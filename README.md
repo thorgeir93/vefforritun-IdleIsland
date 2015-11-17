@@ -8,4 +8,3 @@ Lokaverkefni í Vefforritun
 > npm install
 
 > gulp
-
