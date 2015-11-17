@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS gameState
 
 CREATE TABLE IF NOT EXISTS friends
 (
-	id VARCHAR(255),   
-    friendID VARCHAR(255000), 
-    PRIMARY KEY ( id )
+	username VARCHAR(255),   
+	friendID VARCHAR(255000), 
+	PRIMARY KEY ( username )
 );
