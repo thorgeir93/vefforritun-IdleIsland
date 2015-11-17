@@ -85,7 +85,7 @@ function loginHandler(req, res, next) {
 }
 
 function createForm(req, res, next) {
-  //res.render('create', { title: 'Create user' });
+  res.render('create', { title: 'Create user' });
 }
 
 
@@ -93,13 +93,20 @@ function createForm(req, res, next) {
 
 
 function createHandler(req, res, next) {
-  /*var username = xss(req.body.username);
+  var username = xss(req.body.username);
   var password = xss(req.body.password);
 
   var userNameExist = false;
-  sql.isValidUser(username, password, function(error, isValid){
 
+  
+  
+  /*sql.isValidUser(username, password, function(error, isValid){
+  	if(isValid){
+
+  	}
   });
+
+
   users.doesUserNameExist(username, function(error, resultRow){
     if( resultRow.length > 0 ){
       console.log("aaaaaaaaaaaaaaaaa");
