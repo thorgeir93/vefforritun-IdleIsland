@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 		if( error ){
 			console.log(error);
 		}
-		res.render('index', { title: 'Express' });
+		res.render('login', { title: 'Log In' });
 	});
 	
 
@@ -22,13 +22,13 @@ router.get('/', function(req, res, next) {
 	//	TESTING sql querys
 	//
 
-	sql.createNewUser( "goggias", "1234", function( error ){
+	/*sql.createNewUser( "goggias", "1234", function( error ){
 		if(error){
 			console.log(error);	
 		} else{
 			console.log("tókst !!!!!!!");
 		}
-	});
+	});*/
 
 	/*sql.isValidUser( "goggias", "1234", function( error, isValid ){
 		if(error){

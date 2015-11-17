@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 
-var users = require('../lib/users');
+var users = require('../lib/DBConnector');
 
 var xss = require('xss');
 
