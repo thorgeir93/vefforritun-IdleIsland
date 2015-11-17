@@ -18,30 +18,40 @@ function homePage(req, res, next){
 		if( error ){
 			console.log(error);
 		}
-		//res.redirect('/login');
-		res.render('login', { title: 'Log In' });
+		res.redirect('/login');
+		//res.render('login', { title: 'Log In' });
 	});
 }
-
-
-
-
-
 
 ////
 //AUTHERATION / CREATE USER
 ////
 
 //if enter login in url -> if user is 
-router.get('/login', redirectIfLoggedIn, login);
+router.get('/login', redirectIfLoggedIn);
 router.post('/login', loginHandler);
 
-router.get('/logout', logout);
+router.get('/menu', ensureLoggedIn, menu);
+//router.post('/menu');
+
+router.get('/viewFriends', ensureLoggedIn, viewFriends);
+
+router.get('/addFriends', ensureLoggedIn, addFriends);
+
+router.get('/highScores', ensureLoggedIn, highScores);
+
+router.get('/settings', ensureLoggedIn, settings);
+
+router.get('/play', ensureLoggedIn, play);
+
+router.get('/logout', ensureLoggedIn, logout);
 
 router.get('/create', redirectIfLoggedIn, createForm);
 router.post('/create', createHandler);
 
-
+function ensureLoggedIn(req, res, next) {
+  next();
+}
 
 function login(req, res, next) {
   res.render('login', { title: 'Log  in' });
@@ -61,6 +71,32 @@ function logout(req, res, next) {
     res.redirect('/');
   });
 }
+
+function menu(req, res, next) {
+  res.render('menu', { title: 'Menu'});
+}
+
+function viewFriends(req, res, next) {
+  res.render('viewFriends', { title: 'View Friends'});
+}
+
+function addFriends(req, res, next) {
+  res.render('addFriends', { title: 'Add Friends'});
+}
+
+function highScores(req, res, next) {
+  res.render('highScores', { title: 'View High Scores'});
+}
+
+function settings(req, res, next) {
+  res.render('settings', { title: 'Change Settings'});
+}
+
+function play(req, res, next) {
+  res.render('play', { title: 'Play The Game'});
+}
+
+
 
 function loginHandler(req, res, next) {
   /*var username = xss(req.body.username);
