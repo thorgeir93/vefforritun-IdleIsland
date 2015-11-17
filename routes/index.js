@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var sql = require('../lib/users');
+var sql = require('../lib/DBConnector');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -22,13 +22,13 @@ router.get('/', function(req, res, next) {
 	//	TESTING sql querys
 	//
 
-	/*sql.createNewUser( "goggias", "1234", function( error ){
+	sql.createNewUser( "goggias", "1234", function( error ){
 		if(error){
 			console.log(error);	
 		} else{
 			console.log("tókst !!!!!!!");
 		}
-	});*/
+	});
 
 	/*sql.isValidUser( "goggias", "1234", function( error, isValid ){
 		if(error){
@@ -42,6 +42,7 @@ router.get('/', function(req, res, next) {
 		}
 	});*/
 
+	
 
 	/*sql.findHighScoreForAll( "goggias", "1234", function( error, isValid ){
 		if(error){
@@ -54,6 +55,9 @@ router.get('/', function(req, res, next) {
 			console.log("SKRÍTIÐ");
 		}
 	});*/
+
+	//sql.
+
 });
 
 module.exports = router;
