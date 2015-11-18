@@ -24,9 +24,9 @@ Button.prototype.render = function(){
 	//implement plz
 };
 
-Button.prototype.action = function(){
+Button.prototype.action = function(i){
 
-	this.actionFunc();
+	this.actionFunc(i);
 };
 
 Button.prototype.getPosition = function(){

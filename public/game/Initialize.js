@@ -7,6 +7,8 @@ var g_ctx = g_canvas.getContext("2d");
 
 var leikur = undefined;
 
+var user;
+
 function AudioPreload(callback){
 	
 	var requiredSounds = {
@@ -24,7 +26,12 @@ function imagePreload(callback){
       upgradeMenu	: "game/images/upgradeMenu.png",
       background0	: "game/images/background0.png",
       UpgradeMenu   : "game/images/UggradeMenu.png",
-      backButton    : "game/images/backButton.png"
+      backButton    : "game/images/backButton.png",
+      upgrade1      : "game/images/upgrade1.png",
+      upgrade2      : "game/images/upgrade2.png",
+      upgrade3      : "game/images/upgrade3.png",
+      unavalible    : "game/images/unavalible.png",
+      bought        : "game/images/bought.png",
       };
 
 	imagesPreload(requiredImages, g_images, callback);
@@ -107,7 +114,11 @@ function init(){
 
 			console.log('all preloads done');
 
-			leikur = new gameEngine(g_images, g_audio);
+            user = $('#user')['0'].innerHTML;
+            userData = $('#userData')['0'].innerHTML;
+            console.log(userData)
+
+			leikur = new gameEngine(g_images, g_audio, user, userData);
 			console.log('game engine done...starting game');
 
 			g_canvas.onmousedown = function(e){

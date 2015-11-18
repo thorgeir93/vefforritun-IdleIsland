@@ -7,11 +7,22 @@ UserData.prototype.settings = undefined;
 UserData.prototype.currFactor = 1;
 UserData.prototype.treeFactor = 1;
 UserData.prototype.timestamp = undefined;
+UserData.prototype.prices = [[10,1000,1000000],[100,10000,100000000],[1000,100000,1000000000000]];
 
 //constructor
 function UserData(userDataFromDB){
 
-	console.log('inn í userData constr');
+	console.log(userDataFromDB)
+	var data = JSON.parse(userDataFromDB);
+
+	this.userName = data.userName;
+	this.upgrades = data.upgrades;
+	this.currency = data.currency;
+	this.settings = data.settings;
+	this.currFactor = data.currFactor;
+	this.treeFactor = data.treeFactor;
+	this.timestamp = data.timestamp;
+	console.log('inn í userData constr', data);
 	//implements
 };
 
@@ -48,7 +59,7 @@ UserData.prototype.setUpgrades = function(upgrades){
 }
 
 UserData.prototype.setCurrency = function(currency){
-	this.currency = currency;
+	this.currency += currency;
 };
 
 UserData.prototype.setSettings = function(settings){
