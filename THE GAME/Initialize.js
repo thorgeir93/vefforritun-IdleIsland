@@ -23,7 +23,8 @@ function imagePreload(callback){
       tree      	: "images/tree.png",
       upgradeMenu	: "images/upgradeMenu.png",
       background0	: "images/background0.png",
-      UpgradeMenu   : "images/UggradeMenu.png"
+      UpgradeMenu   : "images/UggradeMenu.png",
+      backButton    : "images/backButton.png"
       };
 
 	imagesPreload(requiredImages, g_images, callback);

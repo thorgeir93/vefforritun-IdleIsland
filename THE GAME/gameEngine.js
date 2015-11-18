@@ -5,25 +5,48 @@ function gameEngine(image, audio){
 
 	this.databaseConnector = new DBconnector();
 
+    ////////////////////////////////////////////////////////
+    //              THE GAME DISPlAY
+    ////////////////////////////////////////////////////////
+
+    //takki1 - tré
 	var buttons = [];
-        var pos = {     width: image['tree'].width/10,
+    var pos = {     width: image['tree'].width/10,
                         height: image['tree'].height/10,
-                        centerX: 10,
-                        centerY: 100
-                    };
-        buttons.push(new Button(pos, image['tree'], audio, this.punch.bind(this)))
+                        topX: 10,
+                        topY: 100
+               };
 
-        pos = {     width: image['upgradeMenu'].width,
+    buttons.push(new Button(pos, image['tree'], audio, this.punch.bind(this)))
+
+    //takki2 - takki til að komast inn i upgrade menu
+    pos = {     width: image['upgradeMenu'].width,
                         height: image['upgradeMenu'].height,
-                        centerX: 900,
-                        centerY: 30
-                    };
+                        topX: 900,
+                        topY: 10
+          };
 
-        buttons.push(new Button(pos, image['upgradeMenu'], audio, this.chanceDisplayToUpgrades.bind(this)))
+    buttons.push(new Button(pos, image['upgradeMenu'], audio, this.chanceDisplayToUpgrades.bind(this)))
 
-        this.displays.push(new Display(image['background0'], buttons));
+    this.displays.push(new Display(image['background0'], buttons));
 
-        this.displays.push(new Display(image['UpgradeMenu'], []));
+    ////////////////////////////////////////////////////////
+    //              THE UPGRADES DISPLAY
+    ////////////////////////////////////////////////////////
+
+    buttons = [];
+
+    pos = {     width: image['backButton'].width,
+                        height: image['backButton'].height,
+                        topX: 900,
+                        topY: 10
+          };
+
+    buttons.push(new Button(pos, image['backButton'], audio, this.chanceDisplayToGame.bind(this)))
+
+    this.displays.push(new Display(image['UpgradeMenu'], buttons));
+
+    console.log(this.displays,'----------------------');
 
 	//implementa calculator, userdata, databaseConnector og display
 }
@@ -50,7 +73,6 @@ gameEngine.prototype.saveUserData = function(){
 }
 
 gameEngine.prototype.render = function(){
-    console.log(this.displayScreen);
     this.displays[this.displayScreen].render(ctx);
 	//implementa
 }
@@ -74,7 +96,6 @@ gameEngine.prototype.punch = function(factor){
 
 gameEngine.prototype.chanceDisplayToUpgrades = function(){
 
-    console.log('--------------hérna--------inni---------');
     this.displayScreen = 1;
 }
 
