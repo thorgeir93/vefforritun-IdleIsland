@@ -73,7 +73,7 @@ function createForm(req, res, next) {
 function createHandler(req, res, next) {
 	var username = xss(req.body.username);
 	var password = xss(req.body.password);
-
+	console.log(username,password);
 	var data = {};
 
 	data.title = 'Create account';
@@ -84,6 +84,8 @@ function createHandler(req, res, next) {
 		data.errorMessage = "User name and password is requried";
 		res.render('create', data);
 	} else {
+
+		console.log('herna inni er þetta ða virka');
 		sql.isUserNTaken(username, function( error, userNameTaken ){
 			handleSmallError(error,"auth.js: finding if username taken");
 			if( !error ){

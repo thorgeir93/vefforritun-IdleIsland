@@ -3,7 +3,7 @@ function DBconnector(){
 	console.log('inn i dbconnector constr');
 }
 
-DBconnector.prototype.connectionString = "postgres://postgres:M39JPD@localhost/vefforritunLokaverkefni";
+DBconnector.prototype.connectionString = "postgres://postgres:M39JPD@localhost/users";
 
 DBconnector.prototype.send = function(userData){
 	//implement

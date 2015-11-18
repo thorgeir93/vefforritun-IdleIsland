@@ -5,6 +5,8 @@ function gameEngine(image, audio){
 
 	this.databaseConnector = new DBconnector();
 
+    this.dataBaseConnector.receiver()
+
     ////////////////////////////////////////////////////////
     //              THE GAME DISPlAY
     ////////////////////////////////////////////////////////
@@ -54,7 +56,7 @@ function gameEngine(image, audio){
 gameEngine.prototype.userData = undefined;
 
 gameEngine.prototype.calculator = undefined;
-gameEngine.prototype.dataBaseConnectot = undefined;
+gameEngine.prototype.dataBaseConnector = undefined;
 
 gameEngine.prototype.displayScreen = 0;
 gameEngine.prototype.displays = [];
