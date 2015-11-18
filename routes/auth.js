@@ -50,7 +50,7 @@ function loginHandler(req, res, next) {
 	if (user) {
 		console.log("This user is valid!");
 		req.session.regenerate(function (){
-			req.session.user = user;
+			req.session.user = username;
 			res.redirect('/menu'); //var wall
 		});
 	} else {

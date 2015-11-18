@@ -34,9 +34,8 @@ router.get('/viewFriends', ensureUser, viewFriends);
 router.get('/addFriends', ensureUser, addFriends);
 router.get('/highScores', ensureUser, highScores);
 router.get('/settings', ensureUser, settings);
-router.get('/play', ensureUser, play);
+router.get('/idleisland', ensureUser, play);
 router.get('/logout', ensureUser, logout);
-
 
 function login(req, res, next) {
   res.render('login', { title: 'Log  in' });
@@ -78,7 +77,7 @@ function settings(req, res, next) {
 }
 
 function play(req, res, next) {
-  res.render('play', { title: 'Play The Game'});
+  res.render('idleisland', {username: req.session.user });
 }
 
 
