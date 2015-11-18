@@ -21,10 +21,6 @@ Display.prototype.render = function(){
 	//implements plz
 };
 
-/*Display.prototype.addButton = function(image, audio, pos, func){
-
-	this.Buttons.push(new Button( pos, image, audio, func ));
-}*/
 
 Display.prototype.drawAt = function (ctx, x, y) {
 	ctx.fillRect(0,0,1000,600);

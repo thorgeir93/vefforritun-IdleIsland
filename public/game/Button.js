@@ -1,6 +1,6 @@
 
-Button.prototype.centerX = undefined;
-Button.prototype.centerY = undefined;
+Button.prototype.topX = undefined;
+Button.prototype.topY = undefined;
 Button.prototype.image = undefined;
 Button.prototype.audio = undefined;
 Button.prototype.actionFunc = undefined;
@@ -9,8 +9,8 @@ Button.prototype.width = undefined;
 
 function Button(pos, img, audio, actionFunc){
 
-	this.centerX = pos.centerX;
-	this.centerY = pos.centerY;
+	this.topX = pos.topX;
+	this.topY = pos.topY;
 	this.height = pos.height;
 	this.width = pos.width;
 	this.image = img;
@@ -20,25 +20,18 @@ function Button(pos, img, audio, actionFunc){
 
 Button.prototype.render = function(){
 	
-	this.drawAt(g_ctx, this.centerX, this.centerY,this.width, this.height);
+	this.drawAt(g_ctx, this.topX, this.topY,this.width, this.height);
 	//implement plz
 };
 
 Button.prototype.action = function(){
-	
-	//leikur['displayScreen'] = 1;
-
 
 	this.actionFunc();
-	///NOTA ÞETTA !!!!!
-	//gameEngine[this.actionFunc]();
-
-	//implement plz
 };
 
 Button.prototype.getPosition = function(){
-	return {x: this.centerX,
-			y: this.centerY,
+	return {x: this.topX,
+			y: this.topY,
 			width: this.width,
 			height: this.height};
 }

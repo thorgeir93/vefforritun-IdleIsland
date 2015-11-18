@@ -10,7 +10,7 @@ var leikur = undefined;
 function AudioPreload(callback){
 	
 	var requiredSounds = {
-		bones	: "/game/sounds/bones.ogg"
+		bones	: "game/sounds/bones.ogg"
 	};
 
 	soundsPreload(requiredSounds, g_audio, callback);
@@ -20,10 +20,11 @@ function AudioPreload(callback){
 function imagePreload(callback){
 
     var requiredImages = {
-      tree      	: "/game/images/tree.png",
-      upgradeMenu	: "/game/images/upgradeMenu.png",
-      background0	: "/game/images/background0.png",
-      UpgradeMenu   : "/game/images/UggradeMenu.png"
+      tree      	: "game/images/tree.png",
+      upgradeMenu	: "game/images/upgradeMenu.png",
+      background0	: "game/images/background0.png",
+      UpgradeMenu   : "game/images/UggradeMenu.png",
+      backButton    : "game/images/backButton.png"
       };
 
 	imagesPreload(requiredImages, g_images, callback);

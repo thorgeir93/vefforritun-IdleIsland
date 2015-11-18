@@ -77,7 +77,7 @@ function settings(req, res, next) {
 }
 
 function play(req, res, next) {
-  res.render('idleisland');
+  res.render('idleisland', {username: req.session.user });
 }
 
 
