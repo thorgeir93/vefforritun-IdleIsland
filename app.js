@@ -43,12 +43,12 @@ app.use(session({
 
 app.use(viewCounter);
 app.use('/', routes);
+//app.user('/',)
 app.use('/users', users);
 app.use('/', auth);
 
 
 // error handlers
-
 app.use(notFoundHandler);
 app.use(errorHandler);
 

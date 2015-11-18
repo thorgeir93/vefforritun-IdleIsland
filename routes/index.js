@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var sql = require('../lib/DBConnector');
+var ensureUser = require('../lib/ensureLoggedIn');
 var xss = require('xss');
 
 
@@ -27,31 +28,15 @@ function homePage(req, res, next){
 //AUTHERATION / CREATE USER
 ////
 
-//if enter login in url -> if user is 
-router.get('/login', redirectIfLoggedIn);
-router.post('/login', loginHandler);
 
-router.get('/menu', ensureLoggedIn, menu);
-//router.post('/menu');
+router.get('/menu', ensureUser, menu);
+router.get('/viewFriends', ensureUser, viewFriends);
+router.get('/addFriends', ensureUser, addFriends);
+router.get('/highScores', ensureUser, highScores);
+router.get('/settings', ensureUser, settings);
+router.get('/play', ensureUser, play);
+router.get('/logout', ensureUser, logout);
 
-router.get('/viewFriends', ensureLoggedIn, viewFriends);
-
-router.get('/addFriends', ensureLoggedIn, addFriends);
-
-router.get('/highScores', ensureLoggedIn, highScores);
-
-router.get('/settings', ensureLoggedIn, settings);
-
-router.get('/play', ensureLoggedIn, play);
-
-router.get('/logout', ensureLoggedIn, logout);
-
-router.get('/create', redirectIfLoggedIn, createForm);
-router.post('/create', createHandler);
-
-function ensureLoggedIn(req, res, next) {
-  next();
-}
 
 function login(req, res, next) {
   res.render('login', { title: 'Log  in' });
