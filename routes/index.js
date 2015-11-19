@@ -57,7 +57,7 @@ function logout(req, res, next) {
 }
 
 function menu(req, res, next) {
-  res.render('menu', { title: 'Menu'});
+  res.render('menu', { title: 'Idle Island'});
 }
 
 function viewFriends(req, res, next) {
