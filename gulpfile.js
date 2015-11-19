@@ -7,15 +7,23 @@ var sass = require('gulp-sass');
 var jshint = require('gulp-jshint');
 var nodemon = require('gulp-nodemon');
 var browserSync = require('browser-sync').create();
- 
-var isProd = false;
- 
+
+//https://gist.github.com/floatdrop/8269868
+//var plumber = require('gulp-plumber');
+
 gulp.task('styles', function() {
-  gulp.src('./public/stylesheets/*.scss')
-    .pipe(sass())
+  gulp.src('./public/sass/*.scss')
+    .pipe(sass({
+      includePaths: ['./public/sassimports']
+    }))
     .pipe(gulp.dest('./public/stylesheets'))
     .pipe(browserSync.stream());
 });
+
+
+
+var isProd = false;
+ 
 
 // We need a slight delay to reload browsers
 // connected to browser-sync after restarting nodemon.
@@ -76,7 +84,7 @@ gulp.task('browser-sync', function() {
       browser: "chrome",
       port: 8080,
     });
-    gulp.watch('./public/stylesheets/**/*.scss', ['styles']).on('change', browserSync.reload);
+    gulp.watch('./public/**/*.scss', ['styles']).on('change', browserSync.reload);
     gulp.watch('./lib/**/*').on('change', browserSync.reload);
 });
  

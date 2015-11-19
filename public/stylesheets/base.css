@@ -1,0 +1,138 @@
+* {
+  -border: 1px solid red; }
+
+/*VARIABLES
+==========================*/
+/*blue*/
+/*green*/
+div.options div.text a {
+  color: #00B7FF;
+  text-decoration: none; }
+  div.options div.text a:hover {
+    text-decoration: underline red; }
+
+div.menu, div.options, div.options div.text {
+  display: block;
+  margin-right: auto;
+  margin-left: auto; }
+
+/*FUNCTIONS
+===================================*/
+/*	.parent { position: relative; }
+		.child { @include centerer; }*/
+/*.overlay { 	@include coverer;
+						background: rgba(black, 0.5);
+						z-index: 1000;}*/
+/* BASES
+==================================*/
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; }
+
+body {
+  word-wrap: break-word;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #00B7FF; }
+
+/* LOGIN
+===============================*/
+div.login {
+  padding: 100px;
+  background: #29ABE2;
+  height: 100%;
+  font-family: "Agency FB", arial;
+  color: white; }
+  div.login h1 {
+    text-align: center;
+    font-size: 120px; }
+
+div.middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 300px;
+  color: white;
+  font-family: "Arial", serif sans; }
+  div.middle a {
+    display: block;
+    margin-top: 30px;
+    color: #E0E0E0;
+    text-decoration: none; }
+  div.middle button {
+    background-color: transparent;
+    width: 100%;
+    right: 20px;
+    margin-top: 50px;
+    font-size: 20px;
+    color: #E0E0E0;
+    cursor: pointer;
+    border: 0;
+    border: 2px solid #E0E0E0; }
+  div.middle ::-webkit-input-placeholder {
+    color: #E0E0E0;
+    font-style: "Agency FB", arial; }
+  div.middle input {
+    display: block;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: transparent;
+    font-size: 20px;
+    color: white;
+    line-height: 50px;
+    border: none;
+    border-bottom: 2px solid #E0E0E0; }
+    div.middle input:focus {
+      outline: 0;
+      box-shadow: none;
+      border-bottom: 2px solid green; }
+
+/* MENU
+================================*/
+div.menu {
+  background-color: #29ABE2;
+  height: 100%;
+  text-align: center; }
+  div.menu h1 {
+    color: white;
+    font-family: "Agency FB", arial;
+    text-transform: uppercase;
+    letter-spacing: 25px;
+    margin-top: 0;
+    font-size: 140px; }
+
+div.options {
+  /*width: $image-island-green-width;
+		height: $image-island-green-height;
+		
+		background-image: url('../images/menu-island-green.png');
+		background-size: cover;*/ }
+  div.options div.text {
+    padding-top: 68.2px;
+    width: 60%; }
+    div.options div.text a {
+      font: 20px "Agency FB", arial;
+      color: #006837; }
+
+div.island {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 336px;
+  height: 392px;
+  background-image: url("../images/menu-island-green-waves-02.png");
+  z-index: 1000; }
+
+div.sand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 242px;
+  height: 346px;
+  background-image: url("../images/menu-island-sand.png"); }
+
+/* TRASH
+==============================*/

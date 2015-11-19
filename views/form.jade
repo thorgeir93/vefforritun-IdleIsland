@@ -1,0 +1,23 @@
+extends layout
+block content
+	div.login
+		h1= title
+		div.middle
+			form(method=method, action=action)
+				if error
+					p= errorMessage
+
+				input(
+					type='text',
+					id='username',
+					name='username',
+					placeholder='user name')
+
+				input(	
+					type='password',
+					id='password',
+					name='password'
+					placeholder='password')
+
+				button= btnTitle
+				a(href=linkHref)= linkText

@@ -43,7 +43,7 @@ router.get('/idleisland', ensureUser, play);
 
 
 function menu(req, res, next) {
-  res.render('menu', { title: 'Menu'});
+  res.render('menu', { title: 'Idle Island'});
 }
 
 function viewFriends(req, res, next) {
