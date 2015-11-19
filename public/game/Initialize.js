@@ -66,7 +66,7 @@ _updateClocks = function (frameTime) {
 
 _iterCore = function (dt) {
 
-    leikur.calculate(dt);
+    leikur.update(dt);
     
     leikur.render();
 

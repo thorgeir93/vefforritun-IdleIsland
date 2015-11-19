@@ -211,9 +211,11 @@ gameEngine.prototype.coconutImage = undefined;
 
 
 
-gameEngine.prototype.calculate = function(time){
+gameEngine.prototype.update = function(time){
 
-	this.userdata.setCurrency(this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor()));
+    var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor())
+	this.userdata.setCurrency(currency);
+    this.displays[this.displayScreen].update(time);
 }
 
 gameEngine.prototype.saveUserData = function(){
@@ -273,9 +275,14 @@ gameEngine.prototype.punch = function(){
 
 	this.userdata.currency += 1 * this.userdata.treeFactor;
 
+    var pos = {     width: this.coconutImage.width,
+                    height: this.coconutImage.height,
+                        topX: 400,
+                        topY: 50
+               };
 
-    //var coconut = new Coconut()
-    //this.displays[this.displayScreen].createCoconut();
+    var coconut = new Coconut(pos,this.coconutImage,undefined)
+    this.displays[this.displayScreen].createCoconut(coconut);
 }
 
 gameEngine.prototype.chanceDisplayToUpgrades = function(){

@@ -20,6 +20,10 @@ Display.prototype.render = function(score){
 		this.Buttons[i].render();
 	}
 
+	for(var i = 0; i<this.coconuts.length; i++){
+		this.coconuts[i].render();
+	}
+
 	g_ctx.fillStyle = "black";
 	g_ctx.font="20px Georgia";
 	g_ctx.fillText(score,900,150);
@@ -30,10 +34,19 @@ Display.prototype.render = function(score){
 
 
 Display.prototype.createCoconut = function(coconut){
-
-
-
 	this.coconuts.push(coconut)
+}
+
+Display.prototype.update = function(dt){
+	if(this.coconuts){
+		for(var i = 0; i<this.coconuts.length; i++){
+			var kill = this.coconuts[i].update(dt);
+			if(kill === -1){
+				this.coconuts.splice(i,1);
+			}
+
+		}
+	}
 }
 
 Display.prototype.drawAt = function (ctx, x, y) {
