@@ -76,8 +76,18 @@ function settings(req, res, next) {
   res.render('settings', { title: 'Change Settings'});
 }
 
+var gamestate;
 function play(req, res, next) {
-  res.render('idleisland', {username: req.session.user });
+  sql.getGameState(req.session.user, function(error, dataa){
+    console.log('success');
+    gamestate = dataa
+    console.log(gamestate);
+
+    var data = {username: req.session.user,
+                userData: gamestate }
+
+    res.render('idleisland', {data});
+  });
 }
 
 
