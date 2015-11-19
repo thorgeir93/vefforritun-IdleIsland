@@ -1,20 +1,4 @@
 extends layout
 
 block content
-  div.login
-    h1= title
-    div.middle
-      form(method='post', action='/create')
-        if post
-          if errorMessage
-            p= errorMessage
-
-        //div: label(for='username') Username
-        input(type='text', id='username', name='username', value=username)
-
-        //div: label(for='password') Password
-        input(type='password', id='password', name='password')
-
-        button Create user
-
-        a(href="./login" class="a-login") Back to log in
+  block form

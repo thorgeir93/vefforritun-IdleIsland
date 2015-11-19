@@ -2,17 +2,6 @@ extends layout
 
 block content
 	div.login
-		h1 Log in
-		div.middle
-			form(method='post', action='/login')
-				if error
-					p= errorMessage
-
-				//div.form-group: label(for='username') Username
-				input(type='text', id='username', name='username', placeholder='user name')
-
-				//div.form-group: label(for='password') Password
-				input(type='password', id='password', name='password' placeholder='password')
-
-				button Submit
-				a(href="/create") Create account
+		h1= title
+		block form
+		
