@@ -4,10 +4,10 @@ UserData.prototype.userName = undefined;
 UserData.prototype.upgrades = undefined;
 UserData.prototype.currency = 0;
 UserData.prototype.settings = undefined;
-UserData.prototype.currFactor = 1;
+UserData.prototype.currFactor = 0;
 UserData.prototype.treeFactor = 1;
 UserData.prototype.timestamp = undefined;
-UserData.prototype.prices = [[10,1000,1000000],[100,10000,100000000],[1000,100000,1000000000000]];
+
 
 //constructor
 function UserData(userDataFromDB){
@@ -39,7 +39,7 @@ UserData.prototype.getCurrency = function(){
 UserData.prototype.getSettings = function(){
 	return this.settings;
 };
-
+				   
 UserData.prototype.getCurrFactor = function(){
 	return this.currFactor;
 };
@@ -59,7 +59,7 @@ UserData.prototype.setUpgrades = function(upgrades){
 }
 
 UserData.prototype.setCurrency = function(currency){
-	this.currency += currency;
+	this.currency = currency;
 };
 
 UserData.prototype.setSettings = function(settings){

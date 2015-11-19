@@ -81,13 +81,13 @@ function play(req, res, next) {
   sql.getGameState(req.session.user, function(error, dataa){
     console.log('success');
     gamestate = dataa
+    console.log(gamestate);
+
+    var data = {username: req.session.user,
+                userData: gamestate }
+
+    res.render('idleisland', {data});
   });
-  console.log(gamestate);
-
-  var data = {username: req.session.user,
-              userData: gamestate }
-
-  res.render('idleisland', {data});
 }
 
 
