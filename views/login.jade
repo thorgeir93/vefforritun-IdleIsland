@@ -5,6 +5,7 @@ block content
 	form(method='post', action='/login')
 		if error
 			p= errorMessage
+			hr
 
 		div.form-group: label(for='username') Username
 		input(type='text', id='username', name='username', value=username)

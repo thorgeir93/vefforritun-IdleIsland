@@ -81,7 +81,7 @@ function createHandler(req, res, next) {
 
 	if( isEmpty(username) || isEmpty(password) ){
 		handleSmallError(true,"username or password fail!");
-		data.errorMessage = "User name and password is requried";
+		data.errorMessage = "User name and password is required";
 		res.render('create', data);
 	} else {
 		sql.isUserNTaken(username, function( error, userNameTaken ){
@@ -91,7 +91,7 @@ function createHandler(req, res, next) {
 					sql.findRandomUserN( username, function(error, userNames){
 						handleSmallError(error, "auth.js:find random User fail");
 						data.error = true;
-						data.errorMessage='The "'+username+'" is aldready taken.';
+						data.errorMessage='The "'+username+'" is already taken.';
 						data.userNOptions=userNames;
 						res.render('create', data);
 					});
@@ -102,6 +102,7 @@ function createHandler(req, res, next) {
 							console.log("auth.js:Error->Trying to create new user");
 							console.log(error);
 						}
+						req.session.user = username;
 						res.redirect('/menu');
 					});
 				}
