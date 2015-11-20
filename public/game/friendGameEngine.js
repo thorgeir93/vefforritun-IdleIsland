@@ -13,45 +13,46 @@ function friendGameEngine(image, audio, user, userData){
     //              THE UPGRADES DISPLAY 1
     ////////////////////////////////////////////////////////
     var names = ['backButton', 'item1upgrade1', 'item2upgrade1', 'item3upgrade1', 'item1upgrade2', 'item2upgrade2', 'item3upgrade2', 'item1upgrade3', 'item2upgrade3', 'item3upgrade3']
-    this.makeUpgradeDisplay(names, image, audio, this.chanceDisplayToUpgradeslvl1.bind(this))
+    this.makeUpgradefriendDisplay(names, image, audio, this.chancefriendDisplayToUpgradeslvl1.bind(this))
 
     ////////////////////////////////////////////////////////
     //              THE UPGRADES DISPLAY 2
     ////////////////////////////////////////////////////////
     names = ['backButton', 'item4upgrade1', 'item5upgrade1', 'item6upgrade1', 'item4upgrade2', 'item5upgrade2', 'item6upgrade2', 'item4upgrade3', 'item5upgrade3', 'item6upgrade3']
-    this.makeUpgradeDisplay(names, image, audio, this.chanceDisplayToUpgradeslvl2.bind(this))
+    this.makeUpgradefriendDisplay(names, image, audio, this.chancefriendDisplayToUpgradeslvl2.bind(this))
 */
     ////////////////////////////////////////////////////////
     //              LEVEL 1
     ////////////////////////////////////////////////////////
     
     //takki1 - tré
+
+
     var buttons = [];
     var pos = {     width: image['tree'].width,
                         height: image['tree'].height,
                         topX: 400,
                         topY: 50
                };
-
-    buttons.push(new Button(pos, image['tree'], audio, undefined))
+    buttons.push(new Button(pos, image['tree'], audio, undefined));
 
     //takki2 - takki til að komast inn i upgrade menu
-    pos = {     width: image['upgradeMenu'].width,
+   /* pos = {     width: image['upgradeMenu'].width,
                         height: image['upgradeMenu'].height,
                         topX: 900,
                         topY: 10
           };
-
-    buttons.push(new Button(pos, image['upgradeMenu'], audio, undefined))
+    */
+    //buttons.push(new Button(pos, image['upgradeMenu'], audio, undefined))
 
     //takki3 - exit takki
-    pos = {     width: image['exit'].width,
+   /* pos = {     width: image['exit'].width,
                         height: image['exit'].height,
                         topX: 900,
                         topY: 60
           };
-
-    buttons.push(new Button(pos, image['exit'], audio, undefined))
+*/
+    //buttons.push(new Button(pos, image['exit'], audio, undefined))
 
     //takki3 - downLvl
     pos = {     width: image['downLvl'].width,
@@ -60,19 +61,19 @@ function friendGameEngine(image, audio, user, userData){
                         topY: 500
           };
 
-    buttons.push(new Button(pos, image['downLvl'], audio, undefined))
+    buttons.push(new Button(pos, image['downLvl'], audio, this.chanceDisplayToLvl2.bind(this)));
 
     var backgroundImages = [];
-    backgroundImages.push(image['gamesky'])
-    backgroundImages.push(image['gameseaseven'])
-    backgroundImages.push(image['gameseasix'])
-    backgroundImages.push(image['gameseafive'])
-    backgroundImages.push(image['gameseafour'])
-    backgroundImages.push(image['gamesandthree'])
-    backgroundImages.push(image['gameseatwo'])
-    backgroundImages.push(image['gameseaone'])
+    backgroundImages.push(image['gamesky']);
+    backgroundImages.push(image['gameseaseven']);
+    backgroundImages.push(image['gameseasix']);
+    backgroundImages.push(image['gameseafive']);
+    backgroundImages.push(image['gameseafour']);
+    backgroundImages.push(image['gamesandthree']);
+    backgroundImages.push(image['gameseatwo']);
+    backgroundImages.push(image['gameseaone']);
 
-    this.displays.push(new Display(backgroundImages, buttons,undefined));
+    this.displays.push(new friendDisplay(backgroundImages, buttons, undefined));
 
     /////////////////////////////////////////////////
     //                  LEVEL TWO
@@ -86,57 +87,56 @@ function friendGameEngine(image, audio, user, userData){
                         topY: 50
                };
 
-    buttons.push(new Button(pos, image['tree'], audio))
+    buttons.push(new Button(pos, image['tree'], audio, undefined))
 
     //takki2 - takki til að komast inn i upgrade menu
-    pos = {     width: image['upgradeMenu'].width,
+    /*pos = {     width: image['upgradeMenu'].width,
                         height: image['upgradeMenu'].height,
                         topX: 900,
                         topY: 10
           };
-
-    buttons.push(new Button(pos, image['upgradeMenu'], audio, this.chanceDisplayToUpgradeslvl2.bind(this)))
+    */
+   // buttons.push(new Button(pos, image['upgradeMenu'], audio, this.chancefriendDisplayToUpgradeslvl2.bind(this)))
 
     //takki3 - exit takki
-    pos = {     width: image['upLvl'].width,
+    /*pos = {     width: image['upLvl'].width,
                         height: image['upLvl'].height,
                         topX: 500,
                         topY: 0
           };
-
-    buttons.push(new Button(pos, image['upLvl'], audio, this.chanceDisplayToLvl1.bind(this)))
+    */
+    buttons.push(new Button(pos, image['upLvl'], audio, this.chanceDisplayToLvl1.bind(this)));
 
     backgroundImages = [];
     backgroundImages.push(image['gamesky'])
     backgroundImages.push(image['gameseaseven'])
     backgroundImages.push(image['gameseasix'])
 
-    this.displays.push(new Display(backgroundImages, buttons, undefined));
-
+    this.displays.push(new friendDisplay(backgroundImages, buttons, undefined));
 }
 
-gameEngine.prototype.lvl1 = 2;
-gameEngine.prototype.lvl2 = 3;
-gameEngine.prototype.UpgrLvl1 = 0;
-gameEngine.prototype.UpgrLvl2 = 1;
+friendGameEngine.prototype.lvl1 = 0;
+friendGameEngine.prototype.lvl2 = 1;
+//friendGameEngine.prototype.UpgrLvl1 = 0;
+//friendGameEngine.prototype.UpgrLvl2 = 1;
 
-gameEngine.prototype.userName = undefined;
+friendGameEngine.prototype.userName = undefined;
 
-gameEngine.prototype.userData = undefined;
+friendGameEngine.prototype.userData = undefined;
 
-gameEngine.prototype.calculator = undefined;
-gameEngine.prototype.dataBaseConnector = undefined;
+//friendGameEngine.prototype.calculator = undefined;
+friendGameEngine.prototype.dataBaseConnector = undefined;
 
-gameEngine.prototype.displayScreen = undefined;
-gameEngine.prototype.displays = [];
+friendGameEngine.prototype.displayScreen = undefined;
+friendGameEngine.prototype.displays = [];
 
-gameEngine.prototype.isMuted = false;
+friendGameEngine.prototype.isMuted = false;
 
-gameEngine.prototype.coconutImage = undefined;
+friendGameEngine.prototype.coconutImage = undefined;
 
-gameEngine.prototype.score = undefined;
+//friendGameEngine.prototype.score = undefined;
 
-/*gameEngine.prototype.makeUpgradeDisplay = function(names,image, audio, func){
+/*friendGameEngine.prototype.makeUpgradefriendDisplay = function(names,image, audio, func){
 
     buttons = [];
 
@@ -220,12 +220,11 @@ gameEngine.prototype.score = undefined;
    
     buyMenu.push(bought);
 
-    this.displays.push(new Display([image['UpgradeMenu']], buttons, buyMenu));
+    this.displays.push(new friendDisplay([image['UpgradeMenu']], buttons, buyMenu));
 }
 
 */
-gameEngine.prototype.update = function(time){
-
+friendGameEngine.prototype.update = function(time){
    /* var currentCurrency = this.userdata.getCurrency();
     var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor())
     var gained = currency - currentCurrency;
@@ -246,31 +245,31 @@ gameEngine.prototype.update = function(time){
         }
     }
     
-	*/this.userdata.setCurrency(currency);
-    this.displays[this.displayScreen].update(time);
+	this.userdata.setCurrency(currency);*/
+    //this.displays[this.displayScreen].update(time);
 }
 
-gameEngine.prototype.saveUserData = function(){
+/*friendGameEngine.prototype.saveUserData = function(){
 	//implementa 
-}
+}*/
 
-gameEngine.prototype.render = function(){
+friendGameEngine.prototype.render = function(){
 
     this.displays[this.displayScreen].render(undefined, undefined);
-    if(this.displayScreen === this.UpgrLvl1 || this.displayScreen === this.UpgrLvl2){
+    /*if(this.displayScreen === this.UpgrLvl1 || this.displayScreen === this.UpgrLvl2){
 
         this.displays[this.displayScreen].renderUpgrades(this.userdata.upgrades);
-    }
+    }*/
 }
 
-gameEngine.prototype.receiveInputs = function(e){
+friendGameEngine.prototype.receiveInputs = function(e){
 
-    this.displays[this.displayScreen].findButtonForClick(e,this.userdata.upgrades);
+    this.displays[this.displayScreen].findButtonForClick(e);
 
 	//implementa
 }
 
-/*gameEngine.prototype.buyUpgrade = function(index){  
+/*friendGameEngine.prototype.buyUpgrade = function(index){  
     
     if(this.userdata.currency >= this.calculator.prices[index[0]][index[1]]){
 
@@ -300,7 +299,7 @@ gameEngine.prototype.receiveInputs = function(e){
 }
 
 //láta hann taka inn factor frá´user data. þessi callback milli prótótýpa er vonlaus
-gameEngine.prototype.punch = function(){
+friendGameEngine.prototype.punch = function(){
 
 	this.userdata.currency += 1 * this.userdata.treeFactor;
 
@@ -319,43 +318,43 @@ gameEngine.prototype.punch = function(){
     }
 }*/
 
-gameEngine.prototype.chanceDisplayToLvl2 = function(){
+friendGameEngine.prototype.chanceDisplayToLvl2 = function(){
     this.displayScreen = this.lvl2;
 }
 
-gameEngine.prototype.chanceDisplayToLvl1 = function(){
+friendGameEngine.prototype.chanceDisplayToLvl1 = function(){
     this.displayScreen = this.lvl1;
 }
 
-gameEngine.prototype.chanceDisplayToUpgradeslvl1 = function(){
+/*friendGameEngine.prototype.chancefriendDisplayToUpgradeslvl1 = function(){
 
     this.displayScreen = this.UpgrLvl1;;
     this.displays[1].coconuts = [];
-}
+}*/
 
-gameEngine.prototype.chanceDisplayToUpgradeslvl2 = function(){
+/*friendGameEngine.prototype.chancefriendDisplayToUpgradeslvl2 = function(){
 
     this.displayScreen = this.UpgrLvl2;
     this.displays[1].coconuts = [];
-}
+}*/
 
 
 
-gameEngine.prototype.chanceDisplayToSettings = function(){
+/*friendGameEngine.prototype.chancefriendDisplayToSettings = function(){
     this.displayScreen = 4;
 
     this.displays[0].coconuts = [];
-}
+}*/
 
 
-gameEngine.prototype.exit = function(){
+/*friendGameEngine.prototype.exit = function(){
 	console.log('inn í exit');
-    var exit  = $('#exit');
+    //var exit  = $('#exit');
     var field = exit[0][0];
     var scoreField = exit[0][1];
-    this.userdata.score = this.score;
-    field.value = this.userdata.createJSONstring();
-    scoreField.value = this.score;
+    //this.userdata.score = this.score;
+    //field.value = this.userdata.createJSONstring();
+    //scoreField.value = this.score;
     exit.submit();
     console.log(exit);
-}
+}*/

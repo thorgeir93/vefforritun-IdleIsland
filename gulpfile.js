@@ -86,7 +86,7 @@ gulp.task('browser-sync', function() {
     });
     gulp.watch('./public/**/*.scss', ['styles']).on('change', browserSync.reload);
     gulp.watch('./public/**/*.js').on('change', browserSync.reload);
-    gulp.watch('./lib/**/*').on('change', browserSync.reload);
+    gulp.watch('./lib/**/*.*').on('change', browserSync.reload);
 });
  
 gulp.task('setProdEnv', function() { isProd = true; });

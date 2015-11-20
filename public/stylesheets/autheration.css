@@ -1,0 +1,83 @@
+/*blue*/
+/*green*/
+div.middle {
+  display: block;
+  margin-right: auto;
+  margin-left: auto; }
+
+div.login {
+  padding: 20px;
+  background-color: #29ABE2;
+  height: 100%; }
+
+/*FUNCTIONS
+===================================*/
+/*	.parent { position: relative; }
+	.child { @include centerer; }*/
+/*.overlay { 	@include coverer;
+					background: rgba(black, 0.5);
+					z-index: 1000;}*/
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) {
+  h1 {
+    font-size: 250px !important; }
+  div.middle {
+    display: block !important;
+    width: 5000px !important;
+    background-color: black !important; } }
+
+/*@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : portrait) {
+	div.login{
+		background-color:black;
+	} 
+}*/
+div.login {
+  padding: 50px;
+  font-family: "Agency FB", arial;
+  color: white;
+  border-size: border-box; }
+  div.login h1 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 120px; }
+
+div.middle {
+  max-width: 250px;
+  color: white;
+  font-family: "Arial", serif sans;
+  overflow: hidden; }
+  div.middle a {
+    display: block;
+    margin-top: 30px;
+    color: #E0E0E0;
+    text-decoration: none; }
+  div.middle button {
+    background-color: transparent;
+    width: 100%;
+    right: 20px;
+    margin-top: 50px;
+    font-size: 20px;
+    color: #E0E0E0;
+    cursor: pointer;
+    border: 0;
+    border: 2px solid #E0E0E0; }
+  div.middle ::-webkit-input-placeholder {
+    color: #E0E0E0;
+    font-style: "Agency FB", arial; }
+  div.middle input {
+    display: block;
+    margin-top: 10px;
+    padding: 5px;
+    width: 100%;
+    background-color: transparent;
+    font-size: 20px;
+    color: white;
+    line-height: 50px;
+    border: none;
+    border-bottom: 2px solid #E0E0E0; }
+    div.middle input:focus {
+      outline: 0;
+      box-shadow: none;
+      border-bottom: 2px solid green; }

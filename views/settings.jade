@@ -1,9 +1,10 @@
 extends layout
 
 block content
+	link(rel='stylesheet', href='/stylesheets/settings.css')
 	script(type='text/javascript' src='/game/settings.js')
-	div.main-background
-		div.settings
+	div.settings
+		div.main
 			h1= title
 
 			form(method='post' action='/settings')
