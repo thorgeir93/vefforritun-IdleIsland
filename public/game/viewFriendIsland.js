@@ -5,7 +5,7 @@ var g_canvas = document.getElementById("myCanvas");
 
 var g_ctx = g_canvas.getContext("2d");
 
-var leikur = undefined;
+var vinur = undefined;
 
 var user;
 
@@ -99,9 +99,9 @@ _updateClocks = function (frameTime) {
 
 _iterCore = function (dt) {
 
-    leikur.update(dt);
+    vinur.update(dt);
     
-    leikur.render();
+    vinur.render();
 
     Loop();
 };
@@ -119,6 +119,7 @@ function mainIterFrame(frameTime) {
 }
 
 _requestNextIteration = function () {
+  
     window.requestAnimationFrame(mainIterFrame);
 };
 
@@ -140,20 +141,15 @@ Loop = function () {
 
 
 function init(){
-	console.log('starting');
 
 	imagePreload(function(){
 
 		AudioPreload(function(){
 
-			console.log('all preloads done');
-
             user = $('#user')['0'].innerHTML;
             userData = $('#userData')['0'].innerHTML;
-            console.log(userData.toString())
 
 			vinur = new friendGameEngine(g_images, g_audio, user, userData);
-			console.log('game engine done...starting game');
 
 			g_canvas.onmousedown = function(e){
 				vinur.receiveInputs(e);
