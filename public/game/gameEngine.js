@@ -62,6 +62,8 @@ function gameEngine(image, audio, user, userData){
 
     buttons.push(new Button(pos, image['downLvl'], audio, this.chanceDisplayToLvl2.bind(this)))
 
+
+    
     var backgroundImages = [];
     backgroundImages.push(image['gamesky'])
     backgroundImages.push(image['gameseaseven'])
@@ -255,10 +257,6 @@ gameEngine.prototype.update = function(time){
     this.displays[this.displayScreen].update(time);
 }
 
-gameEngine.prototype.saveUserData = function(){
-	//implementa 
-}
-
 gameEngine.prototype.render = function(){
 
     this.displays[this.displayScreen].render(this.userdata.currency, this.score);
@@ -269,6 +267,7 @@ gameEngine.prototype.render = function(){
     }else if( this.displayScreen === this.UpgrLvl2){
         this.displays[this.displayScreen].renderUpgrades(this.userdata.upgrades2);
     }
+    
 }
 
 gameEngine.prototype.receiveInputs = function(e){
@@ -288,59 +287,67 @@ gameEngine.prototype.receiveInputs = function(e){
 
 gameEngine.prototype.buyUpgrade = function(index){  
     
+    if(index[0] === 0 && index[1] === 2){
+        
+        this.displays[this.lvl2].showArrow = true;
+        this.displays[this.lvl1].showArrow = true;
+
+    }
     if(this.displayScreen === this.UpgrLvl1){
 
         if(this.userdata.currency >= this.calculator.prices1[index[0]][index[1]]){
 
+            this.userdata.upgrades1[index[0]][index[1]] = 2;
 
-        this.userdata.upgrades1[index[0]][index[1]] = 2;
-
-        if(index[0] === 0){
-            if(index[1] !== 2){
-                this.userdata.upgrades1[index[0]][index[1]+1] = 1;
+            if(index[0] === 0){
+                if(index[1] !== 2){
+                    this.userdata.upgrades1[index[0]][index[1]+1] = 1;
+                }
             }
-        }
 
-        if(index[0] !== 2){
-            this.userdata.upgrades1[index[0]+1][index[1]] = 1;
-        }
-        if(index[0] < 1){
-            this.userdata.upgrades1[index[0]+2][index[1]] = 0;
-        }
+            if(index[0] !== 2){
+                this.userdata.upgrades1[index[0]+1][index[1]] = 1;
+            }
+            if(index[0] < 1){
+                this.userdata.upgrades1[index[0]+2][index[1]] = 0;
+            }
+            if(index[1]< 1){
+                this.userdata.upgrades1[index[0]][index[1]+2] = 0;
+            }
 
-        this.userdata.currency -= this.calculator.prices1[index[0]][index[1]];
-    }
+            this.userdata.currency -= this.calculator.prices1[index[0]][index[1]];
+        }
 
     
-    this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1(),1));
-    this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1()))
+        this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1()));
+        this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1()))
 
     }else if( this.displayScreen === this.UpgrLvl2){
 
         if(this.userdata.currency >= this.calculator.prices2[index[0]][index[1]]){
 
 
-        this.userdata.upgrades2[index[0]][index[1]] = 2;
+            this.userdata.upgrades2[index[0]][index[1]] = 2;
 
-        if(index[0] === 0){
-            if(index[1] !== 2){
-                this.userdata.upgrades2[index[0]][index[1]+1] = 1;
+            if(index[0] === 0){
+                if(index[1] !== 2){
+                    this.userdata.upgrades2[index[0]][index[1]+1] = 1;
+                }
             }
+
+            if(index[0] !== 2){
+                this.userdata.upgrades2[index[0]+1][index[1]] = 1;
+            }
+            if(index[0] < 1){
+                this.userdata.upgrades2[index[0]+2][index[1]] = 0;
+            }
+
+            this.userdata.currency -= this.calculator.prices2[index[0]][index[1]];
         }
 
-        if(index[0] !== 2){
-            this.userdata.upgrades2[index[0]+1][index[1]] = 1;
-        }
-        if(index[0] < 1){
-            this.userdata.upgrades2[index[0]+2][index[1]] = 0;
-        }
-
-        this.userdata.currency -= this.calculator.prices2[index[0]][index[1]];
-    }
-
-    
-    this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades2(),2));
-    this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades2()))
+        
+        this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades2()));
+        this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades2()))
     }
 
     

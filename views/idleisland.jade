@@ -6,7 +6,6 @@ head
 		p(hidden,id = 'user') #{data.username}
 		p(hidden, id = 'userData') #{data.userData}
 		h1 IDLE ISLAND
-		p: a(href='/menu') GO BACK TO MENU
 		canvas#myCanvas(width='1000', height='600', style='border: 1px solid black;')
 		form(method='post', action='/exit', id = 'exit', hidden)
 			input(type='text', id='submitString', name='submitString')

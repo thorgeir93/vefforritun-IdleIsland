@@ -12,12 +12,17 @@ Display.prototype.Buttons = undefined;
 Display.prototype.image = undefined;
 Display.prototype.upgrades = undefined;
 Display.prototype.coconuts = [];
+Display.prototype.showArrow = false;
 
 Display.prototype.render = function(currency, score ){
 	this.drawAt(g_ctx, 0, 0);
 
 	for(var i = 0; i<this.Buttons.length; i++){
-		this.Buttons[i].render();
+		if(!(this.Buttons[i].image.name === "downLvl")){
+			this.Buttons[i].render();
+		}else if(this.showArrow){
+			this.Buttons[i].render();
+		}
 	}
 
 	for(var i = 0; i<this.coconuts.length; i++){
@@ -26,7 +31,7 @@ Display.prototype.render = function(currency, score ){
 
 	g_ctx.fillStyle = "black";
 	g_ctx.font="20px Georgia";
-	g_ctx.fillText('Your Coconuts :  '+currency,500,150);
+	g_ctx.fillText('Your Coconuts :  '+currency,780,150);
 
 	g_ctx.font="20px Georgia";
 	g_ctx.fillText('Your score: '+score,820,200);
@@ -58,8 +63,8 @@ Display.prototype.drawAt = function (ctx, x, y) {
 	for(var i = 0; i<this.image.length; i++){
 
 		ctx.drawImage(this.image[i], x, y);
+		
 	}
-
     //ctx.drawImage(this.image,
                   //x, y);
 };
@@ -91,9 +96,17 @@ Display.prototype.findButtonForClick = function(e,upgrades){
 	var mouseY = e.pageY - $('#myCanvas').offset().top;
 
 	for (var i = 0; i < this.Buttons.length; i++) {
-		var cords = this.Buttons[i].getPosition();
-		if(cords.x <= mouseX && mouseX <= cords.x+cords.width && cords.y <= mouseY && mouseY <= cords.y+cords.height){
-			this.Buttons[i].action();
+		
+		if(!(this.Buttons[i].image.name === "downLvl")){
+			var cords = this.Buttons[i].getPosition();
+			if(cords.x <= mouseX && mouseX <= cords.x+cords.width && cords.y <= mouseY && mouseY <= cords.y+cords.height){
+				this.Buttons[i].action();
+			}
+		}else if(this.showArrow){
+			var cords = this.Buttons[i].getPosition();
+			if(cords.x <= mouseX && mouseX <= cords.x+cords.width && cords.y <= mouseY && mouseY <= cords.y+cords.height){
+				this.Buttons[i].action();
+			}
 		}
 	}
 

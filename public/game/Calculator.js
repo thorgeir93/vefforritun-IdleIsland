@@ -20,9 +20,12 @@ Calculator.prototype.calculateCurrency = function(time, currency, currFactor){
 	if(this.difference >= 1){
 		this.difference -= 1;
 		intTala += 1;
-	}
+	}	
+
+	console.log(intTala, currFactor);
 
 	return currency + intTala;
+
 
 };
 
@@ -48,7 +51,7 @@ Calculator.prototype.calculateOfflineCurrency = function(date, currency, factor)
 
 };
 
-Calculator.prototype.createFactor = function(upgrades,disp){
+Calculator.prototype.createFactor = function(upgrades){
 	
 	var factor = 0;
 
@@ -67,6 +70,8 @@ Calculator.prototype.createFactor = function(upgrades,disp){
 				}
 			}
 		}
+
+		console.log('factor = ',factor);
 		return factor;
 	
 };
