@@ -36,7 +36,7 @@ router.get('/viewFriends', ensureUser, viewFriends);
 router.get('/addFriends', ensureUser, addFriends);
 router.post('/addFriends', addFriendsHandler);
 
-router.get('/highScores', ensureUser, highScores);
+router.get('/highScores', /*ensureUser,*/ highScores);
 router.get('/settings', /*ensureUser,*/ settings);
 
 router.get('/idleisland', ensureUser, play);
@@ -47,7 +47,22 @@ function menu(req, res, next) {
 }
 
 function viewFriends(req, res, next) {
-  res.render('viewFriends', { title: 'View Friends'});
+  username = req.session.user;
+  sql.findFriendList(username, function(err, result) {
+    if (err) {
+      console.error(err);
+    } 
+    friends = result[0]['friendid'].split(',');
+    var friended = [];
+    for (var i = 0; i < friends.length; i++) {
+      friended.push(friends[i]);
+    }
+    if (friended.length > 2) {
+      res.render('viewFriends', { status: 'Your friends', entries: friended});
+    } else {
+      res.render('viewFriends', { status: 'Get some friends, loser', entries: false});
+    }
+  });
 }
 
 function addFriends(req, res, next) {
@@ -99,8 +114,19 @@ function addFriendsHandler(req, res, next) {
 }
 
 function highScores(req, res, next) {
-  res.render('highScores', { title: 'View High Scores'});
+  sql.findAllHighScore(function(error, result) {
+    if (error) {
+      console.error(error);
+    }
+    var entries = [];
+    for(var i = 0; i < result.rows.length; i++) {
+      entries.push(result.rows[i]);
+    }
+    res.render('highScores', { entries: entries});
+  });
 }
+
+  
 
 function settings(req, res, next) {
   res.render('settings', { title: 'Change Settings'});
