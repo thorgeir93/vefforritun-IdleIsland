@@ -32,6 +32,7 @@ function homePage(req, res, next){
 router.get('/menu', ensureUser, menu);
 
 router.get('/viewFriends', ensureUser, viewFriends);
+router.post('/viewFriends', chooseFriend);
 
 router.get('/addFriends', ensureUser, addFriends);
 router.post('/addFriends', addFriendsHandler);
@@ -44,7 +45,26 @@ router.get('/settings', ensureUser, settings);
 
 router.get('/idleisland', ensureUser, play);
 router.get('/logout', ensureUser, logout);
+
+
 router.post('/exit', ensureUser ,exit);
+
+/*router.get('/viewFriendsIsland', viewFriendsIsland);
+
+function viewFriendsIsland(req, res, next) {
+  res.render('viewFriendsIsland');
+}*/
+
+function chooseFriend(req, res, next) {
+  var friend = xss(req.body.who);
+  sql.getGameState(friend, function(error, result) {
+    var gamestate;
+    gamestate = result
+    var data = {username: friend,
+                userData: gamestate }
+    res.render('viewFriendsIsland', {data:data});
+  });
+}
 
 function exit(req, res, next){
   var gameState = xss(req.body.submitString)
@@ -152,8 +172,9 @@ function settings(req, res, next) {
   res.render('settings', { title: 'Change Settings'});
 }
 
-var gamestate;
+
 function play(req, res, next) {
+  var gamestate;
   sql.getGameState(req.session.user, function(error, dataa){
     console.log('success');
     gamestate = dataa
