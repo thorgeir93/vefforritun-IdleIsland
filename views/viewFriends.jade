@@ -8,6 +8,10 @@ block content
 	if entries !== false
 		hr
 		each item in entries
-				p #{item}
+				form(method='post', action='/viewFriends')
+					input(type='hidden', id='who', name='who', value=item)
+
+					p #{item}
+					div: button View Island
 			hr
 	p: a(href='/menu') Back to menu
