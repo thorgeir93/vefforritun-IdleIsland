@@ -85,6 +85,7 @@ gulp.task('browser-sync', function() {
       port: 8080,
     });
     gulp.watch('./public/**/*.scss', ['styles']).on('change', browserSync.reload);
+    gulp.watch('./public/**/*.js').on('change', browserSync.reload);
     gulp.watch('./lib/**/*').on('change', browserSync.reload);
 });
  

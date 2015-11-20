@@ -28,7 +28,7 @@ function homePage(req, res, next){
 //AUTHERATION / CREATE USER
 ////
 
-
+//VILLA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KV ÞORGEIR
 router.get('/menu', ensureUser, menu);
 
 router.get('/viewFriends', ensureUser, viewFriends);
@@ -37,7 +37,7 @@ router.get('/addFriends', ensureUser, addFriends);
 router.post('/addFriends', addFriendsHandler);
 
 router.get('/highScores', ensureUser, highScores);
-router.get('/settings', ensureUser, settings);
+router.get('/settings', /*ensureUser,*/ settings);
 
 router.get('/idleisland', ensureUser, play);
 

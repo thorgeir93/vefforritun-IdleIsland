@@ -11,10 +11,23 @@ div.options div.text a {
   div.options div.text a:hover {
     text-decoration: underline red; }
 
-div.menu, div.options, div.options div.text {
+div.settings, div.settings form, div.menu, div.options, div.options div.text {
   display: block;
   margin-right: auto;
   margin-left: auto; }
+
+div.settings label {
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* mozilla browsers */
+  -khtml-user-select: none;
+  /* webkit browsers */ }
+
+div.main-background, div.login, div.menu {
+  padding: 20px;
+  height: 100%;
+  background-color: #29ABE2; }
 
 /*FUNCTIONS
 ===================================*/
@@ -35,12 +48,60 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: #00B7FF; }
 
-/* LOGIN
+/*SETTINGS
+===================================*/
+div.settings {
+  color: white;
+  width: 50%; }
+  div.settings h1 {
+    text-align: center; }
+  div.settings form {
+    max-width: 300px; }
+  div.settings div.formgroup {
+    margin-top: 30px; }
+  div.settings input {
+    float: right;
+    margin: 0; }
+  div.settings #checkbox-on, div.settings #checkbox-off {
+    width: 15px;
+    height: 15px;
+    float: right;
+    border: 3px solid #E0E0E0;
+    cursor: pointer; }
+  div.settings #checkbox-on {
+    background-color: #FFC36E; }
+  div.settings #checkbox-off {
+    background-color: transparent; }
+  div.settings input[type=checkbox] {
+    visibility: hidden; }
+  div.settings label {
+    cursor: pointer;
+    width: 100%;
+    padding: 4px;
+    border: 3px solid #E0E0E0;
+    color: #E0E0E0; }
+  div.settings input[type=range] {
+    -webkit-appearance: none;
+    height: 2px;
+    border: 1px solid #bdc3c7; }
+  div.settings input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    width: 6px;
+    height: 20px;
+    cursor: pointer; }
+  div.settings input:focus,
+  div.settings input:active {
+    outline: 0; }
+  div.settings p {
+    display: inline;
+    margin-left: 10px; }
+
+/* LOGIN | MENU
 ===============================*/
 div.login {
   padding: 100px;
-  background: #29ABE2;
-  height: 100%;
   font-family: "Agency FB", arial;
   color: white; }
   div.login h1 {
@@ -91,8 +152,6 @@ div.middle {
 /* MENU
 ================================*/
 div.menu {
-  background-color: #29ABE2;
-  height: 100%;
   text-align: center; }
   div.menu h1 {
     color: white;
