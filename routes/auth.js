@@ -20,10 +20,35 @@ router.post('/create', createHandler);
 
 router.get('/logout', logout);
 
+var formDataLogin =
+{
+	title: 'Log in',
+	method: 'post',
+	action: '/login',
+	btnTitle:'Submit',
+	linkText:'Create new account',
+	linkHref:'/create',
+	username: "",
+	error: false,
+	errorMessage: ""
+};
+
+var formDataCreate =
+{
+	title: 'Create user',
+	method: 'post',
+	action: '/create',
+	btnTitle:'Create',
+	linkText:'Back to login page',
+	linkHref:'./login',
+	username: "",
+	error: false,
+	errorMessage: ""
+};
+
 
 function login(req, res, next) {
-	console.log("hallo");
-	res.render('login', { title: 'Log	in' });
+	res.render('form', formDataLogin);
 }
 
 function redirectIfLoggedIn(req, res, next) {
@@ -55,18 +80,17 @@ function loginHandler(req, res, next) {
 		});
 	} else {
 		console.log("This user is NOT valid!");
-		res.render('login', {
-			title: 'Log in',
-			username: username,
-			error: true,
-			errorMessage: "Wrong username or password :("
-		});
+		var data = formDataLogin;
+		data.error = true;
+		data.username=username;
+		data.errorMessage="Wrong username or password :(";
+		res.render('form', data);
 	}
 	});
 }
 
 function createForm(req, res, next) {
-	res.render('create', { title: 'Create user' });
+	res.render('form', formDataCreate);
 }
 
 //TODO:ask for the "data.message", is it dangerous ?
@@ -74,15 +98,13 @@ function createHandler(req, res, next) {
 	var username = xss(req.body.username);
 	var password = xss(req.body.password);
 
-	var data = {};
-
-	data.title = 'Create account';
-	data.post = true;
+	var data = formDataCreate;
 
 	if( isEmpty(username) || isEmpty(password) ){
 		handleSmallError(true,"username or password fail!");
+		data.error = true;
 		data.errorMessage = "User name and password is requried";
-		res.render('create', data);
+		res.render('form', data);
 	} else {
 		sql.isUserNTaken(username, function( error, userNameTaken ){
 			handleSmallError(error,"auth.js: finding if username taken");
@@ -93,7 +115,7 @@ function createHandler(req, res, next) {
 						data.error = true;
 						data.errorMessage='The "'+username+'" is aldready taken.';
 						data.userNOptions=userNames;
-						res.render('create', data);
+						res.render('form', data);
 					});
 				} else if( !userNameTaken ){
 					console.log("d");

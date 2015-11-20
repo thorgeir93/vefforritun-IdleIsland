@@ -1,0 +1,90 @@
+/*blue*/
+/*green*/
+div.options div.text a {
+  color: #00B7FF;
+  text-decoration: none; }
+  div.options div.text a:hover {
+    text-decoration: underline red; }
+
+div.menu, div.options, div.options div.text {
+  display: block;
+  margin-right: auto;
+  margin-left: auto; }
+
+div.main-backgroun, div.menu {
+  padding: 20px;
+  background-color: #29ABE2;
+  height: 100%; }
+
+/*FUNCTIONS
+===================================*/
+/*	.parent { position: relative; }
+	.child { @include centerer; }*/
+/*.overlay { 	@include coverer;
+					background: rgba(black, 0.5);
+					z-index: 1000;}*/
+* {
+  border: 1px solid red; }
+
+/* BASES
+==================================*/
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; }
+
+body {
+  word-wrap: break-word;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #00B7FF; }
+
+/*SETTINGS
+===================================*/
+/* LOGIN | CREATE USER
+===============================*/
+/* MENU
+================================*/
+div.menu {
+  text-align: center; }
+  div.menu h1 {
+    color: white;
+    font-family: "Agency FB", arial;
+    text-transform: uppercase;
+    letter-spacing: 25px;
+    margin-top: 0;
+    font-size: 140px; }
+
+div.options {
+  /*width: $image-island-green-width;
+		height: $image-island-green-height;
+		
+		background-image: url('../images/menu-island-green.png');
+		background-size: cover;*/ }
+  div.options div.text {
+    padding-top: 68.2px;
+    width: 60%; }
+    div.options div.text a {
+      font: 20px "Agency FB", arial;
+      color: #006837; }
+
+div.island {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 336px;
+  height: 392px;
+  background-image: url("../images/menu-island-green-waves-02.png");
+  z-index: 1000; }
+
+div.sand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 242px;
+  height: 346px;
+  background-image: url("../images/menu-island-sand.png"); }
+
+/* TRASH
+==============================*/

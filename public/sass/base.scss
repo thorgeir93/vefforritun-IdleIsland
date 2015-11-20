@@ -1,0 +1,109 @@
+@import 'sassimports/variables';
+
+*{
+	border: 1px solid red;
+}
+
+
+/* BASES
+==================================*/
+
+	html, body {
+		margin:0;
+		padding:0;
+		height:100%;
+	}
+
+
+	body{
+		word-wrap: break-word;
+		font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+		color:$text-color-default;
+	}
+
+	div.main-backgroun{
+		@extend %background;
+	}
+
+
+/*SETTINGS
+===================================*/
+	
+
+/* LOGIN | CREATE USER
+===============================*/
+
+/* MENU
+================================*/
+	div.menu{
+		@extend %block-centered-hor;
+		@extend %background;
+		text-align: center;
+		h1{
+			color:$color-title;
+			font-family: $text-fontstack;
+			text-transform: uppercase;
+			letter-spacing: 25px;
+			margin-top:0;
+			font-size: 140px;
+		}
+	}
+
+	div.options{
+		//@include centerer; 
+		@extend %block-centered-hor;
+		//@extend %centered-height;
+		
+
+		/*width: $image-island-green-width;
+		height: $image-island-green-height;
+		
+		background-image: url('../images/menu-island-green.png');
+		background-size: cover;*/
+		
+		div.text{
+			@extend %block-centered-hor;
+			padding-top:$image-island-green-height*(1/5);
+			width: 60%;
+			a{
+				@extend %link-default;
+				font: $text-size-menu $text-fontstack;
+				color: $color-dark-gras;
+			}
+		}
+
+	}
+
+	div.island {
+		@include centerer;
+		width: $image-island-wave-width;
+		height: $image-island-wave-height;
+		background-image: url('../images/menu-island-green-waves-02.png');
+		z-index: 1000;
+	}
+
+
+
+	div.sand{
+		@include centerer;
+		width: $image-island-sand-width;
+		height: $image-island-sand-height;
+		background-image: url('../images/menu-island-sand.png');
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* TRASH
+==============================*/

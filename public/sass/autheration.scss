@@ -1,0 +1,113 @@
+//
+//
+//	SCREEN-SIZE-width < $break-point
+//
+
+@import 'sassimports/variables';
+
+$break-point:322px;
+
+//@media only screen and (max-width:$break-point) {
+//}
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+	
+	h1{
+		font-size: 250px !important;
+		//width:100% !important;
+		//font-size:8px;
+	}
+
+	div.middle{
+		display: block !important;
+		
+		width:5000px !important;
+		background-color:black !important;
+	}
+  	
+}
+
+/*@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : portrait) {
+	div.login{
+		background-color:black;
+	} 
+}*/
+
+
+//@media screen and (max-width:1280px) {
+	div.login{
+		@extend %background;
+		padding: 50px;
+		font-family: $text-fontstack;
+		color:white;
+		border-size:border-box;
+		h1{
+			margin-top: 0;
+			text-align: center;
+			font-size: 120px;
+		}
+	}
+	div.middle{
+		@extend %block-centered-hor;
+		max-width: 250px;
+		color: white;
+		font-family:$login-font-stack;
+		overflow:hidden;
+		a{
+			display: block;
+			margin-top:30px;
+			color:$color-light-gray;
+			text-decoration:none;
+		}
+
+		button{
+			background-color:transparent;
+			width: 100%;
+			right:20px;
+			margin-top: 50px;
+			 
+			font-size: 20px;
+			color: $color-light-gray;
+			
+			cursor: pointer;
+			
+			border:0;
+			border: 2px solid $color-light-gray;
+		}
+		
+		
+		::-webkit-input-placeholder{
+			color: $color-light-gray;
+			font-style: $text-fontstack;
+		}
+		
+		input{
+			display: block;
+			
+			margin-top:10px;
+			padding:5px;
+			
+			width:100%;
+
+			background-color: transparent;
+			
+			font-size:20px;
+			color:white;
+			line-height: 50px;
+			
+			border:none;
+			border-bottom: 2px solid $color-light-gray;
+			&:focus{
+				outline:0;
+				box-shadow:none;
+				border-bottom: 2px solid green;
+			} 
+		}
+	}
+//}

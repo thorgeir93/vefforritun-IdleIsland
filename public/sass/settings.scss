@@ -1,0 +1,101 @@
+//
+// SCREEN SIZE - normal
+// SCREEN SIZE - < 320px
+//
+@import 'sassimports/variables';
+
+div.settings{
+		@extend %background;
+		color: white;
+}
+div.main{
+		@extend %block-centered-hor; 
+		width:50%;
+		h1{
+			text-align: center;
+		}
+
+		form{
+			@extend %block-centered-hor;
+			max-width: 300px;
+		}
+		
+		div.formgroup{
+			//overflow: hidden;
+			margin-top: 30px;
+		}
+
+		input{
+			float: right;
+			margin: 0;
+		}
+
+		#checkbox-on, #checkbox-off{
+			$checkbox-size:15px;
+			$checkbox-color:#FFC36E;
+			width: $checkbox-size;
+			height: $checkbox-size;
+		
+			float: right;
+
+			border: 3px solid $color-light-gray;
+			cursor: pointer;
+		}
+		
+		#checkbox-on{
+			background-color: $color-sand;
+
+		}	
+		#checkbox-off{
+			background-color: transparent;
+		}
+
+		//TODO: ef ég hef tíma þá þarf að losna við important
+		//Skipta þarf á mili checkbox og checkbox off, þ.e. 
+		//class verðuru id og öfugt. Sömuleiðis þarf að 
+		//breyta settings.js
+		//.checkbox:hover{
+		//	background-color: $color-sand !important; 
+		//}
+
+		input[type=checkbox] {
+			visibility: hidden;
+		}
+
+		
+		label{
+			@extend %select-none;
+			cursor:pointer;
+			width: 100%;
+			padding: 4px;
+			border: 3px solid $color-light-gray;
+			color:$color-light-gray;
+		}
+		
+		input[type=range] {
+		    -webkit-appearance: none;
+		    //border-radius: 8px;
+		    height: 2px;
+		    border: 1px solid #bdc3c7;
+		    //background-color: #fff; 
+		}
+
+		input[type='range']::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			background-color: #ecf0f1;
+			border: 1px solid #bdc3c7;
+			width: 6px;
+			height: 20px;
+			//border-radius: 10px;
+			cursor: pointer;
+		}
+		input:focus,
+		input:active {
+			outline: 0;
+		}
+
+		p{
+			display: inline;
+			margin-left: 10px;
+		}
+	}
