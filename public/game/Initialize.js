@@ -23,7 +23,7 @@ function imagePreload(callback){
 
     var requiredImages = {
       tree      	: "game/images/game-coconut-tree.png",
-      upgradeMenu	: "game/images/game-button-upgrade.png",
+      upgradeMenu	: "game/images/game-button-upgrade2.png",
 
       gamesky    : "game/images/game-sky-8.png",
       gameseaseven: "game/images/game-sea-7.png",
