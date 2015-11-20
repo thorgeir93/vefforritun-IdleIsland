@@ -26,7 +26,7 @@ Display.prototype.render = function(currency, score ){
 
 	g_ctx.fillStyle = "black";
 	g_ctx.font="20px Georgia";
-	g_ctx.fillText('Your Coconuts :  '+currency,780,150);
+	g_ctx.fillText('Your Coconuts :  '+currency,500,150);
 
 	g_ctx.font="20px Georgia";
 	g_ctx.fillText('Your score: '+score,820,200);

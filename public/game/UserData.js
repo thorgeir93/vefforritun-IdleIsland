@@ -1,7 +1,8 @@
 'use strict'
 
 UserData.prototype.userName = undefined;
-UserData.prototype.upgrades = undefined;
+UserData.prototype.upgrades1 = undefined;
+UserData.prototype.upgrades2 = undefined;
 UserData.prototype.currency = 0;
 UserData.prototype.settings = undefined;
 UserData.prototype.currFactor = 0;
@@ -17,7 +18,8 @@ function UserData(userDataFromDB){
 	var data = JSON.parse(userDataFromDB);
 
 	this.userName = data.userName;
-	this.upgrades = data.upgrades;
+	this.upgrades1 = data.upgrades1;
+	this.upgrades2 = data.upgrades2;
 	this.currency = data.currency;
 	this.settings = data.settings;
 	this.currFactor = data.currFactor;
@@ -30,8 +32,12 @@ function UserData(userDataFromDB){
 
 
 //getters
-UserData.prototype.getUpgrades = function(){
-	return this.upgrades;
+UserData.prototype.getUpgrades1 = function(){
+	return this.upgrades1;
+};
+
+UserData.prototype.getUpgrades2 = function(){
+	return this.upgrades2;
 };
 
 UserData.prototype.getCurrency = function(){
@@ -56,8 +62,12 @@ UserData.prototype.getTimestamp = function(){
 
 //setters
 
-UserData.prototype.setUpgrades = function(upgrades){
-	this.upgrades = upgrades;
+UserData.prototype.setupgrades1 = function(upgrades1){
+	this.upgrades1 = upgrades1;
+}
+
+UserData.prototype.setupgrades2 = function(upgrades2){
+	this.upgrades2 = upgrades2;
 }
 
 UserData.prototype.setCurrency = function(currency){
@@ -82,7 +92,7 @@ UserData.prototype.setTimestamp = function(timestamp){
 
 UserData.prototype.createJSONstring = function(){
 				 
-	var string = '{"userName": "'+this.userName+'","upgrades": [['+this.upgrades[0].toString()+'],['+this.upgrades[1].toString()+'],['+this.upgrades[2].toString()+']], "currency": '+this.currency+', "settings": "'+this.settings+'", "currFactor": '+this.currFactor+', "treeFactor": '+this.treeFactor+', "timestamp": '+ Date.now() +', "score": '+this.score+' }';
+	var string = '{"userName": "'+this.userName+'","upgrades1": [['+this.upgrades1[0].toString()+'],['+this.upgrades1[1].toString()+'],['+this.upgrades1[2].toString()+']],"upgrades2": [['+this.upgrades2[0].toString()+'],['+this.upgrades2[1].toString()+'],['+this.upgrades2[2].toString()+']], "currency": '+this.currency+', "settings": "'+this.settings+'", "currFactor": '+this.currFactor+', "treeFactor": '+this.treeFactor+', "timestamp": '+ Date.now() +', "score": '+this.score+' }';
 
 	console.log(string);
 	return string;

@@ -4,8 +4,12 @@ function Calculator(){
 	console.log('inn i calculator constr')
 }
 
-Calculator.prototype.prices = [[10,1000,1000000],[100,10000,100000000],[1000,100000,1000000000000]];
-Calculator.prototype.factors = [[1,5,10],[2,7,15],[3,9,20]];
+Calculator.prototype.prices1 = [[10,1000,1000000],[100,10000,100000000],[1000,100000,1000000000000]];
+Calculator.prototype.factors1 = [[1,5,10],[2,7,15],[3,9,20]];
+
+Calculator.prototype.prices2 = [[10*100,1000*100,1000000*100],[100*100,10000*100,100000000*100],[1000*100,100000*100,1000000000000*100]];
+Calculator.prototype.factors2 = [[1*2,5*2,10*20],[2*2,7*2,15*2],[3*2,9*2,20*2]];
+
 Calculator.prototype.difference = 0;
 
 Calculator.prototype.calculateCurrency = function(time, currency, currFactor){
@@ -44,15 +48,25 @@ Calculator.prototype.calculateOfflineCurrency = function(date, currency, factor)
 
 };
 
-Calculator.prototype.createFactor = function(upgrades){
+Calculator.prototype.createFactor = function(upgrades,disp){
 	
 	var factor = 0;
-	for (var i = 0; i < 3; i++) {
-		for (var j = 0; j < 3; j++) {
-			if(upgrades[i][j] === 2){
-				factor += this.factors[i][j];
+
+		for (var i = 0; i < 3; i++) {
+			for (var j = 0; j < 3; j++) {
+				if(upgrades[i][j] === 2){
+					factor += this.factors1[i][j];
+				}
 			}
 		}
-	}
-	return factor;
+
+		for (var i = 0; i < 3; i++) {
+			for (var j = 0; j < 3; j++) {
+				if(upgrades[i][j] === 2){
+					factor += this.factors2[i][j];
+				}
+			}
+		}
+		return factor;
+	
 };
