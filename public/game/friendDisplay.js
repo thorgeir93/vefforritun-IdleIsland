@@ -1,24 +1,20 @@
 'use strict'
-function Display(image,buttons,upgrades, itemsForScreen){
+function friendDisplay(image,buttons,upgrades){
 	
 	this.image = image;
 	this.Buttons = buttons;
-	this.upgrades = upgrades;
-	this.itemsForScreen = itemsForScreen;
-	console.log('inn í disp constructor');
+	//this.upgrades = upgrades;
 
 }
 
-Display.prototype.Buttons = undefined;
-Display.prototype.image = undefined;
-Display.prototype.upgrades = undefined;
-Display.prototype.coconuts = [];
-Display.prototype.showArrow = false;
-Display.prototype.itemsForScreen = undefined;
+friendDisplay.prototype.Buttons = undefined;
+friendDisplay.prototype.image = undefined;
+//friendDisplay.prototype.upgrades = undefined;
+//friendDisplay.prototype.coconuts = [];
+friendDisplay.prototype.showArrow = true;
 
-Display.prototype.render = function(currency, score){
+friendDisplay.prototype.render = function(currency, score ){
 	this.drawAt(g_ctx, 0, 0);
-
 	for(var i = 0; i<this.Buttons.length; i++){
 		if(!(this.Buttons[i].image.name === "downLvl")){
 			this.Buttons[i].render();
@@ -27,10 +23,10 @@ Display.prototype.render = function(currency, score){
 		}
 	}
 
-	for(var i = 0; i<this.coconuts.length; i++){
+	/*for(var i = 0; i<this.coconuts.length; i++){
 		this.coconuts[i].render();
-	}
-
+	}*/
+/*
 	g_ctx.fillStyle = "black";
 	g_ctx.font="20px Georgia";
 	g_ctx.fillText('Your Coconuts :  '+currency,780,150);
@@ -38,16 +34,16 @@ Display.prototype.render = function(currency, score){
 	g_ctx.font="20px Georgia";
 	g_ctx.fillText('Your score: '+score,820,200);
 
-	g_ctx.fillStyle = "white";
+	g_ctx.fillStyle = "white";*/
 	//implements plz
 };
 
 
-Display.prototype.createCoconut = function(coconut){
+/*friendDisplay.prototype.createCoconut = function(coconut){
 	this.coconuts.push(coconut)
 }
 
-Display.prototype.update = function(dt){
+friendDisplay.prototype.update = function(dt){
 	if(this.coconuts){
 		for(var i = 0; i<this.coconuts.length; i++){
 			var kill = this.coconuts[i].update(dt);
@@ -57,9 +53,9 @@ Display.prototype.update = function(dt){
 
 		}
 	}
-}
+}*/
 
-Display.prototype.drawAt = function (ctx, x, y) {
+friendDisplay.prototype.drawAt = function (ctx, x, y) {
 	ctx.fillRect(0,0,1000,600);
 
 	for(var i = 0; i<this.image.length; i++){
@@ -67,12 +63,14 @@ Display.prototype.drawAt = function (ctx, x, y) {
 		ctx.drawImage(this.image[i], x, y);
 		
 	}
+    //ctx.drawImage(this.image,
+                  //x, y);
 };
 
 
 
-var counter = 0;
-Display.prototype.renderUpgrades = function(upgrades){
+/*var counter = 0;
+friendDisplay.prototype.renderUpgrades = function(upgrades){
 
 	for(var i = 0; i < 3; i++){
 		for(var j = 0; j < 3; j++){	
@@ -89,20 +87,8 @@ Display.prototype.renderUpgrades = function(upgrades){
 		}
 	}
 };
-
-Display.prototype.renderItemsOnScreen = function(upgrades){
-
-	for(var i = 0; i < 3; i++){
-		for(var j = 0; j< 3; j++){
-			if(upgrades[j][i] === 2){
-				ctx.drawImage(this.itemsForScreen[i][j].image, this.itemsForScreen[i][j].getPosition().x,this.itemsForScreen[i][j].getPosition().y)
-			}
-		}
-	}
-
-}
-
-Display.prototype.findButtonForClick = function(e,upgrades){
+*/
+friendDisplay.prototype.findButtonForClick = function(e){
 
 	var mouseX = e.pageX - $('#myCanvas').offset().left;
 	var mouseY = e.pageY - $('#myCanvas').offset().top;
@@ -122,7 +108,7 @@ Display.prototype.findButtonForClick = function(e,upgrades){
 		}
 	}
 
-	if(this.upgrades){
+	/*if(this.upgrades){
 		for(var i = 0; i < 3; i++){
 			for(var j = 0; j < 3; j++){	
 
@@ -137,6 +123,6 @@ Display.prototype.findButtonForClick = function(e,upgrades){
 			}
 		}
 		
-	}
+	}*/
 	//til að taka bara takkana sem er hægt að kaupa (fyrir upgrade menu)
 }

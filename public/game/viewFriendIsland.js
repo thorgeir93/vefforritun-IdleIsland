@@ -5,7 +5,7 @@ var g_canvas = document.getElementById("myCanvas");
 
 var g_ctx = g_canvas.getContext("2d");
 
-var leikur = undefined;
+var vinur = undefined;
 
 var user;
 
@@ -37,32 +37,32 @@ function imagePreload(callback){
       backButton    : "game/images/backButton.png",
       coconut       : "game/images/game-coconut-money.png",
       exit          : "game/images/game-button-exit.png",
-      downLvl       : "game/images/uplvl.png",
-      upLvl         : "game/images/downlvl.png",
+      downLvl       : "game/images/lvl2.png",
+      upLvl         : "game/images/lvl2.png",
 
-      item1upgrade1 : "game/images/item1upgrade1.png",
-      item2upgrade1 : "game/images/item2upgrade1.png",
-      item3upgrade1 : "game/images/item3upgrade1.png",
+      item1upgrade1 : "game/images/upgrade1.png",
+      item2upgrade1 : "game/images/upgrade2.png",
+      item3upgrade1 : "game/images/upgrade3.png",
 
-      item1upgrade2 : "game/images/item1upgrade2.png",
-      item2upgrade2 : "game/images/item2upgrade2.png",
-      item3upgrade2 : "game/images/item3upgrade2.png",
+      item1upgrade2 : "game/images/upgrade1.png",
+      item2upgrade2 : "game/images/upgrade2.png",
+      item3upgrade2 : "game/images/upgrade3.png",
 
-      item1upgrade3 : "game/images/item1upgrade3.png",
-      item2upgrade3 : "game/images/item2upgrade3.png",
-      item3upgrade3 : "game/images/item3upgrade3.png",
+      item1upgrade3 : "game/images/upgrade1.png",
+      item2upgrade3 : "game/images/upgrade2.png",
+      item3upgrade3 : "game/images/upgrade3.png",
 
-      item4upgrade1 : "game/images/item4upgrade1.png",
-      item5upgrade1 : "game/images/item5upgrade1.png",
-      item6upgrade1 : "game/images/item6upgrade1.png",
+      item4upgrade1 : "game/images/upgrade1.png",
+      item5upgrade1 : "game/images/upgrade2.png",
+      item6upgrade1 : "game/images/upgrade3.png",
 
-      item4upgrade2 : "game/images/item4upgrade2.png",
-      item5upgrade2 : "game/images/item5upgrade2.png",
-      item6upgrade2 : "game/images/item6upgrade2.png",
+      item4upgrade2 : "game/images/upgrade1.png",
+      item5upgrade2 : "game/images/upgrade2.png",
+      item6upgrade2 : "game/images/upgrade3.png",
 
-      item4upgrade3 : "game/images/item4upgrade3.png",
-      item5upgrade3 : "game/images/item5upgrade3.png",
-      item6upgrade3 : "game/images/item6upgrade3.png",
+      item4upgrade3 : "game/images/upgrade1.png",
+      item5upgrade3 : "game/images/upgrade2.png",
+      item6upgrade3 : "game/images/upgrade3.png",
 
       unavalible    : "game/images/unavalible.png",
       bought        : "game/images/bought.png",
@@ -99,9 +99,9 @@ _updateClocks = function (frameTime) {
 
 _iterCore = function (dt) {
 
-    leikur.update(dt);
+    vinur.update(dt);
     
-    leikur.render();
+    vinur.render();
 
     Loop();
 };
@@ -119,6 +119,7 @@ function mainIterFrame(frameTime) {
 }
 
 _requestNextIteration = function () {
+  
     window.requestAnimationFrame(mainIterFrame);
 };
 
@@ -140,23 +141,18 @@ Loop = function () {
 
 
 function init(){
-	console.log('starting');
 
 	imagePreload(function(){
 
 		AudioPreload(function(){
 
-			console.log('all preloads done');
-
             user = $('#user')['0'].innerHTML;
             userData = $('#userData')['0'].innerHTML;
-            console.log(userData.toString())
 
-			leikur = new gameEngine(g_images, g_audio, user, userData);
-			console.log('game engine done...starting game');
+			vinur = new friendGameEngine(g_images, g_audio, user, userData);
 
 			g_canvas.onmousedown = function(e){
-				leikur.receiveInputs(e);
+				vinur.receiveInputs(e);
 			}
 			
 			Loop();

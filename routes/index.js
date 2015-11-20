@@ -32,6 +32,7 @@ function homePage(req, res, next){
 router.get('/menu', ensureUser, menu);
 
 router.get('/viewFriends', ensureUser, viewFriends);
+router.post('/viewFriends', chooseFriend);
 
 router.get('/addFriends', ensureUser, addFriends);
 router.post('/addFriends', addFriendsHandler);
@@ -39,15 +40,69 @@ router.post('/addFriends', addFriendsHandler);
 router.get('/highScores', ensureUser, highScores);
 router.get('/settings', /*ensureUser,*/ settings);
 
-router.get('/idleisland', ensureUser, play);
+router.get('/highScores', ensureUser, highScores);
+router.get('/settings', ensureUser, settings);
 
+router.get('/idleisland', ensureUser, play);
+router.get('/logout', ensureUser, logout);
+
+
+router.post('/exit', ensureUser ,exit);
+
+/*router.get('/viewFriendsIsland', viewFriendsIsland);
+
+function viewFriendsIsland(req, res, next) {
+  res.render('viewFriendsIsland');
+}*/
+
+function chooseFriend(req, res, next) {
+  var friend = xss(req.body.who);
+  sql.getGameState(friend, function(error, result) {
+    var gamestate;
+    gamestate = result
+    var data = {username: friend,
+                userData: gamestate }
+    res.render('viewFriendsIsland', {data:data});
+  });
+}
+
+function exit(req, res, next){
+  var gameState = xss(req.body.submitString)
+  var score = xss(req.body.score)
+  sql.setGameState(req.session.user, gameState, score, function(){
+    console.log('allt gekk upp')
+    res.redirect('/menu');
+  })
+}
+
+function logout(req, res, next) {
+  // eyðir session og öllum gögnum, verður til nýtt við næsta request
+  req.session.destroy(function(){
+    res.redirect('/');
+  });
+}
 
 function menu(req, res, next) {
   res.render('menu', { title: 'Idle Island'});
 }
 
 function viewFriends(req, res, next) {
-  res.render('viewFriends', { title: 'View Friends'});
+  username = req.session.user;
+  sql.findFriendList(username, function(err, result) {
+    if (err) {
+      console.error(err);
+    } 
+    friends = result[0]['friendid'].split(',');
+    var friended = [];
+    for (var i = 0; i < friends.length; i++) {
+      friended.push(friends[i]);
+    }
+    if (friended.length > 2) {
+      res.render('viewFriends', { status: 'Your friends', entries: friended});
+    } else {
+      res.render('viewFriends', { status: 'Get some friends, loser', entries: false});
+    }
+  });
 }
 
 function addFriends(req, res, next) {
@@ -99,15 +154,27 @@ function addFriendsHandler(req, res, next) {
 }
 
 function highScores(req, res, next) {
-  res.render('highScores', { title: 'View High Scores'});
+  sql.findAllHighScore(function(error, result) {
+    if (error) {
+      console.error(error);
+    }
+    var entries = [];
+    for(var i = 0; i < result.rows.length; i++) {
+      entries.push(result.rows[i]);
+    }
+    res.render('highScores', { entries: entries});
+  });
 }
+
+  
 
 function settings(req, res, next) {
   res.render('settings', { title: 'Change Settings'});
 }
 
-var gamestate;
+
 function play(req, res, next) {
+  var gamestate;
   sql.getGameState(req.session.user, function(error, dataa){
     console.log('success');
     gamestate = dataa

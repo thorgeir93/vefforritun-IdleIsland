@@ -1,4 +1,17 @@
 extends layout
 
 block content
-  h1= title
+	h1= 'view Friends'
+	if (status)
+		strong #{status}
+	div.friends
+	if entries !== false
+		hr
+		each item in entries
+				form(method='post', action='/viewFriends')
+					input(type='hidden', id='who', name='who', value=item)
+
+					p #{item}
+					div: button View Island
+			hr
+	p: a(href='/menu') Back to menu
