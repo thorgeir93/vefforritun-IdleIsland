@@ -36,11 +36,33 @@ router.get('/viewFriends', ensureUser, viewFriends);
 router.get('/addFriends', ensureUser, addFriends);
 router.post('/addFriends', addFriendsHandler);
 
-router.get('/highScores', /*ensureUser,*/ highScores);
+<<<<<<< HEAD
+router.get('/highScores', ensureUser, highScores);
 router.get('/settings', /*ensureUser,*/ settings);
 
+=======
+router.get('/highScores', ensureUser, highScores);
+router.get('/settings', ensureUser, settings);
+>>>>>>> 6bf5c524651a7d4c5a752b94ccd063b7e9369278
 router.get('/idleisland', ensureUser, play);
+router.get('/logout', ensureUser, logout);
+router.post('/exit', ensureUser ,exit);
 
+function exit(req, res, next){
+  var gameState = xss(req.body.submitString)
+  var score = xss(req.body.score)
+  sql.setGameState(req.session.user, gameState, score, function(){
+    console.log('allt gekk upp')
+    res.redirect('/menu');
+  })
+}
+
+function logout(req, res, next) {
+  // eyðir session og öllum gögnum, verður til nýtt við næsta request
+  req.session.destroy(function(){
+    res.redirect('/');
+  });
+}
 
 function menu(req, res, next) {
   res.render('menu', { title: 'Idle Island'});

@@ -1,11 +1,3 @@
-Coconut.prototype.topX = undefined;
-Coconut.prototype.topY = undefined;
-Coconut.prototype.image = undefined;
-Coconut.prototype.audio = undefined;
-Coconut.prototype.height = undefined;
-Coconut.prototype.width = undefined;
-Coconut.prototype.Xvel = 2;
-Coconut.prototype.Yvel = -20;
 
 function Coconut(pos, img, audio){
 
@@ -15,8 +7,25 @@ function Coconut(pos, img, audio){
 	this.width = pos.width;
 	this.image = img;
 	this.audio = audio;
-	this.actionFunc = actionFunc;
+	if(Math.random()>0.5){
+
+		this.Xvel = Math.random()*10;
+	}else{
+		this.Xvel = -Math.random()*10;
+	}
+	this.Yvel = (-Math.random() * 20)+10;
+
 }
+
+Coconut.prototype.topX = undefined;
+Coconut.prototype.topY = undefined;
+Coconut.prototype.image = undefined;
+Coconut.prototype.audio = undefined;
+Coconut.prototype.height = undefined;
+Coconut.prototype.width = undefined;
+Coconut.prototype.Xvel = undefined;
+Coconut.prototype.Yvel = undefined;
+Coconut.prototype.time = 20;
 
 Coconut.prototype.render = function(){
 	
@@ -24,13 +33,29 @@ Coconut.prototype.render = function(){
 	//implement plz
 };
 
+Coconut.prototype.update = function(dt){
+	this.topX += (dt/100)*this.Xvel;
+	this.topY += (dt/100)*this.Yvel;
+
+	this.Yvel += (dt/100)*9.8;
+
+	if(this.topY > 350){
+		this.Yvel = -this.Yvel*0.5;
+		this.topY -= 5
+	}
+
+	this.time -= (dt/100);
+	if(this.time < 0){
+		return -1;
+	}
+};
 
 Coconut.prototype.getPosition = function(){
 	return {x: this.topX,
 			y: this.topY,
 			width: this.width,
 			height: this.height};
-}
+};
 
 Coconut.prototype.getImage = function(){
 	return this.image;
@@ -42,7 +67,13 @@ Coconut.prototype.getAudioPath = function(){
 
 Coconut.prototype.drawAt = function (ctx, x, y, w, h) {
 
+	if(this.time < 10){
+		
+		ctx.globalAlpha = 1/(10 - this.time);
+	}
 	ctx.drawImage(this.image, x, y, w, h);
     //ctx.drawImage(this.image,
                   //x, y);
+
+	ctx.globalAlpha = 1;
 };

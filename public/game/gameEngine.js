@@ -3,23 +3,30 @@ function gameEngine(image, audio, user, userData){
 
     this.userName = user;
     this.userdata = new UserData(userData);
-	this.calculator = new Calculator('hi');
-    this.userdata.setCurrency(1000);
+	this.calculator = new Calculator();
     this.coconutImage = image['coconut'];
-
-
-	/*this.dataBaseConnector = new DBconnector();
-
-    this.dataBaseConnector.receiver(this.userName, function(){
-        console.log('success!!');
-    });*/
+    this.userdata.setCurrency(this.calculator.calculateOfflineCurrency(this.userdata.timestamp,this.userdata.getCurrency(), this.userdata.getCurrFactor()));
+    this.score = this.userdata.score + this.calculator.calculateOfflineCurrency(this.userdata.timestamp,this.userdata.getCurrency(), this.userdata.getCurrFactor());
+    this.displayScreen = this.lvl1;
 
     ////////////////////////////////////////////////////////
-    //              THE GAME DISPlAY
+    //              THE UPGRADES DISPLAY 1
+    ////////////////////////////////////////////////////////
+    var names = ['backButton', 'item1upgrade1', 'item2upgrade1', 'item3upgrade1', 'item1upgrade2', 'item2upgrade2', 'item3upgrade2', 'item1upgrade3', 'item2upgrade3', 'item3upgrade3']
+    this.makeUpgradeDisplay(names, image, audio, this.chanceDisplayToUpgradeslvl1.bind(this))
+
+    ////////////////////////////////////////////////////////
+    //              THE UPGRADES DISPLAY 2
+    ////////////////////////////////////////////////////////
+    names = ['backButton', 'item4upgrade1', 'item5upgrade1', 'item6upgrade1', 'item4upgrade2', 'item5upgrade2', 'item6upgrade2', 'item4upgrade3', 'item5upgrade3', 'item6upgrade3']
+    this.makeUpgradeDisplay(names, image, audio, this.chanceDisplayToUpgradeslvl2.bind(this))
+
+    ////////////////////////////////////////////////////////
+    //              LEVEL 1
     ////////////////////////////////////////////////////////
 
     //takki1 - tré
-	var buttons = [];
+    var buttons = [];
     var pos = {     width: image['tree'].width,
                         height: image['tree'].height,
                         topX: 400,
@@ -35,24 +42,110 @@ function gameEngine(image, audio, user, userData){
                         topY: 10
           };
 
-    buttons.push(new Button(pos, image['upgradeMenu'], audio, this.chanceDisplayToUpgrades.bind(this)))
+    buttons.push(new Button(pos, image['upgradeMenu'], audio, this.chanceDisplayToUpgradeslvl1.bind(this)))
 
+    //takki3 - exit takki
+    pos = {     width: image['exit'].width,
+                        height: image['exit'].height,
+                        topX: 900,
+                        topY: 60
+          };
 
-    this.displays.push(new Display(image['background0'], buttons,undefined));
+    buttons.push(new Button(pos, image['exit'], audio, this.exit.bind(this)))
 
-    ////////////////////////////////////////////////////////
-    //              THE UPGRADES DISPLAY
-    ////////////////////////////////////////////////////////
+    //takki3 - downLvl
+    pos = {     width: image['downLvl'].width,
+                        height: image['downLvl'].height,
+                        topX: 500,
+                        topY: 500
+          };
 
-    buttons = [];
+    buttons.push(new Button(pos, image['downLvl'], audio, this.chanceDisplayToLvl2.bind(this)))
 
-    pos = {     width: image['backButton'].width,
-                        height: image['backButton'].height,
+    var backgroundImages = [];
+    backgroundImages.push(image['gamesky'])
+    backgroundImages.push(image['gameseaseven'])
+    backgroundImages.push(image['gameseasix'])
+    backgroundImages.push(image['gameseafive'])
+    backgroundImages.push(image['gameseafour'])
+    backgroundImages.push(image['gamesandthree'])
+    backgroundImages.push(image['gameseatwo'])
+    backgroundImages.push(image['gameseaone'])
+
+    this.displays.push(new Display(backgroundImages, buttons,undefined));
+
+    /////////////////////////////////////////////////
+    //                  LEVEL TWO
+    ////////////////////////////////////////////////
+
+    //takki1 - tré
+    var buttons = [];
+    var pos = {     width: image['tree'].width,
+                        height: image['tree'].height,
+                        topX: 400,
+                        topY: 50
+               };
+
+    buttons.push(new Button(pos, image['tree'], audio, this.punch.bind(this)))
+
+    //takki2 - takki til að komast inn i upgrade menu
+    pos = {     width: image['upgradeMenu'].width,
+                        height: image['upgradeMenu'].height,
                         topX: 900,
                         topY: 10
           };
 
-    buttons.push(new Button(pos, image['backButton'], audio, this.chanceDisplayToGame.bind(this)))
+    buttons.push(new Button(pos, image['upgradeMenu'], audio, this.chanceDisplayToUpgradeslvl2.bind(this)))
+
+    //takki3 - exit takki
+    pos = {     width: image['upLvl'].width,
+                        height: image['upLvl'].height,
+                        topX: 500,
+                        topY: 0
+          };
+
+    buttons.push(new Button(pos, image['upLvl'], audio, this.chanceDisplayToLvl1.bind(this)))
+
+    backgroundImages = [];
+    backgroundImages.push(image['gamesky'])
+    backgroundImages.push(image['gameseaseven'])
+    backgroundImages.push(image['gameseasix'])
+
+    this.displays.push(new Display(backgroundImages, buttons, undefined));
+
+}
+
+gameEngine.prototype.lvl1 = 2;
+gameEngine.prototype.lvl2 = 3;
+gameEngine.prototype.UpgrLvl1 = 0;
+gameEngine.prototype.UpgrLvl2 = 1;
+
+gameEngine.prototype.userName = undefined;
+
+gameEngine.prototype.userData = undefined;
+
+gameEngine.prototype.calculator = undefined;
+gameEngine.prototype.dataBaseConnector = undefined;
+
+gameEngine.prototype.displayScreen = undefined;
+gameEngine.prototype.displays = [];
+
+gameEngine.prototype.isMuted = false;
+
+gameEngine.prototype.coconutImage = undefined;
+
+gameEngine.prototype.score = undefined;
+
+gameEngine.prototype.makeUpgradeDisplay = function(names,image, audio, func){
+
+    buttons = [];
+
+    pos = {     width: image[names[0]].width,
+                        height: image[names[0]].height,
+                        topX: 900,
+                        topY: 10
+          };
+    buttons.push(new Button(pos, image[names[0]], audio, func))
 
     //////////////////////////////////////////
     //              PARTUR FYRIR BUY MENU
@@ -65,81 +158,21 @@ function gameEngine(image, audio, user, userData){
     ///////////////////////////////////////////
     var upgrades = [[0,0,0],[0,0,0],[0,0,0]];
 
-    var one = 10;
-    var two = 80; 
-    var three = 150;
+    var nameCounter = 1
+    for(var i = 0; i< 3; i++){
+        for(var i = 0; i< 3; i++){
+            console.log([names[nameCounter]])
+            pos = {     width: image[names[nameCounter]].width,
+                        height: image[names[nameCounter]].height,
+                        topX: (j*70) + 10,
+                        topY: (i*70) + 10
+            };
 
-    pos = {     width: image['upgrade1'].width,
-                        height: image['upgrade1'].height,
-                        topX: one,
-                        topY: one
-          };
 
-    upgrades[0][0] = new Button(pos, image['upgrade1'], audio, this.buyUpgrade.bind(this))
-
-    pos = {     width: image['upgrade2'].width,
-                        height: image['upgrade2'].height,
-                        topX: two,
-                        topY: one
-          };
-
-    upgrades[0][1] = new Button(pos, image['upgrade2'], audio, this.buyUpgrade.bind(this))
-
-    pos = {     width: image['upgrade3'].width,
-                        height: image['upgrade3'].height,
-                        topX: three,
-                        topY: one
-          };
-
-    upgrades[0][2] = new Button(pos, image['upgrade3'], audio, this.buyUpgrade.bind(this))
-
-    pos = {     width: image['upgrade1'].width,
-                        height: image['upgrade1'].height,
-                        topX: one,
-                        topY: two
-          };
-
-    upgrades[1][0] = new Button(pos, image['upgrade1'], audio, this.buyUpgrade.bind(this))
-
-    pos = {     width: image['upgrade1'].width,
-                        height: image['upgrade1'].height,
-                        topX: two,
-                        topY: two
-          };
-
-    upgrades[1][1] = new Button(pos, image['upgrade2'], audio, this.buyUpgrade.bind(this))
-
-    pos = {     width: image['upgrade1'].width,
-                        height: image['upgrade1'].height,
-                        topX: three,
-                        topY: two
-          };
-
-    upgrades[1][2] = new Button(pos, image['upgrade3'], audio, this.buyUpgrade.bind(this))
-
-    pos = {     width: image['upgrade1'].width,
-                        height: image['upgrade1'].height,
-                        topX: one,
-                        topY: three
-          };
-
-    upgrades[2][0] = new Button(pos, image['upgrade1'], audio, this.buyUpgrade.bind(this))
-
-    pos = {     width: image['upgrade1'].width,
-                        height: image['upgrade1'].height,
-                        topX: two,
-                        topY: three
-          };
-
-    upgrades[2][1] = new Button(pos, image['upgrade2'], audio, this.buyUpgrade.bind(this))
-
-    pos = {     width: image['upgrade3'].width,
-                        height: image['upgrade3'].height,
-                        topX: three,
-                        topY: three
-          };
-
-    upgrades[2][2] = new Button(pos, image['upgrade3'], audio, this.buyUpgrade.bind(this))
+            upgrades[i][j] = new Button(pos, image[names[nameCounter]], audio, this.buyUpgrade.bind(this))
+            nameCounter++;
+        }
+    }
 
     buyMenu.push(upgrades);
 
@@ -187,33 +220,33 @@ function gameEngine(image, audio, user, userData){
    
     buyMenu.push(bought);
 
-    this.displays.push(new Display(image['UpgradeMenu'], buttons, buyMenu));
-
-    console.log(this.displays,'----------------------',this.userdata);
-
-	//implementa calculator, userdata, databaseConnector og display
+    this.displays.push(new Display([image['UpgradeMenu']], buttons, buyMenu));
 }
 
-gameEngine.prototype.userName = undefined;
 
-gameEngine.prototype.userData = undefined;
+gameEngine.prototype.update = function(time){
+    var currentCurrency = this.userdata.getCurrency();
+    var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor())
+    var gained = currency - currentCurrency;
+    this.score += gained;
+    
+    if(this.displayScreen === this.lvl1){
 
-gameEngine.prototype.calculator = undefined;
-gameEngine.prototype.dataBaseConnector = undefined;
+        for(var i = 0; i < gained; i++){
 
-gameEngine.prototype.displayScreen = 0;
-gameEngine.prototype.displays = [];
+            var pos = {     width: this.coconutImage.width,
+                        height: this.coconutImage.height,
+                            topX: 400,
+                            topY: 50
+                   };
 
-gameEngine.prototype.isMuted = false;
-
-gameEngine.prototype.coconutImage = undefined;
-
-
-
-
-gameEngine.prototype.calculate = function(time){
-
-	this.userdata.setCurrency(this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor()));
+            var coconut = new Coconut(pos,this.coconutImage,undefined)
+            this.displays[this.displayScreen].createCoconut(coconut);
+        }
+    }
+    
+	this.userdata.setCurrency(currency);
+    this.displays[this.displayScreen].update(time);
 }
 
 gameEngine.prototype.saveUserData = function(){
@@ -222,8 +255,8 @@ gameEngine.prototype.saveUserData = function(){
 
 gameEngine.prototype.render = function(){
 
-    this.displays[this.displayScreen].render(this.userdata.currency);
-    if(this.displayScreen === 1){
+    this.displays[this.displayScreen].render(this.userdata.currency, this.score);
+    if(this.displayScreen === this.UpgrLvl1 || this.displayScreen === this.UpgrLvl2){
 
         this.displays[this.displayScreen].renderUpgrades(this.userdata.upgrades);
     }
@@ -237,10 +270,7 @@ gameEngine.prototype.receiveInputs = function(e){
 }
 
 gameEngine.prototype.buyUpgrade = function(index){  
-    console.log(index);
-
     
-    console.log('')
     if(this.userdata.currency >= this.calculator.prices[index[0]][index[1]]){
 
         this.userdata.upgrades[index[0]][index[1]] = 2;
@@ -273,182 +303,58 @@ gameEngine.prototype.punch = function(){
 
 	this.userdata.currency += 1 * this.userdata.treeFactor;
 
+    this.score += 1 * this.userdata.treeFactor;
 
-    //var coconut = new Coconut()
-    //this.displays[this.displayScreen].createCoconut();
+    if(this.displayScreen === this.lvl1){
+
+        var pos = {     width: this.coconutImage.width,
+                        height: this.coconutImage.height,
+                            topX: 400,
+                            topY: 50
+                   };
+
+        var coconut = new Coconut(pos,this.coconutImage,undefined)
+        this.displays[this.displayScreen].createCoconut(coconut);
+    }
 }
 
-gameEngine.prototype.chanceDisplayToUpgrades = function(){
+gameEngine.prototype.chanceDisplayToLvl2 = function(){
+    this.displayScreen = this.lvl2;
+}
 
-    this.displayScreen = 1;
+gameEngine.prototype.chanceDisplayToLvl1 = function(){
+    this.displayScreen = this.lvl1;
+}
+
+gameEngine.prototype.chanceDisplayToUpgradeslvl1 = function(){
+
+    this.displayScreen = this.UpgrLvl1;;
+    this.displays[1].coconuts = [];
+}
+
+gameEngine.prototype.chanceDisplayToUpgradeslvl2 = function(){
+
+    this.displayScreen = this.UpgrLvl2;
+    this.displays[1].coconuts = [];
 }
 
 
-gameEngine.prototype.chanceDisplayToGame = function(){
-    this.displayScreen = 0;
-}
 
 gameEngine.prototype.chanceDisplayToSettings = function(){
-    this.displayScreen = 2;
+    this.displayScreen = 4;
+
+    this.displays[0].coconuts = [];
 }
 
 
 gameEngine.prototype.exit = function(){
-	//implementa
+	console.log('inn í exit');
+    var exit  = $('#exit');
+    var field = exit[0][0];
+    var scoreField = exit[0][1];
+    this.userdata.score = this.score;
+    field.value = this.userdata.createJSONstring();
+    scoreField.value = this.score;
+    exit.submit();
+    console.log(exit);
 }
-
-
-/////////////////////////////////////////////////
-// GAME LOOP SECTION
-
-
-
-
-//////////////////////////////////////////////////////
-// END OF GAME LOOP SECTION
-//////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-var gameEngine = {
-
-    calculator: Calculator,
-
-    databaseConnector: DBconnector,
-
-    userData: undefined,
-
-    displayScreen: 0,
-    displays: [],
-
-    isMuted: false,
-
-
-    init: function(image,audio){
-
-        
-
-        var buttons = [];
-        var pos = {     width: image['tree'].width/10,
-                        height: image['tree'].height/10,
-                        centerX: 10,
-                        centerY: 100
-                    };
-        buttons.push(new Button(pos, image['tree'], audio, 'punch'))
-
-        pos = {     width: image['upgradeMenu'].width,
-                        height: image['upgradeMenu'].height,
-                        centerX: 900,
-                        centerY: 30
-                    };
-
-        buttons.push(new Button(pos, image['upgradeMenu'], audio, 'chanceDisplayToUpgrades'))
-
-        this.displays.push(new Display(image['background0'], buttons));
-
-        this.displays.push(new Display(image['UpgradeMenu'], []));
-
-        console.log(this.displays);
-    },
-
-
-
-
-
-
-
-    calculate: function(time){
-        //implementa hvað calculator þarf að gera
-    },
-
-    saveUserData: function(){
-        //implementa 
-    },
-
-    render: function(){
-        //console.log(this.displayScreen);
-        this.displays[this.displayScreen].render(ctx);
-        //implementa
-    },
-
-    receiveInputs: function(e){
-
-        this.displays[this.displayScreen].findButtonForClick(e);
-
-        //implementa
-    },
-
-    buyUpgrade: function(index){
-        //implementa
-    },
-
-    punch: function(factor){
-        //implementa
-    },
-
-    chanceDisplayToUpgrades: function(){
-
-        console.log('--------------hérna--------inni---------');
-        this.displayScreen = 1;
-    },
-
-
-    chanceDisplayToGame: function(){
-        this.displayScreen = 0;
-    },
-
-    chanceDisplayToSettings: function(){
-        this.displayScreen = 2;
-    },
-
-
-    exit: function(){
-        //implementa
-    }
-
-
-    
-}*/

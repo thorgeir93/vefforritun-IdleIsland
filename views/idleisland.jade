@@ -8,13 +8,17 @@ head
 		h1 IDLE ISLAND
 		p: a(href='/menu') GO BACK TO MENU
 		canvas#myCanvas(width='1000', height='600', style='border: 1px solid black;')
+		form(method='post', action='/exit', id = 'exit', hidden)
+			input(type='text', id='submitString', name='submitString')
+			input(type='text', id='score', name='score')
+			div: button
 	script(src='/game/jquery.js')
 	script(src='/game/imagesPreload.js')
 	script(src='/game/soundsPreload.js')
+	script(src='/game/Coconut.js')
 	script(src='/game/Button.js')
 	script(src='/game/Display.js')
 	script(src='/game/UserData.js')
 	script(src='/game/Calculator.js')
-	script(src='/game/DBconnector.js')
 	script(src='/game/gameEngine.js')
 	script(src='/game/Initialize.js')
