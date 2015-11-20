@@ -13,7 +13,7 @@ Display.prototype.image = undefined;
 Display.prototype.upgrades = undefined;
 Display.prototype.coconuts = [];
 
-Display.prototype.render = function(score){
+Display.prototype.render = function(currency, score ){
 	this.drawAt(g_ctx, 0, 0);
 
 	for(var i = 0; i<this.Buttons.length; i++){
@@ -26,7 +26,10 @@ Display.prototype.render = function(score){
 
 	g_ctx.fillStyle = "black";
 	g_ctx.font="20px Georgia";
-	g_ctx.fillText(score,900,150);
+	g_ctx.fillText('Your Coconuts :  '+currency,780,150);
+
+	g_ctx.font="20px Georgia";
+	g_ctx.fillText('Your score: '+score,820,200);
 
 	g_ctx.fillStyle = "white";
 	//implements plz
@@ -51,7 +54,11 @@ Display.prototype.update = function(dt){
 
 Display.prototype.drawAt = function (ctx, x, y) {
 	ctx.fillRect(0,0,1000,600);
-	ctx.drawImage(this.image, x, y);
+
+	for(var i = 0; i<this.image.length; i++){
+
+		ctx.drawImage(this.image[i], x, y);
+	}
 
     //ctx.drawImage(this.image,
                   //x, y);
@@ -61,22 +68,7 @@ Display.prototype.drawAt = function (ctx, x, y) {
 
 var counter = 0;
 Display.prototype.renderUpgrades = function(upgrades){
-if(counter < 10){
-	for (var i = 0; i < 3; i++) {
-            console.log(upgrades[i][0],upgrades[i][1], upgrades[i][2])
-        console.log()
-    };
-    console.log('vs.')
 
-
-    for(var i = 0; i < 3; i++){
-		for(var j = 0; j < 3; j++){	
-			console.log(upgrades[i][j])
-		}
-		console.log('')
-	}
-	counter++;
-}
 	for(var i = 0; i < 3; i++){
 		for(var j = 0; j < 3; j++){	
 

@@ -1,0 +1,375 @@
+//@import "variables";
+//@import './sassImports/variables';
+
+
+*{
+	-border: 1px solid red;
+}
+
+/*VARIABLES
+==========================*/
+	$text-size-menu:20px;
+	$text-fontstack:"Agency FB",arial;
+	$text-color-default:#00B7FF;
+	$login-font-stack: "Arial", serif sans;
+	$color-light-green:#42FF42;
+
+	$color-ocean:#29ABE2;
+	$color-title:white;
+	$color-dark-gras:#006837;
+	$color-light-gray:#E0E0E0;
+	$color-sand:#FFC36E;
+
+	/*blue*/
+	$color-blue-1:$color-ocean;
+
+	/*green*/
+	$color-green-4:$color-dark-gras;
+
+	$image-island-green-width:215px;
+	$image-island-green-height:341px;
+	$image-island-wave-width: 336px;
+	$image-island-wave-height: 392px;
+	$image-island-sand-width: 242px;
+	$image-island-sand-height: 346px;
+
+
+	%link-default{
+		color:$text-color-default;
+		text-decoration: none;
+		&:hover{
+			text-decoration: underline red;
+		}
+	}
+
+
+	%block-centered-hor{
+		display: block;
+		margin-right:auto;
+		margin-left:auto;
+	}
+
+	%button-default {
+		padding: 4px;
+		cursor:pointer;
+		border:none;
+		shadow:none;
+		display:block;
+	}
+
+	%select-none{
+		-webkit-user-select: none;/* Chrome all / Safari all */
+		-moz-user-select: none; /* mozilla browsers */
+  		-khtml-user-select: none; /* webkit browsers */
+	}
+
+
+	%centered-height{
+		display: table-cell;
+	    vertical-align: middle; /*Vertically centered*/
+	    text-align: center; /* Horizontally centered */
+	}
+
+	%background{
+		padding: 20px;
+		height: 100%;
+		background-color:$color-ocean;
+	}
+
+
+
+/*FUNCTIONS
+===================================*/
+
+	//usage:
+	/*	.parent { position: relative; }
+		.child { @include centerer; }*/
+	@mixin centerer {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	//usage:
+	/*.overlay { 	@include coverer;
+						background: rgba(black, 0.5);
+						z-index: 1000;}*/
+	@mixin coverer {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+div.main-background{
+	@extend %background;
+}
+
+
+/* BASES
+==================================*/
+
+	html, body {
+		margin:0;
+		padding:0;
+		height:100%;
+	}
+
+
+
+	body{
+		word-wrap: break-word;
+		font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+		color:$text-color-default;
+	}
+
+
+/*SETTINGS
+===================================*/
+div.settings{
+	@extend %block-centered-hor;
+	color: white;
+	width: 50%;	
+	
+	h1{
+		text-align: center;
+	}
+
+	form{
+		@extend %block-centered-hor;
+		max-width: 300px;
+	}
+	
+	div.formgroup{
+		//overflow: hidden;
+		margin-top: 30px;
+	}
+
+	input{
+		float: right;
+		margin: 0;
+	}
+
+	#checkbox-on, #checkbox-off{
+		$checkbox-size:15px;
+		$checkbox-color:#FFC36E;
+		width: $checkbox-size;
+		height: $checkbox-size;
+	
+		float: right;
+
+		border: 3px solid $color-light-gray;
+		cursor: pointer;
+	}
+	
+	#checkbox-on{
+		background-color: $color-sand;
+
+	}	
+	#checkbox-off{
+		background-color: transparent;
+	}
+
+	//TODO: ef ég hef tíma þá þarf að losna við important
+	//Skipta þarf á mili checkbox og checkbox off, þ.e. 
+	//class verðuru id og öfugt. Sömuleiðis þarf að 
+	//breyta settings.js
+	//.checkbox:hover{
+	//	background-color: $color-sand !important; 
+	//}
+
+	input[type=checkbox] {
+		visibility: hidden;
+	}
+
+	
+	label{
+		@extend %select-none;
+	    cursor:pointer;
+	    width: 100%;
+		padding: 4px;
+		border: 3px solid $color-light-gray;
+		color:$color-light-gray;
+	}
+	
+	input[type=range] {
+	    -webkit-appearance: none;
+	    //border-radius: 8px;
+	    height: 2px;
+	    border: 1px solid #bdc3c7;
+	    //background-color: #fff; 
+	}
+
+	input[type='range']::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		background-color: #ecf0f1;
+		border: 1px solid #bdc3c7;
+		width: 6px;
+		height: 20px;
+		//border-radius: 10px;
+		cursor: pointer;
+	}
+	input:focus,
+	input:active {
+		outline: 0;
+	}
+
+	p{
+		display: inline;
+		margin-left: 10px;
+	}
+
+}
+
+
+/* LOGIN | MENU
+===============================*/
+	div.login{
+		@extend %background;
+		padding: 100px;
+		font-family: $text-fontstack;
+		color:white;
+		h1{
+			text-align: center;
+			font-size: 120px;
+		}
+	}
+	div.middle{
+		
+		@include centerer;
+
+		max-width: 300px;
+
+		color: white;
+		
+		font-family:$login-font-stack;
+
+
+		a{
+			display: block;
+			margin-top:30px;
+			color:$color-light-gray;
+			text-decoration:none;
+		}
+
+		button{
+			background-color:transparent;
+			width: 100%;
+			right:20px;
+			margin-top: 50px;
+			 
+			font-size: 20px;
+			color: $color-light-gray;
+			
+			cursor: pointer;
+			
+			border:0;
+			border: 2px solid $color-light-gray;
+		}
+		
+		
+		::-webkit-input-placeholder{
+			color: $color-light-gray;
+			font-style: $text-fontstack;
+		}
+		
+		input{
+			display: block;
+			
+			margin-top:10px;
+			padding:5px;
+			
+			background-color: transparent;
+			
+			font-size:20px;
+			color:white;
+			line-height: 50px;
+			
+			border:none;
+			border-bottom: 2px solid $color-light-gray;
+			&:focus{
+				outline:0;
+				box-shadow:none;
+				border-bottom: 2px solid green;
+			} 
+		}
+
+	}
+
+
+/* MENU
+================================*/
+	div.menu{
+		@extend %block-centered-hor;
+		@extend %background;
+		text-align: center;
+		h1{
+			color:$color-title;
+			font-family: $text-fontstack;
+			text-transform: uppercase;
+			letter-spacing: 25px;
+			margin-top:0;
+			font-size: 140px;
+		}
+	}
+
+	div.options{
+		//@include centerer; 
+		@extend %block-centered-hor;
+		//@extend %centered-height;
+		
+
+		/*width: $image-island-green-width;
+		height: $image-island-green-height;
+		
+		background-image: url('../images/menu-island-green.png');
+		background-size: cover;*/
+		
+		div.text{
+			@extend %block-centered-hor;
+			padding-top:$image-island-green-height*(1/5);
+			width: 60%;
+			a{
+				@extend %link-default;
+				font: $text-size-menu $text-fontstack;
+				color: $color-dark-gras;
+			}
+		}
+
+	}
+
+	div.island {
+		@include centerer;
+		width: $image-island-wave-width;
+		height: $image-island-wave-height;
+		background-image: url('../images/menu-island-green-waves-02.png');
+		z-index: 1000;
+	}
+
+
+
+	div.sand{
+		@include centerer;
+		width: $image-island-sand-width;
+		height: $image-island-sand-height;
+		background-image: url('../images/menu-island-sand.png');
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* TRASH
+==============================*/

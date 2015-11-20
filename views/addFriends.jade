@@ -1,4 +1,16 @@
 extends layout
 
 block content
-  h1= title
+	h1= 'Add Friends'
+
+	form(method='post', action='/addFriends')
+		if status
+			strong #{status}
+		
+		div.form-group: label(for='username')  Enter friend's username
+		input(type='text', id='friend', name='friend', value=friend)
+		
+		div: button Add friend
+
+	p: a(href='/menu') Back to menu?
+

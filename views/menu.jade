@@ -1,12 +1,17 @@
 extends layout
 
 block content
-  h1= title
+	div.menu
+		h1= title
 
-  p: a(href='/viewFriends') View Friends
-  p: a(href='/addFriends') Add Friends
-  p: a(href='/settings') Settings
-  p: a(href='/highScores') High Scores
-  p: a(href='/idleisland') PLAY
-  hr
-  p: a(href='/logout') Log Out
+		div.sand
+		div.island
+			div.options
+				div.text
+					p: a(href='/viewFriends') View Friends
+					p: a(href='/addFriends') Add Friends
+					p: a(href='/settings') Settings
+					p: a(href='/highScores') High Scores
+					p: a(href='/idleisland') PLAY
+					br
+					p: a(href='/logout') Log Out

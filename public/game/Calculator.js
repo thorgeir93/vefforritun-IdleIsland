@@ -1,7 +1,7 @@
 'use strict'
 
-function Calculator(text){
-	console.log('inn i calculator constr',text)
+function Calculator(){
+	console.log('inn i calculator constr')
 }
 
 Calculator.prototype.prices = [[10,1000,1000000],[100,10000,100000000],[1000,100000,1000000000000]];
@@ -35,8 +35,13 @@ Calculator.prototype.calculateTreeFactor = function(upgrades){
 	return factor;
 };
 
-Calculator.prototype.calculateOfflineCurrency = function(date){
-	//implement plz
+Calculator.prototype.calculateOfflineCurrency = function(date, currency, factor){
+	var timeElapsedInSecs = (Date.now() - date);
+	var curr = this.calculateCurrency(timeElapsedInSecs,currency, factor);
+	console.log(timeElapsedInSecs,curr)
+	return curr;
+
+
 };
 
 Calculator.prototype.createFactor = function(upgrades){

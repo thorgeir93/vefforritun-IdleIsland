@@ -7,6 +7,7 @@ UserData.prototype.settings = undefined;
 UserData.prototype.currFactor = 0;
 UserData.prototype.treeFactor = 1;
 UserData.prototype.timestamp = undefined;
+UserData.prototype.score = undefined;
 
 
 //constructor
@@ -22,6 +23,7 @@ function UserData(userDataFromDB){
 	this.currFactor = data.currFactor;
 	this.treeFactor = data.treeFactor;
 	this.timestamp = data.timestamp;
+	this.score = data.score;
 	console.log('inn í userData constr', data);
 	//implements
 };
@@ -77,6 +79,15 @@ UserData.prototype.setTreeFactor = function(treeFactor){
 UserData.prototype.setTimestamp = function(timestamp){
 	this.timestamp = timestamp;
 };
+
+UserData.prototype.createJSONstring = function(){
+				 
+	var string = '{"userName": "'+this.userName+'","upgrades": [['+this.upgrades[0].toString()+'],['+this.upgrades[1].toString()+'],['+this.upgrades[2].toString()+']], "currency": '+this.currency+', "settings": "'+this.settings+'", "currFactor": '+this.currFactor+', "treeFactor": '+this.treeFactor+', "timestamp": '+ Date.now() +', "score": '+this.score+' }';
+
+	console.log(string);
+	return string;
+
+}
 
 
 

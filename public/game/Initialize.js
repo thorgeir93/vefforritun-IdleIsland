@@ -22,18 +22,50 @@ function AudioPreload(callback){
 function imagePreload(callback){
 
     var requiredImages = {
-      tree      	: "game/images/tree.png",
-      upgradeMenu	: "game/images/upgradeMenu.png",
-      background0	: "game/images/background0.png",
+      tree      	: "game/images/game-coconut-tree.png",
+      upgradeMenu	: "game/images/game-button-upgrade.png",
+
+      gamesky    : "game/images/game-sky-8.png",
+      gameseaseven: "game/images/game-sea-7.png",
+      gameseasix: "game/images/game-sea-6.png",
+      gameseafive: "game/images/game-sea-5.png",
+      gameseafour: "game/images/game-sea-4.png",
+      gameseatwo: "game/images/game-sea-2.png",
+      gameseaone: "game/images/game-sea-1.png",
+      gamesandthree: "game/images/game-sand-3.png",
       UpgradeMenu   : "game/images/UggradeMenu.png",
       backButton    : "game/images/backButton.png",
-      upgrade1      : "game/images/upgrade1.png",
-      upgrade2      : "game/images/upgrade2.png",
-      upgrade3      : "game/images/upgrade3.png",
+      coconut       : "game/images/game-coconut-money.png",
+      exit          : "game/images/game-button-exit.png",
+      downLvl       : "game/images/lvl2.png",
+      upLvl         : "game/images/lvl2.png",
+
+      item1upgrade1 : "game/images/upgrade1.png",
+      item2upgrade1 : "game/images/upgrade2.png",
+      item3upgrade1 : "game/images/upgrade3.png",
+
+      item1upgrade2 : "game/images/upgrade1.png",
+      item2upgrade2 : "game/images/upgrade2.png",
+      item3upgrade2 : "game/images/upgrade3.png",
+
+      item1upgrade3 : "game/images/upgrade1.png",
+      item2upgrade3 : "game/images/upgrade2.png",
+      item3upgrade3 : "game/images/upgrade3.png",
+
+      item4upgrade1 : "game/images/upgrade1.png",
+      item5upgrade1 : "game/images/upgrade2.png",
+      item6upgrade1 : "game/images/upgrade3.png",
+
+      item4upgrade2 : "game/images/upgrade1.png",
+      item5upgrade2 : "game/images/upgrade2.png",
+      item6upgrade2 : "game/images/upgrade3.png",
+
+      item4upgrade3 : "game/images/upgrade1.png",
+      item5upgrade3 : "game/images/upgrade2.png",
+      item6upgrade3 : "game/images/upgrade3.png",
+
       unavalible    : "game/images/unavalible.png",
       bought        : "game/images/bought.png",
-      coconut       : "game/images/coconut.png",
-      exit          : "game/images/exit.png"
       };
 
 	imagesPreload(requiredImages, g_images, callback);
@@ -118,7 +150,7 @@ function init(){
 
             user = $('#user')['0'].innerHTML;
             userData = $('#userData')['0'].innerHTML;
-            console.log(userData)
+            console.log(userData.toString())
 
 			leikur = new gameEngine(g_images, g_audio, user, userData);
 			console.log('game engine done...starting game');
