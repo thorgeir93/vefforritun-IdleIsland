@@ -7,6 +7,9 @@ head
 		p(hidden, id = 'userData') #{data.userData}
 		h1 IDLE ISLAND
 		canvas#myCanvas(width='1000', height='600', style='border: 1px solid black;')
+		form(method='post', action='/exit', id = 'exit')
+			input(type='text', id='submitString', name='submitString')
+			div: button
 	script(src='/game/jquery.js')
 	script(src='/game/imagesPreload.js')
 	script(src='/game/soundsPreload.js')

@@ -32,7 +32,8 @@ function imagePreload(callback){
       upgrade3      : "game/images/upgrade3.png",
       unavalible    : "game/images/unavalible.png",
       bought        : "game/images/bought.png",
-      coconut       : "game/images/coconut.png"
+      coconut       : "game/images/coconut.png",
+      exit          : "game/images/exit.png"
       };
 
 	imagesPreload(requiredImages, g_images, callback);

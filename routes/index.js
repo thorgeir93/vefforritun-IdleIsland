@@ -36,6 +36,11 @@ router.get('/highScores', ensureUser, highScores);
 router.get('/settings', ensureUser, settings);
 router.get('/idleisland', ensureUser, play);
 router.get('/logout', ensureUser, logout);
+router.post('/exit', exit);
+
+function exit(req, res, next){
+  console.log('inn í server exit-------', req.body.submitString);
+}
 
 function login(req, res, next) {
   res.render('login', { title: 'Log  in' });

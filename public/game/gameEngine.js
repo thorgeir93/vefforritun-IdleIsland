@@ -37,6 +37,15 @@ function gameEngine(image, audio, user, userData){
 
     buttons.push(new Button(pos, image['upgradeMenu'], audio, this.chanceDisplayToUpgrades.bind(this)))
 
+    //takki3 - exit takki
+    pos = {     width: image['exit'].width,
+                        height: image['exit'].height,
+                        topX: 900,
+                        topY: 60
+          };
+
+    buttons.push(new Button(pos, image['exit'], audio, this.exit.bind(this)))
+
 
     this.displays.push(new Display(image['background0'], buttons,undefined));
 
@@ -301,7 +310,11 @@ gameEngine.prototype.chanceDisplayToSettings = function(){
 
 
 gameEngine.prototype.exit = function(){
-	//implementa
+	console.log('inn í exit');
+    var exit  = $('#exit');
+    var field = exit[0][0];
+    field.value = 'sup'!
+    console.log(field);
 }
 
 
