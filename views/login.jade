@@ -1,17 +1,22 @@
 extends layout
 
 block content
-	h1 Log in
-	form(method='post', action='/login')
-		if error
-			p= errorMessage
+	div.login
+		div.page-title
+			h1 Log in
 
-		div.form-group: label(for='username') Username
-		input(type='text', id='username', name='username', value=username)
+		div.form
+			form(method='post', action='/login')
+				if error
+					p= errorMessage
 
-		div.form-group: label(for='password') Password
-		input(type='password', id='password', name='password')
+				div.input
+					//div.form-group: label(for='username') Username
+					input(type='text', id='username', name='username', value=username placeholder='username')
+				div.input
+					//div.form-group: label(for='password') Password
+					input(type='password', id='password', name='password' placeholder='password')
 
-		div: button Login
+				div.button: button Login
 
-		a(href="/create") Create account
+				a(href="/create") Create account
