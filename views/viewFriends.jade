@@ -1,4 +1,13 @@
 extends layout
 
 block content
-  h1= title
+	h1= 'view Friends'
+	if (status)
+		strong #{status}
+	div.friends
+	if entries !== false
+		hr
+		each item in entries
+				p #{item}
+			hr
+	p: a(href='/menu') Back to menu
