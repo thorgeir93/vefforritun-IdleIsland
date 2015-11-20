@@ -1,9 +1,10 @@
 'use strict'
-function Display(image,buttons,upgrades){
+function Display(image,buttons,upgrades, itemsForScreen){
 	
 	this.image = image;
 	this.Buttons = buttons;
 	this.upgrades = upgrades;
+	this.itemsForScreen = itemsForScreen;
 	console.log('inn í disp constructor');
 
 }
@@ -13,8 +14,9 @@ Display.prototype.image = undefined;
 Display.prototype.upgrades = undefined;
 Display.prototype.coconuts = [];
 Display.prototype.showArrow = false;
+Display.prototype.itemsForScreen = undefined;
 
-Display.prototype.render = function(currency, score ){
+Display.prototype.render = function(currency, score){
 	this.drawAt(g_ctx, 0, 0);
 
 	for(var i = 0; i<this.Buttons.length; i++){
@@ -65,8 +67,6 @@ Display.prototype.drawAt = function (ctx, x, y) {
 		ctx.drawImage(this.image[i], x, y);
 		
 	}
-    //ctx.drawImage(this.image,
-                  //x, y);
 };
 
 
@@ -89,6 +89,18 @@ Display.prototype.renderUpgrades = function(upgrades){
 		}
 	}
 };
+
+Display.prototype.renderItemsOnScreen = function(upgrades){
+
+	for(var i = 0; i < 3; i++){
+		for(var j = 0; j< 3; j++){
+			if(upgrades[j][i] === 2){
+				ctx.drawImage(this.itemsForScreen[i][j].image, this.itemsForScreen[i][j].getPosition().x,this.itemsForScreen[i][j].getPosition().y)
+			}
+		}
+	}
+
+}
 
 Display.prototype.findButtonForClick = function(e,upgrades){
 

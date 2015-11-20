@@ -29,12 +29,20 @@ Calculator.prototype.calculateCurrency = function(time, currency, currFactor){
 
 };
 
-Calculator.prototype.calculateTreeFactor = function(upgrades){
+Calculator.prototype.calculateTreeFactor = function(upgrades,upgrades2){
 
 	var factor = 0;
 	for (var i = 0; i < 3; i++) {
 		for (var j = 0; j < 3; j++) {
 			if(upgrades[i][j] === 2){
+				factor += 1;
+			}
+		}
+	}
+
+	for (var i = 0; i < 3; i++) {
+		for (var j = 0; j < 3; j++) {
+			if(upgrades2[i][j] === 2){
 				factor += 1;
 			}
 		}
@@ -51,7 +59,7 @@ Calculator.prototype.calculateOfflineCurrency = function(date, currency, factor)
 
 };
 
-Calculator.prototype.createFactor = function(upgrades){
+Calculator.prototype.createFactor = function(upgrades,upgrades2){
 	
 	var factor = 0;
 
@@ -65,7 +73,7 @@ Calculator.prototype.createFactor = function(upgrades){
 
 		for (var i = 0; i < 3; i++) {
 			for (var j = 0; j < 3; j++) {
-				if(upgrades[i][j] === 2){
+				if(upgrades2[i][j] === 2){
 					factor += this.factors2[i][j];
 				}
 			}

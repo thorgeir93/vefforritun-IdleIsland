@@ -74,7 +74,14 @@ function gameEngine(image, audio, user, userData){
     backgroundImages.push(image['gameseatwo'])
     backgroundImages.push(image['gameseaone'])
 
-    this.displays.push(new Display(backgroundImages, buttons,undefined));
+    var upgradesForScreens = [];
+
+
+    upgradesForScreens.push(this.makeItemImages(['item1upgrade1','item1upgrade2','item1upgrade3'], 100, 100, image, audio))
+    upgradesForScreens.push(this.makeItemImages(['item2upgrade1','item2upgrade2','item2upgrade3'], 200, 200, image, audio))
+    upgradesForScreens.push(this.makeItemImages(['item3upgrade1','item3upgrade2','item3upgrade3'], 300, 300, image, audio))
+
+    this.displays.push(new Display(backgroundImages, buttons,undefined,upgradesForScreens));
 
     /////////////////////////////////////////////////
     //                  LEVEL TWO
@@ -113,8 +120,32 @@ function gameEngine(image, audio, user, userData){
     backgroundImages.push(image['gameseaseven'])
     backgroundImages.push(image['gameseasix'])
 
-    this.displays.push(new Display(backgroundImages, buttons, undefined));
+    upgradesForScreens = [];
 
+    upgradesForScreens.push(this.makeItemImages(['item4upgrade1','item4upgrade2','item4upgrade3'], 100, 100, image, audio))
+    upgradesForScreens.push(this.makeItemImages(['item5upgrade1','item5upgrade2','item5upgrade3'], 200, 200, image, audio))
+    upgradesForScreens.push(this.makeItemImages(['item6upgrade1','item6upgrade2','item6upgrade3'], 300, 300, image, audio))
+
+    this.displays.push(new Display(backgroundImages, buttons, undefined, upgradesForScreens));
+
+}
+
+gameEngine.prototype.makeItemImages = function(names, x, y, images, audio){
+    var buttons = [];
+
+    for(var i = 0; i < 3; i++){
+
+        pos = {     width: images[names[i]].width,
+                        height: images[names[i]].height,
+                        topX: x,
+                        topY: y
+          };
+
+        buttons.push(new Button(pos, images[names[i]], audio, undefined))
+
+    }
+
+    return buttons;
 }
 
 gameEngine.prototype.lvl1 = 2;
@@ -149,11 +180,9 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image, audio,func){
           };
 
     if(func === 0){
-        console.log('func 1')
         buttons.push(new Button(pos, image[names[0]], audio, this.chanceDisplayToLvl1.bind(this)))
     }else{
         buttons.push(new Button(pos, image[names[0]], audio, this.chanceDisplayToLvl2.bind(this)))
-        console.log('func 2')
 
     }
 
@@ -228,7 +257,7 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image, audio,func){
    
     buyMenu.push(bought);
 
-    this.displays.push(new Display([image['UpgradeMenu']], buttons, buyMenu));
+    this.displays.push(new Display([image['UpgradeMenu']], buttons, buyMenu, undefined));
 }
 
 
@@ -261,6 +290,13 @@ gameEngine.prototype.render = function(){
 
     this.displays[this.displayScreen].render(this.userdata.currency, this.score);
 
+
+    if(this.displayScreen === this.lvl1){
+        this.displays[this.displayScreen].renderItemsOnScreen(this.userdata.upgrades1)
+    }else if(this.displayScreen === this.lvl2){
+        this.displays[this.displayScreen].renderItemsOnScreen(this.userdata.upgrades2)
+    }
+
     if(this.displayScreen === this.UpgrLvl1){
 
         this.displays[this.displayScreen].renderUpgrades(this.userdata.upgrades1);
@@ -287,6 +323,7 @@ gameEngine.prototype.receiveInputs = function(e){
 
 gameEngine.prototype.buyUpgrade = function(index){  
     
+    console.log('hérna er factor : ',this.userdata.getTreeFactor())
     if(index[0] === 0 && index[1] === 2){
         
         this.displays[this.lvl2].showArrow = true;
@@ -302,6 +339,7 @@ gameEngine.prototype.buyUpgrade = function(index){
             if(index[0] === 0){
                 if(index[1] !== 2){
                     this.userdata.upgrades1[index[0]][index[1]+1] = 1;
+                    this.userdata.upgrades1[index[0]+1][index[1]+1] = 0;
                 }
             }
 
@@ -311,16 +349,17 @@ gameEngine.prototype.buyUpgrade = function(index){
             if(index[0] < 1){
                 this.userdata.upgrades1[index[0]+2][index[1]] = 0;
             }
-            if(index[1]< 1){
+            if(index[1]< 1 && index[0] === 0 ){
                 this.userdata.upgrades1[index[0]][index[1]+2] = 0;
             }
 
             this.userdata.currency -= this.calculator.prices1[index[0]][index[1]];
+        
+            this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
+            this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()))
         }
 
     
-        this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1()));
-        this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1()))
 
     }else if( this.displayScreen === this.UpgrLvl2){
 
@@ -332,6 +371,7 @@ gameEngine.prototype.buyUpgrade = function(index){
             if(index[0] === 0){
                 if(index[1] !== 2){
                     this.userdata.upgrades2[index[0]][index[1]+1] = 1;
+                    this.userdata.upgrades2[index[0]+1][index[1]+1] = 0;
                 }
             }
 
@@ -341,16 +381,21 @@ gameEngine.prototype.buyUpgrade = function(index){
             if(index[0] < 1){
                 this.userdata.upgrades2[index[0]+2][index[1]] = 0;
             }
+            if(index[1]< 1 && index[0] === 0 ){
+                this.userdata.upgrades1[index[0]][index[1]+2] = 0;
+            }
 
             this.userdata.currency -= this.calculator.prices2[index[0]][index[1]];
+
+
+            this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades2(),this.userdata.getUpgrades2()));
+            this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades2(),this.userdata.getUpgrades2()))
         }
 
         
-        this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades2()));
-        this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades2()))
     }
 
-    
+    console.log('hérna er factor aftur : ',this.userdata.getTreeFactor())
 
 	//implementa
 }
