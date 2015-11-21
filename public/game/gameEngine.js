@@ -38,8 +38,8 @@ function gameEngine(image, audio, user, userData){
     //takki2 - takki til að komast inn i upgrade menu
     pos = {     width: image['upgradeMenu'].width,
                         height: image['upgradeMenu'].height,
-                        topX: 540,
-                        topY: 450
+                        topX: 900,
+                        topY: 20
           };
 
     buttons.push(new Button(pos, image['upgradeMenu'], audio, this.chanceDisplayToUpgradeslvl1.bind(this)))
@@ -47,8 +47,8 @@ function gameEngine(image, audio, user, userData){
     //takki3 - exit takki
     pos = {     width: image['exit'].width,
                         height: image['exit'].height,
-                        topX: 900,
-                        topY: 60
+                        topX: 20,
+                        topY: 20
           };
 
     buttons.push(new Button(pos, image['exit'], audio, this.exit.bind(this)))
@@ -77,9 +77,9 @@ function gameEngine(image, audio, user, userData){
     var upgradesForScreens = [];
 
 
-    upgradesForScreens.push(this.makeItemImages(['item1upgrade1','item1upgrade2','item1upgrade3'], 100, 100, image, audio))
-    upgradesForScreens.push(this.makeItemImages(['item2upgrade1','item2upgrade2','item2upgrade3'], 200, 200, image, audio))
-    upgradesForScreens.push(this.makeItemImages(['item3upgrade1','item3upgrade2','item3upgrade3'], 300, 300, image, audio))
+    upgradesForScreens.push(this.makeItemImages(['item1upgrade1','item1upgrade2','item1upgrade3'], 500, 500, image, audio))
+    upgradesForScreens.push(this.makeItemImages(['item2upgrade1','item2upgrade2','item2upgrade3'], 300, 542, image, audio))
+    upgradesForScreens.push(this.makeItemImages(['item3upgrade1','item3upgrade2','item3upgrade3'], 178, 498, image, audio))
 
     this.displays.push(new Display(backgroundImages, buttons,undefined,upgradesForScreens));
 
@@ -262,6 +262,7 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image, audio,func){
 
 
 gameEngine.prototype.update = function(time){
+
     var currentCurrency = this.userdata.getCurrency();
     var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor())
     var gained = currency - currentCurrency;
@@ -280,6 +281,8 @@ gameEngine.prototype.update = function(time){
             var coconut = new Coconut(pos,this.coconutImage,undefined)
             this.displays[this.displayScreen].createCoconut(coconut);
         }
+    }else{
+        this.displays[this.displayScreen].destroyCoconuts();
     }
     
 	this.userdata.setCurrency(currency);
@@ -323,17 +326,17 @@ gameEngine.prototype.receiveInputs = function(e){
 
 gameEngine.prototype.buyUpgrade = function(index){  
     
-    console.log('hérna er factor : ',this.userdata.getTreeFactor())
-    if(index[0] === 0 && index[1] === 2){
-        
-        this.displays[this.lvl2].showArrow = true;
-        this.displays[this.lvl1].showArrow = true;
 
-    }
     if(this.displayScreen === this.UpgrLvl1){
 
         if(this.userdata.currency >= this.calculator.prices1[index[0]][index[1]]){
 
+            if(index[0] === 0 && index[1] === 2){
+                
+                this.displays[this.lvl2].showArrow = true;
+                this.displays[this.lvl1].showArrow = true;
+
+            }
             this.userdata.upgrades1[index[0]][index[1]] = 2;
 
             if(index[0] === 0){
@@ -365,6 +368,12 @@ gameEngine.prototype.buyUpgrade = function(index){
 
         if(this.userdata.currency >= this.calculator.prices2[index[0]][index[1]]){
 
+            if(index[0] === 0 && index[1] === 2){
+                
+                this.displays[this.lvl2].showArrow = true;
+                this.displays[this.lvl1].showArrow = true;
+
+            }
 
             this.userdata.upgrades2[index[0]][index[1]] = 2;
 
@@ -382,14 +391,13 @@ gameEngine.prototype.buyUpgrade = function(index){
                 this.userdata.upgrades2[index[0]+2][index[1]] = 0;
             }
             if(index[1]< 1 && index[0] === 0 ){
-                this.userdata.upgrades1[index[0]][index[1]+2] = 0;
+                this.userdata.upgrades2[index[0]][index[1]+2] = 0;
             }
 
             this.userdata.currency -= this.calculator.prices2[index[0]][index[1]];
-
-
-            this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades2(),this.userdata.getUpgrades2()));
-            this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades2(),this.userdata.getUpgrades2()))
+        
+            this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
+            this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()))
         }
 
         
@@ -421,6 +429,7 @@ gameEngine.prototype.punch = function(){
 
 gameEngine.prototype.chanceDisplayToLvl2 = function(){
     this.displayScreen = this.lvl2;
+    this.displays[this.lvl1].coconuts = [];
 }
 
 gameEngine.prototype.chanceDisplayToLvl1 = function(){

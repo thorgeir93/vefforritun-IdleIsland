@@ -27,6 +27,7 @@ Display.prototype.render = function(currency, score){
 		}
 	}
 
+
 	for(var i = 0; i<this.coconuts.length; i++){
 		this.coconuts[i].render();
 	}
@@ -42,6 +43,13 @@ Display.prototype.render = function(currency, score){
 	//implements plz
 };
 
+Display.prototype.destroyCoconuts = function(){
+	console.log(this.coconuts);
+
+	this.coconuts = [];
+
+	console.log(this.coconuts);
+}
 
 Display.prototype.createCoconut = function(coconut){
 	this.coconuts.push(coconut)

@@ -23,9 +23,6 @@ div.main-backgroun, div.menu {
 /*.overlay { 	@include coverer;
 					background: rgba(black, 0.5);
 					z-index: 1000;}*/
-* {
-  border: 1px solid red; }
-
 /* BASES
 ==================================*/
 html, body {
