@@ -17,7 +17,12 @@ Display.prototype.showArrow = false;
 Display.prototype.itemsForScreen = undefined;
 
 Display.prototype.render = function(currency, score){
-	this.drawAt(g_ctx, 0, 0);
+	//g_ctx.aglobalAlpha = 0.0;
+	//g_ctx.fillStyle = 'tranparent';
+	//console.log(g_canvasW);
+	g_ctx.clearRect(0,0,g_canvasW,g_canvasH);
+	g_ctx.fillStyle = 'rgba(0, 0, 0, 0.0)';
+	this.drawAt(g_ctx, islandPos.x, islandPos.y);
 
 	for(var i = 0; i<this.Buttons.length; i++){
 		if(!(this.Buttons[i].image.name === "downLvl")){
@@ -38,7 +43,6 @@ Display.prototype.render = function(currency, score){
 	g_ctx.font="20px Georgia";
 	g_ctx.fillText('Your score: '+score,820,200);
 
-	g_ctx.fillStyle = "white";
 	//implements plz
 };
 

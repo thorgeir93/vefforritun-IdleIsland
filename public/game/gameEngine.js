@@ -27,10 +27,15 @@ function gameEngine(image, audio, user, userData){
 
     //takki1 - tré
     var buttons = [];
-    var pos = {     width: image['tree'].width,
+   /* var pos = {     width: image['tree'].width,
                         height: image['tree'].height,
                         topX: 250,
                         topY: 150
+               };    */
+    var pos = {     width: image['tree'].width,
+                        height: image['tree'].height,
+                        topX: treePos.x,
+                        topY: treePos.y
                };
 
     buttons.push(new Button(pos, image['tree'], audio, this.punch.bind(this)))
@@ -38,8 +43,8 @@ function gameEngine(image, audio, user, userData){
     //takki2 - takki til að komast inn i upgrade menu
     pos = {     width: image['upgradeMenu'].width,
                         height: image['upgradeMenu'].height,
-                        topX: 540,
-                        topY: 450
+                        topX: upgradePos.x,
+                        topY: upgradePos.y
           };
 
     buttons.push(new Button(pos, image['upgradeMenu'], audio, this.chanceDisplayToUpgradeslvl1.bind(this)))
@@ -47,8 +52,8 @@ function gameEngine(image, audio, user, userData){
     //takki3 - exit takki
     pos = {     width: image['exit'].width,
                         height: image['exit'].height,
-                        topX: 900,
-                        topY: 60
+                        topX: 40,
+                        topY: 40
           };
 
     buttons.push(new Button(pos, image['exit'], audio, this.exit.bind(this)))
@@ -65,14 +70,14 @@ function gameEngine(image, audio, user, userData){
 
     
     var backgroundImages = [];
-    backgroundImages.push(image['gamesky'])
-    backgroundImages.push(image['gameseaseven'])
+    //backgroundImages.push(image['gamesky'])
+   /* backgroundImages.push(image['gameseaseven'])
     backgroundImages.push(image['gameseasix'])
     backgroundImages.push(image['gameseafive'])
     backgroundImages.push(image['gameseafour'])
-    backgroundImages.push(image['gamesandthree'])
     backgroundImages.push(image['gameseatwo'])
-    backgroundImages.push(image['gameseaone'])
+    backgroundImages.push(image['gameseaone'])*/
+    backgroundImages.push(image['gamesandthree']);
 
     var upgradesForScreens = [];
 
@@ -116,19 +121,33 @@ function gameEngine(image, audio, user, userData){
     buttons.push(new Button(pos, image['upLvl'], audio, this.chanceDisplayToLvl1.bind(this)))
 
     backgroundImages = [];
-    backgroundImages.push(image['gamesky'])
-    backgroundImages.push(image['gameseaseven'])
-    backgroundImages.push(image['gameseasix'])
+    //backgroundImages.push(image['gamesky'])
+    backgroundImages.push(image['gameseaseven']);
+    backgroundImages.push(image['gameseasix']);
 
     upgradesForScreens = [];
 
-    upgradesForScreens.push(this.makeItemImages(['item4upgrade1','item4upgrade2','item4upgrade3'], 100, 100, image, audio))
-    upgradesForScreens.push(this.makeItemImages(['item5upgrade1','item5upgrade2','item5upgrade3'], 200, 200, image, audio))
-    upgradesForScreens.push(this.makeItemImages(['item6upgrade1','item6upgrade2','item6upgrade3'], 300, 300, image, audio))
+    upgradesForScreens.push(this.makeItemImages(['item4upgrade1','item4upgrade2','item4upgrade3'], 100, 100, image, audio));
+    upgradesForScreens.push(this.makeItemImages(['item5upgrade1','item5upgrade2','item5upgrade3'], 200, 200, image, audio));
+    upgradesForScreens.push(this.makeItemImages(['item6upgrade1','item6upgrade2','item6upgrade3'], 300, 300, image, audio));
 
     this.displays.push(new Display(backgroundImages, buttons, undefined, upgradesForScreens));
 
 }
+
+
+//
+function decidePosition(img2, top, left, img1Pos){
+    //var img1WH = getWidthHeight( img1 );
+    var img2WH = getWidthHeight( img2 );
+}
+
+function getWidthHeight(img){
+    return {w:img.width, h:img.height};
+}
+
+
+
 
 gameEngine.prototype.makeItemImages = function(names, x, y, images, audio){
     var buttons = [];
@@ -287,9 +306,8 @@ gameEngine.prototype.update = function(time){
 }
 
 gameEngine.prototype.render = function(){
-
+        
     this.displays[this.displayScreen].render(this.userdata.currency, this.score);
-
 
     if(this.displayScreen === this.lvl1){
         this.displays[this.displayScreen].renderItemsOnScreen(this.userdata.upgrades1)
@@ -302,8 +320,7 @@ gameEngine.prototype.render = function(){
         this.displays[this.displayScreen].renderUpgrades(this.userdata.upgrades1);
     }else if( this.displayScreen === this.UpgrLvl2){
         this.displays[this.displayScreen].renderUpgrades(this.userdata.upgrades2);
-    }
-    
+    } 
 }
 
 gameEngine.prototype.receiveInputs = function(e){
@@ -410,8 +427,8 @@ gameEngine.prototype.punch = function(){
 
         var pos = {     width: this.coconutImage.width,
                         height: this.coconutImage.height,
-                            topX: 450,
-                            topY: 200
+                            topX: coconutPos.x,
+                            topY: coconutPos.y
                    };
 
         var coconut = new Coconut(pos,this.coconutImage,undefined)

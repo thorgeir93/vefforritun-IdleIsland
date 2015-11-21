@@ -25,7 +25,6 @@ Button.prototype.render = function(){
 };
 
 Button.prototype.action = function(i){
-
 	this.actionFunc(i);
 };
 

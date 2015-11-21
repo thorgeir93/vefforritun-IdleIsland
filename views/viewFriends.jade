@@ -1,17 +1,19 @@
 extends layout
 
 block content
-	h1= 'view Friends'
-	if (status)
-		strong #{status}
-	div.friends
-	if entries !== false
-		hr
-		each item in entries
-				form(method='post', action='/viewFriends')
-					input(type='hidden', id='who', name='who', value=item)
+	div(class='container' id='view-friends')
+		h1= 'view Friends'
+		if (status)
+			strong #{status}
+			if entries !== false
+				hr
+				each item in entries
+						form(method='post', action='/viewFriends')
+							input(type='hidden', id='who', name='who', value=item)
 
-					p #{item}
-					div: button View Island
-			hr
-	p: a(href='/menu') Back to menu
+							//p #{item}
+							div: button(type='submit') View 
+								p(class='inline-block') #{item}
+								|  Island
+					hr
+			a(href='/menu') Back to menu

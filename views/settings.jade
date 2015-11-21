@@ -4,24 +4,27 @@ block content
 	link(rel='stylesheet', href='/stylesheets/settings.css')
 	script(type='text/javascript' src='/game/settings.js')
 	div.settings
-		div.main
+		div.container
 			h1= title
-
+			hr
 			form(method='post' action='/settings')
 				div.formgroup
-					label(
-						class='label-audio'
-						for='audio-slider') Audio
-					input(
-						type='range' 
-						name='audio-slider'
-						class='audio-slider'
-						min='0' 
-						max='100' 
-						value='20')
-					p(class='audio-number' value='33' text='332') 
+					div.container-slider
+						label(
+							class='label-audio audio-on'
+							for='audio-slider') Audio
+						p(class='audio-number audio-on' value='33' text='332') 
+					div(class="container-slider" id='input-slider')
+						input(
+							type='range' 
+							name='audio-slider'
+							class='audio-slider audio-on'
+							min='0' 
+							max='100' 
+							value='20')
 				div.formgroup
-					label(for='fullscreen' id='label-fullscreen') Fullscreen
+					label(for='fullscreen' id='label-check-off') Fullscreen
 					input(type="checkbox" name="checkboxG1" id="fullscreen")
 					div(class='checkbox' id="checkbox-off")
+			hr
 			p: a(href='/menu') Back to Menu

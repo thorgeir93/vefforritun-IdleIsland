@@ -1,23 +1,26 @@
 doctype html(lang='is')
-head
-	meta(charset='utf-8')
-	title IDLE ISLAND
+html
+	head
+		meta(charset='utf-8')
+		title IDLE ISLAND
+		link(rel='stylesheet', href='/stylesheets/game.css')
 	body
 		p(hidden,id = 'user') #{data.username}
 		p(hidden, id = 'userData') #{data.userData}
-		h1 IDLE ISLAND
-		canvas#myCanvas(width='1000', height='600', style='border: 1px solid black;')
+		//h1 IDLE ISLAND
+		canvas#myCanvas
 		form(method='post', action='/exit', id = 'exit', hidden)
 			input(type='text', id='submitString', name='submitString')
 			input(type='text', id='score', name='score')
 			div: button
-	script(src='/game/jquery.js')
-	script(src='/game/imagesPreload.js')
-	script(src='/game/soundsPreload.js')
-	script(src='/game/Coconut.js')
-	script(src='/game/Button.js')
-	script(src='/game/Display.js')
-	script(src='/game/UserData.js')
-	script(src='/game/Calculator.js')
-	script(src='/game/gameEngine.js')
-	script(src='/game/Initialize.js')
+		script(src='/game/jquery.js')
+		script(src='/game/imagesPreload.js')
+		script(src='/game/soundsPreload.js')
+		script(src='/game/Coconut.js')
+		script(src='/game/Button.js')
+		script(src='/game/Display.js')
+		script(src='/game/UserData.js')
+		script(src='/game/Calculator.js')
+		script(src='/game/gameEngine.js')
+		script(src='/game/Initialize.js')
+	div.sea

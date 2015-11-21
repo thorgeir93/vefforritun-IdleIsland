@@ -12,13 +12,15 @@ block content
 					type='text',
 					id='username',
 					name='username',
-					placeholder='user name')
+					placeholder='user name'
+					autocomplete="off")
 
 				input(	
 					type='password',
 					id='password',
 					name='password'
-					placeholder='password')
+					placeholder='password'
+					autocomplete="off")
 
-				button= btnTitle
+				button(type='submit')= btnTitle
 				a(href=linkHref)= linkText

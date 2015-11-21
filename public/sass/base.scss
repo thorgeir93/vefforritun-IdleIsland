@@ -1,27 +1,27 @@
-//@import 'sassimports/variables';
+@import 'sassimports/variables';
 
 *{
 	-border: 1px solid red;
 }
-
-/*VARIABLES
-=======================*/
+/*
+//VARIABLES
+//=======================
 	$text-size-menu:20px;
 	$text-fontstack:"Agency FB",arial;
 	$text-color-default:#00B7FF;
 	$login-font-stack: "Arial", serif sans;
-	$color-light-green:#42FF42;
 
+	$color-light-green:#42FF42;
 	$color-ocean:#29ABE2;
 	$color-title:white;
 	$color-dark-gras:#006837;
 	$color-light-gray:#E0E0E0;
 	$color-sand:#FFC36E;
 
-	/*blue*/
+	//blue
 	$color-blue-1:$color-ocean;
 
-	/*green*/
+	//green
 	$color-green-4:$color-dark-gras;
 
 	$image-island-green-width:215px;
@@ -38,6 +38,13 @@
 		&:hover{
 			text-decoration: underline red;
 		}
+	}
+	
+	%links{
+		display: block;
+		margin-top:30px;
+		color:$color-light-gray;
+		text-decoration:none;
 	}
 
 
@@ -61,16 +68,16 @@
 	}
 
 	%select-none{
-		-webkit-user-select: none;/* Chrome all / Safari all */
-		-moz-user-select: none; /* mozilla browsers */
-			-khtml-user-select: none; /* webkit browsers */
+		-webkit-user-select: none;// Chrome all / Safari all
+		-moz-user-select: none; // mozilla browsers
+			-khtml-user-select: none; // webkit browsers
 	}
 
 
 	%centered-height{
 		display: table-cell;
-	  vertical-align: middle; /*Vertically centered*/
-	  text-align: center; /* Horizontally centered */
+	  vertical-align: middle; //Vertically centered
+	  text-align: center; //Horizontally centered
 	}
 
 	%background{
@@ -91,12 +98,12 @@
 
 
 
-	/*FUNCTIONS
-	===================================*/
+	//FUNCTIONS
+	//===================================
 
 	//usage:
-	/*	.parent { position: relative; }
-		.child { @include centerer; }*/
+	//	.parent { position: relative; }
+	// .child { @include centerer; }
 	@mixin centerer {
 		position: absolute;
 		top: 50%;
@@ -105,41 +112,82 @@
 	}
 
 	//usage:
-	/*.overlay { 	@include coverer;
-						background: rgba(black, 0.5);
-						z-index: 1000;}*/
+	//.overlay { 	@include coverer;
+	//					background: rgba(black, 0.5);
+	//					z-index: 1000;}
 	@mixin coverer {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-	}
-
+	}*/
 
 
 
 /* BASES
 ==================================*/
 
-	html{
-		@extend %clear-padd-marg;
-		height: 100%;
-	}
+html{
+	@extend %clear-padd-marg;
+	background-color:$color-ocean;
+	height: 100%;
+}
 
 
-	body{
-		@extend %clear-padd-marg;
-		min-height:100%;
-		height:100%;
-		word-wrap: break-word;
-		font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-		color:$text-color-default;
-	}
+body{
+	@extend %clear-padd-marg;
+	min-height:100%;
+	word-wrap: break-word;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	color:$text-color-default;
+	padding:20px;
+}
 
-	div.main-backgroun{
-		@extend %background;
-	}
+button{
+	cursor:pointer;
+}
+
+a{
+	@extend %links;
+}
+
+input[type='text']{
+	@extend %input-text;
+}
+
+
+table{
+	font-size:20px;
+	margin-right:auto;
+	margin-left:auto;
+	width:70%;
+	border-spacing: 30px;
+    border-collapse: separate;
+}
+
+
+input[type='password']{
+	@extend %input-text;
+}
+
+button[type='submit']{
+	@extend %button-style;
+}
+
+.container{
+	@extend %block-centered-hor;
+	overflow:hidden;
+	text-align:center;
+	display: block;
+	position:relative;
+	max-width:$image-island-wave-width;
+	width:90%;
+	height:auto;
+	z-index: 2;
+}
+
+
 
 
 /*SETTINGS
@@ -148,18 +196,7 @@
 
 /* LOGIN | CREATE USER
 ===============================*/
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 568px)
-  and (-webkit-min-device-pixel-ratio: 2) {
-	
-	div.login{ 
-		h1{
-			font-size:80px;
-		}
-		//height: 100%;
-	}
-}
+
 
 /* MENU
 ================================*/
@@ -186,6 +223,13 @@
 		padding:0;
 		overflow: hidden;
 	}
+
+	//settings
+	//==================
+	#input-slider{
+		width: 100% !important;
+		display: block !important;
+	}
 }
 
 	.menu{
@@ -201,6 +245,10 @@
 			letter-spacing: 25px;
 			margin-top:0;
 			font-size: 140px;
+		}
+
+		.container{
+			width: $image-island-wave-width;
 		}
 	}
 
@@ -224,18 +272,11 @@
 				@extend %link-default;
 				font: $text-size-menu $text-fontstack;
 				color: $color-dark-gras;
+				margin:0;
 			}
 		}
 	}
 
-	.container{
-		@extend %block-centered-hor;
-		width: $image-island-wave-width;
-		position:relative;
-		display: block;
-		height:auto;
-		z-index: 2;
-	}
 
 	%islands{
 		display: block;
