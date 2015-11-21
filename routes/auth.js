@@ -80,13 +80,25 @@ function loginHandler(req, res, next) {
 		});
 	} else {
 		console.log("This user is NOT valid!");
-		var data = formDataLogin;
+		var data = clone( formDataLogin );
 		data.error = true;
 		data.username=username;
 		data.errorMessage="Wrong username or password :(";
+		console.log("formDataLogin");
+		console.dir(formDataLogin);
+		console.log("data");
+		console.dir(data);
 		res.render('form', data);
 	}
 	});
+}
+
+function clone( object ){
+	var data = {};
+	for(var item in object){
+		data[item] = object[item];
+	}
+	return data;
 }
 
 function createForm(req, res, next) {

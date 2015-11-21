@@ -16,40 +16,74 @@ var settings = (function() {
 		console.log( "init!" );
 		cBoxFullS.on = false;
 		cBoxFullS.element1 = document.getElementById('checkbox-off');
-		cBoxFullS.element2 = document.getElementById('label-fullscreen');
+		cBoxFullS.element2 = document.getElementById('check-off');
+		cBoxFullS.element2 = document.getElementById('label-check-off');
 		cBoxFullS.element1.addEventListener('click', toggleCheckBoxBackground);
 		cBoxFullS.element2.addEventListener('click', toggleCheckBoxBackground);
 		
+		slider1.on = true;
 		slider1.element1 = document.querySelector('.audio-slider');
 		slider1.element2 = document.querySelector('.audio-number');
+		slider1.element3 = document.querySelector('.label-audio');
 		slider1.element1.addEventListener('mousedown', updateAudioNum);
 		slider1.element1.addEventListener('mousemove', updateAudioNum);
+		
+		//slider1.element1.addEventListener('click', toggleMute);
+		slider1.element2.addEventListener('click', toggleMute);
+		slider1.element3.addEventListener('click', toggleMute);
 
 		slider1.element2.innerHTML = slider1.element1.value;
 	}
 
+	function toggleMute(){
+		console.log("slider1");
+		console.dir(slider1);
+		if( slider1.on ){
+			slider1.on = false;
+			for(var element in slider1){
+				console.log(element);
+				if(element!=='on'){
+					slider1[element].classList.remove('audio-on');
+					slider1[element].classList.add('audio-off');
+				}
+			}
+			slider1.element2.innerHTML = 'Mute';
+		} else{
+			slider1.on = true;
+			for(var element in slider1){
+				console.log(element);
+				if(element!=='on'){
+					slider1[element].classList.remove('audio-off');
+					slider1[element].classList.add('audio-on');
+				}
+			}
+			slider1.element2.innerHTML=slider1.element1.value;
+		}
+	}
 
 	function toggleCheckBoxBackground( event ){
 		console.log(cBoxFullS.on);
 		if(cBoxFullS.on){
 			cBoxFullS.on = false;
+
 			cBoxFullS.element1.id = 'checkbox-off';
+			cBoxFullS.element2.id = 'label-check-off';
+
 		} else {
 			cBoxFullS.on = true;
 			cBoxFullS.element1.id = 'checkbox-on';
+			cBoxFullS.element2.id = 'label-check-on';
 		}
 	}
 
 	function updateAudioNum( event ){
-		//console.log( "hsfdjkdsf ");
-		var newNumber = slider1.element1.value;
-		//console.log(slider1.element2);
-		slider1.element2.innerHTML = newNumber;
+		if(slider1.on){
+			var newNumber = slider1.element1.value;
+			slider1.element2.innerHTML = newNumber;
+		}
 	}
 
 	return {
 		init: init
 	};
 })();
-
-///AUDIO TAKKINN VERÐUR EXXAÐUR I EF ÞAÐ ER ÝTT Á HANN MUTE

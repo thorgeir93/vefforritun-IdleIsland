@@ -1,0 +1,33 @@
+@import 'sassimports/variables';
+
+html{
+	background: -webkit-linear-gradient(top, rgb(0, 91, 151) 0%, rgb(7, 126, 195) 20%, rgb(83, 177, 224) 56%, rgb(152, 204, 235) 77%, rgb(200, 223, 243) 97%, rgb(204, 224, 244) 100%);
+	background: -o-linear-gradient(top, rgb(0, 91, 151) 0%, rgb(7, 126, 195) 20%, rgb(83, 177, 224) 56%, rgb(152, 204, 235) 77%, rgb(200, 223, 243) 97%, rgb(204, 224, 244) 100%);
+	background: -ms-linear-gradient(top, rgb(0, 91, 151) 0%, rgb(7, 126, 195) 20%, rgb(83, 177, 224) 56%, rgb(152, 204, 235) 77%, rgb(200, 223, 243) 97%, rgb(204, 224, 244) 100%);
+	background: -moz-linear-gradient(top, rgb(0, 91, 151) 0%, rgb(7, 126, 195) 20%, rgb(83, 177, 224) 56%, rgb(152, 204, 235) 77%, rgb(200, 223, 243) 97%, rgb(204, 224, 244) 100%);
+	background: linear-gradient(to bottom, rgb(0, 91, 151) 0%, rgb(7, 126, 195) 20%, rgb(83, 177, 224) 56%, rgb(152, 204, 235) 77%, rgb(200, 223, 243) 97%, rgb(204, 224, 244) 100%);	
+}
+
+div.sea{
+	top:70%;
+	height:30%;
+	
+	left:0;
+	width:100%;
+	
+	position: absolute;
+	
+	background-color:$color-ocean;
+
+	z-index:-1;
+}
+
+
+body{
+	margin:0 !important;
+}
+
+#myCanvas{
+	border:0 !important;
+	//background-color: black !important;
+}

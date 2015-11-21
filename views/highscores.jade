@@ -1,17 +1,17 @@
 extends layout
 
 block content
-	h1= 'High scores'
-	div.scores
-	if entries !== false
-		hr
-		table
-			tr
-				td Users
-				td Scores
-			each item in entries
+	div.container
+		h1= 'High scores'
+		if entries !== false
+			hr
+			table
 				tr
-					td #{item.username}
-					td #{item.score}
-		hr
-	p: a(href='/menu') Back to menu
+					th Users
+					th Scores
+				each item in entries
+					tr
+						td #{item.username}
+						td #{item.score}
+			hr
+		p: a(href='/menu') Back to menu

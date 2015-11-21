@@ -1,16 +1,18 @@
 extends layout
 
 block content
-	h1= 'Add Friends'
+	//link(rel='stylesheet', href='/stylesheets/addFriends.css')
+	div.addFriends
+		div.container
+			h1= 'Add Friends'
+			form(method='post', action='/addFriends')
+				if status
+					strong #{status}
+				
+				div.form-group: label(for='username')  Enter friend's username
+				input(type='text', id='friend', name='friend', value=friend autocomplete="off")
+				
+				div: button(type='submit') Add friend
 
-	form(method='post', action='/addFriends')
-		if status
-			strong #{status}
-		
-		div.form-group: label(for='username')  Enter friend's username
-		input(type='text', id='friend', name='friend', value=friend)
-		
-		div: button Add friend
-
-	p: a(href='/menu') Back to menu?
+			p: a(href='/menu') Back to menu?
 

@@ -1,8 +1,8 @@
-/*VARIABLES
-=======================*/
+//VARIABLES
+//=======================
 	$text-size-menu:20px;
 	$text-fontstack:"Agency FB",arial;
-	$text-color-default:#00B7FF;
+	$text-color-default:white;
 	$login-font-stack: "Arial", serif sans;
 	$color-light-green:#42FF42;
 
@@ -12,10 +12,10 @@
 	$color-light-gray:#E0E0E0;
 	$color-sand:#FFC36E;
 
-	/*blue*/
+	//blue
 	$color-blue-1:$color-ocean;
 
-	/*green*/
+	//green
 	$color-green-4:$color-dark-gras;
 
 	$image-island-green-width:215px;
@@ -26,6 +26,30 @@
 	$image-island-sand-height: 346px;
 
 
+	%input-text{
+ 		-webkit-appearance: none;
+		display: block;
+		
+		margin:10px 0 10px 0;
+		padding:5px;
+		
+		width:100%;
+
+		background-color: transparent;
+		
+		font-size:20px;
+		color:white;
+		line-height: 50px;
+		
+		border:none;
+		border-bottom: 2px solid $color-light-gray;
+		&:focus{
+			outline:0;
+			box-shadow:none;
+			border-bottom: 2px solid green;
+		} 
+	}
+
 	%link-default{
 		color:$text-color-default;
 		text-decoration: none;
@@ -34,6 +58,28 @@
 		}
 	}
 
+	%links{
+		display: block;
+		margin-top:30px;
+		color:$color-light-gray;
+		text-decoration:none;
+	}
+
+	%button-style{
+		background-color:transparent;
+		color: $color-light-gray;
+		border:0;
+		border: 2px solid $color-light-gray;
+		width: 100%;
+		right:20px;
+		margin-top: 50px;
+
+		opacity: 0.7;
+		font-size: 20px;
+		&:hover{
+			opacity: 1.0;
+		}
+	}
 
 	%block-centered-hor{
 		display: block;
@@ -55,16 +101,16 @@
 	}
 
 	%select-none{
-		-webkit-user-select: none;/* Chrome all / Safari all */
-		-moz-user-select: none; /* mozilla browsers */
-			-khtml-user-select: none; /* webkit browsers */
+		-webkit-user-select: none;// Chrome all / Safari all
+		-moz-user-select: none; // mozilla browsers
+			-khtml-user-select: none; // webkit browsers
 	}
 
 
 	%centered-height{
 		display: table-cell;
-	  vertical-align: middle; /*Vertically centered*/
-	  text-align: center; /* Horizontally centered */
+	  vertical-align: middle; //Vertically centered
+	  text-align: center; //Horizontally centered
 	}
 
 	%background{
@@ -85,12 +131,12 @@
 
 
 
-	/*FUNCTIONS
-	===================================*/
+	//FUNCTIONS
+	//===================================
 
 	//usage:
-	/*	.parent { position: relative; }
-		.child { @include centerer; }*/
+	//	.parent { position: relative; }
+	// .child { @include centerer; }
 	@mixin centerer {
 		position: absolute;
 		top: 50%;
@@ -99,9 +145,9 @@
 	}
 
 	//usage:
-	/*.overlay { 	@include coverer;
-						background: rgba(black, 0.5);
-						z-index: 1000;}*/
+	//.overlay { 	@include coverer;
+	//					background: rgba(black, 0.5);
+	//					z-index: 1000;}
 	@mixin coverer {
 		position: absolute;
 		top: 0;
@@ -109,3 +155,5 @@
 		width: 100%;
 		height: 100%;
 	}
+
+

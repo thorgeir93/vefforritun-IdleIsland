@@ -1,5 +1,13 @@
+<<<<<<< HEAD
+=======
+//
+// SCREEN SIZE - normal
+// SCREEN SIZE - < 320px
+//
+@import 'sassimports/variables';
+>>>>>>> a6b500f697f0ed029510a8089ef2fed19c059be7
 /*VARIABLES
-=======================*/
+=======================
 	$text-size-menu:20px;
 	$text-fontstack:"Agency FB",arial;
 	$text-color-default:#00B7FF;
@@ -12,10 +20,10 @@
 	$color-light-gray:#E0E0E0;
 	$color-sand:#FFC36E;
 
-	/*blue*/
+	//blue
 	$color-blue-1:$color-ocean;
 
-	/*green*/
+	//green
 	$color-green-4:$color-dark-gras;
 
 	$image-island-green-width:215px;
@@ -55,16 +63,16 @@
 	}
 
 	%select-none{
-		-webkit-user-select: none;/* Chrome all / Safari all */
-		-moz-user-select: none; /* mozilla browsers */
-			-khtml-user-select: none; /* webkit browsers */
+		-webkit-user-select: none;// Chrome all / Safari all
+		-moz-user-select: none; // mozilla browsers
+			-khtml-user-select: none; // webkit browsers
 	}
 
 
 	%centered-height{
 		display: table-cell;
-	  vertical-align: middle; /*Vertically centered*/
-	  text-align: center; /* Horizontally centered */
+	  vertical-align: middle; //Vertically centered
+	  text-align: center; //Horizontally centered
 	}
 
 	%background{
@@ -85,12 +93,12 @@
 
 
 
-	/*FUNCTIONS
-	===================================*/
+	//FUNCTIONS
+	//===================================
 
 	//usage:
-	/*	.parent { position: relative; }
-		.child { @include centerer; }*/
+	//	.parent { position: relative; }
+	// .child { @include centerer; }
 	@mixin centerer {
 		position: absolute;
 		top: 50%;
@@ -99,9 +107,9 @@
 	}
 
 	//usage:
-	/*.overlay { 	@include coverer;
-						background: rgba(black, 0.5);
-						z-index: 1000;}*/
+	//.overlay { 	@include coverer;
+	//					background: rgba(black, 0.5);
+	//					z-index: 1000;}
 	@mixin coverer {
 		position: absolute;
 		top: 0;
@@ -109,98 +117,128 @@
 		width: 100%;
 		height: 100%;
 	}
+*/
+
 div.settings{
-		@extend %background;
-		color: white;
+	//@extend %background;
+	//	color: white;
 }
-div.main{
-		@extend %block-centered-hor; 
-		width:50%;
-		h1{
-			text-align: center;
-		}
+//div.main{
+		//@extend %block-centered-hor; 
 
-		form{
-			@extend %block-centered-hor;
-			max-width: 300px;
-		}
-		
-		div.formgroup{
-			//overflow: hidden;
-			margin-top: 30px;
-		}
+h1{
+	text-align: center;
+}
 
-		input{
-			float: right;
-			margin: 0;
-		}
+form{
+	//@extend %block-centered-hor;
+	//max-width: 300px;
+}
 
-		#checkbox-on, #checkbox-off{
-			$checkbox-size:15px;
-			$checkbox-color:#FFC36E;
-			width: $checkbox-size;
-			height: $checkbox-size;
-		
-			float: right;
+div.formgroup{
+	//clear:both;
+	position:relative;
+	display: block;
+	padding:8px;
+	height: 50px;
+	margin: 30px 0 30px 0;
+	text-align:left;
+}
 
-			border: 3px solid $color-light-gray;
-			cursor: pointer;
-		}
-		
-		#checkbox-on{
-			background-color: $color-sand;
+input{
+	//@extend %block-centered-hor;
+	//float: center;
+	//margin: 0;
+}
 
-		}	
-		#checkbox-off{
-			background-color: transparent;
-		}
+.container-slider{
+	float:left;
+	height: 30px;
+	display: inline-block;
+}
 
-		//TODO: ef ég hef tíma þá þarf að losna við important
-		//Skipta þarf á mili checkbox og checkbox off, þ.e. 
-		//class verðuru id og öfugt. Sömuleiðis þarf að 
-		//breyta settings.js
-		//.checkbox:hover{
-		//	background-color: $color-sand !important; 
-		//}
+#input-slider{
+	float: right;
+}
 
-		input[type=checkbox] {
-			visibility: hidden;
-		}
+.audio-off{
+	opacity: 0.5;
+}
 
-		
-		label{
-			@extend %select-none;
-			cursor:pointer;
-			width: 100%;
-			padding: 4px;
-			border: 3px solid $color-light-gray;
-			color:$color-light-gray;
-		}
-		
-		input[type=range] {
-		    -webkit-appearance: none;
-		    //border-radius: 8px;
-		    height: 2px;
-		    border: 1px solid #bdc3c7;
-		    //background-color: #fff; 
-		}
+#checkbox-on, #checkbox-off{
+	$checkbox-size:15px;
+	$checkbox-color:#FFC36E;
+	width: $checkbox-size;
+	height: $checkbox-size;
 
-		input[type='range']::-webkit-slider-thumb {
-			-webkit-appearance: none;
-			background-color: #ecf0f1;
-			border: 1px solid #bdc3c7;
-			width: 6px;
-			height: 20px;
-			//border-radius: 10px;
-			cursor: pointer;
-		}
-		input:focus,
-		input:active {
-			outline: 0;
-		}
+	float: right;
 
-		p{
-			display: inline;
-			margin-left: 10px;
-		}
-	}
+	border: 3px solid $color-light-gray;
+	cursor: pointer;
+}
+
+#checkbox-on, #check-on{
+	background-color:$color-sand;
+}
+
+
+#checkbox-off, #check-off, #label-check-off{
+	opacity: 0.5;
+	background-color: transparent;
+}
+
+//TODO: ef ég hef tíma þá þarf að losna við important
+//Skipta þarf á mili checkbox og checkbox off, þ.e. 
+//class verðuru id og öfugt. Sömuleiðis þarf að 
+//breyta settings.js
+//.checkbox:hover{
+//	background-color: $color-sand !important; 
+//}
+
+input[type=checkbox] {
+	visibility: hidden;
+}
+
+
+label{
+	@extend %select-none;
+	cursor:pointer;
+	width: 100%;
+	padding: 4px;
+	border: 3px solid $color-light-gray;
+	color:$color-light-gray;
+}
+
+input[type=range] {
+    //-webkit-appearance: none;
+    //border-radius: 8px;
+    height: 2px;
+    border: 1px solid #bdc3c7;
+    //background-color: #fff; 
+}
+
+input[type='range']::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	background-color: #ecf0f1;
+	border: 1px solid #bdc3c7;
+	width: 6px;
+	height: 20px;
+	cursor: pointer;
+}
+input:focus,
+input:active {
+	outline: 0;
+}
+
+p{
+	text-align: center;
+	display: inline;
+	margin-left: 10px;
+}
+
+a{
+	@extend %link-default;
+	@extend %links;
+}
+
+	//}

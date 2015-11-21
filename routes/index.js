@@ -31,10 +31,10 @@ function homePage(req, res, next){
 //VILLA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KV ÞORGEIR
 router.get('/menu', ensureUser, menu);
 
-router.get('/viewFriends', ensureUser, viewFriends);
+router.get('/viewFriends', /*ensureUser,*/ developmentViewFriends/*viewFriends*/);
 router.post('/viewFriends', chooseFriend);
 
-router.get('/addFriends', ensureUser, addFriends);
+router.get('/addFriends', /*ensureUser, */addFriends);
 router.post('/addFriends', addFriendsHandler);
 
 router.get('/highScores', ensureUser, highScores);
@@ -85,10 +85,21 @@ function logout(req, res, next) {
 function menu(req, res, next) {
   res.render('menu', { title: 'Idle Island'});
 }
+function developmentViewFriends(req, res, next){
+  var friended = ["a", "b", "c"];
+  res.render('viewFriends', { status: 'Your friends', entries: friended});
+}
 
 function viewFriends(req, res, next) {
   username = req.session.user;
+
+  console.log("req.session");
+  console.log(req.session);
+  console.log("username");
+  console.log(username);
   sql.findFriendList(username, function(err, result) {
+    console.log("result");
+    console.dir(result);
     if (err) {
       console.error(err);
     } 
