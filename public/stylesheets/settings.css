@@ -1,3 +1,5 @@
+/*VARIABLES
+=======================*/
 /*blue*/
 /*green*/
 div.main, div.main form {
@@ -14,17 +16,18 @@ div.main label {
   /* webkit browsers */ }
 
 div.settings {
+  display: block;
   padding: 20px;
   background-color: #29ABE2;
   height: 100%; }
 
 /*FUNCTIONS
-===================================*/
+	===================================*/
 /*	.parent { position: relative; }
-	.child { @include centerer; }*/
+		.child { @include centerer; }*/
 /*.overlay { 	@include coverer;
-					background: rgba(black, 0.5);
-					z-index: 1000;}*/
+						background: rgba(black, 0.5);
+						z-index: 1000;}*/
 div.settings {
   color: white; }
 

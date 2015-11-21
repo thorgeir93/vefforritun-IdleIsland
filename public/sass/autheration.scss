@@ -1,211 +1,200 @@
-$text-size-menu:20px;
-$text-fontstack:"Agency FB",arial;
-$text-color-default:#00B7FF;
-$login-font-stack: "Arial", serif sans;
-$color-light-green:#42FF42;
 
-$color-ocean:#29ABE2;
-$color-title:white;
-$color-dark-gras:#006837;
-$color-light-gray:#E0E0E0;
-$color-sand:#FFC36E;
+=======
+/*VARIABLES
+=======================*/
+	$text-size-menu:20px;
+	$text-fontstack:"Agency FB",arial;
+	$text-color-default:#00B7FF;
+	$login-font-stack: "Arial", serif sans;
+	$color-light-green:#42FF42;
 
-/*blue*/
-$color-blue-1:$color-ocean;
+	$color-ocean:#29ABE2;
+	$color-title:white;
+	$color-dark-gras:#006837;
+	$color-light-gray:#E0E0E0;
+	$color-sand:#FFC36E;
 
-/*green*/
-$color-green-4:$color-dark-gras;
+	/*blue*/
+	$color-blue-1:$color-ocean;
 
-$image-island-green-width:215px;
-$image-island-green-height:341px;
-$image-island-wave-width: 336px;
-$image-island-wave-height: 392px;
-$image-island-sand-width: 242px;
-$image-island-sand-height: 346px;
+	/*green*/
+	$color-green-4:$color-dark-gras;
+
+	$image-island-green-width:215px;
+	$image-island-green-height:341px;
+	$image-island-wave-width: 336px;
+	$image-island-wave-height: 392px;
+	$image-island-sand-width: 242px;
+	$image-island-sand-height: 346px;
 
 
-%link-default{
-	color:$text-color-default;
-	text-decoration: none;
-	&:hover{
-		text-decoration: underline red;
+	%link-default{
+		color:$text-color-default;
+		text-decoration: none;
+		&:hover{
+			text-decoration: underline red;
+		}
 	}
-}
 
 
-%block-centered-hor{
-	display: block;
-	margin-right:auto;
-	margin-left:auto;
-}
+	%block-centered-hor{
+		display: block;
+		margin-right:auto;
+		margin-left:auto;
+	}
 
-%button-default {
-	padding: 4px;
-	cursor:pointer;
-	border:none;
-	shadow:none;
-	display:block;
-}
+	%button-default {
+		padding: 4px;
+		cursor:pointer;
+		border:none;
+		shadow:none;
+		display:block;
+	}
 
-%select-none{
-	-webkit-user-select: none;/* Chrome all / Safari all */
-	-moz-user-select: none; /* mozilla browsers */
-		-khtml-user-select: none; /* webkit browsers */
-}
+	%clear-padd-marg{
+		margin:0;
+		padding:0;
+	}
 
-
-%centered-height{
-	display: table-cell;
-    vertical-align: middle; /*Vertically centered*/
-    text-align: center; /* Horizontally centered */
-}
-
-%background{
-	//display: block;
-	padding: 20px;
-	background-color:$color-ocean;
-	height: 100%;
-}
+	%select-none{
+		-webkit-user-select: none;/* Chrome all / Safari all */
+		-moz-user-select: none; /* mozilla browsers */
+			-khtml-user-select: none; /* webkit browsers */
+	}
 
 
+	%centered-height{
+		display: table-cell;
+	  vertical-align: middle; /*Vertically centered*/
+	  text-align: center; /* Horizontally centered */
+	}
+
+	%background{
+		display: block;
+		padding: 20px;
+		background-color:$color-ocean;
+		height:100%;
+	}
+
+	%background-2{
+		position:absolute;
+		top:0;
+		left:0;
+		height:100%;
+		width:100%;
+	}
 
 
-/*FUNCTIONS
-===================================*/
-
-//usage:
-/*	.parent { position: relative; }
-	.child { @include centerer; }*/
-@mixin centerer {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-//usage:
-/*.overlay { 	@include coverer;
-					background: rgba(black, 0.5);
-					z-index: 1000;}*/
-@mixin coverer {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
 
 
-//
-//
-//	SCREEN-SIZE-width < $break-point
-//
+	/*FUNCTIONS
+	===================================*/
 
-//@import 'sassimports/variables';
+	//usage:
+	/*	.parent { position: relative; }
+		.child { @include centerer; }*/
+	@mixin centerer {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
 
+	//usage:
+	/*.overlay { 	@include coverer;
+						background: rgba(black, 0.5);
+						z-index: 1000;}*/
+	@mixin coverer {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+	
 $break-point:322px;
 
-//@media only screen and (max-width:$break-point) {
-//}
 
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 568px)
-  and (-webkit-min-device-pixel-ratio: 2) {
-	
+.login{
+	@extend %background;
+	padding: 20px;
+	font-family: $text-fontstack;
+	color:white;
+	//border-size:border-box;
+
+	//background-color:$color-ocean;
+	display: block;
+	height: 100%;
+	//background-attachment: fixed;
+
+
 	h1{
-		font-size: 250px !important;
-		//width:100% !important;
-		//font-size:8px;
+		margin-top: 0;
+		text-align: center;
+		font-size: 120px;
 	}
+	//background-attachment: scroll;
+	//background-attachment: local;
 
-	div.middle{
-		display: block !important;
-		
-		width:5000px !important;
-		background-color:black !important;
-	}
-  	
+	//background-attachment: inherit;
 }
 
-/*@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 568px) 
-and (orientation : portrait) {
-	div.login{
-		background-color:black;
-	} 
-}*/
+div.middle{
+	@extend %block-centered-hor;
+	
+	max-width: 250px;
+	color: white;
+	font-family:$login-font-stack;
+	overflow:hidden;
+	
+	a{
+		display: block;
+		margin-top:30px;
+		color:$color-light-gray;
+		text-decoration:none;
+	}
 
+	button{
+		background-color:transparent;
+		width: 100%;
+		right:20px;
+		margin-top: 50px;
+		 
+		font-size: 20px;
+		color: $color-light-gray;
+		
+		cursor: pointer;
+		
+		border:0;
+		border: 2px solid $color-light-gray;
+	}
+	
+	
+	::-webkit-input-placeholder{
+		color: $color-light-gray;
+		font-style: $text-fontstack;
+	}
+	
+	input{
+		display: block;
+		
+		margin-top:10px;
+		padding:5px;
+		
+		width:100%;
 
-//@media screen and (max-width:1280px) {
-	div.login{
-		@extend %background;
-		padding: 50px;
-		font-family: $text-fontstack;
+		background-color: transparent;
+		
+		font-size:20px;
 		color:white;
-		border-size:border-box;
-		h1{
-			margin-top: 0;
-			text-align: center;
-			font-size: 120px;
-		}
+		line-height: 50px;
+		
+		border:none;
+		border-bottom: 2px solid $color-light-gray;
+		&:focus{
+			outline:0;
+			box-shadow:none;
+			border-bottom: 2px solid green;
+		} 
 	}
-	div.middle{
-		@extend %block-centered-hor;
-		max-width: 250px;
-		color: white;
-		font-family:$login-font-stack;
-		overflow:hidden;
-		a{
-			display: block;
-			margin-top:30px;
-			color:$color-light-gray;
-			text-decoration:none;
-		}
-
-		button{
-			background-color:transparent;
-			width: 100%;
-			right:20px;
-			margin-top: 50px;
-			 
-			font-size: 20px;
-			color: $color-light-gray;
-			
-			cursor: pointer;
-			
-			border:0;
-			border: 2px solid $color-light-gray;
-		}
-		
-		
-		::-webkit-input-placeholder{
-			color: $color-light-gray;
-			font-style: $text-fontstack;
-		}
-		
-		input{
-			display: block;
-			
-			margin-top:10px;
-			padding:5px;
-			
-			width:100%;
-
-			background-color: transparent;
-			
-			font-size:20px;
-			color:white;
-			line-height: 50px;
-			
-			border:none;
-			border-bottom: 2px solid $color-light-gray;
-			&:focus{
-				outline:0;
-				box-shadow:none;
-				border-bottom: 2px solid green;
-			} 
-		}
-	}
-//}
+}
