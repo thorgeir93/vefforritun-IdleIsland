@@ -1,9 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*VARIABLES
 =======================*/
 /*blue*/
 /*green*/
 =======
+=======
+>>>>>>> a6b500f697f0ed029510a8089ef2fed19c059be7
 input[type='text'], input[type='password'] {
   -webkit-appearance: none;
   display: block;
@@ -21,6 +24,9 @@ input[type='text'], input[type='password'] {
     box-shadow: none;
     border-bottom: 2px solid green; }
 
+<<<<<<< HEAD
+>>>>>>> a6b500f697f0ed029510a8089ef2fed19c059be7
+=======
 >>>>>>> a6b500f697f0ed029510a8089ef2fed19c059be7
 div.options div.text a {
   color: white;
@@ -28,6 +34,7 @@ div.options div.text a {
   div.options div.text a:hover {
     text-decoration: underline red; }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 div.main-backgroun, .menu {
   padding: 20px;
@@ -45,6 +52,8 @@ div.main-backgroun, .menu {
 ==================================*/
 .menu, div.options, div.options div.text, .container, div.island {
 =======
+=======
+>>>>>>> a6b500f697f0ed029510a8089ef2fed19c059be7
 a {
   display: block;
   margin-top: 30px;
@@ -65,6 +74,9 @@ button[type='submit'] {
     opacity: 1.0; }
 
 .container, .menu, div.options, div.options div.text, div.island {
+<<<<<<< HEAD
+>>>>>>> a6b500f697f0ed029510a8089ef2fed19c059be7
+=======
 >>>>>>> a6b500f697f0ed029510a8089ef2fed19c059be7
   display: block;
   margin-right: auto;

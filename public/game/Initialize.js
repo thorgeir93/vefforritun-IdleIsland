@@ -2,8 +2,32 @@ var g_audio   = {};
 var g_images = {};
 
 var g_canvas = document.getElementById("myCanvas");
-
 var g_ctx = g_canvas.getContext("2d");
+
+var g_canvasW = g_canvas.parentElement.clientWidth;
+var g_canvasH = g_canvas.parentElement.clientHeight;
+
+var islandPos = { 
+  x:(g_canvasW/10), 
+  y:(g_canvasH/1.4)
+};
+
+var treePos = {
+  x:(islandPos.x),
+  y:(islandPos.y-350)
+}
+
+var coconutPos = {
+  x:(treePos.x+170),
+  y:(treePos.y+60)
+}
+
+var upgradePos = {
+  x:(g_canvasW-100),
+  y:(30)
+}
+
+
 
 var leikur = undefined;
 
@@ -25,14 +49,14 @@ function imagePreload(callback){
       tree      	: "game/images/game-coconut-tree.png",
       upgradeMenu	: "game/images/game-button-upgrade.png",
 
-      gamesky    : "game/images/game-sky-8.png",
-      gameseaseven: "game/images/game-sea-7.png",
-      gameseasix: "game/images/game-sea-6.png",
-      gameseafive: "game/images/game-sea-5.png",
-      gameseafour: "game/images/game-sea-4.png",
-      gameseatwo: "game/images/game-sea-2.png",
-      gameseaone: "game/images/game-sea-1.png",
-      gamesandthree: "game/images/game-sand-3.png",
+      //gamesky    : "game/images/game-sky-8.png",
+      //gameseaseven: "game/images/game-sea-7.png",
+      //gameseasix: "game/images/game-sea-6.png",
+      //gameseafive: "game/images/game-sea-5.png",
+      //gameseafour: "game/images/game-sea-4.png",
+      //gameseatwo: "game/images/game-sea-2.png",
+      //gameseaone: "game/images/game-sea-1.png",
+      gamesandthree: "game/images/game-sand-3-01.png",
       UpgradeMenu   : "game/images/UggradeMenu.png",
       backButton    : "game/images/backButton.png",
       coconut       : "game/images/game-coconut-money.png",
@@ -142,6 +166,8 @@ Loop = function () {
 function init(){
 	console.log('starting');
 
+  canvasInit();
+
 	imagePreload(function(){
 
 		AudioPreload(function(){
@@ -164,6 +190,20 @@ function init(){
 		});
 	});
 }
+
+
+function canvasInit(){
+  canvas = document.getElementById("myCanvas");
+  canvas.width = document.body.clientWidth; //document.width is obsolete
+  canvas.height = document.body.clientHeight; //document.height is obsolete
+  
+  //canvasW = canvas.width;
+  //canvasH = canvas.height;
+  //canvas.globalAlpha = 0.0;
+  //canvas.clearRect(0,0,200,200);
+  //canvas.fillStyle = "rgba(0, 0, 0, 0.0)";
+}
+
 
 //Starting point of the game
 init();

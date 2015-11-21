@@ -7,12 +7,9 @@ html
 	body
 		p(hidden,id = 'user') #{data.username}
 		p(hidden, id = 'userData') #{data.userData}
-<<<<<<< HEAD
-		canvas#myCanvas(width='1000', height='600', style='border: 1px solid black;')
-=======
+
 		//h1 IDLE ISLAND
 		canvas#myCanvas
->>>>>>> a6b500f697f0ed029510a8089ef2fed19c059be7
 		form(method='post', action='/exit', id = 'exit', hidden)
 			input(type='text', id='submitString', name='submitString')
 			input(type='text', id='score', name='score')

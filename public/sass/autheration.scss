@@ -1,7 +1,8 @@
 //
-// SCREEN SIZE - normal
-// SCREEN SIZE - < 320px
 //
+//	SCREEN-SIZE-width < $break-point
+//
+
 //@import 'sassimports/variables';
 //VARIABLES
 //=======================
@@ -161,126 +162,50 @@
 		height: 100%;
 	}
 
-div.settings{
-	//@extend %background;
-	//	color: white;
-}
-//div.main{
-		//@extend %block-centered-hor; 
+$break-point:322px;
 
-h1{
-	text-align: center;
-}
 
-form{
-	//@extend %block-centered-hor;
-	//max-width: 300px;
-}
-
-div.formgroup{
-	//clear:both;
-	position:relative;
+.login{
+	@extend %background;
+	padding: 20px;
+	//font-family: $text-fontstack;
+	font-family:$login-font-stack;
+	color:white;
 	display: block;
-	padding:8px;
-	height: 50px;
-	margin: 30px 0 30px 0;
-	text-align:left;
+
+	h1{
+		margin-top: 0;
+		text-align: center;
+		font-size: 120px;
+	}
 }
 
-input{
-	//@extend %block-centered-hor;
-	//float: center;
-	//margin: 0;
+div.middle{
+	@extend %block-centered-hor;
+	
+	max-width: 250px;
+	color: white;
+	overflow:hidden;
+	
+	a{
+		@extend %links;
+	}
+
+
+
+	/*button{
+		@extend %button-style;
+		//width: 100%;
+		//right:20px;
+		//margin-top: 50px;
+		 
+		//font-size: 20px;
+	}*/
+	
+	
+	::-webkit-input-placeholder{
+		color: $color-light-gray;
+		font-style: $text-fontstack;
+	}
+	
 }
-
-.container-slider{
-	float:left;
-	height: 30px;
-	display: inline-block;
-}
-
-#input-slider{
-	float: right;
-}
-
-.audio-off{
-	opacity: 0.5;
-}
-
-#checkbox-on, #checkbox-off{
-	$checkbox-size:15px;
-	$checkbox-color:#FFC36E;
-	width: $checkbox-size;
-	height: $checkbox-size;
-
-	float: right;
-
-	border: 3px solid $color-light-gray;
-	cursor: pointer;
-}
-
-#checkbox-on, #check-on{
-	background-color:$color-sand;
-}
-
-
-#checkbox-off, #check-off, #label-check-off{
-	opacity: 0.5;
-	background-color: transparent;
-}
-
-//TODO: ef ég hef tíma þá þarf að losna við important
-//Skipta þarf á mili checkbox og checkbox off, þ.e. 
-//class verðuru id og öfugt. Sömuleiðis þarf að 
-//breyta settings.js
-//.checkbox:hover{
-//	background-color: $color-sand !important; 
-//}
-
-input[type=checkbox] {
-	visibility: hidden;
-}
-
-
-label{
-	@extend %select-none;
-	cursor:pointer;
-	width: 100%;
-	padding: 4px;
-	border: 3px solid $color-light-gray;
-	color:$color-light-gray;
-}
-
-input[type=range] {
-    //-webkit-appearance: none;
-    //border-radius: 8px;
-    height: 2px;
-    border: 1px solid #bdc3c7;
-    //background-color: #fff; 
-}
-
-input[type='range']::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	background-color: #ecf0f1;
-	border: 1px solid #bdc3c7;
-	width: 6px;
-	height: 20px;
-	cursor: pointer;
-}
-input:focus,
-input:active {
-	outline: 0;
-}
-
-p{
-	text-align: center;
-	display: inline;
-	margin-left: 10px;
-}
-
-a{
-	@extend %link-default;
-	@extend %links;
-}
-
-	//}
