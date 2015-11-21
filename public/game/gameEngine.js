@@ -29,8 +29,8 @@ function gameEngine(image, audio, user, userData){
     var buttons = [];
     var pos = {     width: image['tree'].width,
                         height: image['tree'].height,
-                        topX: 400,
-                        topY: 50
+                        topX: 250,
+                        topY: 150
                };
 
     buttons.push(new Button(pos, image['tree'], audio, this.punch.bind(this)))
@@ -38,8 +38,8 @@ function gameEngine(image, audio, user, userData){
     //takki2 - takki til að komast inn i upgrade menu
     pos = {     width: image['upgradeMenu'].width,
                         height: image['upgradeMenu'].height,
-                        topX: 900,
-                        topY: 10
+                        topX: 540,
+                        topY: 450
           };
 
     buttons.push(new Button(pos, image['upgradeMenu'], audio, this.chanceDisplayToUpgradeslvl1.bind(this)))
@@ -273,8 +273,8 @@ gameEngine.prototype.update = function(time){
 
             var pos = {     width: this.coconutImage.width,
                         height: this.coconutImage.height,
-                            topX: 400,
-                            topY: 50
+                            topX: 450,
+                            topY: 200
                    };
 
             var coconut = new Coconut(pos,this.coconutImage,undefined)
@@ -395,8 +395,6 @@ gameEngine.prototype.buyUpgrade = function(index){
         
     }
 
-    console.log('hérna er factor aftur : ',this.userdata.getTreeFactor())
-
 	//implementa
 }
 
@@ -412,8 +410,8 @@ gameEngine.prototype.punch = function(){
 
         var pos = {     width: this.coconutImage.width,
                         height: this.coconutImage.height,
-                            topX: 400,
-                            topY: 50
+                            topX: 450,
+                            topY: 200
                    };
 
         var coconut = new Coconut(pos,this.coconutImage,undefined)
