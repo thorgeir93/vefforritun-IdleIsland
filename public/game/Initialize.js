@@ -8,7 +8,6 @@ var g_canvasW = g_canvas.parentElement.clientWidth;
 var g_canvasH = g_canvas.parentElement.clientHeight;
 
 
-
 var islandPos = { 
   x:(g_canvasW/10), 
   y:(g_canvasH/1.4)
@@ -40,7 +39,13 @@ var user;
 function AudioPreload(callback){
 	
 	var requiredSounds = {
-		bones	: "game/sounds/bones.ogg"
+		punch	: "game/sounds/punch.ogg",
+    gameTheme : "game/sounds/GameTheme.ogg",
+    purchase  : "game/sounds/purchase.ogg",
+    noMoney   : "game/sounds/noMoney.ogg",
+    ocean     : "game/sounds/ocean.ogg",
+    changeDisp: "game/sounds/changeDisp.ogg",
+    exit      : "game/sounds/exit.ogg"
 	};
 
 	soundsPreload(requiredSounds, g_audio, callback);
@@ -94,6 +99,7 @@ function imagePreload(callback){
 
       unavalible    : "game/images/unavalible.png",
       bought        : "game/images/bought.png",
+      kall          : "game/images/kall_animation.png"
       };
 
 	imagesPreload(requiredImages, g_images, callback);
@@ -130,6 +136,8 @@ _iterCore = function (dt) {
     leikur.update(dt);
     
     leikur.render();
+
+    leikur.playTheme();
 
     Loop();
 };

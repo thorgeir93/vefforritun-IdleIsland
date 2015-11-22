@@ -2,19 +2,17 @@
 Button.prototype.topX = undefined;
 Button.prototype.topY = undefined;
 Button.prototype.image = undefined;
-Button.prototype.audio = undefined;
 Button.prototype.actionFunc = undefined;
 Button.prototype.height = undefined;
 Button.prototype.width = undefined;
 
-function Button(pos, img, audio, actionFunc){
+function Button(pos, img, actionFunc){
 
 	this.topX = pos.topX;
 	this.topY = pos.topY;
 	this.height = pos.height;
 	this.width = pos.width;
 	this.image = img;
-	this.audio = audio;
 	this.actionFunc = actionFunc;
 }
 
@@ -25,6 +23,7 @@ Button.prototype.render = function(){
 };
 
 Button.prototype.action = function(i){
+	
 	this.actionFunc(i);
 };
 

@@ -1,10 +1,13 @@
 'use strict'
-function Display(image,buttons,upgrades, itemsForScreen){
+function Display(image,buttons,upgrades, itemsForScreen, sprite){
 	
 	this.image = image;
 	this.Buttons = buttons;
 	this.upgrades = upgrades;
 	this.itemsForScreen = itemsForScreen;
+	this.sprite = sprite;
+	this.animationFrame = 0;
+	this.animationCurrentTime = 0;
 	console.log('inn í disp constructor');
 
 }
@@ -16,6 +19,10 @@ Display.prototype.coconuts = [];
 Display.prototype.showArrow = false;
 Display.prototype.itemsForScreen = undefined;
 
+Display.prototype.sprite = undefined;
+Display.prototype.animationFrame = undefined;
+Display.prototype.animationCurrentTime = undefined;
+
 Display.prototype.render = function(currency, score){
 	//g_ctx.aglobalAlpha = 0.0;
 	//g_ctx.fillStyle = 'tranparent';
@@ -24,6 +31,10 @@ Display.prototype.render = function(currency, score){
 	g_ctx.fillStyle = 'rgba(0, 0, 0, 0.0)';
 	this.drawAt(g_ctx, islandPos.x, islandPos.y);
 
+	if(this.sprite){
+
+		this.sprite.draw(this.animationFrame);
+	}
 	for(var i = 0; i<this.Buttons.length; i++){
 
 		if(!(this.Buttons[i].image.name === "downLvl")){
@@ -45,15 +56,13 @@ Display.prototype.render = function(currency, score){
 	g_ctx.font="20px Georgia";
 	g_ctx.fillText('Your score: '+score,820,200);
 
+
 	//implements plz
 };
 
 Display.prototype.destroyCoconuts = function(){
-	console.log(this.coconuts);
-
 	this.coconuts = [];
 
-	console.log(this.coconuts);
 }
 
 Display.prototype.createCoconut = function(coconut){
@@ -61,6 +70,7 @@ Display.prototype.createCoconut = function(coconut){
 }
 
 Display.prototype.update = function(dt){
+
 	if(this.coconuts){
 		for(var i = 0; i<this.coconuts.length; i++){
 			var kill = this.coconuts[i].update(dt);
@@ -68,6 +78,20 @@ Display.prototype.update = function(dt){
 				this.coconuts.splice(i,1);
 			}
 
+		}
+	}
+
+	if(this.sprite){
+		this.animationFrame = Math.floor(this.animationCurrentTime/ (this.sprite.animationTime / this.sprite.animationFrames));
+		
+		if(this.sprite.shouldAnimate){
+
+			this.animationCurrentTime += dt/1000;
+		}
+
+		if(this.animationCurrentTime > this.sprite.animationTime ){
+			this.animationCurrentTime = 0;
+			this.sprite.shouldAnimate = false;
 		}
 	}
 }
