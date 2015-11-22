@@ -3,12 +3,12 @@
 //	SCREEN-SIZE-width < $break-point
 //
 
-@import 'sassimports/variables';
-/*VARIABLES
-=======================
+//@import 'sassimports/variables';
+//VARIABLES
+//=======================
 	$text-size-menu:20px;
 	$text-fontstack:"Agency FB",arial;
-	$text-color-default:#00B7FF;
+	$text-color-default:white;
 	$login-font-stack: "Arial", serif sans;
 	$color-light-green:#42FF42;
 
@@ -32,6 +32,30 @@
 	$image-island-sand-height: 346px;
 
 
+	%input-text{
+ 		-webkit-appearance: none;
+		display: block;
+		
+		margin:10px 0 10px 0;
+		padding:5px;
+		
+		width:100%;
+
+		background-color: transparent;
+		
+		font-size:20px;
+		color:white;
+		line-height: 50px;
+		
+		border:none;
+		border-bottom: 2px solid $color-light-gray;
+		&:focus{
+			outline:0;
+			box-shadow:none;
+			border-bottom: 2px solid green;
+		} 
+	}
+
 	%link-default{
 		color:$text-color-default;
 		text-decoration: none;
@@ -40,6 +64,28 @@
 		}
 	}
 
+	%links{
+		display: block;
+		margin-top:30px;
+		color:$color-light-gray;
+		text-decoration:none;
+	}
+
+	%button-style{
+		background-color:transparent;
+		color: $color-light-gray;
+		border:0;
+		border: 2px solid $color-light-gray;
+		width: 100%;
+		right:20px;
+		margin-top: 50px;
+
+		opacity: 0.7;
+		font-size: 20px;
+		&:hover{
+			opacity: 1.0;
+		}
+	}
 
 	%block-centered-hor{
 		display: block;
@@ -115,7 +161,6 @@
 		width: 100%;
 		height: 100%;
 	}
-*/
 
 $break-point:322px;
 
@@ -146,7 +191,7 @@ div.middle{
 		@extend %links;
 	}
 
-	
+
 
 	/*button{
 		@extend %button-style;

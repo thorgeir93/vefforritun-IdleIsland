@@ -39,6 +39,8 @@ Coconut.prototype.update = function(dt){
 
 	this.Yvel += (dt/100)*9.8;
 
+	//controls the heigth that coconut
+	//have to travel
 	if(this.topY > g_canvasH*0.78){
 		this.Yvel = -this.Yvel*0.5;
 		this.topY -= 5

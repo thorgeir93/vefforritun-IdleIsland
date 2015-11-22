@@ -122,8 +122,8 @@ function gameEngine(image, audio, user, userData){
 
     backgroundImages = [];
     //backgroundImages.push(image['gamesky'])
-    backgroundImages.push(image['gameseaseven']);
-    backgroundImages.push(image['gameseasix']);
+    //backgroundImages.push(image['gameseaseven']);
+    //backgroundImages.push(image['gameseasix']);
 
     upgradesForScreens = [];
 
@@ -292,8 +292,8 @@ gameEngine.prototype.update = function(time){
 
             var pos = {     width: this.coconutImage.width,
                         height: this.coconutImage.height,
-                            topX: 450,
-                            topY: 200
+                            topX: coconutPos.x,
+                            topY: coconutPos.y
                    };
 
             var coconut = new Coconut(pos,this.coconutImage,undefined)

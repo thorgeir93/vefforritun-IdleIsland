@@ -1,17 +1,16 @@
-@import 'sassimports/variables';
+//@import 'sassimports/variables';
 
 *{
 	-border: 1px solid red;
 }
-/*
 //VARIABLES
 //=======================
 	$text-size-menu:20px;
 	$text-fontstack:"Agency FB",arial;
-	$text-color-default:#00B7FF;
+	$text-color-default:white;
 	$login-font-stack: "Arial", serif sans;
-
 	$color-light-green:#42FF42;
+
 	$color-ocean:#29ABE2;
 	$color-title:white;
 	$color-dark-gras:#006837;
@@ -32,6 +31,30 @@
 	$image-island-sand-height: 346px;
 
 
+	%input-text{
+ 		-webkit-appearance: none;
+		display: block;
+		
+		margin:10px 0 10px 0;
+		padding:5px;
+		
+		width:100%;
+
+		background-color: transparent;
+		
+		font-size:20px;
+		color:white;
+		line-height: 50px;
+		
+		border:none;
+		border-bottom: 2px solid $color-light-gray;
+		&:focus{
+			outline:0;
+			box-shadow:none;
+			border-bottom: 2px solid green;
+		} 
+	}
+
 	%link-default{
 		color:$text-color-default;
 		text-decoration: none;
@@ -39,7 +62,7 @@
 			text-decoration: underline red;
 		}
 	}
-	
+
 	%links{
 		display: block;
 		margin-top:30px;
@@ -47,6 +70,21 @@
 		text-decoration:none;
 	}
 
+	%button-style{
+		background-color:transparent;
+		color: $color-light-gray;
+		border:0;
+		border: 2px solid $color-light-gray;
+		width: 100%;
+		right:20px;
+		margin-top: 50px;
+
+		opacity: 0.7;
+		font-size: 20px;
+		&:hover{
+			opacity: 1.0;
+		}
+	}
 
 	%block-centered-hor{
 		display: block;
@@ -121,7 +159,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-	}*/
+	}
 
 
 
@@ -145,6 +183,7 @@ body{
 }
 
 button{
+	//@extend %button-style;
 	cursor:pointer;
 }
 

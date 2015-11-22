@@ -7,6 +7,8 @@ var g_ctx = g_canvas.getContext("2d");
 var g_canvasW = g_canvas.parentElement.clientWidth;
 var g_canvasH = g_canvas.parentElement.clientHeight;
 
+
+
 var islandPos = { 
   x:(g_canvasW/10), 
   y:(g_canvasH/1.4)
@@ -15,17 +17,19 @@ var islandPos = {
 var treePos = {
   x:(islandPos.x),
   y:(islandPos.y-350)
-}
+};
 
 var coconutPos = {
   x:(treePos.x+170),
   y:(treePos.y+60)
-}
+};
 
+
+//
 var upgradePos = {
   x:(g_canvasW-100),
   y:(30)
-}
+};
 
 
 

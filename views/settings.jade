@@ -10,21 +10,39 @@ block content
 			form(method='post' action='/settings')
 				div.formgroup
 					div.container-slider
+						- var value = settings['audio-slider']
+						- var className = 'audio-on'
+						if (settings['audio-slider'] === 'Mute')
+							- value = 20
+							- className = 'audio-off';
+						
 						label(
-							class='label-audio audio-on'
+							class='label-audio '+className
 							for='audio-slider') Audio
-						p(class='audio-number audio-on' value='33' text='332') 
+						p(class='audio-number '+className value='33' text='332')= settings['audio-slider']
 					div(class="container-slider" id='input-slider')
+						input(
+							type='text' 
+							name='audio-slider-hidden' 
+							value= settings['audio-slider']
+							class='audio-slider-hidden' hidden)
 						input(
 							type='range' 
 							name='audio-slider'
-							class='audio-slider audio-on'
+							class= 'audio-slider '+className
 							min='0' 
 							max='100' 
-							value='20')
+							value= value)
 				div.formgroup
+					- var onORoff = 'checkbox-off'
+					if settings['on']
+						- onORoff = 'checkbox-on'
 					label(for='fullscreen' id='label-check-off') Fullscreen
-					input(type="checkbox" name="checkboxG1" id="fullscreen")
-					div(class='checkbox' id="checkbox-off")
-			hr
-			p: a(href='/menu') Back to Menu
+					input(type="checkbox" name="checkbox" id="fullscreen")
+					div(class='checkbox' id=onORoff)
+				hr
+				button(type='submit' name='action' value='default') Restore default settings
+				button(type='submit' name='action' value='save') Save and go back to menu
+				//a(href='/menu') Back to Menu
+			//form(method='post' action='/saveSettings')
+
