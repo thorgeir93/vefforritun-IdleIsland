@@ -49,12 +49,26 @@ Display.prototype.render = function(currency, score){
 		this.coconuts[i].render();
 	}
 
-	g_ctx.fillStyle = "black";
-	g_ctx.font="20px Georgia";
-	g_ctx.fillText('Your Coconuts :  '+currency,780,150);
+	var x = 20;
+	var y = g_canvasH*0.8;
+	var pos1 = {
+		x: x,
+		y: y
+	};
 
-	g_ctx.font="20px Georgia";
-	g_ctx.fillText('Your score: '+score,820,200);
+	var pos2 = {
+		x: x,
+		y: y+25
+	};
+
+	var font = "bold 20px Arial";
+
+	g_ctx.fillStyle = "white";
+	g_ctx.font=font;
+	g_ctx.fillText('Coconuts :  '+currency,pos1.x,pos1.y);
+
+	g_ctx.font=font;
+	g_ctx.fillText('Score : '+score,pos2.x,pos2.y);
 
 
 	//implements plz

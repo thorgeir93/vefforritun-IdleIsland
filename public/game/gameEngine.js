@@ -39,7 +39,7 @@ function gameEngine(image, audio, user, userData){
     buttons.push(new Button(pos, image['tree'], this.punch.bind(this)))
 
     //takki2 - takki til að komast inn i upgrade menu
-    pos = {     width: image['upgradeMenu'].width,
+  /*  pos = {     width: image['upgradeMenu'].width,
                         height: image['upgradeMenu'].height,
 
                         topX: upgradePos.x,
@@ -48,6 +48,7 @@ function gameEngine(image, audio, user, userData){
 
     buttons.push(new Button(pos, image['upgradeMenu'], this.chanceDisplayToUpgradeslvl1.bind(this)))
 
+*/
     //takki3 - exit takki
     pos = {     width: image['exit'].width,
                         height: image['exit'].height,
@@ -59,7 +60,7 @@ function gameEngine(image, audio, user, userData){
     buttons.push(new Button(pos, image['exit'], this.exit.bind(this)))
 
     //takki3 - downLvl
-    pos = {     width: image['downLvl'].width,
+    /*pos = {     width: image['downLvl'].width,
                         height: image['downLvl'].height,
                         topX: 500,
                         topY: 500
@@ -67,6 +68,7 @@ function gameEngine(image, audio, user, userData){
 
     buttons.push(new Button(pos, image['downLvl'], this.chanceDisplayToLvl2.bind(this)))
 
+*/
 
     
     var backgroundImages = [];
@@ -113,7 +115,7 @@ function gameEngine(image, audio, user, userData){
     buttons.push(new Button(pos, image['tree'], this.punch.bind(this)))
 
     //takki2 - takki til að komast inn i upgrade menu
-    pos = {     width: image['upgradeMenu'].width,
+    /*pos = {     width: image['upgradeMenu'].width,
                         height: image['upgradeMenu'].height,
                         topX: 900,
                         topY: 10
@@ -121,8 +123,9 @@ function gameEngine(image, audio, user, userData){
 
     buttons.push(new Button(pos, image['upgradeMenu'], this.chanceDisplayToUpgradeslvl2.bind(this)))
 
+*/
     //takki3 - exit takki
-    pos = {     width: image['upLvl'].width,
+    /*pos = {     width: image['upLvl'].width,
                         height: image['upLvl'].height,
                         topX: 500,
                         topY: 0
@@ -130,6 +133,7 @@ function gameEngine(image, audio, user, userData){
 
     buttons.push(new Button(pos, image['upLvl'], this.chanceDisplayToLvl1.bind(this)))
 
+*/
     backgroundImages = [];
     //backgroundImages.push(image['gamesky'])
     //backgroundImages.push(image['gameseaseven']);

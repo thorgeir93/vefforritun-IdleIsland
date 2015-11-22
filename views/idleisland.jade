@@ -4,12 +4,17 @@ html
 		meta(charset='utf-8')
 		title IDLE ISLAND
 		link(rel='stylesheet', href='/stylesheets/game.css')
+		//script(type='text/javascript' src='/game/htmlButtons.js')
 	body
 		p(hidden,id = 'user') #{data.username}
 		p(hidden, id = 'userData') #{data.userData}
 
 		//h1 IDLE ISLAND
 		canvas#myCanvas
+		div.displayUpgrades
+		div.buttons
+			div.circle-buttons
+			div.arrows-buttons
 		form(method='post', action='/exit', id = 'exit', hidden)
 			input(type='text', id='submitString', name='submitString')
 			input(type='text', id='score', name='score')
@@ -19,10 +24,12 @@ html
 		script(src='/game/soundsPreload.js')
 		script(src='/game/Coconut.js')
 		script(src='/game/Sprite.js')
+		script(src='/game/htmlButtons.js')
 		script(src='/game/Button.js')
 		script(src='/game/Display.js')
 		script(src='/game/UserData.js')
 		script(src='/game/Calculator.js')
 		script(src='/game/gameEngine.js')
 		script(src='/game/Initialize.js')
+	div.sky
 	div.sea

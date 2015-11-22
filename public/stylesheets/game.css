@@ -1,4 +1,87 @@
-html {
+body {
+  margin: 0 !important; }
+
+#myCanvas {
+  border: 0 !important; }
+
+div.circle-buttons .upgrade, div.circle-buttons .settings {
+  margin: 20px 0 0 0; }
+
+div.arrow-up:before {
+  display: block;
+  height: 100px;
+  width: 100px;
+  border: 1px solid red; }
+
+div.circle-buttons {
+  top: 50px;
+  right: 10px;
+  position: absolute;
+  display: block;
+  width: 100px;
+  height: auto; }
+  div.circle-buttons .upgrade {
+    transform: rotate(45deg);
+    outline: 0;
+    border: 0;
+    display: block;
+    width: 72px;
+    height: 72px;
+    background: url("../game/images/game-button-upgrade.png") no-repeat;
+    transition: transform 0.5s; }
+    div.circle-buttons .upgrade:active {
+      opacity: 0.5; }
+    div.circle-buttons .upgrade:hover {
+      transform: rotate(-60deg); }
+  div.circle-buttons .settings {
+    outline: 0;
+    border: 0;
+    display: block;
+    width: 72px;
+    height: 72px;
+    background: url("../game/images/game-button-settings.png") no-repeat;
+    transition: transform 0.5s; }
+    div.circle-buttons .settings:active {
+      opacity: 2s; }
+    div.circle-buttons .settings:hover {
+      transform: rotate(-270deg); }
+
+div.arrows-buttons button.level-down, div.arrows-buttons button.level-up {
+  display: block;
+  position: absolute;
+  left: 45%;
+  font-size: 100px;
+  color: #E0E0E0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  opacity: 0.3;
+  transition: transform 0.1s; }
+  div.arrows-buttons button.level-down:hover, div.arrows-buttons button.level-up:hover {
+    opacity: 1.0; }
+
+.hidden {
+  display: none !important; }
+
+div.arrows-buttons button.level-down {
+  top: 80%;
+  transition: transform 0.1s; }
+  div.arrows-buttons button.level-down:active {
+    transform: translate(0, 10px); }
+
+div.arrows-buttons button.level-up {
+  top: 10px;
+  transition: transform 0.1s; }
+  div.arrows-buttons button.level-up:active {
+    transform: translate(0, -10px); }
+
+div.sky {
+  left: 0;
+  top: 0;
+  height: 70%;
+  width: 100%;
+  position: absolute;
+  z-index: -2;
   background: -webkit-linear-gradient(top, #005b97 0%, #077ec3 20%, #53b1e0 56%, #98cceb 77%, #c8dff3 97%, #cce0f4 100%);
   background: -o-linear-gradient(top, #005b97 0%, #077ec3 20%, #53b1e0 56%, #98cceb 77%, #c8dff3 97%, #cce0f4 100%);
   background: -ms-linear-gradient(top, #005b97 0%, #077ec3 20%, #53b1e0 56%, #98cceb 77%, #c8dff3 97%, #cce0f4 100%);
@@ -13,9 +96,3 @@ div.sea {
   position: absolute;
   background-color: #29ABE2;
   z-index: -1; }
-
-body {
-  margin: 0 !important; }
-
-#myCanvas {
-  border: 0 !important; }
