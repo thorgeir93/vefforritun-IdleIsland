@@ -10,6 +10,19 @@ a {
   color: #E0E0E0;
   text-decoration: none; }
 
+button {
+  background-color: transparent;
+  color: #E0E0E0;
+  border: 0;
+  border: 2px solid #E0E0E0;
+  width: 100%;
+  right: 20px;
+  margin-top: 50px;
+  opacity: 0.7;
+  font-size: 20px; }
+  button:hover {
+    opacity: 1.0; }
+
 label {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -81,3 +94,7 @@ p {
   text-align: center;
   display: inline;
   margin-left: 10px; }
+
+input[type='text'].audio-slider-hidden {
+  visibility: hidden;
+  position: absolute; }

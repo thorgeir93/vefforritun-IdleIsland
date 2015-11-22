@@ -5,6 +5,7 @@ var sql = require('../lib/DBConnector');
 var ensureUser = require('../lib/ensureLoggedIn');
 var xss = require('xss');
 
+var defaultSettings = require('../lib/defaultSettings');
 
 ////
 //HOME PAGE
@@ -28,20 +29,20 @@ function homePage(req, res, next){
 //AUTHERATION / CREATE USER
 ////
 
-//VILLA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KV ÞORGEIR
+//SPURNING: eigum við að hafa ensuerUser á post aðgerðum?
 router.get('/menu', ensureUser, menu);
 
 router.get('/viewFriends', /*ensureUser,*/ viewFriends);
 router.post('/viewFriends', chooseFriend);
 
-router.get('/addFriends', /*ensureUser, */addFriends);
+router.get('/addFriends', ensureUser,addFriends);
 router.post('/addFriends', addFriendsHandler);
 
 router.get('/highScores', ensureUser, highScores);
-router.get('/settings', /*ensureUser,*/ settings);
+router.get('/settings', ensureUser, settings);
+router.post('/settings',  saveOrRestoreSettings);
 
 router.get('/highScores', ensureUser, highScores);
-router.get('/settings', ensureUser, settings);
 
 router.get('/idleisland', ensureUser, play);
 router.get('/logout', ensureUser, logout);
@@ -55,11 +56,40 @@ function viewFriendsIsland(req, res, next) {
   res.render('viewFriendsIsland');
 }*/
 
+function saveOrRestoreSettings(req, res, next){
+  var body = req.body;
+  var action = body.action;
+  var settings;
+
+  console.log('index.js:body');
+  console.dir(body);
+  if(action==='save'){
+    settings = body;
+    delete settings['action'];
+    settings['audio-slider'] = settings['audio-slider-hidden'];
+  } else if(action==='default'){
+    settings = defaultSettings();
+  }
+
+  sql.setSettings(req.session.user, settings, function(error, result){
+    if(error){
+      console.log(error);
+    }
+    console.log('settings');
+    console.dir(settings);    
+    if(action==='save'){
+      res.redirect('/menu');
+    } else if(action==='default'){
+      res.render('settings', {title:'Change Settings', settings:settings});
+    }
+  });
+}
+
 function chooseFriend(req, res, next) {
   var friend = xss(req.body.who);
   sql.getGameState(friend, function(error, result) {
     var gamestate;
-    gamestate = result
+    gamestate = result;
     var data = {username: friend,
                 userData: gamestate }
     res.render('viewFriendsIsland', {data:data});
@@ -67,12 +97,12 @@ function chooseFriend(req, res, next) {
 }
 
 function exit(req, res, next){
-  var gameState = xss(req.body.submitString)
-  var score = xss(req.body.score)
+  var gameState = xss(req.body.submitString);
+  var score = xss(req.body.score);
   sql.setGameState(req.session.user, gameState, score, function(){
-    console.log('allt gekk upp')
+    console.log('allt gekk upp');
     res.redirect('/menu');
-  })
+  });
 }
 
 function logout(req, res, next) {
@@ -102,7 +132,7 @@ function viewFriends(req, res, next) {
     console.dir(result);
     if (err) {
       console.error(err);
-    } 
+    }
     friends = result[0]['friendid'].split(',');
     var friended = [];
     for (var i = 0; i < friends.length; i++) {
@@ -180,7 +210,9 @@ function highScores(req, res, next) {
   
 
 function settings(req, res, next) {
-  res.render('settings', { title: 'Change Settings'});
+  sql.getSettings(req.session.user, function(error, settings){
+    res.render('settings', { title: 'Change Settings', settings:settings});
+  });
 }
 
 
@@ -198,4 +230,3 @@ function play(req, res, next) {
 }
 
 module.exports = router;
-	

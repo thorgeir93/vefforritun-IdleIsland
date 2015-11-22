@@ -278,9 +278,17 @@ p{
 	margin-left: 10px;
 }
 
+button{
+	@extend %button-style;
+}
 a{
 	@extend %link-default;
 	@extend %links;
+}
+
+input[type='text'].audio-slider-hidden{
+	visibility:hidden;
+	position:absolute;
 }
 
 	//}
