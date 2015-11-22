@@ -44,7 +44,7 @@ router.post('/settings',  saveOrRestoreSettings);
 
 router.get('/highScores', ensureUser, highScores);
 
-router.get('/idleisland', ensureUser, play);
+router.get('/idleisland', /*ensureUser, */play);
 router.get('/logout', ensureUser, logout);
 
 
@@ -219,7 +219,11 @@ function settings(req, res, next) {
 function play(req, res, next) {
   var gamestate;
   sql.getGameState(req.session.user, function(error, dataa){
-    console.log('success');
+    if(error){
+      console.log(error);
+    }else {
+      console.log('success');
+    }
     gamestate = dataa
 
     var data = {username: req.session.user,

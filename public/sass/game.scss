@@ -156,7 +156,130 @@
 		width: 100%;
 		height: 100%;
 	}
-html{
+html{}
+
+
+body{
+	margin:0 !important;
+}
+#myCanvas{
+	border:0 !important;
+	//background-color: black !important;
+}
+
+$button-upgrade-width:72px;
+$button-upgrade-heigth:72px;
+
+%space-top-bottom{
+	margin:20px 0 0 0;
+}
+
+div.arrow-up:before{
+	display:block;
+	height:100px;
+	width:100px;
+	border:1px solid red;
+	//content: "&#9660";
+}
+
+
+
+
+div.circle-buttons{
+	top:50px;
+	//left:100%;
+	right:10px;
+	position: absolute;
+	display: block;
+	width:100px;
+	height:auto;
+	.upgrade{
+		@extend %space-top-bottom;
+		transform: rotate(45deg);
+		outline: 0;
+		border:0;
+		display: block;
+		width: $button-upgrade-width;
+		height: $button-upgrade-heigth;
+		background:url('../game/images/game-button-upgrade.png') no-repeat;
+		//-webkit-transition: width 2s, height 2s, background-color 2s, -webkit-transform 2s;
+    transition: transform 0.5s;
+		&:active{
+			opacity: 0.5;
+		}
+		&:hover{
+			//-webkit-transform: rotate(90deg);
+    	transform: rotate(-60deg);
+		}
+	}
+	.settings{
+		@extend %space-top-bottom;
+		outline: 0;
+		border:0;
+		display: block;
+		width: $button-upgrade-width;
+		height: $button-upgrade-heigth;
+		background:url('../game/images/game-button-settings.png') no-repeat;
+
+	  transition: transform 0.5s;
+		&:active{
+			opacity: 2s;
+		}
+		&:hover{
+			//-webkit-transform: rotate(90deg);
+    	transform: rotate(-270deg);
+		}
+	}
+}
+
+
+%button-arrow{
+	display: block;
+	position: absolute;
+	left: 45%;
+	font-size:100px;
+	color:$color-light-gray;
+	border:0;
+	outline:0;
+	background:transparent;
+	opacity: 0.3;
+	transition: transform 0.1s;
+	&:hover{
+		opacity: 1.0;}
+}
+
+
+.hidden{
+	display:none !important;
+}
+
+div.arrows-buttons{
+	button.level-down{
+		@extend %button-arrow;
+		top:80%;
+		transition: transform 0.1s;
+		&:active{
+			transform: translate(0, 10px); 
+		}
+	}
+
+	button.level-up{
+		@extend %button-arrow;
+		top:10px;
+		transition: transform 0.1s;
+		&:active{
+			transform: translate(0, -10px); 
+		}
+	}
+}
+
+div.sky{
+	left:0;
+	top:0;
+	height:70%;
+	width:100%;
+	position: absolute;
+	z-index:-2;
 	background: -webkit-linear-gradient(top, rgb(0, 91, 151) 0%, rgb(7, 126, 195) 20%, rgb(83, 177, 224) 56%, rgb(152, 204, 235) 77%, rgb(200, 223, 243) 97%, rgb(204, 224, 244) 100%);
 	background: -o-linear-gradient(top, rgb(0, 91, 151) 0%, rgb(7, 126, 195) 20%, rgb(83, 177, 224) 56%, rgb(152, 204, 235) 77%, rgb(200, 223, 243) 97%, rgb(204, 224, 244) 100%);
 	background: -ms-linear-gradient(top, rgb(0, 91, 151) 0%, rgb(7, 126, 195) 20%, rgb(83, 177, 224) 56%, rgb(152, 204, 235) 77%, rgb(200, 223, 243) 97%, rgb(204, 224, 244) 100%);
@@ -167,23 +290,9 @@ html{
 div.sea{
 	top:70%;
 	height:30%;
-	
 	left:0;
 	width:100%;
-	
 	position: absolute;
-	
 	background-color:$color-ocean;
-
 	z-index:-1;
-}
-
-
-body{
-	margin:0 !important;
-}
-
-#myCanvas{
-	border:0 !important;
-	//background-color: black !important;
 }

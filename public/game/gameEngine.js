@@ -41,14 +41,14 @@ function gameEngine(image, audio, user, userData){
     buttons.push(new Button(pos, image['tree'], audio, this.punch.bind(this)))
 
     //takki2 - takki til að komast inn i upgrade menu
-    pos = {     width: image['upgradeMenu'].width,
+  /*  pos = {     width: image['upgradeMenu'].width,
                         height: image['upgradeMenu'].height,
                         topX: upgradePos.x,
                         topY: upgradePos.y
           };
 
     buttons.push(new Button(pos, image['upgradeMenu'], audio, this.chanceDisplayToUpgradeslvl1.bind(this)))
-
+*/
     //takki3 - exit takki
     pos = {     width: image['exit'].width,
                         height: image['exit'].height,
@@ -59,14 +59,14 @@ function gameEngine(image, audio, user, userData){
     buttons.push(new Button(pos, image['exit'], audio, this.exit.bind(this)))
 
     //takki3 - downLvl
-    pos = {     width: image['downLvl'].width,
+    /*pos = {     width: image['downLvl'].width,
                         height: image['downLvl'].height,
                         topX: 500,
                         topY: 500
           };
 
     buttons.push(new Button(pos, image['downLvl'], audio, this.chanceDisplayToLvl2.bind(this)))
-
+*/
 
     
     var backgroundImages = [];
@@ -103,23 +103,23 @@ function gameEngine(image, audio, user, userData){
     buttons.push(new Button(pos, image['tree'], audio, this.punch.bind(this)))
 
     //takki2 - takki til að komast inn i upgrade menu
-    pos = {     width: image['upgradeMenu'].width,
+    /*pos = {     width: image['upgradeMenu'].width,
                         height: image['upgradeMenu'].height,
                         topX: 900,
                         topY: 10
           };
 
     buttons.push(new Button(pos, image['upgradeMenu'], audio, this.chanceDisplayToUpgradeslvl2.bind(this)))
-
+*/
     //takki3 - exit takki
-    pos = {     width: image['upLvl'].width,
+    /*pos = {     width: image['upLvl'].width,
                         height: image['upLvl'].height,
                         topX: 500,
                         topY: 0
           };
 
     buttons.push(new Button(pos, image['upLvl'], audio, this.chanceDisplayToLvl1.bind(this)))
-
+*/
     backgroundImages = [];
     //backgroundImages.push(image['gamesky'])
     //backgroundImages.push(image['gameseaseven']);

@@ -22,7 +22,7 @@ Calculator.prototype.calculateCurrency = function(time, currency, currFactor){
 		intTala += 1;
 	}	
 
-	console.log(intTala, currFactor);
+	//console.log(intTala, currFactor);
 
 	return currency + intTala;
 
