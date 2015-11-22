@@ -31,7 +31,7 @@ function homePage(req, res, next){
 //VILLA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KV ÞORGEIR
 router.get('/menu', ensureUser, menu);
 
-router.get('/viewFriends', /*ensureUser,*/ developmentViewFriends/*viewFriends*/);
+router.get('/viewFriends', /*ensureUser,*/ viewFriends);
 router.post('/viewFriends', chooseFriend);
 
 router.get('/addFriends', /*ensureUser, */addFriends);

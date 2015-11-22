@@ -25,6 +25,7 @@ Display.prototype.render = function(currency, score){
 	this.drawAt(g_ctx, islandPos.x, islandPos.y);
 
 	for(var i = 0; i<this.Buttons.length; i++){
+
 		if(!(this.Buttons[i].image.name === "downLvl")){
 			this.Buttons[i].render();
 		}else if(this.showArrow){

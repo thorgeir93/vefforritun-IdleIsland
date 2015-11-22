@@ -9,6 +9,8 @@ function gameEngine(image, audio, user, userData){
     this.score = this.userdata.score + this.calculator.calculateOfflineCurrency(this.userdata.timestamp,this.userdata.getCurrency(), this.userdata.getCurrFactor());
     this.displayScreen = this.lvl1;
 
+    //this.userdata.currency = 1000000000;
+
     ////////////////////////////////////////////////////////
     //              THE UPGRADES DISPLAY 1
     ////////////////////////////////////////////////////////
@@ -27,11 +29,6 @@ function gameEngine(image, audio, user, userData){
 
     //takki1 - tré
     var buttons = [];
-   /* var pos = {     width: image['tree'].width,
-                        height: image['tree'].height,
-                        topX: 250,
-                        topY: 150
-               };    */
     var pos = {     width: image['tree'].width,
                         height: image['tree'].height,
                         topX: treePos.x,
@@ -134,6 +131,9 @@ function gameEngine(image, audio, user, userData){
     upgradesForScreens.push(this.makeItemImages(['item6upgrade1','item6upgrade2','item6upgrade3'], 300, 300, image, audio));
 
     this.displays.push(new Display(backgroundImages, buttons, undefined, upgradesForScreens));
+
+
+    console.log(this.displays)
 
 }
 
@@ -295,8 +295,8 @@ gameEngine.prototype.update = function(time){
 
             var pos = {     width: this.coconutImage.width,
                         height: this.coconutImage.height,
-                            topX: 450,
-                            topY: 200
+                            topX: coconutPos.x,
+                            topY: coconutPos.y
                    };
 
             var coconut = new Coconut(pos,this.coconutImage,undefined)
@@ -308,6 +308,7 @@ gameEngine.prototype.update = function(time){
     
 	this.userdata.setCurrency(currency);
     this.displays[this.displayScreen].update(time);
+
 }
 
 gameEngine.prototype.render = function(){
@@ -459,6 +460,7 @@ gameEngine.prototype.chanceDisplayToUpgradeslvl1 = function(){
 
     this.displayScreen = this.UpgrLvl1;
     this.displays[this.lvl1].coconuts = [];
+
 }
 
 gameEngine.prototype.chanceDisplayToUpgradeslvl2 = function(){
