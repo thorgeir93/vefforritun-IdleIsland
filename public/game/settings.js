@@ -39,7 +39,6 @@ var settings = (function() {
 				slider1[element].classList.add('audio-off');
 			}
 			slider1.element2.innerHTML = 'Mute';
-			//slider1.element4.value = 'Mute';
 			slider1.element1.value = 0;
 		} else{
 			for(var element in slider1){
@@ -69,7 +68,6 @@ var settings = (function() {
 		if( slider1.element1.classList.contains('audio-on') ){
 				var newNumber = slider1.element1.value;
 				slider1.element2.innerHTML = newNumber;
-				//slider1.element4.value = newNumber;
 		}
 	}
 

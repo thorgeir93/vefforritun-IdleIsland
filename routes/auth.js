@@ -125,7 +125,7 @@ function createHandler(req, res, next) {
 					sql.findRandomUserN( username, function(error, userNames){
 						handleSmallError(error, "auth.js:find random User fail");
 						data.error = true;
-						data.errorMessage='The "'+username+'" is aldready taken.';
+						data.errorMessage='"'+username+'" is already taken.';
 						data.userNOptions=userNames;
 						res.render('form', data);
 					});

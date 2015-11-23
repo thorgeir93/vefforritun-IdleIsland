@@ -164,23 +164,13 @@ var Buttons = (function() {
 	//
 	function displayUpgrades(){
 
-		/*console.log("buttons.levelUp");
-		console.log(buttons.levelUp);
-		console.dir(buttons.levelUp);*/
-
 		toggleBackgrounds();
-
-		/*console.log("buttons.levelUp");
-		console.log(buttons.levelUp);
-		console.dir(buttons.levelUp);*/
 
 		//SHOW this elements
 		removeHidden( buttons.quit );
+		addToVisible( buttons.quit );
 		removeHidden( backgrounds.upgrade );
-
-		/*console.log("buttons.levelUp");
-		console.log(buttons.levelUp);
-		console.dir(buttons.levelUp);*/
+		//addToVisible( backgrounds.upgrade );
 
 		var name = 'upgrade'+level;
 		if(lvlFunc[name]){
@@ -195,7 +185,7 @@ var Buttons = (function() {
 		if( lvlFunc[level] ){
 			lvlFunc[level].action();
 			removeHidden(buttons.levelUp);
-			
+			addToVisible(buttons.levelUp);
 			changeBackground(level, true);
 
 		} else {
@@ -209,6 +199,7 @@ var Buttons = (function() {
 		level -= 1;
 		if(level===2){
 			addHidden( buttons.levelUp );
+			removeFromVisible( buttons.levelUp );
 			lvlFunc[level].action();
 			changeBackground(level, false);
 		}
@@ -224,9 +215,24 @@ var Buttons = (function() {
 
 		for(var i in lvlFunc[newLevel].backgrounds){
 			removeHidden( lvlFunc[newLevel].backgrounds[i] );
+			//addToVisible( lvlFunc[newLevel].backgrounds[i] );
 		}
 		for(var i in lvlFunc[levelBefore].backgrounds){
 			addHidden( lvlFunc[levelBefore].backgrounds[i] );
+			//removeFromVisible( lvlFunc[levelBefore].backgrounds[i] );
+		}
+	}
+
+	function addToVisible(element){
+		visibleElements.push( element );
+	}
+
+	function removeFromVisible(element){
+		for(var i in visibleElements){
+			if( element === visibleElements[i] ){
+				visibleElements.splice(i,1);
+			}
+			
 		}
 	}
 
@@ -244,8 +250,9 @@ var Buttons = (function() {
 		console.log("Going to remove hidden to element!");
 		if( element.classList.contains('hidden') ){
 			console.log("Hidden class added to element");
+			console.log(element);
 			element.classList.remove('hidden');
-			visibleElements.push( element );
+			//addToVisible(element);
 		} else {
 			console.log("This element has aldready none hidden class!");
 		}
