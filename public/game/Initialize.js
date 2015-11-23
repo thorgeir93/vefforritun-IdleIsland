@@ -8,7 +8,6 @@ var g_canvasW = g_canvas.parentElement.clientWidth;
 var g_canvasH = g_canvas.parentElement.clientHeight;
 
 
-
 var islandPos = { 
   x:(g_canvasW/10), 
   y:(g_canvasH/1.4)
@@ -40,7 +39,13 @@ var user;
 function AudioPreload(callback){
 	
 	var requiredSounds = {
-		bones	: "game/sounds/bones.ogg"
+		punch	: "game/sounds/punch.ogg",
+    gameTheme : "game/sounds/GameTheme.ogg",
+    purchase  : "game/sounds/purchase.ogg",
+    noMoney   : "game/sounds/noMoney.ogg",
+    ocean     : "game/sounds/ocean.ogg",
+    changeDisp: "game/sounds/changeDisp.ogg",
+    exit      : "game/sounds/exit.ogg"
 	};
 
 	soundsPreload(requiredSounds, g_audio, callback);
@@ -51,15 +56,15 @@ function imagePreload(callback){
 
     var requiredImages = {
       tree      	: "game/images/game-coconut-tree.png",
-      upgradeMenu	: "game/images/game-button-upgrade2.png",
+      upgradeMenu	: "game/images/game-button-upgrade.png",
 
-      //gamesky    : "game/images/game-sky-8.png",
-      //gameseaseven: "game/images/game-sea-7.png",
-      //gameseasix: "game/images/game-sea-6.png",
-      //gameseafive: "game/images/game-sea-5.png",
-      //gameseafour: "game/images/game-sea-4.png",
-      //gameseatwo: "game/images/game-sea-2.png",
-      //gameseaone: "game/images/game-sea-1.png",
+      gamesky    : "game/images/game-sky-8.png",
+      gameseaseven: "game/images/game-sea-7.png",
+      gameseasix: "game/images/game-sea-6.png",
+      gameseafive: "game/images/game-sea-5.png",
+      gameseafour: "game/images/game-sea-4.png",
+      gameseatwo: "game/images/game-sea-2.png",
+      gameseaone: "game/images/game-sea-1.png",
       gamesandthree: "game/images/game-sand-3-01.png",
       UpgradeMenu   : "game/images/UggradeMenu.png",
       backButton    : "game/images/backButton.png",
@@ -94,6 +99,7 @@ function imagePreload(callback){
 
       unavalible    : "game/images/unavalible.png",
       bought        : "game/images/bought.png",
+      kall          : "game/images/kall_animation.png"
       };
 
 	imagesPreload(requiredImages, g_images, callback);
@@ -130,6 +136,8 @@ _iterCore = function (dt) {
     leikur.update(dt);
     
     leikur.render();
+
+    leikur.playTheme();
 
     Loop();
 };
