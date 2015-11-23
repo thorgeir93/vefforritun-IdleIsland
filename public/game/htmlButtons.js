@@ -12,13 +12,23 @@ var Buttons = (function() {
 
 	var lvlFunc = {};
 
+	//keeps track of elements that is visible
+	var visibleElements = [];
+
 	//ELEMENTS
 	var buttons = {};
-	var numButtons;
+	var backgrounds = {};
 
+	//BUTTONS
 	var allBtnElements;
 	var circleBtnElements;
 	var arrowsBtnElements;
+
+	//BACKGROUNDS
+	var allBackgroundElements;
+	var upgradeElement;
+	var skyElement;
+	var seaElement;
 
 	function init( game ){
 		console.log( "button init!" );
@@ -31,7 +41,6 @@ var Buttons = (function() {
 		//
 		//	INITIALIZE LEVELS
 		//
-
 		lvlFunc[2] = { 
 			action:function(){
 				//TODO:change background HTML (change classList)
@@ -44,7 +53,7 @@ var Buttons = (function() {
 				//TODO:change background HTML (change classList)		
 				theGame.chanceDisplayToLvl2();
 			}
-		};	
+		};
 		
 
 		lvlFunc.upgrade2={
@@ -58,12 +67,23 @@ var Buttons = (function() {
 				theGame.chanceDisplayToSettings();
 			}
 		};
-		
+
+		//GET BASE ELEMENTS TO ADD NEW ELEMENTS TO
+		allBackgroundElements = document.querySelector('.backgrounds');
 		circleBtnElements = document.querySelector('.circle-buttons');
 		arrowsBtnElements = document.querySelector('.arrows-buttons');
 		allBtnElements = document.querySelector('.buttons');
 
+		//BUILD ALL NEW ELEMENTS
+		buildBackgrounds();
 		buildButtons();
+
+		//BIND ALL NEW ELEMENT TO BASE ELEMTNS
+		allBackgroundElements.appendChild( backgrounds.sea );
+		allBackgroundElements.appendChild( backgrounds.sky );
+		allBackgroundElements.appendChild( backgrounds.upgrade );
+
+		allBtnElements.appendChild( buttons.quit );
 
 		circleBtnElements.appendChild( buttons.upgrade );
 		circleBtnElements.appendChild( buttons.settings );
@@ -72,24 +92,65 @@ var Buttons = (function() {
 		arrowsBtnElements.appendChild( buttons.levelUp );
 	}
 
+	function buildBackgrounds(){
+		backgrounds.sky = elementCreator('div','sky','sky');
+		backgrounds.sea = elementCreator('div','sea','sea');
+		backgrounds.upgrade = elementCreator('div','upgrade','upgrade');
+	}
 
 	function buildButtons(){
 		buttons.upgrade = elementCreator('button','upgrade','upgrade');
 		buttons.settings = elementCreator('button','settings','settings');
+		buttons.quit = elementCreator('button','quit','quit hidden');
 		
 		buttons.levelDown= elementCreator('button','level-down','level-down', '&#9660');
 		buttons.levelUp= elementCreator('button','level-up','level-up hidden', '&#9650');
-		
+
 		buttons.upgrade.addEventListener('click', displayUpgrades);
 		//buttons.settings.addEventListener('click', displayUpgrades);
 		buttons.levelDown.addEventListener('click', displayLevelDown);
 		buttons.levelUp.addEventListener('click', displayLevelUp);
+
+		buttons.quit.addEventListener('click', handleQuit);
+	}
+
+
+	function handleQuit(){
+		toggleBackgrounds();
+		removeVisibleElements();
+		lvlFunc[level].action();
+	}
+
+	//TODO: held að það þarf að setja fyrir 
+	//backgrounds.upgrade auka breytu sem eru toggle clasar
+	//þá fyrir allabackground visible þá togglum við fade in
+	//fade out classana inn.
+	function toggleBackgrounds(){
+		//for(var element in visibleElements ){
+			backgrounds.upgrade.classList.toggle('upgrade-show');
+			backgrounds.upgrade.classList.toggle('upgrade');
+			
+		//}
+	}
+
+	function removeVisibleElements(){
+		while( visibleElements.length !== 0 ){
+			addHidden( visibleElements.pop() );
+		}
 	}
 
 	//
 	// DISPLAYS
 	//
 	function displayUpgrades(){
+
+		toggleBackgrounds();
+
+		//SHOW this elements
+		removeHidden( buttons.quit );
+		removeHidden( backgrounds.upgrade );
+
+
 		var name = 'upgrade'+level;
 		if(lvlFunc[name]){
 			lvlFunc [name].action();
@@ -132,6 +193,7 @@ var Buttons = (function() {
 		if( element.classList.contains('hidden') ){
 			console.log("Hidden class added to element");
 			element.classList.remove('hidden');
+			visibleElements.push( element );
 		} else {
 			console.log("This element has aldready none hidden class!");
 		}

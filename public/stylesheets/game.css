@@ -14,6 +14,7 @@ div.arrow-up:before {
   border: 1px solid red; }
 
 div.circle-buttons {
+  z-index: 5;
   top: 50px;
   right: 10px;
   position: absolute;
@@ -75,6 +76,61 @@ div.arrows-buttons button.level-up {
   div.arrows-buttons button.level-up:active {
     transform: translate(0, -10px); }
 
+button.quit {
+  position: absolute;
+  right: 50%;
+  top: 10;
+  display: block;
+  height: 42;
+  width: 42;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  background: url("../game/images/game-button-exit.png") no-repeat;
+  z-index: 20; }
+  button.quit:hover {
+    opacity: 0.7; }
+
+/*
+div.upgrade{
+	@include centerer;
+	display:block;
+	height:95%;
+	width:95%;
+	background-color:$color-ocean;
+	border:4px solid $color-light-gray;
+	z-index:10;
+	-webkit-transition-property:all; 
+	transition-duration:5s;
+}
+*/
+div.upgrade, div.upgrade-show {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 95%;
+  width: 50%;
+  display: block;
+  background-color: #29ABE2;
+  border: 4px solid #E0E0E0;
+  z-index: 10;
+  -webkit-transition: visibility 0s, opacity 300ms; }
+
+div.upgrade {
+  visibility: hidden;
+  opacity: 0; }
+
+div.upgrade-show {
+  visibility: visible;
+  opacity: 1; }
+
+/*
+.fadeIn {
+	visibility: hidden;
+  opacity: 1;
+  transition: visibility 1s;
+}*/
 div.sky {
   left: 0;
   top: 0;

@@ -10,10 +10,10 @@ html
 		p(hidden, id = 'userData') #{data.userData}
 		//h1 IDLE ISLAND
 		canvas#myCanvas
-		div.displayUpgrades
 		div.buttons
 			div.circle-buttons
 			div.arrows-buttons
+			//div.quit
 		form(method='post', action='/exit', id = 'exit', hidden)
 			input(type='text', id='submitString', name='submitString')
 			input(type='text', id='score', name='score')
@@ -29,5 +29,4 @@ html
 		script(src='/game/Calculator.js')
 		script(src='/game/gameEngine.js')
 		script(src='/game/Initialize.js')
-	div.sky
-	div.sea
+	div.backgrounds
