@@ -61,6 +61,7 @@ Display.prototype.render = function(currency, score){
 		y: y+25
 	};
 
+	
 	var font = "bold 20px Arial";
 
 	g_ctx.fillStyle = "white";
@@ -84,7 +85,7 @@ Display.prototype.createCoconut = function(coconut){
 }
 
 Display.prototype.update = function(dt){
-
+	console.log(this.coconuts);
 	if(this.coconuts){
 		for(var i = 0; i<this.coconuts.length; i++){
 			var kill = this.coconuts[i].update(dt);
