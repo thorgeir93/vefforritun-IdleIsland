@@ -133,11 +133,16 @@ _updateClocks = function (frameTime) {
 
 _iterCore = function (dt) {
 
+    console.log('fyrir update');
     leikur.update(dt);
+    console.log('eftir update');
+    console.log('fyrir render');
     
     leikur.render();
-
+    console.log('eftir render');
+    console.log('fyrir playtheme');
     leikur.playTheme();
+    console.log('eftir playtheme');
 
     Loop();
 };
@@ -171,6 +176,8 @@ Loop = function () {
     //
     g_ctx.fillStyle = "white";
 
+  console.log('loop-de-loop');
+
 	_requestNextIteration();
 };
 
@@ -186,11 +193,18 @@ function init(){
 
 			console.log('all preloads done');
 
-            user = $('#user')['0'].innerHTML;
-            userData = $('#userData')['0'].innerHTML;
-            console.log(userData.toString())
+            var user = $('#user')['0'].innerHTML;
+            var userData = $('#userData')['0'].innerHTML;
+            var isFriend = $('#isFriend')['0'].innerHTML;
 
-			leikur = new gameEngine(g_images, g_audio, user, userData);
+      if (isFriend === 'false') {
+        isFriend = false;
+      } else {
+        isFriend = true;
+      }
+
+      leikur = new gameEngine(g_images, g_audio, user, userData, isFriend);
+
 			console.log('game engine done...starting game');
 
       console.log("HTML buttons setup [begin] " );

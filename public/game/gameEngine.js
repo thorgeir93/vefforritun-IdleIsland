@@ -1,5 +1,7 @@
-function gameEngine(image, audio, user, userData){
+function gameEngine(image, audio, user, userData, isFriend){
 	console.log('inn í gameEngine constructor');
+    if (!isFriend) console.log('venjulegt session');
+    else console.log('friend session');
 
     this.userName = user;
     this.userdata = new UserData(userData);
@@ -9,24 +11,29 @@ function gameEngine(image, audio, user, userData){
     this.score = this.userdata.score + this.calculator.calculateOfflineCurrency(this.userdata.timestamp,this.userdata.getCurrency(), this.userdata.getCurrFactor());
     this.displayScreen = this.lvl1;
     this.audio = audio;
+    this.isFriend = isFriend;
 
     //this.userdata.currency = 1000000000;
 
-    ////////////////////////////////////////////////////////
-    //              THE UPGRADES DISPLAY 1
-    ////////////////////////////////////////////////////////
-    var names = ['backButton', 'item1upgrade1', 'item2upgrade1', 'item3upgrade1', 'item1upgrade2', 'item2upgrade2', 'item3upgrade2', 'item1upgrade3', 'item2upgrade3', 'item3upgrade3']
-    this.makeUpgradeDisplay(names, image, 0)
+    if (!isFriend) {
+        console.log('upgrades')
 
-    ////////////////////////////////////////////////////////
-    //              THE UPGRADES DISPLAY 2
-    ////////////////////////////////////////////////////////
-    names = ['backButton', 'item4upgrade1', 'item5upgrade1', 'item6upgrade1', 'item4upgrade2', 'item5upgrade2', 'item6upgrade2', 'item4upgrade3', 'item5upgrade3', 'item6upgrade3']
-    this.makeUpgradeDisplay(names, image, 1)
+        ////////////////////////////////////////////////////////
+        //              THE UPGRADES DISPLAY 1
+        ////////////////////////////////////////////////////////
+        var names = ['backButton', 'item1upgrade1', 'item2upgrade1', 'item3upgrade1', 'item1upgrade2', 'item2upgrade2', 'item3upgrade2', 'item1upgrade3', 'item2upgrade3', 'item3upgrade3']
+        this.makeUpgradeDisplay(names, image, 0)
 
-    ////////////////////////////////////////////////////////
-    //              LEVEL 1
-    ////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////
+        //              THE UPGRADES DISPLAY 2
+        ////////////////////////////////////////////////////////
+        names = ['backButton', 'item4upgrade1', 'item5upgrade1', 'item6upgrade1', 'item4upgrade2', 'item5upgrade2', 'item6upgrade2', 'item4upgrade3', 'item5upgrade3', 'item6upgrade3']
+        this.makeUpgradeDisplay(names, image, 1)
+
+        ////////////////////////////////////////////////////////
+        //              LEVEL 1
+        ////////////////////////////////////////////////////////
+    }
 
     //takki1 - tré
     var buttons = [];
@@ -35,9 +42,12 @@ function gameEngine(image, audio, user, userData){
                         topX: treePos.x,
                         topY: treePos.y
                };
-
-    buttons.push(new Button(pos, image['tree'], this.punch.bind(this)))
-
+    if (!isFriend) {    
+        console.log('rétt button push á tré');      
+        buttons.push(new Button(pos, image['tree'], this.punch.bind(this)))
+    } else {
+         buttons.push(new Button(pos, image['tree']))
+    }    
     //takki2 - takki til að komast inn i upgrade menu
   /*  pos = {     width: image['upgradeMenu'].width,
                         height: image['upgradeMenu'].height,
@@ -100,6 +110,8 @@ function gameEngine(image, audio, user, userData){
 
     this.displays.push(new Display(backgroundImages, buttons,undefined,upgradesForScreens,animation));
 
+    console.log('fyrra display');
+    console.log(this.displays);
     /////////////////////////////////////////////////
     //                  LEVEL TWO
     ////////////////////////////////////////////////
@@ -111,9 +123,13 @@ function gameEngine(image, audio, user, userData){
                         topX: 400,
                         topY: 50
                };
-
-    buttons.push(new Button(pos, image['tree'], this.punch.bind(this)))
-
+    if (!isFriend) {
+        console.log('level twö button push');
+        buttons.push(new Button(pos, image['tree'], this.punch.bind(this)))
+    } else {
+        console.log('friend lvl 2 button punch');
+        buttons.push(new Button(pos, image['tree']))
+    }
     //takki2 - takki til að komast inn i upgrade menu
     /*pos = {     width: image['upgradeMenu'].width,
                         height: image['upgradeMenu'].height,
@@ -147,7 +163,7 @@ function gameEngine(image, audio, user, userData){
 
     this.displays.push(new Display(backgroundImages, buttons, undefined, upgradesForScreens));
 
-
+    console.log('seinna display');
     console.log(this.displays)
 
 }
@@ -233,102 +249,110 @@ gameEngine.prototype.score = undefined;
 
 gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
 
-    buttons = [];
+    if (!isFriend) {
+        console.log('inupgradedisplay');
 
-    pos = {     width: image[names[0]].width,
-                        height: image[names[0]].height,
-                        topX: 900,
-                        topY: 10
-          };
+        buttons = [];
 
-    if(func === 0){
-        buttons.push(new Button(pos, image[names[0]], this.chanceDisplayToLvl1.bind(this)))
-    }else{
-        buttons.push(new Button(pos, image[names[0]], this.chanceDisplayToLvl2.bind(this)))
+        pos = {     width: image[names[0]].width,
+                            height: image[names[0]].height,
+                            topX: 900,
+                            topY: 10
+              };
 
-    }
+        if(func === 0){
+            buttons.push(new Button(pos, image[names[0]], this.chanceDisplayToLvl1.bind(this)))
+        }else{
+            buttons.push(new Button(pos, image[names[0]], this.chanceDisplayToLvl2.bind(this)))
 
-    //////////////////////////////////////////
-    //              PARTUR FYRIR BUY MENU
-    ///////////////////////////////////////////
-
-    buyMenu = []
-
-    //////////////////////////////////////////
-    //              UPGRADES
-    ///////////////////////////////////////////
-    var upgrades = [[0,0,0],[0,0,0],[0,0,0]];
-
-    var nameCounter = 1
-    for(var i = 0; i< 3; i++){
-        for(var j = 0; j< 3; j++){
-            pos = {     width: image[names[nameCounter]].width,
-                        height: image[names[nameCounter]].height,
-                        topX: (j*70) + 10,
-                        topY: (i*70) + 10
-            };
-
-            upgrades[i][j] = new Button(pos, image[names[nameCounter]], this.buyUpgrade.bind(this))
-            nameCounter++;
         }
-    }
 
-    buyMenu.push(upgrades);
+        //////////////////////////////////////////
+        //              PARTUR FYRIR BUY MENU
+        ///////////////////////////////////////////
 
-    //////////////////////////////////////////
-    //              unavalible
-    ///////////////////////////////////////////
+        buyMenu = []
 
-    var unavailabe = [[0,0,0],[0,0,0],[0,0,0]];
+        //////////////////////////////////////////
+        //              UPGRADES
+        ///////////////////////////////////////////
+        var upgrades = [[0,0,0],[0,0,0],[0,0,0]];
 
-    for(var i = 0; i < 3; i++){
-            for(var j = 0; j < 3; j++){ 
-                pos = {     width: image['unavalible'].width,
-                        height: image['unavalible'].height,
-                        topX: (j*70) + 10,
-                        topY: (i*70) + 10
-                 };
+        var nameCounter = 1
+        for(var i = 0; i< 3; i++){
+            for(var j = 0; j< 3; j++){
+                pos = {     width: image[names[nameCounter]].width,
+                            height: image[names[nameCounter]].height,
+                            topX: (j*70) + 10,
+                            topY: (i*70) + 10
+                };
 
-                unavailabe[i][j] = new Button(pos, image['unavalible'], undefined)
-            
+                upgrades[i][j] = new Button(pos, image[names[nameCounter]], this.buyUpgrade.bind(this))
+                nameCounter++;
             }
         }
 
-    
-    buyMenu.push(unavailabe);
+        buyMenu.push(upgrades);
 
-    //////////////////////////////////////////
-    //              bought
-    ///////////////////////////////////////////
+        //////////////////////////////////////////
+        //              unavalible
+        ///////////////////////////////////////////
 
-    var bought = [[0,0,0],[0,0,0],[0,0,0]];
+        var unavailabe = [[0,0,0],[0,0,0],[0,0,0]];
 
-    for(var i = 0; i < 3; i++){
-            for(var j = 0; j < 3; j++){ 
-                pos = {     width: image['bought'].width,
-                        height: image['bought'].height,
-                        topX: (j*70) + 10,
-                        topY: (i*70) + 10
-                 };
+        for(var i = 0; i < 3; i++){
+                for(var j = 0; j < 3; j++){ 
+                    pos = {     width: image['unavalible'].width,
+                            height: image['unavalible'].height,
+                            topX: (j*70) + 10,
+                            topY: (i*70) + 10
+                     };
 
-                bought[i][j] = new Button(pos, image['bought'], undefined)
-            
+                    unavailabe[i][j] = new Button(pos, image['unavalible'], undefined)
+                
+                }
             }
-        }
 
-   
-    buyMenu.push(bought);
+        
+        buyMenu.push(unavailabe);
 
-    this.displays.push(new Display([image['UpgradeMenu']], buttons, buyMenu, undefined));
+        //////////////////////////////////////////
+        //              bought
+        ///////////////////////////////////////////
+
+        var bought = [[0,0,0],[0,0,0],[0,0,0]];
+
+        for(var i = 0; i < 3; i++){
+                for(var j = 0; j < 3; j++){ 
+                    pos = {     width: image['bought'].width,
+                            height: image['bought'].height,
+                            topX: (j*70) + 10,
+                            topY: (i*70) + 10
+                     };
+
+                    bought[i][j] = new Button(pos, image['bought'], undefined)
+                
+                }
+            }
+
+       
+        buyMenu.push(bought);
+
+        this.displays.push(new Display([image['UpgradeMenu']], buttons, buyMenu, undefined));
+    }
 }
+
 
 
 gameEngine.prototype.update = function(time){
 
-    var currentCurrency = this.userdata.getCurrency();
-    var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor())
-    var gained = currency - currentCurrency;
-    this.score += gained;
+    if (!this.isFriend) {
+        console.log('inupdate');
+        var currentCurrency = this.userdata.getCurrency();
+        var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor())
+        var gained = currency - currentCurrency;
+        this.score += gained;
+    }
     
     if(this.displayScreen === this.lvl1){
 
@@ -348,13 +372,17 @@ gameEngine.prototype.update = function(time){
     }else{
         this.displays[this.displayScreen].destroyCoconuts();
     }
-    
-    if(/*this.userdata.settings && gained > 0*/false){
-        this.audio['punch'].cloneNode().play();
+    if (!this.isFriend) {
+        console.log('inthis.audiopunch');
+        if(/*this.userdata.settings && gained > 0*/false){
+            this.audio['punch'].cloneNode().play();
+        }
+        console.log('currency dót');
+    	this.userdata.setCurrency(currency);
     }
-
-	this.userdata.setCurrency(currency);
+    console.log(this.displays[this.displayScreen]);
     this.displays[this.displayScreen].update(time);
+    console.log('nei');
 
 }
 
@@ -376,9 +404,7 @@ gameEngine.prototype.render = function(){
     } 
 }
 
-gameEngine.prototype.receiveInputs = function(e){
-
-    
+gameEngine.prototype.receiveInputs = function(e){    
 
     if(this.displayScreen === this.UpgrLvl1){
         this.displays[this.displayScreen].findButtonForClick(e,this.userdata.upgrades1);
@@ -393,124 +419,128 @@ gameEngine.prototype.receiveInputs = function(e){
 
 gameEngine.prototype.buyUpgrade = function(index){  
     
+    if (!this.isFriend) {
+        console.log('inbuyupgrade');
+        if(this.displayScreen === this.UpgrLvl1){
 
-    if(this.displayScreen === this.UpgrLvl1){
+            if(this.userdata.currency >= this.calculator.prices1[index[0]][index[1]]){
 
-        if(this.userdata.currency >= this.calculator.prices1[index[0]][index[1]]){
-
-            if(this.userdata.settings){
-                this.audio['purchase'].cloneNode().play();
-            }
-
-            if(index[0] === 0 && index[1] === 2){
-                
-                this.displays[this.lvl2].showArrow = true;
-                this.displays[this.lvl1].showArrow = true;
-
-            }
-            this.userdata.upgrades1[index[0]][index[1]] = 2;
-
-            if(index[0] === 0){
-                if(index[1] !== 2){
-                    this.userdata.upgrades1[index[0]][index[1]+1] = 1;
-                    this.userdata.upgrades1[index[0]+1][index[1]+1] = 0;
+                if(this.userdata.settings){
+                    this.audio['purchase'].cloneNode().play();
                 }
-            }
 
-            if(index[0] !== 2){
-                this.userdata.upgrades1[index[0]+1][index[1]] = 1;
-            }
-            if(index[0] < 1){
-                this.userdata.upgrades1[index[0]+2][index[1]] = 0;
-            }
-            if(index[1]< 1 && index[0] === 0 ){
-                this.userdata.upgrades1[index[0]][index[1]+2] = 0;
-            }
+                if(index[0] === 0 && index[1] === 2){
+                    
+                    this.displays[this.lvl2].showArrow = true;
+                    this.displays[this.lvl1].showArrow = true;
 
-            this.userdata.currency -= this.calculator.prices1[index[0]][index[1]];
-        
-            this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
-            this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()))
-        }
-        else if(this.userdata.settings){
-            this.audio['noMoney'].cloneNode().play();
-        }
-
-    
-
-    }else if( this.displayScreen === this.UpgrLvl2){
-
-        if(this.userdata.currency >= this.calculator.prices2[index[0]][index[1]]){
-
-            if(this.userdata.settings){
-                this.audio['purchase'].cloneNode().play();
-            }
-
-            if(index[0] === 0 && index[1] === 2){
-                
-                this.displays[this.lvl2].showArrow = true;
-                this.displays[this.lvl1].showArrow = true;
-
-            }
-
-            this.userdata.upgrades2[index[0]][index[1]] = 2;
-
-            if(index[0] === 0){
-                if(index[1] !== 2){
-                    this.userdata.upgrades2[index[0]][index[1]+1] = 1;
-                    this.userdata.upgrades2[index[0]+1][index[1]+1] = 0;
                 }
+                this.userdata.upgrades1[index[0]][index[1]] = 2;
+
+                if(index[0] === 0){
+                    if(index[1] !== 2){
+                        this.userdata.upgrades1[index[0]][index[1]+1] = 1;
+                        this.userdata.upgrades1[index[0]+1][index[1]+1] = 0;
+                    }
+                }
+
+                if(index[0] !== 2){
+                    this.userdata.upgrades1[index[0]+1][index[1]] = 1;
+                }
+                if(index[0] < 1){
+                    this.userdata.upgrades1[index[0]+2][index[1]] = 0;
+                }
+                if(index[1]< 1 && index[0] === 0 ){
+                    this.userdata.upgrades1[index[0]][index[1]+2] = 0;
+                }
+
+                this.userdata.currency -= this.calculator.prices1[index[0]][index[1]];
+            
+                this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
+                this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()))
+            }
+            else if(this.userdata.settings){
+                this.audio['noMoney'].cloneNode().play();
             }
 
-            if(index[0] !== 2){
-                this.userdata.upgrades2[index[0]+1][index[1]] = 1;
-            }
-            if(index[0] < 1){
-                this.userdata.upgrades2[index[0]+2][index[1]] = 0;
-            }
-            if(index[1]< 1 && index[0] === 0 ){
-                this.userdata.upgrades2[index[0]][index[1]+2] = 0;
-            }
-
-            this.userdata.currency -= this.calculator.prices2[index[0]][index[1]];
         
-            this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
-            this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()))
-        }else if(this.userdata.settings){
-            this.audio['noMoney'].cloneNode().play();
+
+        }else if( this.displayScreen === this.UpgrLvl2){
+
+            if(this.userdata.currency >= this.calculator.prices2[index[0]][index[1]]){
+
+                if(this.userdata.settings){
+                    this.audio['purchase'].cloneNode().play();
+                }
+
+                if(index[0] === 0 && index[1] === 2){
+                    
+                    this.displays[this.lvl2].showArrow = true;
+                    this.displays[this.lvl1].showArrow = true;
+
+                }
+
+                this.userdata.upgrades2[index[0]][index[1]] = 2;
+
+                if(index[0] === 0){
+                    if(index[1] !== 2){
+                        this.userdata.upgrades2[index[0]][index[1]+1] = 1;
+                        this.userdata.upgrades2[index[0]+1][index[1]+1] = 0;
+                    }
+                }
+
+                if(index[0] !== 2){
+                    this.userdata.upgrades2[index[0]+1][index[1]] = 1;
+                }
+                if(index[0] < 1){
+                    this.userdata.upgrades2[index[0]+2][index[1]] = 0;
+                }
+                if(index[1]< 1 && index[0] === 0 ){
+                    this.userdata.upgrades2[index[0]][index[1]+2] = 0;
+                }
+
+                this.userdata.currency -= this.calculator.prices2[index[0]][index[1]];
+            
+                this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
+                this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()))
+            }else if(this.userdata.settings){
+                this.audio['noMoney'].cloneNode().play();
+            }
+        
+
+            
         }
-    
 
-        
     }
-
 	//implementa
 }
 
 //láta hann taka inn factor frá´user data. þessi callback milli prótótýpa er vonlaus
 gameEngine.prototype.punch = function(){
 
-    console.log('inn í punch')
-	this.userdata.currency += 1 * this.userdata.treeFactor;
+    if (!this.isFriend) {
+        console.log('inn í punch')
+    	this.userdata.currency += 1 * this.userdata.treeFactor;
 
-    this.score += 1 * this.userdata.treeFactor;
+        this.score += 1 * this.userdata.treeFactor;
 
-    if(this.displayScreen === this.lvl1){
+        if(this.displayScreen === this.lvl1){
 
-        var pos = {     width: this.coconutImage.width,
-                        height: this.coconutImage.height,
-                            topX: coconutPos.x,
-                            topY: coconutPos.y
-                   };
+            var pos = {     width: this.coconutImage.width,
+                            height: this.coconutImage.height,
+                                topX: coconutPos.x,
+                                topY: coconutPos.y
+                       };
 
-        var coconut = new Coconut(pos,this.coconutImage,undefined)
-        this.displays[this.displayScreen].createCoconut(coconut);
-    }
+            var coconut = new Coconut(pos,this.coconutImage,undefined)
+            this.displays[this.displayScreen].createCoconut(coconut);
+        }
 
-    this.displays[this.displayScreen].sprite.shouldAnimate = true;
+        this.displays[this.displayScreen].sprite.shouldAnimate = true;
 
-    if(this.userdata.settings){
-        this.audio['punch'].cloneNode().play();
+        if(this.userdata.settings){
+            this.audio['punch'].cloneNode().play();
+        }
     }
 }
 
@@ -533,34 +563,40 @@ gameEngine.prototype.chanceDisplayToLvl1 = function(){
 
 gameEngine.prototype.chanceDisplayToUpgradeslvl1 = function(){
 
-    this.displayScreen = this.UpgrLvl1;
-    this.displays[this.lvl1].coconuts = [];
+    if (!this.isFriend) {
+        this.displayScreen = this.UpgrLvl1;
+        this.displays[this.lvl1].coconuts = [];
 
-    if(this.userdata.settings){
-        this.audio['changeDisp'].cloneNode().play();
+        if(this.userdata.settings){
+            this.audio['changeDisp'].cloneNode().play();
+        }
     }
 
 }
 
 gameEngine.prototype.chanceDisplayToUpgradeslvl2 = function(){
 
-    this.displayScreen = this.UpgrLvl2;
-    this.displays[this.lvl1].coconuts = [];
+    if (!this.isFriend) {
+        this.displayScreen = this.UpgrLvl2;
+        this.displays[this.lvl1].coconuts = [];
 
-    if(this.userdata.settings){
-        this.audio['changeDisp'].cloneNode().play();
+        if(this.userdata.settings){
+            this.audio['changeDisp'].cloneNode().play();
+        }
     }
 }
 
 
 
 gameEngine.prototype.chanceDisplayToSettings = function(){
-    this.displayScreen = 4;
+    if (!this.isFriend) {
+        this.displayScreen = 4;
 
-    this.displays[0].coconuts = [];
+        this.displays[0].coconuts = [];
 
-    if(this.userdata.settings){
-        this.audio['changeDisp'].cloneNode().play();
+        if(this.userdata.settings){
+            this.audio['changeDisp'].cloneNode().play();
+        }
     }
 }
 
@@ -573,11 +609,13 @@ gameEngine.prototype.exit = function(){
 
 	console.log('inn í exit');
     var exit  = $('#exit');
-    var field = exit[0][0];
-    var scoreField = exit[0][1];
-    this.userdata.score = this.score;
-    field.value = this.userdata.createJSONstring();
-    scoreField.value = this.score;
+    if (!this.isFriend) {
+        var field = exit[0][0];
+        var scoreField = exit[0][1];
+        this.userdata.score = this.score;
+        field.value = this.userdata.createJSONstring();
+        scoreField.value = this.score;
+    }
     exit.submit();
     console.log(exit);
 }

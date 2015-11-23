@@ -6,8 +6,9 @@ html
 		link(rel='stylesheet', href='/stylesheets/game.css')
 		//script(type='text/javascript' src='/game/htmlButtons.js')
 	body
-		p(hidden,id = 'user') #{data.username}
+		p(hidden,id = 'user') #{data.userName}
 		p(hidden, id = 'userData') #{data.userData}
+		p(hidden, id = 'isFriend') #{data.isFriend}
 
 		//h1 IDLE ISLAND
 		canvas#myCanvas
