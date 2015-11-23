@@ -10,6 +10,7 @@ function gameEngine(image, audio, user, userData){
     this.displayScreen = this.lvl1;
     this.audio = audio;
 
+
     //this.userdata.currency = 1000000000;
 
     ////////////////////////////////////////////////////////
