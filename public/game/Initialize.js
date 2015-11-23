@@ -37,26 +37,26 @@ var leikur = undefined;
 var user;
 
 function AudioPreload(callback){
-	
-	var requiredSounds = {
-		punch	: "game/sounds/punch.ogg",
+  
+  var requiredSounds = {
+    punch : "game/sounds/punch.ogg",
     gameTheme : "game/sounds/GameTheme.ogg",
     purchase  : "game/sounds/purchase.ogg",
     noMoney   : "game/sounds/noMoney.ogg",
     ocean     : "game/sounds/ocean.ogg",
     changeDisp: "game/sounds/changeDisp.ogg",
     exit      : "game/sounds/exit.ogg"
-	};
+  };
 
-	soundsPreload(requiredSounds, g_audio, callback);
+  soundsPreload(requiredSounds, g_audio, callback);
 }
 
 
 function imagePreload(callback){
 
     var requiredImages = {
-      tree      	: "game/images/game-coconut-tree.png",
-      upgradeMenu	: "game/images/game-button-upgrade.png",
+      tree        : "game/images/game-coconut-tree.png",
+      upgradeMenu : "game/images/game-button-upgrade.png",
 
       gamesky    : "game/images/game-sky-8.png",
       gameseaseven: "game/images/game-sea-7.png",
@@ -102,7 +102,7 @@ function imagePreload(callback){
       kall          : "game/images/kall_animation-2.png"
       };
 
-	imagesPreload(requiredImages, g_images, callback);
+  imagesPreload(requiredImages, g_images, callback);
 }
 
 
@@ -133,17 +133,12 @@ _updateClocks = function (frameTime) {
 
 _iterCore = function (dt) {
 
-    console.log('fyrir update');
     leikur.update(dt);
     console.log('eftir update');
-    console.log('fyrir render');
-    
     leikur.render();
     console.log('eftir render');
-    console.log('fyrir playtheme');
     leikur.playTheme();
-    console.log('eftir playtheme');
-
+    console.log('eftir theme');
     Loop();
 };
 
@@ -176,49 +171,47 @@ Loop = function () {
     //
     g_ctx.fillStyle = "white";
 
-  console.log('loop-de-loop');
-
-	_requestNextIteration();
+  _requestNextIteration();
 };
 
 
 function init(){
-	console.log('starting');
+  console.log('starting');
 
   canvasInit();
 
-	imagePreload(function(){
+  imagePreload(function(){
 
-		AudioPreload(function(){
+    AudioPreload(function(){
 
-			console.log('all preloads done');
+      console.log('all preloads done');
 
-            var user = $('#user')['0'].innerHTML;
-            var userData = $('#userData')['0'].innerHTML;
+            user = $('#user')['0'].innerHTML;
+            userData = $('#userData')['0'].innerHTML;
+            console.log(userData.toString())
+
             var isFriend = $('#isFriend')['0'].innerHTML;
-
-      if (isFriend === 'false') {
-        isFriend = false;
-      } else {
-        isFriend = true;
-      }
+            if (isFriend === 'false') {
+              isFriend = false;
+            } else {
+              isFriend = true;
+            }
 
       leikur = new gameEngine(g_images, g_audio, user, userData, isFriend);
-
-			console.log('game engine done...starting game');
+      console.log('game engine done...starting game');
 
       console.log("HTML buttons setup [begin] " );
       Buttons.init( leikur );
       console.log("HTML buttons setup [done] " );
 
-			g_canvas.onmousedown = function(e){
-				leikur.receiveInputs(e);
-			}
-			
-			Loop();
+      g_canvas.onmousedown = function(e){
+        leikur.receiveInputs(e);
+      }
+      
+      Loop();
 
-		});
-	});
+    });
+  });
 }
 
 

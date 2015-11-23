@@ -1,7 +1,11 @@
 function gameEngine(image, audio, user, userData, isFriend){
+    isFriend = !isFriend;
 	console.log('inn í gameEngine constructor');
-    if (!isFriend) console.log('venjulegt session');
-    else console.log('friend session');
+    if (isFriend) {
+        console.log('venju sesh');
+    } else {
+        console.log('friend sesh');
+    }
 
     this.userName = user;
     this.userdata = new UserData(userData);
@@ -16,26 +20,28 @@ function gameEngine(image, audio, user, userData, isFriend){
 
     //this.userdata.currency = 1000000000;
 
-    if (!isFriend) {
-        console.log('upgrades')
+    if (isFriend) {
 
         ////////////////////////////////////////////////////////
         //              THE UPGRADES DISPLAY 1
         ////////////////////////////////////////////////////////
-        var names = ['backButton', 'item1upgrade1', 'item2upgrade1', 'item3upgrade1', 'item1upgrade2', 'item2upgrade2', 'item3upgrade2', 'item1upgrade3', 'item2upgrade3', 'item3upgrade3']
-        this.makeUpgradeDisplay(names, image, 0)
+        var names = ['backButton', 'item1upgrade1', 'item2upgrade1', 'item3upgrade1', 'item1upgrade2', 'item2upgrade2', 'item3upgrade2', 'item1upgrade3', 'item2upgrade3', 'item3upgrade3'];
+        this.makeUpgradeDisplay(names, image, 0);
 
         ////////////////////////////////////////////////////////
         //              THE UPGRADES DISPLAY 2
         ////////////////////////////////////////////////////////
-        names = ['backButton', 'item4upgrade1', 'item5upgrade1', 'item6upgrade1', 'item4upgrade2', 'item5upgrade2', 'item6upgrade2', 'item4upgrade3', 'item5upgrade3', 'item6upgrade3']
-        this.makeUpgradeDisplay(names, image, 1)
+        names = ['backButton', 'item4upgrade1', 'item5upgrade1', 'item6upgrade1', 'item4upgrade2', 'item5upgrade2', 'item6upgrade2', 'item4upgrade3', 'item5upgrade3', 'item6upgrade3'];
+        this.makeUpgradeDisplay(names, image, 1);
 
         ////////////////////////////////////////////////////////
         //              LEVEL 1
         ////////////////////////////////////////////////////////
-    }
 
+    } else {
+        this.displays.push([]);
+        this.displays.push([]);
+    } 
     //takki1 - tré
     var buttons = [];
     var pos = {     width: image['tree'].width,
@@ -43,24 +49,12 @@ function gameEngine(image, audio, user, userData, isFriend){
                         topX: treePos.x,
                         topY: treePos.y
                };
-
-    if (!isFriend) {    
-        console.log('rétt button push á tré');      
-        buttons.push(new Button(pos, image['tree'], this.punch.bind(this)))
+    if (isFriend) {
+        buttons.push(new Button(pos, image['tree'], this.punch.bind(this)));
     } else {
-         buttons.push(new Button(pos, image['tree']))
+        buttons.push(new Button(pos, image['tree'], undefined));
     }    
-    //takki2 - takki til að komast inn i upgrade menu
-  /*  pos = {     width: image['upgradeMenu'].width,
-                        height: image['upgradeMenu'].height,
-
-                        topX: upgradePos.x,
-                        topY: upgradePos.y
-          };
-
-    buttons.push(new Button(pos, image['upgradeMenu'], this.chanceDisplayToUpgradeslvl1.bind(this)))
-
-*/
+ 
     //takki3 - exit takki
     pos = {     width: image['exit'].width,
                         height: image['exit'].height,
@@ -70,27 +64,9 @@ function gameEngine(image, audio, user, userData, isFriend){
           };
 
     buttons.push(new Button(pos, image['exit'], this.exit.bind(this)));
-
-    //takki3 - downLvl
-    /*pos = {     width: image['downLvl'].width,
-                        height: image['downLvl'].height,
-                        topX: 500,
-                        topY: 500
-          };
-
-    buttons.push(new Button(pos, image['downLvl'], this.chanceDisplayToLvl2.bind(this)))
-
-*/
-
     
     var backgroundImages = [];
-    //backgroundImages.push(image['gamesky'])
-   /* backgroundImages.push(image['gameseaseven'])
-    backgroundImages.push(image['gameseasix'])
-    backgroundImages.push(image['gameseafive'])
-    backgroundImages.push(image['gameseafour'])
-    backgroundImages.push(image['gameseatwo'])
-    backgroundImages.push(image['gameseaone'])*/
+
     backgroundImages.push(image['gamesandthree']);
 
     var upgradesForScreens = [];
@@ -112,8 +88,6 @@ function gameEngine(image, audio, user, userData, isFriend){
 
     this.displays.push(new Display(backgroundImages, buttons,undefined,upgradesForScreens,animation));
 
-    console.log('fyrra display');
-    console.log(this.displays);
     /////////////////////////////////////////////////
     //                  LEVEL TWO
     ////////////////////////////////////////////////
@@ -125,33 +99,12 @@ function gameEngine(image, audio, user, userData, isFriend){
                         topX: 400,
                         topY: 50
                };
-    if (!isFriend) {
-        console.log('level twö button push');
-        buttons.push(new Button(pos, image['tree'], this.punch.bind(this)))
+    if (isFriend) {      
+        buttons.push(new Button(pos, image['tree'], this.punch.bind(this)));
     } else {
-        console.log('friend lvl 2 button punch');
-        buttons.push(new Button(pos, image['tree']))
-    }
-    //takki2 - takki til að komast inn i upgrade menu
-    /*pos = {     width: image['upgradeMenu'].width,
-                        height: image['upgradeMenu'].height,
-                        topX: 900,
-                        topY: 10
-          };
-
-    buttons.push(new Button(pos, image['upgradeMenu'], this.chanceDisplayToUpgradeslvl2.bind(this)))
-
-*/
-    //takki3 - exit takki
-    /*pos = {     width: image['upLvl'].width,
-                        height: image['upLvl'].height,
-                        topX: 500,
-                        topY: 0
-          };
-
-    buttons.push(new Button(pos, image['upLvl'], this.chanceDisplayToLvl1.bind(this)))
-
-*/
+        buttons.push(new Button(pos, image['tree'], undefined));
+    }    
+   
     backgroundImages = [];
     //backgroundImages.push(image['gamesky'])
     //backgroundImages.push(image['gameseaseven']);
@@ -165,9 +118,8 @@ function gameEngine(image, audio, user, userData, isFriend){
 
     this.displays.push(new Display(backgroundImages, buttons, undefined, upgradesForScreens));
 
-    console.log('seinna display');
-    console.log(this.displays)
 
+    console.log(this.displays);
 }
 
 gameEngine.prototype.playTheme = function(){
@@ -254,9 +206,7 @@ gameEngine.prototype.score = undefined;
 
 gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
 
-    if (!isFriend) {
-        console.log('inupgradedisplay');
-
+    if (this.isFriend) {
         buttons = [];
 
         pos = {     width: image[names[0]].width,
@@ -266,9 +216,9 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
               };
 
         if(func === 0){
-            buttons.push(new Button(pos, image[names[0]], this.chanceDisplayToLvl1.bind(this)))
+            buttons.push(new Button(pos, image[names[0]], this.chanceDisplayToLvl1.bind(this)));
         }else{
-            buttons.push(new Button(pos, image[names[0]], this.chanceDisplayToLvl2.bind(this)))
+            buttons.push(new Button(pos, image[names[0]], this.chanceDisplayToLvl2.bind(this)));
 
         }
 
@@ -276,14 +226,14 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
         //              PARTUR FYRIR BUY MENU
         ///////////////////////////////////////////
 
-        buyMenu = []
+        buyMenu = [];
 
         //////////////////////////////////////////
         //              UPGRADES
         ///////////////////////////////////////////
         var upgrades = [[0,0,0],[0,0,0],[0,0,0]];
 
-        var nameCounter = 1
+        var nameCounter = 1;
         for(var i = 0; i< 3; i++){
             for(var j = 0; j< 3; j++){
                 pos = {     width: image[names[nameCounter]].width,
@@ -313,7 +263,7 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
                             topY: (i*70) + 10
                      };
 
-                    unavailabe[i][j] = new Button(pos, image['unavalible'], undefined)
+                    unavailabe[i][j] = new Button(pos, image['unavalible'], undefined);
                 
                 }
             }
@@ -335,32 +285,29 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
                             topY: (i*70) + 10
                      };
 
-                    bought[i][j] = new Button(pos, image['bought'], undefined)
+                    bought[i][j] = new Button(pos, image['bought'], undefined);
                 
                 }
             }
 
        
         buyMenu.push(bought);
-
-        this.displays.push(new Display([image['UpgradeMenu']], buttons, buyMenu, undefined));
     }
-}
+    this.displays.push(new Display([image['UpgradeMenu']], buttons, buyMenu, undefined));
+    console.log(this.displays);
 
+}
 
 
 gameEngine.prototype.update = function(time){
 
-    if (!this.isFriend) {
-        console.log('inupdate');
         var currentCurrency = this.userdata.getCurrency();
-        var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor())
+        var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor());
         var gained = currency - currentCurrency;
+    if (this.isFriend) {    
         this.score += gained;
     }
-    
     if(this.displayScreen === this.lvl1){
-
         for(var i = 0; i < gained; i++){
 
             this.displays[this.displayScreen].sprite.shouldAnimate = true;
@@ -377,15 +324,11 @@ gameEngine.prototype.update = function(time){
     }else{
         this.displays[this.displayScreen].destroyCoconuts();
     }
-<<<<<<< HEAD
-    if (!this.isFriend) {
-        console.log('currency dót');
-    	this.userdata.setCurrency(currency);
+    
+    if (this.isFriend) {
+        this.userdata.setCurrency(currency);
     }
-    console.log(this.displays[this.displayScreen]);    
-
     this.displays[this.displayScreen].update(time);
-    console.log('nei');
 
 };
 
@@ -407,7 +350,9 @@ gameEngine.prototype.render = function(){
     } 
 }
 
-gameEngine.prototype.receiveInputs = function(e){    
+gameEngine.prototype.receiveInputs = function(e){
+
+    
 
     if(this.displayScreen === this.UpgrLvl1){
         this.displays[this.displayScreen].findButtonForClick(e,this.userdata.upgrades1);
@@ -421,28 +366,22 @@ gameEngine.prototype.receiveInputs = function(e){
 }
 
 gameEngine.prototype.buyUpgrade = function(index){  
-    
-    if (!this.isFriend) {
-        console.log('inbuyupgrade');
+    if (this.isFriend) {
+
         if(this.displayScreen === this.UpgrLvl1){
 
             if(this.userdata.currency >= this.calculator.prices1[index[0]][index[1]]){
 
-                if(this.userdata.settings){
+                if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+                    this.audio['purchase'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
                     this.audio['purchase'].cloneNode().play();
                 }
-
 
                 if(index[0] === 0 && index[1] === 2){
                     
                     this.displays[this.lvl2].showArrow = true;
                     this.displays[this.lvl1].showArrow = true;
-
-            if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
-
-                this.audio['purchase'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
-                this.audio['purchase'].cloneNode().play();
-            }
 
                 }
                 this.userdata.upgrades1[index[0]][index[1]] = 2;
@@ -467,28 +406,23 @@ gameEngine.prototype.buyUpgrade = function(index){
                 this.userdata.currency -= this.calculator.prices1[index[0]][index[1]];
             
                 this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
-                this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()))
+                this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
             }
-            else if(this.userdata.settings){
+            else if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+                this.audio['noMoney'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
                 this.audio['noMoney'].cloneNode().play();
             }
 
         
 
-            this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
-            this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
-        }
-        else if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
-
-            this.audio['noMoney'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
-            this.audio['noMoney'].cloneNode().play();
-        }
-
         }else if( this.displayScreen === this.UpgrLvl2){
 
             if(this.userdata.currency >= this.calculator.prices2[index[0]][index[1]]){
 
-                if(this.userdata.settings){
+                if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+                    this.audio['purchase'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
                     this.audio['purchase'].cloneNode().play();
                 }
 
@@ -496,12 +430,6 @@ gameEngine.prototype.buyUpgrade = function(index){
                     
                     this.displays[this.lvl2].showArrow = true;
                     this.displays[this.lvl1].showArrow = true;
-
-            if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
-
-                this.audio['purchase'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
-                this.audio['purchase'].cloneNode().play();
-            }
 
                 }
 
@@ -527,20 +455,17 @@ gameEngine.prototype.buyUpgrade = function(index){
                 this.userdata.currency -= this.calculator.prices2[index[0]][index[1]];
             
                 this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
-                this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()))
-            }else if(this.userdata.settings){
+                this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
+
+            }else if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+                this.audio['noMoney'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
                 this.audio['noMoney'].cloneNode().play();
             }
         
-            this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
-            this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
 
-        }else if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
-
-            this.audio['noMoney'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
-            this.audio['noMoney'].cloneNode().play();
+            
         }
-
     }
 	//implementa
 }
@@ -548,8 +473,8 @@ gameEngine.prototype.buyUpgrade = function(index){
 //láta hann taka inn factor frá´user data. þessi callback milli prótótýpa er vonlaus
 gameEngine.prototype.punch = function(){
 
-    if (!this.isFriend) {
-        console.log('inn í punch')
+    if (this.isFriend) {
+        console.log('inn í punch');
     	this.userdata.currency += 1 * this.userdata.treeFactor;
 
         this.score += 1 * this.userdata.treeFactor;
@@ -568,11 +493,11 @@ gameEngine.prototype.punch = function(){
 
         this.displays[this.displayScreen].sprite.shouldAnimate = true;
 
-        }
-    if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+        if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
 
-        this.audio['punch'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
-        this.audio['punch'].cloneNode().play();
+            this.audio['punch'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
+            this.audio['punch'].cloneNode().play();
+        }
     }
 }
 
@@ -598,44 +523,46 @@ gameEngine.prototype.chanceDisplayToLvl1 = function(){
 }
 
 gameEngine.prototype.chanceDisplayToUpgradeslvl1 = function(){
-
-    if (!this.isFriend) {
+    if (this.isFriend) {
         this.displayScreen = this.UpgrLvl1;
         this.displays[this.lvl1].coconuts = [];
 
-    if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+        if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
 
-        this.audio['changeDisp'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
-        this.audio['changeDisp'].cloneNode().play();
+            this.audio['changeDisp'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
+            this.audio['changeDisp'].cloneNode().play();
+        }        
     }
-
 }
 
 gameEngine.prototype.chanceDisplayToUpgradeslvl2 = function(){
 
-    if (!this.isFriend) {
+    if (this.isFriend) {
         this.displayScreen = this.UpgrLvl2;
         this.displays[this.lvl1].coconuts = [];
 
-    if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+        if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
 
-        this.audio['changeDisp'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
-        this.audio['changeDisp'].cloneNode().play();
+            this.audio['changeDisp'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
+            this.audio['changeDisp'].cloneNode().play();
+        }
     }
 }
 
 
 
 gameEngine.prototype.chanceDisplayToSettings = function(){
-    if (!this.isFriend) {
+    if (this.isFriend) {    
+
         this.displayScreen = 4;
 
         this.displays[0].coconuts = [];
 
-    if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+        if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
 
-        this.audio['changeDisp'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
-        this.audio['changeDisp'].cloneNode().play();
+            this.audio['changeDisp'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
+            this.audio['changeDisp'].cloneNode().play();
+        }
     }
 }
 
@@ -650,13 +577,11 @@ gameEngine.prototype.exit = function(){
 
 	console.log('inn í exit');
     var exit  = $('#exit');
-    if (!this.isFriend) {
-        var field = exit[0][0];
-        var scoreField = exit[0][1];
-        this.userdata.score = this.score;
-        field.value = this.userdata.createJSONstring();
-        scoreField.value = this.score;
-    }
+    var field = exit[0][0];
+    var scoreField = exit[0][1];
+    this.userdata.score = this.score;
+    field.value = this.userdata.createJSONstring();
+    scoreField.value = this.score;
     exit.submit();
     console.log(exit);
 }
