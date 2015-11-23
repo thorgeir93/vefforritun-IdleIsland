@@ -3,6 +3,7 @@ extends layout
 block content
 	link(rel='stylesheet', href='/stylesheets/settings.css')
 	script(type='text/javascript' src='/game/settings.js')
+	script(src='/game/playTheme.js')
 	div.settings
 		div.container
 			h1= title
@@ -10,29 +11,31 @@ block content
 			form(method='post' action='/settings')
 				div.formgroup
 					div.container-slider
-						- var value = settings['audio-slider']
-						- var className = 'audio-on'
-						if (settings['audio-slider'] === 'Mute')
-							- value = 20
-							- className = 'audio-off';
 						
+						- var pVolume
+						- var iVolume
+						- var className
+						if (settings['audio-slider'] === '0')
+							- pVolume = 'Mute'
+							- iVolume = '0'
+							- className = 'audio-off'
+						else
+							- pVolume = settings['audio-slider']
+							- iVolume = settings['audio-slider']
+							- className = 'audio-on'
+
 						label(
 							class='label-audio '+className
 							for='audio-slider') Audio
-						p(class='audio-number '+className value='33' text='332')= settings['audio-slider']
+						p(class='audio-number '+className value='33' text='332')= pVolume
 					div(class="container-slider" id='input-slider')
-						input(
-							type='text' 
-							name='audio-slider-hidden' 
-							value= settings['audio-slider']
-							class='audio-slider-hidden' hidden)
 						input(
 							type='range' 
 							name='audio-slider'
 							class= 'audio-slider '+className
 							min='0' 
 							max='100' 
-							value= value)
+							value= iVolume)
 				div.formgroup
 					- var onORoff = 'checkbox-off'
 					if settings['on']

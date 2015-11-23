@@ -131,13 +131,30 @@ div.upgrade-show {
   opacity: 1;
   transition: visibility 1s;
 }*/
-div.sky {
+div.sky, div.mine-wall {
   left: 0;
   top: 0;
   height: 70%;
   width: 100%;
   position: absolute;
-  z-index: -2;
+  z-index: -2; }
+
+div.sea, div.mine-floor {
+  top: 70%;
+  height: 30%;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  z-index: -1; }
+
+div.backgrounds {
+  /*position: absolute;
+	display:block;
+	background-color:black;
+	height:100%;
+	width:100%;*/ }
+
+div.sky {
   background: -webkit-linear-gradient(top, #005b97 0%, #077ec3 20%, #53b1e0 56%, #98cceb 77%, #c8dff3 97%, #cce0f4 100%);
   background: -o-linear-gradient(top, #005b97 0%, #077ec3 20%, #53b1e0 56%, #98cceb 77%, #c8dff3 97%, #cce0f4 100%);
   background: -ms-linear-gradient(top, #005b97 0%, #077ec3 20%, #53b1e0 56%, #98cceb 77%, #c8dff3 97%, #cce0f4 100%);
@@ -145,10 +162,18 @@ div.sky {
   background: linear-gradient(to bottom, #005b97 0%, #077ec3 20%, #53b1e0 56%, #98cceb 77%, #c8dff3 97%, #cce0f4 100%); }
 
 div.sea {
-  top: 70%;
-  height: 30%;
-  left: 0;
-  width: 100%;
-  position: absolute;
-  background-color: #29ABE2;
-  z-index: -1; }
+  background-color: #29ABE2; }
+
+div.mine-floor {
+  background: -webkit-linear-gradient(180deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
+  background: -o-linear-gradient(180deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
+  background: -ms-linear-gradient(180deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
+  background: -moz-linear-gradient(180deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
+  background: linear-gradient(180deg, black 0%, #303030 40%, #616161 81%, #777777 100%); }
+
+div.mine-wall {
+  background: -webkit-linear-gradient(0deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
+  background: -o-linear-gradient(0deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
+  background: -ms-linear-gradient(0deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
+  background: -moz-linear-gradient(0deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
+  background: linear-gradient(0deg, black 0%, #303030 40%, #616161 81%, #777777 100%); }

@@ -38,35 +38,6 @@ var Buttons = (function() {
 		level = theGame.displayScreen;
 
 
-		//
-		//	INITIALIZE LEVELS
-		//
-		lvlFunc[2] = { 
-			action:function(){
-				//TODO:change background HTML (change classList)
-				theGame.chanceDisplayToLvl1();
-			}
-		};
-		
-		lvlFunc[3] = { 
-			action:function(){
-				//TODO:change background HTML (change classList)		
-				theGame.chanceDisplayToLvl2();
-			}
-		};
-		
-
-		lvlFunc.upgrade2={
-			action:function(){
-				theGame.chanceDisplayToUpgradeslvl1();
-			}
-		};
-
-		lvlFunc.settings={
-			action:function(){
-				theGame.chanceDisplayToSettings();
-			}
-		};
 
 		//GET BASE ELEMENTS TO ADD NEW ELEMENTS TO
 		allBackgroundElements = document.querySelector('.backgrounds');
@@ -90,11 +61,53 @@ var Buttons = (function() {
 
 		arrowsBtnElements.appendChild( buttons.levelDown );
 		arrowsBtnElements.appendChild( buttons.levelUp );
+		
+
+		//
+		//	INITIALIZE LEVELS
+		//
+		lvlFunc[2] = { 
+			action:function(){
+				//TODO:change background HTML (change classList)
+				theGame.chanceDisplayToLvl1();
+			},
+			backgrounds:[backgrounds.sea, backgrounds.sky]
+		};
+		
+		lvlFunc[3] = { 
+			action:function(){
+				//TODO:change background HTML (change classList)		
+				theGame.chanceDisplayToLvl2();
+			},
+			backgrounds:[backgrounds.mineFloor, backgrounds.mineWall]
+			//buttons:[buttons.upgrade ]
+		};
+		
+
+		lvlFunc.upgrade2={
+			action:function(){
+				theGame.chanceDisplayToUpgradeslvl1();
+			},
+			backgrounds:['upgrade']
+		};
+
+		lvlFunc.settings={
+			action:function(){
+				theGame.chanceDisplayToSettings();
+			}
+		};
+
+
+
 	}
 
 	function buildBackgrounds(){
-		backgrounds.sky = elementCreator('div','sky','sky');
 		backgrounds.sea = elementCreator('div','sea','sea');
+		backgrounds.sky = elementCreator('div','sky','sky');
+		
+		backgrounds.mineFloor = elementCreator('div','mine-floor','mine-floor hidden');
+		backgrounds.mineWall = elementCreator('div','mine-wall','mine-wall hidden');
+		
 		backgrounds.upgrade = elementCreator('div','upgrade','upgrade');
 	}
 
@@ -133,9 +146,16 @@ var Buttons = (function() {
 		//}
 	}
 
+	//TODO:Það er skítafix að vera með þessa if
+	//skilyrði, ef hún er fjarlægtð þá mun levelUp
+	//takkin hverfa þegar farið er í upgrade og aftur
+	//tilbaka
 	function removeVisibleElements(){
 		while( visibleElements.length !== 0 ){
-			addHidden( visibleElements.pop() );
+			var element = visibleElements.pop();
+			if(element !== buttons.levelUp ){
+				addHidden( element );
+			}
 		}
 	}
 
@@ -144,17 +164,28 @@ var Buttons = (function() {
 	//
 	function displayUpgrades(){
 
+		/*console.log("buttons.levelUp");
+		console.log(buttons.levelUp);
+		console.dir(buttons.levelUp);*/
+
 		toggleBackgrounds();
+
+		/*console.log("buttons.levelUp");
+		console.log(buttons.levelUp);
+		console.dir(buttons.levelUp);*/
 
 		//SHOW this elements
 		removeHidden( buttons.quit );
 		removeHidden( backgrounds.upgrade );
 
+		/*console.log("buttons.levelUp");
+		console.log(buttons.levelUp);
+		console.dir(buttons.levelUp);*/
 
 		var name = 'upgrade'+level;
 		if(lvlFunc[name]){
 			lvlFunc [name].action();
-		}
+		}	
 	}
 
 	//TODO: stop error -> do not let level to zero or far higher
@@ -164,10 +195,14 @@ var Buttons = (function() {
 		if( lvlFunc[level] ){
 			lvlFunc[level].action();
 			removeHidden(buttons.levelUp);
+			
+			changeBackground(level, true);
+
 		} else {
 			level -= 1;
 		}
 	}
+
 
 	function displayLevelUp(){
 		console.log("GO UP: level " + (level-1));
@@ -175,6 +210,23 @@ var Buttons = (function() {
 		if(level===2){
 			addHidden( buttons.levelUp );
 			lvlFunc[level].action();
+			changeBackground(level, false);
+		}
+	}
+
+	function changeBackground( newLevel, down){
+		var levelBefore;
+		if( down ){
+			levelBefore = newLevel-1;
+		} else {
+			levelBefore = newLevel+1;
+		}
+
+		for(var i in lvlFunc[newLevel].backgrounds){
+			removeHidden( lvlFunc[newLevel].backgrounds[i] );
+		}
+		for(var i in lvlFunc[levelBefore].backgrounds){
+			addHidden( lvlFunc[levelBefore].backgrounds[i] );
 		}
 	}
 

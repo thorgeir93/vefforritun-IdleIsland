@@ -99,7 +99,7 @@ function imagePreload(callback){
 
       unavalible    : "game/images/unavalible.png",
       bought        : "game/images/bought.png",
-      kall          : "game/images/kall_animation.png"
+      kall          : "game/images/kall_animation-2.png"
       };
 
 	imagesPreload(requiredImages, g_images, callback);
