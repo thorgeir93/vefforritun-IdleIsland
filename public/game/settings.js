@@ -23,7 +23,6 @@ var settings = (function() {
 		slider1.element1 = document.querySelector('.audio-slider');
 		slider1.element2 = document.querySelector('.audio-number');
 		slider1.element3 = document.querySelector('.label-audio');
-		slider1.element4 = document.querySelector('.audio-slider-hidden');
 
 		slider1.element1.addEventListener('mousedown', updateAudioNum);
 		slider1.element1.addEventListener('mousemove', updateAudioNum);
@@ -40,14 +39,14 @@ var settings = (function() {
 				slider1[element].classList.add('audio-off');
 			}
 			slider1.element2.innerHTML = 'Mute';
-			slider1.element4.value = 'Mute';
+			//slider1.element4.value = 'Mute';
+			slider1.element1.value = 0;
 		} else{
 			for(var element in slider1){
 				slider1[element].classList.remove('audio-off');
 				slider1[element].classList.add('audio-on');
 			}
 			slider1.element2.innerHTML=slider1.element1.value;
-			slider1.element4.value=slider1.element1.value;
 		}
 	}
 
@@ -70,7 +69,7 @@ var settings = (function() {
 		if( slider1.element1.classList.contains('audio-on') ){
 				var newNumber = slider1.element1.value;
 				slider1.element2.innerHTML = newNumber;
-				slider1.element4.value = newNumber;
+				//slider1.element4.value = newNumber;
 		}
 	}
 

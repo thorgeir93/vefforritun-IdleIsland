@@ -90,8 +90,8 @@ function gameEngine(image, audio, user, userData){
 
     var frameheight = 242;
     var framewidth = 247;
-    var topX = 360;
-    var topY = 380;
+    var topX = treePos.x+240;
+    var topY = treePos.y+270;
     var animationTime = 0.7;
     var numberOfFrames = 5;
     var scale = 0.5;
@@ -155,7 +155,7 @@ function gameEngine(image, audio, user, userData){
 gameEngine.prototype.playTheme = function(){
 
     
-    console.log(this.audio['gameTheme'].duration, this.audio['gameTheme'].currentTime )
+    //console.log(this.audio['gameTheme'].duration, this.audio['gameTheme'].currentTime )
     if(this.audio['gameTheme'].currentTime === 0){
         this.audio['gameTheme'].play();
 
@@ -186,8 +186,6 @@ function decidePosition(img2, top, left, img1Pos){
 function getWidthHeight(img){
     return {w:img.width, h:img.height};
 }
-
-
 
 
 gameEngine.prototype.makeItemImages = function(names, x, y, images){
