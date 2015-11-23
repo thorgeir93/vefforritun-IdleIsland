@@ -346,13 +346,36 @@ div.upgrade-show{
   transition: visibility 1s;
 }*/
 
-div.sky{
+
+%background-top{
 	left:0;
 	top:0;
 	height:70%;
 	width:100%;
 	position: absolute;
 	z-index:-2;
+}
+%background-bottom{
+	top:70%;
+	height:30%;
+	left:0;
+	width:100%;
+	position: absolute;
+	z-index:-1;
+}
+
+
+div.backgrounds{
+	/*position: absolute;
+	display:block;
+	background-color:black;
+	height:100%;
+	width:100%;*/
+}
+
+
+div.sky{
+	@extend %background-top;
 	background: -webkit-linear-gradient(top, rgb(0, 91, 151) 0%, rgb(7, 126, 195) 20%, rgb(83, 177, 224) 56%, rgb(152, 204, 235) 77%, rgb(200, 223, 243) 97%, rgb(204, 224, 244) 100%);
 	background: -o-linear-gradient(top, rgb(0, 91, 151) 0%, rgb(7, 126, 195) 20%, rgb(83, 177, 224) 56%, rgb(152, 204, 235) 77%, rgb(200, 223, 243) 97%, rgb(204, 224, 244) 100%);
 	background: -ms-linear-gradient(top, rgb(0, 91, 151) 0%, rgb(7, 126, 195) 20%, rgb(83, 177, 224) 56%, rgb(152, 204, 235) 77%, rgb(200, 223, 243) 97%, rgb(204, 224, 244) 100%);
@@ -361,11 +384,28 @@ div.sky{
 }
 
 div.sea{
-	top:70%;
-	height:30%;
-	left:0;
-	width:100%;
-	position: absolute;
+	@extend %background-bottom;
 	background-color:$color-ocean;
-	z-index:-1;
+}
+
+div.mine-floor{
+	@extend %background-bottom;
+	$rotate:180deg;
+	background: -webkit-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	background: -o-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	background: -ms-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	background: -moz-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	background: linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+//	z-index:1;
+}
+
+div.mine-wall{
+	@extend %background-top;
+//	z-index:2;
+	$rotate:0deg;
+	background: -webkit-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	background: -o-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	background: -ms-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	background: -moz-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	background: linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
 }

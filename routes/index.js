@@ -66,12 +66,7 @@ function saveOrRestoreSettings(req, res, next){
   if(action==='save'){
     settings = body;
     delete settings['action'];
-    if(settings['audio-slider-hidden'] === 'mute'){
-      settings['audio-slider-hidden'] = 0;
-    }else{
-      settings['audio-slider'] = settings['audio-slider-hidden'];
-    }
-    settings['audio-slider'] = settings['audio-slider-hidden'];
+
   } else if(action==='default'){
     settings = defaultSettings();
   }
