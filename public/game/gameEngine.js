@@ -88,12 +88,12 @@ function gameEngine(image, audio, user, userData){
     upgradesForScreens.push(this.makeItemImages(['item2upgrade1','item2upgrade2','item2upgrade3'], 300, 542, image))
     upgradesForScreens.push(this.makeItemImages(['item3upgrade1','item3upgrade2','item3upgrade3'], 178, 498, image))
 
-    var frameheight = 242;
-    var framewidth = 247;
+    var numberOfFrames = 5;
+    var frameheight = image['kall'].height;
+    var framewidth = image['kall'].width / numberOfFrames;
     var topX = 360;
     var topY = 380;
     var animationTime = 0.7;
-    var numberOfFrames = 5;
     var scale = 0.5;
 
     var animation = new Sprite(image['kall'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale);
@@ -154,25 +154,28 @@ function gameEngine(image, audio, user, userData){
 
 gameEngine.prototype.playTheme = function(){
 
-    
-    console.log(this.audio['gameTheme'].duration, this.audio['gameTheme'].currentTime )
-    if(this.audio['gameTheme'].currentTime === 0){
-        this.audio['gameTheme'].play();
+    if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
 
-    }
+        if(this.audio['gameTheme'].currentTime === 0){
+            this.audio['gameTheme'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
+            this.audio['gameTheme'].play();
 
-    if(this.audio['ocean'].currentTime === 0){
-        this.audio['ocean'].play();
-    }
-            
+        }
 
-    if(this.audio['ocean'].currentTime === this.audio['ocean'].duration){
-        this.audio['ocean'].currentTime = 0;
-    }
+        if(this.audio['ocean'].currentTime === 0){
+            this.audio['ocean'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
+            this.audio['ocean'].play();
+        }
+                
 
-    if(this.audio['gameTheme'].currentTime === this.audio['gameTheme'].duration){
-        this.audio['gameTheme'].currentTime = 0;
-    }
+        if(this.audio['ocean'].currentTime === this.audio['ocean'].duration){
+            this.audio['ocean'].currentTime = 0;
+        }
+
+        if(this.audio['gameTheme'].currentTime === this.audio['gameTheme'].duration){
+            this.audio['gameTheme'].currentTime = 0;
+        }
+    }    
     
 }
 
@@ -349,9 +352,7 @@ gameEngine.prototype.update = function(time){
         this.displays[this.displayScreen].destroyCoconuts();
     }
     
-    if(/*this.userdata.settings && gained > 0*/false){
-        this.audio['punch'].cloneNode().play();
-    }
+    
 
 	this.userdata.setCurrency(currency);
     this.displays[this.displayScreen].update(time);
@@ -398,7 +399,9 @@ gameEngine.prototype.buyUpgrade = function(index){
 
         if(this.userdata.currency >= this.calculator.prices1[index[0]][index[1]]){
 
-            if(this.userdata.settings){
+            if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+                this.audio['purchase'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
                 this.audio['purchase'].cloneNode().play();
             }
 
@@ -432,7 +435,9 @@ gameEngine.prototype.buyUpgrade = function(index){
             this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
             this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()))
         }
-        else if(this.userdata.settings){
+        else if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+            this.audio['noMoney'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
             this.audio['noMoney'].cloneNode().play();
         }
 
@@ -442,7 +447,9 @@ gameEngine.prototype.buyUpgrade = function(index){
 
         if(this.userdata.currency >= this.calculator.prices2[index[0]][index[1]]){
 
-            if(this.userdata.settings){
+            if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+                this.audio['purchase'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
                 this.audio['purchase'].cloneNode().play();
             }
 
@@ -475,8 +482,11 @@ gameEngine.prototype.buyUpgrade = function(index){
             this.userdata.currency -= this.calculator.prices2[index[0]][index[1]];
         
             this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
-            this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()))
-        }else if(this.userdata.settings){
+            this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
+
+        }else if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+            this.audio['noMoney'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
             this.audio['noMoney'].cloneNode().play();
         }
     
@@ -509,7 +519,9 @@ gameEngine.prototype.punch = function(){
 
     this.displays[this.displayScreen].sprite.shouldAnimate = true;
 
-    if(this.userdata.settings){
+    if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+        this.audio['punch'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
         this.audio['punch'].cloneNode().play();
     }
 }
@@ -518,7 +530,9 @@ gameEngine.prototype.chanceDisplayToLvl2 = function(){
     this.displayScreen = this.lvl2;
     this.displays[this.lvl1].coconuts = [];
 
-    if(this.userdata.settings){
+    if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+        this.audio['changeDisp'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
         this.audio['changeDisp'].cloneNode().play();
     }
 }
@@ -526,7 +540,9 @@ gameEngine.prototype.chanceDisplayToLvl2 = function(){
 gameEngine.prototype.chanceDisplayToLvl1 = function(){
     this.displayScreen = this.lvl1;
 
-    if(this.userdata.settings){
+    if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+        this.audio['changeDisp'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
         this.audio['changeDisp'].cloneNode().play();
     }
 }
@@ -536,7 +552,9 @@ gameEngine.prototype.chanceDisplayToUpgradeslvl1 = function(){
     this.displayScreen = this.UpgrLvl1;
     this.displays[this.lvl1].coconuts = [];
 
-    if(this.userdata.settings){
+    if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+        this.audio['changeDisp'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
         this.audio['changeDisp'].cloneNode().play();
     }
 
@@ -547,7 +565,9 @@ gameEngine.prototype.chanceDisplayToUpgradeslvl2 = function(){
     this.displayScreen = this.UpgrLvl2;
     this.displays[this.lvl1].coconuts = [];
 
-    if(this.userdata.settings){
+    if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+        this.audio['changeDisp'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
         this.audio['changeDisp'].cloneNode().play();
     }
 }
@@ -559,7 +579,9 @@ gameEngine.prototype.chanceDisplayToSettings = function(){
 
     this.displays[0].coconuts = [];
 
-    if(this.userdata.settings){
+    if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+        this.audio['changeDisp'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
         this.audio['changeDisp'].cloneNode().play();
     }
 }
@@ -567,7 +589,9 @@ gameEngine.prototype.chanceDisplayToSettings = function(){
 
 gameEngine.prototype.exit = function(){
 
-    if(this.userdata.settings){
+    if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+        this.audio['exit'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
         this.audio['exit'].cloneNode().play();
     }
 

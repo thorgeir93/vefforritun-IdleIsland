@@ -3,6 +3,7 @@ extends layout
 block content
 	link(rel='stylesheet', href='/stylesheets/settings.css')
 	script(type='text/javascript' src='/game/settings.js')
+	script(src='/game/playTheme.js')
 	div.settings
 		div.container
 			h1= title
@@ -13,7 +14,7 @@ block content
 						- var value = settings['audio-slider']
 						- var className = 'audio-on'
 						if (settings['audio-slider'] === 'Mute')
-							- value = 20
+							- value = 0
 							- className = 'audio-off';
 						
 						label(
