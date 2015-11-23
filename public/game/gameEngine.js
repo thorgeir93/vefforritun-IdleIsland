@@ -12,26 +12,26 @@ function gameEngine(image, audio, user, userData, isFriend){
 	this.calculator = new Calculator();
     this.coconutImage = image['coconut'];
     this.userdata.setCurrency(this.calculator.calculateOfflineCurrency(this.userdata.timestamp,this.userdata.getCurrency(), this.userdata.getCurrFactor()));
-    this.score = this.userdata.score + this.calculator.calculateOfflineCurrency(this.userdata.timestamp,this.userdata.getCurrency(), this.userdata.getCurrFactor());
+    this.score = this.userdata.score + this.calculator.calculateOfflineScore(this.userdata.timestamp,this.userdata.getCurrency(), this.userdata.getCurrFactor());
+    
     this.displayScreen = this.lvl1;
     this.audio = audio;
     this.isFriend = isFriend;
 
-
-    //this.userdata.currency = 1000000000;
+    this.userdata.currency = 10000000;
 
     if (isFriend) {
 
         ////////////////////////////////////////////////////////
         //              THE UPGRADES DISPLAY 1
         ////////////////////////////////////////////////////////
-        var names = ['backButton', 'item1upgrade1', 'item2upgrade1', 'item3upgrade1', 'item1upgrade2', 'item2upgrade2', 'item3upgrade2', 'item1upgrade3', 'item2upgrade3', 'item3upgrade3'];
+        var names = ['backButton', 'item1upgrade1', 'item2upgrade1', 'item3upgrade1', 'item1upgrade2', 'item2upgrade2', 'item3upgrade2', 'item1upgrade3', 'item2upgrade3', 'item3upgrade3' ,'item1upgrade1_bought', 'item2upgrade1_bought', 'item3upgrade1_bought', 'item1upgrade2_bought', 'item2upgrade2_bought', 'item3upgrade2_bought', 'item1upgrade3_bought', 'item2upgrade3_bought', 'item3upgrade3_bought'];
         this.makeUpgradeDisplay(names, image, 0);
 
         ////////////////////////////////////////////////////////
         //              THE UPGRADES DISPLAY 2
         ////////////////////////////////////////////////////////
-        names = ['backButton', 'item4upgrade1', 'item5upgrade1', 'item6upgrade1', 'item4upgrade2', 'item5upgrade2', 'item6upgrade2', 'item4upgrade3', 'item5upgrade3', 'item6upgrade3'];
+        names = ['backButton', 'item4upgrade1', 'item5upgrade1', 'item6upgrade1', 'item4upgrade2', 'item5upgrade2', 'item6upgrade2', 'item4upgrade3', 'item5upgrade3', 'item6upgrade3', 'item4upgrade1_bought', 'item5upgrade1_bought', 'item6upgrade1_bought', 'item4upgrade2_bought', 'item5upgrade2_bought', 'item6upgrade2_bought', 'item4upgrade3_bought', 'item5upgrade3_bought', 'item6upgrade3_bought'];
         this.makeUpgradeDisplay(names, image, 1);
 
         ////////////////////////////////////////////////////////
@@ -72,10 +72,11 @@ function gameEngine(image, audio, user, userData, isFriend){
     var upgradesForScreens = [];
 
 
-    upgradesForScreens.push(this.makeItemImages(['item1upgrade1','item1upgrade2','item1upgrade3'], 500, 500, image));
+    upgradesForScreens.push(this.makeItemImages(['item1upgrade1','item1upgrade2','item1upgrade3'], 500000/*ætla að nota animations í staðinn fyrir þetta fyrsta svo ég læt það renderast út í rassgati*/, 500000, image));
     upgradesForScreens.push(this.makeItemImages(['item2upgrade1','item2upgrade2','item2upgrade3'], 300, 542, image));
     upgradesForScreens.push(this.makeItemImages(['item3upgrade1','item3upgrade2','item3upgrade3'], 178, 498, image));
 
+    var Sprites = [];
     var numberOfFrames = 5;
     var frameheight = image['kall'].height;
     var framewidth = image['kall'].width / numberOfFrames;
@@ -84,12 +85,15 @@ function gameEngine(image, audio, user, userData, isFriend){
     var animationTime = 0.7;
     var scale = 0.5;
 
-    var animation = new Sprite(image['kall'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale);
+    Sprites.push(animation = new Sprite(image['kall'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale));
+    Sprites.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale));
+    Sprites.push(animation = new Sprite(image['kall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale));
+    Sprites.push(animation = new Sprite(image['kall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale));
 
-    this.displays.push(new Display(backgroundImages, buttons,undefined,upgradesForScreens,animation));
+    this.displays.push(new Display(backgroundImages, buttons,undefined,upgradesForScreens, Sprites));
 
     /////////////////////////////////////////////////
-    //                  LEVEL TWO
+    //                  Sp TWO
     ////////////////////////////////////////////////
 
     //takki1 - tré
@@ -276,17 +280,18 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
         ///////////////////////////////////////////
 
         var bought = [[0,0,0],[0,0,0],[0,0,0]];
-
+        nameCounter = 10;
         for(var i = 0; i < 3; i++){
                 for(var j = 0; j < 3; j++){ 
-                    pos = {     width: image['bought'].width,
-                            height: image['bought'].height,
+                    console.log(names[nameCounter])
+                    pos = {     width: image[names[nameCounter]].width,
+                            height: image[names[nameCounter]].height,
                             topX: (j*70) + 10,
                             topY: (i*70) + 10
                      };
 
-                    bought[i][j] = new Button(pos, image['bought'], undefined);
-                
+                    bought[i][j] = new Button(pos, image[names[nameCounter]], undefined);
+                    nameCounter++;
                 }
             }
 
@@ -401,6 +406,14 @@ gameEngine.prototype.buyUpgrade = function(index){
                 }
                 if(index[1]< 1 && index[0] === 0 ){
                     this.userdata.upgrades1[index[0]][index[1]+2] = 0;
+                }
+
+                if(index[0] === 0 && index[1] === 0){
+                    this.displays[this.lvl1].changeSprite();
+                }else if(index[0] === 1 && index[1] === 0){
+                    this.displays[this.lvl1].changeSprite();
+                }else if(index[0] === 2 && index[1] === 0){
+                    this.displays[this.lvl1].changeSprite();
                 }
 
                 this.userdata.currency -= this.calculator.prices1[index[0]][index[1]];

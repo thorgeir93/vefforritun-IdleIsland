@@ -26,6 +26,8 @@ Sprite.prototype.animationFrames = undefined;
 Sprite.prototype.scale = undefined;
 
 
+
+
 Sprite.prototype.draw = function(frame){
     if(this.shouldAnimate){
 

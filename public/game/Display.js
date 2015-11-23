@@ -5,10 +5,16 @@ function Display(image,buttons,upgrades, itemsForScreen, sprite){
 	this.Buttons = buttons;
 	this.upgrades = upgrades;
 	this.itemsForScreen = itemsForScreen;
-	this.sprite = sprite;
+	
+	if(sprite){
+
+		this.sprite = sprite[0];
+		this.sprites = sprite;
+		this.spriteCounter = 0;
+	}
 	this.animationFrame = 0;
 	this.animationCurrentTime = 0;
-	console.log('inn í disp constructor');
+	console.log('inn í disp constructor', this.sprite);
 
 }
 
@@ -20,8 +26,19 @@ Display.prototype.showArrow = false;
 Display.prototype.itemsForScreen = undefined;
 
 Display.prototype.sprite = undefined;
+Display.prototype.sprites = undefined;
 Display.prototype.animationFrame = undefined;
 Display.prototype.animationCurrentTime = undefined;
+Display.prototype.spriteCounter = undefined;
+
+Display.prototype.changeSprite = function(){
+	this.spriteCounter = this.spriteCounter + 1
+    this.sprite = this.sprites[this.spriteCounter];
+}
+
+Display.prototype.whatSprite = function(){
+	console.log(this.sprite, this.spriteCounter);
+}
 
 Display.prototype.render = function(currency, score){
 	//g_ctx.aglobalAlpha = 0.0;
@@ -85,7 +102,6 @@ Display.prototype.createCoconut = function(coconut){
 }
 
 Display.prototype.update = function(dt){
-	console.log(this.coconuts);
 	if(this.coconuts){
 		for(var i = 0; i<this.coconuts.length; i++){
 			var kill = this.coconuts[i].update(dt);
