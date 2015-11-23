@@ -23,7 +23,7 @@ Display.prototype.sprite = undefined;
 Display.prototype.animationFrame = undefined;
 Display.prototype.animationCurrentTime = undefined;
 
-Display.prototype.render = function(currency, score){
+Display.prototype.render = function(currency, score, isFriend){
 	//g_ctx.aglobalAlpha = 0.0;
 	//g_ctx.fillStyle = 'tranparent';
 	//console.log(g_canvasW);
@@ -61,7 +61,8 @@ Display.prototype.render = function(currency, score){
 		y: y+25
 	};
 
-	
+	if (isFriend) {
+
 	var font = "bold 20px Arial";
 
 	g_ctx.fillStyle = "white";
@@ -71,6 +72,7 @@ Display.prototype.render = function(currency, score){
 	g_ctx.font=font;
 	g_ctx.fillText('Score : '+score,pos2.x,pos2.y);
 
+	}
 
 	//implements plz
 };

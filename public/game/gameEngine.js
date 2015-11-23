@@ -334,7 +334,7 @@ gameEngine.prototype.update = function(time){
 
 gameEngine.prototype.render = function(){
         
-    this.displays[this.displayScreen].render(this.userdata.currency, this.score);
+    this.displays[this.displayScreen].render(this.userdata.currency, this.score, this.isFriend);
 
     if(this.displayScreen === this.lvl1){
         this.displays[this.displayScreen].renderItemsOnScreen(this.userdata.upgrades1);
@@ -579,9 +579,13 @@ gameEngine.prototype.exit = function(){
     var exit  = $('#exit');
     var field = exit[0][0];
     var scoreField = exit[0][1];
+    var checkFriend = exit[0][2];
+
     this.userdata.score = this.score;
     field.value = this.userdata.createJSONstring();
     scoreField.value = this.score;
+    console.log(!this.isFriend);
+    checkFriend.value = (this.isFriend).toString();
     exit.submit();
     console.log(exit);
 }
