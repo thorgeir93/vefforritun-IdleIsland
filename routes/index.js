@@ -32,7 +32,7 @@ function homePage(req, res, next){
 //SPURNING: eigum við að hafa ensuerUser á post aðgerðum?
 router.get('/menu', ensureUser, menu);
 
-router.get('/viewFriends', /*ensureUser,*/ viewFriends);
+router.get('/viewFriends', ensureUser, viewFriends);
 router.post('/viewFriends', chooseFriend);
 
 router.get('/addFriends', ensureUser,addFriends);
@@ -44,7 +44,7 @@ router.post('/settings',  saveOrRestoreSettings);
 
 router.get('/highScores', ensureUser, highScores);
 
-router.get('/idleisland', /*ensureUser, */play);
+router.get('/idleisland', ensureUser, play);
 router.get('/logout', ensureUser, logout);
 
 
@@ -66,6 +66,7 @@ function saveOrRestoreSettings(req, res, next){
   if(action==='save'){
     settings = body;
     delete settings['action'];
+
   } else if(action==='default'){
     settings = defaultSettings();
   }
@@ -89,9 +90,11 @@ function chooseFriend(req, res, next) {
   sql.getGameState(friend, function(error, result) {
     var gamestate;
     gamestate = result;
-    var data = {username: friend,
-                userData: gamestate }
-    res.render('viewFriendsIsland', {data:data});
+    var data = {userName: friend,
+                userData: gamestate,
+                isFriend: true
+                 }
+    res.render('idleisland', {data:data});
   });
 }
 
@@ -223,10 +226,11 @@ function play(req, res, next) {
     }else {
       console.log('success');
     }
-    gamestate = dataa
+    gamestate = dataa;
 
-    var data = {username: req.session.user,
-                userData: gamestate }
+    var data = {userName: req.session.user,
+                userData: gamestate,
+                isFriend: false }
 
     res.render('idleisland', {data});
   });
