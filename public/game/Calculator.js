@@ -3,11 +3,13 @@
 function Calculator(){
 	console.log('inn i calculator constr')
 }
-
-Calculator.prototype.prices1 = [[10,1000,1000000],[100,10000,100000000],[1000,100000,1000000000000]];
+var a = [ [0,0,0],
+[0,0,0],
+[0,0,0] ];
+Calculator.prototype.prices1 = a;//[[10,1000,1000000],[100,10000,100000000],[1000,100000,1000000000000]];
 Calculator.prototype.factors1 = [[1,5,10],[2,7,15],[3,9,20]];
 
-Calculator.prototype.prices2 = [[10*100,1000*100,1000000*100],[100*100,10000*100,100000000*100],[1000*100,100000*100,1000000000000*100]];
+Calculator.prototype.prices2 = a;//[[10*100,1000*100,1000000*100],[100*100,10000*100,100000000*100],[1000*100,100000*100,1000000000000*100]];
 Calculator.prototype.factors2 = [[1*2,5*2,10*20],[2*2,7*2,15*2],[3*2,9*2,20*2]];
 
 Calculator.prototype.difference = 0;

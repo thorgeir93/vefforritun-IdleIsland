@@ -197,6 +197,7 @@ div.circle-buttons{
 	height:auto;
 	.upgrade{
 		@extend %space-top-bottom;
+		cursor:pointer;
 		transform: rotate(0deg);
 		outline: 0;
 		border:0;
@@ -225,6 +226,7 @@ div.circle-buttons{
 		background:url('../game/images/game-button-exit.png') no-repeat;
 	*/
 		@extend %space-top-bottom;
+		cursor:pointer;
 		visibility: visible;
 		outline: 0;
 		border:0;

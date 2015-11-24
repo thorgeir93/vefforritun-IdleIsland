@@ -15,6 +15,9 @@ var Buttons = (function() {
 	//keeps track of elements that is visible
 	var visibleElements = [];
 
+
+	var displays = [];
+
 	//ELEMENTS
 	var buttons = {};
 	var backgrounds = {};
@@ -38,6 +41,7 @@ var Buttons = (function() {
 
 		level = theGame.displayScreen;
 
+		displays = theGame.displays;
 
 
 		//GET BASE ELEMENTS TO ADD NEW ELEMENTS TO
@@ -129,7 +133,7 @@ var Buttons = (function() {
 		buttons.quit = elementCreator('button','quit','quit hidden');
 		buttons.gameExit = elementCreator('button','game-exit','game-exit');
 		
-		buttons.levelDown= elementCreator('button','level-down','level-down', '&#9660');
+		buttons.levelDown= elementCreator('button','level-down','level-down hidden', '&#9660');
 		buttons.levelUp= elementCreator('button','level-up','level-up hidden', '&#9650');
 
 		buttons.upgrade.addEventListener('click', displayUpgrades);
@@ -150,6 +154,8 @@ var Buttons = (function() {
 		//TODO: shit fix
 		var backgroundElement;
 		var classList;
+
+
 		if( backgrounds.upgrade.classList.contains( 'upgrade-show') ){
 			backgroundElement = backgrounds.upgrade;
 			classList = ['upgrade-show', 'upgrade'];
@@ -160,6 +166,9 @@ var Buttons = (function() {
 		toggleBackgrounds( backgroundElement, classList );
 		removeVisibleElements();
 		lvlFunc[level].action();
+
+		var action = (displays[2].showArrow) ? removeHidden : addHidden; 
+		action( buttons.levelDown );
 	}
 
 	function toggleBackgrounds( backgroundElement, classList ){

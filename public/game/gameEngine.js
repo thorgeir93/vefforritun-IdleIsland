@@ -77,8 +77,8 @@ function gameEngine(image, audio, user, userData, isFriend){
     var numberOfFrames = 5;
     var frameheight = image['kall'].height;
     var framewidth = image['kall'].width / numberOfFrames;
-    var topX = 360;
-    var topY = 380;
+    var topX = manPos.x;
+    var topY = manPos.y;
     var animationTime = 0.7;
     var scale = 0.5;
 
@@ -344,27 +344,29 @@ function findY(i,y){
     return y+(i*110) + 10;
 }
 
-
+//var coc = new Coconut({width:35, height:43, topX:300, topY:300,this.coconutImage,undefined);
 gameEngine.prototype.update = function(time){
 
-        var currentCurrency = this.userdata.getCurrency();
-        var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor());
-        var gained = currency - currentCurrency;
+    var currentCurrency = this.userdata.getCurrency();
+    var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor());
+    var gained = currency - currentCurrency;
     if (this.isFriend) {    
         this.score += gained;
     }
     if(this.displayScreen === this.lvl1){
-        for(var i = 0; i < gained; i++){
+        
+        //TODO: taka þrjá og setja í eitthvað bitastæðara
+        for(var i = 0; i < 3; i++){
 
             for(var i = 0; i<4; i++){
 
                 this.displays[this.displayScreen].sprites[0][i].shouldAnimate = true;
             }   
 
-            var pos = {     width: this.coconutImage.width,
+            var pos = { width: this.coconutImage.width,
                         height: this.coconutImage.height,
-                            topX: coconutPos.x,
-                            topY: coconutPos.y
+                        topX: coconutPos.x,
+                        topY: coconutPos.y
                    };
 
             var coconut = new Coconut(pos,this.coconutImage,undefined);
@@ -384,7 +386,7 @@ gameEngine.prototype.update = function(time){
 gameEngine.prototype.render = function(){
         
     this.displays[this.displayScreen].render(this.userdata.currency, this.score, this.isFriend);
-    console.log(this.score);
+    //console.log(this.score);
     if(this.displayScreen === this.lvl1){
         this.displays[this.displayScreen].renderSprites(this.userdata.upgrades1);
     }else if(this.displayScreen === this.lvl2){

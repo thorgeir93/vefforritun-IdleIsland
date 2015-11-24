@@ -48,18 +48,17 @@ Sprite.prototype.draw = function(frame){
 
 Sprite.prototype.update = function(dt){
     this.CurrentFrame = Math.floor(this.CurrentTime/ (this.animationTime / this.animationFrames));
-        
+    
+    if(this.shouldAnimate){
 
-        if(this.shouldAnimate){
+        this.CurrentTime += dt/1000;
+    }
 
-            this.CurrentTime += dt/1000;
+    if(this.CurrentTime > this.animationTime ){
+        this.CurrentTime = 0;
+        if(this.spriteSheet.name === 'kall' || this.spriteSheet.name === 'kall1' || this.spriteSheet.name === 'kall2' ||this.spriteSheet.name === 'kall3'){
+
+            this.shouldAnimate = false;
         }
-
-        if(this.CurrentTime > this.animationTime ){
-            this.CurrentTime = 0;
-            if(this.spriteSheet.name === 'kall' || this.spriteSheet.name === 'kall1' || this.spriteSheet.name === 'kall2' ||this.spriteSheet.name === 'kall3'){
-
-                this.shouldAnimate = false;
-            }
-        }
+    }
 }

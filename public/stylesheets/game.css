@@ -30,6 +30,7 @@ div.circle-buttons {
   width: 100px;
   height: auto; }
   div.circle-buttons .upgrade {
+    cursor: pointer;
     transform: rotate(0deg);
     outline: 0;
     border: 0;
@@ -51,6 +52,7 @@ div.circle-buttons {
 		height: $button-upgrade-heigth;
 		background:url('../game/images/game-button-exit.png') no-repeat;
 	*/
+    cursor: pointer;
     visibility: visible;
     outline: 0;
     border: 0;

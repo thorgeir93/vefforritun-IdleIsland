@@ -24,6 +24,11 @@ var coconutPos = {
   y:(treePos.y+60)
 };
 
+var manPos = {
+  x:(treePos.x+240),
+  y:(treePos.y+280)
+};
+
 
 //
 var upgradePos = {
@@ -120,7 +125,7 @@ function imagePreload(callback){
 
 
 
-      unavalible    : "game/images/unavalible.png",
+      unavalible    : "game/images/game-upgrade-lock-02.png",//"game/images/unavalible.png",
       kall          : "game/images/kall_animation.png",
       kall1         : "game/images/kall_animation-upgrade-1.png",
       kall2         : "game/images/kall_animation-upgrade-2.png",
