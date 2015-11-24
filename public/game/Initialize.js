@@ -123,7 +123,15 @@ function imagePreload(callback){
       kall          : "game/images/kall_animation.png",
       kall1         : "game/images/kall_animation-upgrade-1.png",
       kall2         : "game/images/kall_animation-upgrade-2.png",
-      kall3         : "game/images/kall_animation-upgrade-3.png"
+      kall3         : "game/images/kall_animation-upgrade-3.png",
+
+      vel1          : "game/images/vel_animation2.png",
+
+      tube1         : "game/images/tube_animation-upgrade-1.png",
+      tube2         : "game/images/tube_animation-upgrade-2.png",
+      tube3         : "game/images/tube_animation-upgrade-3.png"
+
+
       };
 
   imagesPreload(requiredImages, g_images, callback);
