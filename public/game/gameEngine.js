@@ -56,14 +56,14 @@ function gameEngine(image, audio, user, userData, isFriend){
     }    
  
     //takki3 - exit takki
-    pos = {     width: image['exit'].width,
+    /*pos = {     width: image['exit'].width,
                         height: image['exit'].height,
 
                         topX: 40,
                         topY: 40
           };
-
-    buttons.push(new Button(pos, image['exit'], this.exit.bind(this)));
+*/
+    //buttons.push(new Button(pos, image['exit'], this.exit.bind(this)));
     
     var backgroundImages = [];
 
@@ -209,7 +209,7 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
     if (this.isFriend) {
         buttons = [];
 
-        pos = {     width: image[names[0]].width,
+        /*pos = {     width: image[names[0]].width,
                             height: image[names[0]].height,
                             topX: 900,
                             topY: 10
@@ -220,7 +220,7 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
         }else{
             buttons.push(new Button(pos, image[names[0]], this.chanceDisplayToLvl2.bind(this)));
 
-        }
+        }*/
 
         //////////////////////////////////////////
         //              PARTUR FYRIR BUY MENU
@@ -293,7 +293,8 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
        
         buyMenu.push(bought);
     }
-    this.displays.push(new Display([image['UpgradeMenu']], buttons, buyMenu, undefined));
+    //TODO: TEMP -> kannski þarf að breyta þessu input-i í einhvað gáfulegra
+    this.displays.push(new Display([/*image['UpgradeMenu']*/], buttons, buyMenu, undefined));
     console.log(this.displays);
 
 }
@@ -301,9 +302,9 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
 
 gameEngine.prototype.update = function(time){
 
-        var currentCurrency = this.userdata.getCurrency();
-        var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor());
-        var gained = currency - currentCurrency;
+    var currentCurrency = this.userdata.getCurrency();
+    var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor());
+    var gained = currency - currentCurrency;
     if (this.isFriend) {    
         this.score += gained;
     }

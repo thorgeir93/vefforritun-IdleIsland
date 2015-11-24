@@ -15,14 +15,14 @@ router.get('/', homePage);
 
 //TEMP MEHTOD SOLUTION
 function homePage(req, res, next){
-	//Initialize tables and then render main screen
-	sql.createTables( function(error){
-		if( error ){
-			console.log(error);
-		}
-		res.redirect('/login');
-		//res.render('login', { title: 'Log In' });
-	});
+  //Initialize tables and then render main screen
+  sql.createTables( function(error){
+    if( error ){
+      console.log(error);
+    }
+    res.redirect('/login');
+    //res.render('login', { title: 'Log In' });
+  });
 }
 
 ////
@@ -42,6 +42,9 @@ router.get('/highScores', ensureUser, highScores);
 router.get('/settings', ensureUser, settings);
 router.post('/settings',  saveOrRestoreSettings);
 
+router.post('/gameSettings', ensureUser, gameSettings );
+router.post('/saveGoBackToGame', ensureUser, startGame );
+
 router.get('/highScores', ensureUser, highScores);
 
 router.get('/idleisland', ensureUser, play);
@@ -50,14 +53,48 @@ router.get('/logout', ensureUser, logout);
 
 router.post('/exit', ensureUser ,exit);
 
+
+function startGame(req, res, next){
+  var action = req.body.action;
+  var settings = getSettings( req.body );
+  console.log('action');
+  console.dir(action);
+  if(action==='save'){
+    sql.setSettings(req.session.user, settings, function(error, result){
+      if(error){
+        console.log(error);
+      }
+      console.log('settings 3241cecewewrecweweewewwewe');
+      console.dir(settings);
+      res.redirect('/idleisland');
+    });
+  } else if(action==='default'){
+    res.redirect('/idleisland');
+  }
+}
+
+function gameSettings(req, res, next){
+
+  sql.getSettings(req.session.user, function(error, settings){
+    console.log("aaaaaaaaaaaaaaaaaaaaaa");
+    console.dir(settings);
+    res.render('settings', 
+      {
+        title: 'Change Settings',
+        action: '/saveGoBackToGame',
+        btnText1:'Back to game', 
+        btnText2:'Save and go back to game', 
+        settings:settings
+      });
+  });
+}
 /*router.get('/viewFriendsIsland', viewFriendsIsland);
 
 function viewFriendsIsland(req, res, next) {
   res.render('viewFriendsIsland');
 }*/
 
-function saveOrRestoreSettings(req, res, next){
-  var body = req.body;
+function getSettings( body ){
   var action = body.action;
   var settings;
 
@@ -66,22 +103,35 @@ function saveOrRestoreSettings(req, res, next){
   if(action==='save'){
     settings = body;
     delete settings['action'];
-
   } else if(action==='default'){
     settings = defaultSettings();
   }
+  return settings;
+}
+
+function saveOrRestoreSettings(req, res, next){
+  var action = req.body.action;
+  var settings = getSettings( req.body );
 
   sql.setSettings(req.session.user, settings, function(error, result){
     if(error){
       console.log(error);
     }
     console.log('settings');
-    console.dir(settings);    
+    console.dir(settings); 
     if(action==='save'){
       res.redirect('/menu');
     } else if(action==='default'){
-      res.render('settings', {title:'Change Settings', settings:settings});
+      res.render('settings', 
+      { 
+        title: 'Change Settings',
+        action: '/settings',
+        btnText1:'Restore default settings', 
+        btnText2:'Save and go back to menu', 
+        settings:settings
+      });
     }
+      //res.render('settings', {title:'Change Settings', settings:settings});
   });
 }
 
@@ -213,7 +263,14 @@ function highScores(req, res, next) {
 
 function settings(req, res, next) {
   sql.getSettings(req.session.user, function(error, settings){
-    res.render('settings', { title: 'Change Settings', settings:settings});
+    res.render('settings', 
+      { 
+        title: 'Change Settings',
+        action: '/settings',
+        btnText1:'Restore default settings', 
+        btnText2:'Save and go back to menu', 
+        settings:settings
+      });
   });
 }
 

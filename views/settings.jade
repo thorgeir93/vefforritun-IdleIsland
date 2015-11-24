@@ -3,15 +3,13 @@ extends layout
 block content
 	link(rel='stylesheet', href='/stylesheets/settings.css')
 	script(type='text/javascript' src='/game/settings.js')
-	script(src='/game/playTheme.js')
 	div.settings
 		div.container
 			h1= title
 			hr
-			form(method='post' action='/settings')
+			form(method='post' action= action)
 				div.formgroup
 					div.container-slider
-						
 						- var pVolume
 						- var iVolume
 						- var className
@@ -44,8 +42,8 @@ block content
 					input(type="checkbox" name="checkbox" id="fullscreen")
 					div(class='checkbox' id=onORoff)
 				hr
-				button(type='submit' name='action' value='default') Restore default settings
-				button(type='submit' name='action' value='save') Save and go back to menu
+				button(type='submit' name='action' value='default')= btnText1
+				button(type='submit' name='action' value='save')= btnText2
 				//a(href='/menu') Back to Menu
 			//form(method='post' action='/saveSettings')
 

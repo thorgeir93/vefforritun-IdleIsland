@@ -7,6 +7,7 @@ var g_ctx = g_canvas.getContext("2d");
 var g_canvasW = g_canvas.parentElement.clientWidth;
 var g_canvasH = g_canvas.parentElement.clientHeight;
 
+g_ctx.globalCompositeOperation='destination-over';
 
 var islandPos = { 
   x:(g_canvasW/10), 
@@ -134,11 +135,11 @@ _updateClocks = function (frameTime) {
 _iterCore = function (dt) {
 
     leikur.update(dt);
-    console.log('eftir update');
+    //console.log('eftir update');
     leikur.render();
-    console.log('eftir render');
+    //console.log('eftir render');
     leikur.playTheme();
-    console.log('eftir theme');
+    //console.log('eftir theme');
     Loop();
 };
 
