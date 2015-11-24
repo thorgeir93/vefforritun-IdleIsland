@@ -15,6 +15,9 @@ var Buttons = (function() {
 	//keeps track of elements that is visible
 	var visibleElements = [];
 
+
+	var displays = [];
+
 	//ELEMENTS
 	var buttons = {};
 	var backgrounds = {};
@@ -23,6 +26,7 @@ var Buttons = (function() {
 	var allBtnElements;
 	var circleBtnElements;
 	var arrowsBtnElements;
+	var formBtnElement;
 
 	//BACKGROUNDS
 	var allBackgroundElements;
@@ -30,19 +34,21 @@ var Buttons = (function() {
 	var skyElement;
 	var seaElement;
 
-	function init( game ){
+	function init( game, isFriend  ){
 		console.log( "button init!" );
 
 		theGame = game;
 
 		level = theGame.displayScreen;
 
+		displays = theGame.displays;
 
 
 		//GET BASE ELEMENTS TO ADD NEW ELEMENTS TO
 		allBackgroundElements = document.querySelector('.backgrounds');
 		circleBtnElements = document.querySelector('.circle-buttons');
 		arrowsBtnElements = document.querySelector('.arrows-buttons');
+		formBtnElement = document.querySelector('.sett');//.children[1];
 		allBtnElements = document.querySelector('.buttons');
 
 		//BUILD ALL NEW ELEMENTS
@@ -53,11 +59,15 @@ var Buttons = (function() {
 		allBackgroundElements.appendChild( backgrounds.sea );
 		allBackgroundElements.appendChild( backgrounds.sky );
 		allBackgroundElements.appendChild( backgrounds.upgrade );
+		//allBackgroundElements.appendChild( backgrounds.settings );
 
 		allBtnElements.appendChild( buttons.quit );
-
-		circleBtnElements.appendChild( buttons.upgrade );
-		circleBtnElements.appendChild( buttons.settings );
+		allBtnElements.appendChild( buttons.gameExit );
+		
+		if(!isFriend){
+			circleBtnElements.appendChild( buttons.upgrade );
+			formBtnElement.appendChild( buttons.settings );
+		}
 
 		arrowsBtnElements.appendChild( buttons.levelDown );
 		arrowsBtnElements.appendChild( buttons.levelUp );
@@ -91,12 +101,17 @@ var Buttons = (function() {
 			backgrounds:['upgrade']
 		};
 
-		lvlFunc.settings={
+	/*	lvlFunc.settings={
 			action:function(){
 				theGame.chanceDisplayToSettings();
 			}
-		};
+		};*/
 
+		lvlFunc.gameExit={
+			action:function(){
+				theGame.exit();
+			}
+		};
 
 
 	}
@@ -109,41 +124,116 @@ var Buttons = (function() {
 		backgrounds.mineWall = elementCreator('div','mine-wall','mine-wall hidden');
 		
 		backgrounds.upgrade = elementCreator('div','upgrade','upgrade');
+		backgrounds.settings = elementCreator('div','settings','settings');
 	}
 
 	function buildButtons(){
 		buttons.upgrade = elementCreator('button','upgrade','upgrade');
-		buttons.settings = elementCreator('button','settings','settings');
+		buttons.settings = elementCreator('button','gamebtn-settings','gamebtn-settings');
 		buttons.quit = elementCreator('button','quit','quit hidden');
+		buttons.gameExit = elementCreator('button','game-exit','game-exit');
 		
-		buttons.levelDown= elementCreator('button','level-down','level-down', '&#9660');
+		buttons.levelDown= elementCreator('button','level-down','level-down hidden', '&#9660');
 		buttons.levelUp= elementCreator('button','level-up','level-up hidden', '&#9650');
 
 		buttons.upgrade.addEventListener('click', displayUpgrades);
-		//buttons.settings.addEventListener('click', displayUpgrades);
+		//buttons.settings.addEventListener('click', displaySettings);
 		buttons.levelDown.addEventListener('click', displayLevelDown);
 		buttons.levelUp.addEventListener('click', displayLevelUp);
+		buttons.gameExit.addEventListener('click', exitGame);
 
 		buttons.quit.addEventListener('click', handleQuit);
 	}
 
 
+	function exitGame(){
+		lvlFunc.gameExit.action();
+	}
+
 	function handleQuit(){
-		toggleBackgrounds();
+		//TODO: shit fix
+		var backgroundElement;
+		var classList;
+
+
+		if( backgrounds.upgrade.classList.contains( 'upgrade-show') ){
+			backgroundElement = backgrounds.upgrade;
+			classList = ['upgrade-show', 'upgrade'];
+		} else {
+			backgroundElement = backgrounds.settings;
+			classList = ['settings-show', 'settings'];
+		}
+		toggleBackgrounds( backgroundElement, classList );
 		removeVisibleElements();
 		lvlFunc[level].action();
+
+		var action = (displays[2].showArrow) ? removeHidden : addHidden; 
+		action( buttons.levelDown );
+	}
+
+	function toggleBackgrounds( backgroundElement, classList ){
+		console.log(classList[0]);
+		backgroundElement.classList.toggle( classList[0] );
+		backgroundElement.classList.toggle( classList[1] );
+
+		if( backgroundElement.classList.contains(classList[0]) ){
+			doActionOnElements( true, circleBtnElements );
+			doActionOnElements( true, arrowsBtnElements, ['level-up']);
+			addHiddenToQuit( true );
+		} else {
+			doActionOnElements( false, circleBtnElements );
+			doActionOnElements( false, arrowsBtnElements, ['level-up']);
+			addHiddenToQuit( false );
+		}
 	}
 
 	//TODO: held að það þarf að setja fyrir 
 	//backgrounds.upgrade auka breytu sem eru toggle clasar
 	//þá fyrir allabackground visible þá togglum við fade in
 	//fade out classana inn.
-	function toggleBackgrounds(){
-		//for(var element in visibleElements ){
+	/*function toggleBackgrounds( button ){
+		
+		if(button==='upgrade'){
 			backgrounds.upgrade.classList.toggle('upgrade-show');
 			backgrounds.upgrade.classList.toggle('upgrade');
+
+			if( backgrounds.upgrade.classList.contains('upgrade-show') ){
+				doActionOnElements( true, circleBtnElements );
+				doActionOnElements( true, arrowsBtnElements, ['level-up']);
+				addHiddenToQuit( true );
+			} else {
+				doActionOnElements( false, circleBtnElements );
+				doActionOnElements( false, arrowsBtnElements, ['level-up']);
+				addHiddenToQuit( false );
+			}
 			
-		//}
+		}
+	}*/
+
+	function doActionOnElements(hidden, elements, exceptList){
+		var action = (hidden) ? addHidden : removeHidden;
+		for( var i in elements.children ){
+			var el = elements.children[i];
+			if( el.classList ){
+				if( !contains(el.classList, exceptList) ){
+					action( el );
+				}
+			}
+		}
+	}
+
+	function contains(classList, exceptList){
+		for(var i in exceptList){
+			if( classList.contains( exceptList[i]) ){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	function addHiddenToQuit( hidden ){
+		var action = (hidden) ? addHidden : removeHidden;
+		action( allBtnElements.children[3] );
 	}
 
 	//TODO:Það er skítafix að vera með þessa if
@@ -164,7 +254,7 @@ var Buttons = (function() {
 	//
 	function displayUpgrades(){
 
-		toggleBackgrounds();
+		toggleBackgrounds(backgrounds.upgrade,['upgrade-show','upgrade']);
 
 		//SHOW this elements
 		removeHidden( buttons.quit );
@@ -175,8 +265,23 @@ var Buttons = (function() {
 		var name = 'upgrade'+level;
 		if(lvlFunc[name]){
 			lvlFunc [name].action();
-		}	
+		}
 	}
+
+	/*function displaySettings(){
+		toggleBackgrounds(backgrounds.settings, ['settings-show', 'settings'])
+		
+		//SHOW this elements
+		removeHidden( buttons.quit );
+		addToVisible( buttons.quit );
+		removeHidden( backgrounds.upgrade );
+		//addToVisible( backgrounds.upgrade );
+
+		var name = 'settings';
+		if(lvlFunc[name]){
+			lvlFunc [name].action();
+		}
+	}*/
 
 	//TODO: stop error -> do not let level to zero or far higher
 	function displayLevelDown(){

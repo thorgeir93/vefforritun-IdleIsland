@@ -14,13 +14,15 @@ html
 		canvas#myCanvas
 		div.buttons
 			div.circle-buttons
+				form( method='post', action='/gameSettings', class='form-settings')
+					div.sett
 			div.arrows-buttons
 			//div.quit
 		form(method='post', action='/exit', id = 'exit', hidden)
 			input(type='text', id='submitString', name='submitString')
 			input(type='text', id='score', name='score')
 			input(type='hidden', id='checkFriend', name='checkFriend')
-			div: button
+			div: button.game-exit
 		script(src='/game/jquery.js')
 		script(src='/game/imagesPreload.js')
 		script(src='/game/soundsPreload.js')
