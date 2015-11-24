@@ -74,33 +74,65 @@ function imagePreload(callback){
       downLvl       : "game/images/uplvl.png",
       upLvl         : "game/images/downlvl.png",
 
-      item1upgrade1 : "game/images/item1upgrade1.png",
-      item2upgrade1 : "game/images/item2upgrade1.png",
-      item3upgrade1 : "game/images/item3upgrade1.png",
 
-      item1upgrade2 : "game/images/item1upgrade2.png",
-      item2upgrade2 : "game/images/item2upgrade2.png",
-      item3upgrade2 : "game/images/item3upgrade2.png",
+      item1upgrade1         : "game/images/item1upgrade1.png",
+      item1upgrade1_bought  : "game/images/item1upgrade1_bought.png",
+      item1upgrade2         : "game/images/item1upgrade2.png",
+      item1upgrade2_bought  : "game/images/item1upgrade2_bought.png",
+      item1upgrade3         : "game/images/item1upgrade3.png",
+      item1upgrade3_bought  : "game/images/item1upgrade3_bought.png",
 
-      item1upgrade3 : "game/images/item1upgrade3.png",
-      item2upgrade3 : "game/images/item2upgrade3.png",
-      item3upgrade3 : "game/images/item3upgrade3.png",
+      item2upgrade1         : "game/images/item2upgrade1.png",
+      item2upgrade1_bought  : "game/images/item2upgrade1_bought.png",
+      item2upgrade2         : "game/images/item2upgrade2.png",
+      item2upgrade2_bought  : "game/images/item2upgrade2_bought.png",
+      item2upgrade3         : "game/images/item2upgrade3.png",
+      item2upgrade3_bought  : "game/images/item2upgrade3_bought.png",
 
-      item4upgrade1 : "game/images/item4upgrade1.png",
-      item5upgrade1 : "game/images/item5upgrade1.png",
-      item6upgrade1 : "game/images/item6upgrade1.png",
+      item3upgrade1         : "game/images/item3upgrade1.png",
+      item3upgrade1_bought  : "game/images/item3upgrade1_bought.png",
+      item3upgrade2         : "game/images/item3upgrade2.png",
+      item3upgrade2_bought  : "game/images/item3upgrade2_bought.png",
+      item3upgrade3         : "game/images/item3upgrade3.png",
+      item3upgrade3_bought  : "game/images/item3upgrade3_bought.png",
 
-      item4upgrade2 : "game/images/item4upgrade2.png",
-      item5upgrade2 : "game/images/item5upgrade2.png",
-      item6upgrade2 : "game/images/item6upgrade2.png",
+      item4upgrade1         : "game/images/item4upgrade1.png",
+      item4upgrade1_bought  : "game/images/item4upgrade1_bought.png",
+      item4upgrade2         : "game/images/item4upgrade2.png",
+      item4upgrade2_bought  : "game/images/item4upgrade2_bought.png",
+      item4upgrade3         : "game/images/item4upgrade3.png",
+      item4upgrade3_bought  : "game/images/item4upgrade3_bought.png",
 
-      item4upgrade3 : "game/images/item4upgrade3.png",
-      item5upgrade3 : "game/images/item5upgrade3.png",
-      item6upgrade3 : "game/images/item6upgrade3.png",
+      item5upgrade1         : "game/images/item5upgrade1.png",
+      item5upgrade1_bought  : "game/images/item5upgrade1_bought.png",
+      item5upgrade2         : "game/images/item5upgrade2.png",
+      item5upgrade2_bought  : "game/images/item5upgrade2_bought.png",
+      item5upgrade3         : "game/images/item5upgrade3.png",
+      item5upgrade3_bought  : "game/images/item5upgrade3_bought.png",
+
+      item6upgrade1         : "game/images/item6upgrade1.png",
+      item6upgrade1_bought  : "game/images/item6upgrade1_bought.png",
+      item6upgrade2         : "game/images/item6upgrade2.png",
+      item6upgrade2_bought  : "game/images/item6upgrade2_bought.png",
+      item6upgrade3         : "game/images/item6upgrade3.png",
+      item6upgrade3_bought  : "game/images/item6upgrade3_bought.png",
+
+
+
 
       unavalible    : "game/images/unavalible.png",
-      bought        : "game/images/bought.png",
-      kall          : "game/images/kall_animation-2.png"
+      kall          : "game/images/kall_animation.png",
+      kall1         : "game/images/kall_animation-upgrade-1.png",
+      kall2         : "game/images/kall_animation-upgrade-2.png",
+      kall3         : "game/images/kall_animation-upgrade-3.png",
+
+      vel1          : "game/images/vel_animation2.png",
+
+      tube1         : "game/images/tube_animation-upgrade-1.png",
+      tube2         : "game/images/tube_animation-upgrade-2.png",
+      tube3         : "game/images/tube_animation-upgrade-3.png"
+
+
       };
 
   imagesPreload(requiredImages, g_images, callback);
@@ -135,11 +167,8 @@ _updateClocks = function (frameTime) {
 _iterCore = function (dt) {
 
     leikur.update(dt);
-    //console.log('eftir update');
     leikur.render();
-    //console.log('eftir render');
     leikur.playTheme();
-    //console.log('eftir theme');
     Loop();
 };
 

@@ -149,12 +149,17 @@ function chooseFriend(req, res, next) {
 }
 
 function exit(req, res, next){
-  var gameState = xss(req.body.submitString);
-  var score = xss(req.body.score);
-  sql.setGameState(req.session.user, gameState, score, function(){
-    console.log('allt gekk upp');
-    res.redirect('/menu');
-  });
+  var friend = xss(req.body.checkFriend);
+  if (friend === 'true') {
+    var gameState = xss(req.body.submitString);
+    var score = xss(req.body.score);
+    sql.setGameState(req.session.user, gameState, score, function(){
+      console.log('allt gekk upp');
+      res.redirect('/menu');
+    });
+  } else {
+    res.redirect('/viewFriends');
+  }
 }
 
 function logout(req, res, next) {
@@ -175,22 +180,17 @@ function developmentViewFriends(req, res, next){
 function viewFriends(req, res, next) {
   username = req.session.user;
 
-  console.log("req.session");
-  console.log(req.session);
-  console.log("username");
-  console.log(username);
   sql.findFriendList(username, function(err, result) {
-    console.log("result");
     console.dir(result);
     if (err) {
       console.error(err);
     }
     friends = result[0]['friendid'].split(',');
     var friended = [];
-    for (var i = 0; i < friends.length; i++) {
+    for (var i = 1; i < friends.length; i++) {
       friended.push(friends[i]);
     }
-    if (friended.length > 2) {
+    if (friended.length > 0) {
       res.render('viewFriends', { status: 'Your friends', entries: friended});
     } else {
       res.render('viewFriends', { status: 'Get some friends, loser', entries: false});

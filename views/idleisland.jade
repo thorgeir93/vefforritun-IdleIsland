@@ -21,6 +21,7 @@ html
 		form(method='post', action='/exit', id = 'exit', hidden)
 			input(type='text', id='submitString', name='submitString')
 			input(type='text', id='score', name='score')
+			input(type='hidden', id='checkFriend', name='checkFriend')
 			div: button.game-exit
 		script(src='/game/jquery.js')
 		script(src='/game/imagesPreload.js')

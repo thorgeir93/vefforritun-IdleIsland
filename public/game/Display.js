@@ -1,14 +1,15 @@
 'use strict'
-function Display(image,buttons,upgrades, itemsForScreen, sprite){
+function Display(image,buttons,upgrades, sprite){
 	
 	this.image = image;
 	this.Buttons = buttons;
 	this.upgrades = upgrades;
-	this.itemsForScreen = itemsForScreen;
-	this.sprite = sprite;
+	
+	if(sprite){
+		this.sprites = sprite;
+	}
 	this.animationFrame = 0;
 	this.animationCurrentTime = 0;
-	console.log('inn í disp constructor');
 
 }
 
@@ -17,13 +18,10 @@ Display.prototype.image = undefined;
 Display.prototype.upgrades = undefined;
 Display.prototype.coconuts = [];
 Display.prototype.showArrow = false;
-Display.prototype.itemsForScreen = undefined;
 
-Display.prototype.sprite = undefined;
-Display.prototype.animationFrame = undefined;
-Display.prototype.animationCurrentTime = undefined;
+Display.prototype.sprites = undefined;
 
-Display.prototype.render = function(currency, score){
+Display.prototype.render = function(currency, score, isFriend, upgrades){
 	//g_ctx.aglobalAlpha = 0.0;
 	//g_ctx.fillStyle = 'tranparent';
 	//console.log(g_canvasW);
@@ -31,10 +29,7 @@ Display.prototype.render = function(currency, score){
 	g_ctx.fillStyle = 'rgba(0, 0, 0, 0.0)';
 	this.drawAt(g_ctx, islandPos.x, islandPos.y);
 
-	if(this.sprite){
 
-		this.sprite.draw(this.animationFrame);
-	}
 	for(var i = 0; i<this.Buttons.length; i++){
 
 		if(!(this.Buttons[i].image.name === "downLvl")){
@@ -61,7 +56,8 @@ Display.prototype.render = function(currency, score){
 		y: y+25
 	};
 
-	
+	if (isFriend) {
+
 	var font = "bold 20px Arial";
 
 	g_ctx.fillStyle = "white";
@@ -71,9 +67,36 @@ Display.prototype.render = function(currency, score){
 	g_ctx.font=font;
 	g_ctx.fillText('Score : '+score,pos2.x,pos2.y);
 
+	}
 
 	//implements plz
 };
+
+Display.prototype.renderSprites = function(upgrades){
+	var flag = true;
+
+	for(var i = 0; i < 3; i++){
+		for(var j = 0; j < 3; j++ ){
+			if(upgrades[j][i] === 2){
+
+				if(i === 0){
+
+					this.sprites[i][j+1].draw(this.sprites[i][j+1].CurrentFrame)
+				}else{
+					console.log(this.sprites[i][j].CurrentFrame, this.sprites[i][j].CurrentTime, this.sprites[i][j].shouldAnimate)
+					this.sprites[i][j].draw(this.sprites[i][j].CurrentFrame)
+				}
+				
+				flag = false;
+			}
+
+		}
+	}
+
+	if(flag){
+		this.sprites[0][0].draw(this.sprites[0][0].CurrentFrame)
+	}
+}
 
 Display.prototype.destroyCoconuts = function(){
 	this.coconuts = [];
@@ -85,7 +108,6 @@ Display.prototype.createCoconut = function(coconut){
 }
 
 Display.prototype.update = function(dt){
-	//console.log(this.coconuts);
 	if(this.coconuts){
 		for(var i = 0; i<this.coconuts.length; i++){
 			var kill = this.coconuts[i].update(dt);
@@ -96,17 +118,17 @@ Display.prototype.update = function(dt){
 		}
 	}
 
-	if(this.sprite){
-		this.animationFrame = Math.floor(this.animationCurrentTime/ (this.sprite.animationTime / this.sprite.animationFrames));
-		
-		if(this.sprite.shouldAnimate){
+	if(this.sprites){
+		this.sprites[0][0].update(dt);
+		for(var i = 0; i < 3; i++){
+			for(var j = 0; j < 3; j++){
+				if(i === 0){
 
-			this.animationCurrentTime += dt/1000;
-		}
-
-		if(this.animationCurrentTime > this.sprite.animationTime ){
-			this.animationCurrentTime = 0;
-			this.sprite.shouldAnimate = false;
+					this.sprites[i][j+1].update(dt)
+				}else{
+					this.sprites[i][j].update(dt)
+				}
+			}	
 		}
 	}
 }
@@ -142,17 +164,6 @@ Display.prototype.renderUpgrades = function(upgrades){
 	}
 };
 
-Display.prototype.renderItemsOnScreen = function(upgrades){
-
-	for(var i = 0; i < 3; i++){
-		for(var j = 0; j< 3; j++){
-			if(upgrades[j][i] === 2){
-				ctx.drawImage(this.itemsForScreen[i][j].image, this.itemsForScreen[i][j].getPosition().x,this.itemsForScreen[i][j].getPosition().y)
-			}
-		}
-	}
-
-}
 
 Display.prototype.findButtonForClick = function(e,upgrades){
 
