@@ -31,7 +31,7 @@ var Buttons = (function() {
 	var skyElement;
 	var seaElement;
 
-	function init( game ){
+	function init( game, isFriend  ){
 		console.log( "button init!" );
 
 		theGame = game;
@@ -59,9 +59,11 @@ var Buttons = (function() {
 
 		allBtnElements.appendChild( buttons.quit );
 		allBtnElements.appendChild( buttons.gameExit );
-
-		circleBtnElements.appendChild( buttons.upgrade );
-		formBtnElement.appendChild( buttons.settings );
+		
+		if(!isFriend){
+			circleBtnElements.appendChild( buttons.upgrade );
+			formBtnElement.appendChild( buttons.settings );
+		}
 
 		arrowsBtnElements.appendChild( buttons.levelDown );
 		arrowsBtnElements.appendChild( buttons.levelUp );

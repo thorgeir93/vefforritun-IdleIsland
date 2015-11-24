@@ -150,18 +150,27 @@ Display.prototype.renderUpgrades = function(upgrades){
 
 	for(var i = 0; i < 3; i++){
 		for(var j = 0; j < 3; j++){	
-
-
 			if(upgrades[i][j] === 0){
-				g_ctx.drawImage(this.upgrades[1][i][j].image, this.upgrades[1][i][j].getPosition().x, this.upgrades[1][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[1][i][j].image, this.upgrades[1][i][j].getPosition().x, this.upgrades[1][i][j].getPosition().y);
 			}else if(upgrades[i][j] === 1){
-				g_ctx.drawImage(this.upgrades[0][i][j].image, this.upgrades[0][i][j].getPosition().x, this.upgrades[0][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[0][i][j].image, this.upgrades[0][i][j].getPosition().x, this.upgrades[0][i][j].getPosition().y);
 			}else if(upgrades[i][j] === 2){
-				g_ctx.drawImage(this.upgrades[2][i][j].image, this.upgrades[2][i][j].getPosition().x, this.upgrades[2][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[2][i][j].image, this.upgrades[2][i][j].getPosition().x, this.upgrades[2][i][j].getPosition().y);
 			}
-		
 		}
 	}
+};
+
+
+Display.prototype.drawUpgrade = function(ctx, image, x, y, w, h){
+	
+	ctx.drawImage(image, x, y);
+
+	//draw rectangle around the image
+	ctx.rect(x, y, image.width, image.height);
+	ctx.stroke();
+	ctx.strokeStyle = 'white';
+	ctx.lineWidth = 4;
 };
 
 

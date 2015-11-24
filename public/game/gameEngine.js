@@ -1,6 +1,7 @@
+/******************************/
 function gameEngine(image, audio, user, userData, isFriend){
     isFriend = !isFriend;
-	console.log('inn í gameEngine constructor');
+    console.log('inn í gameEngine constructor');
     if (isFriend) {
         console.log('venju sesh');
     } else {
@@ -9,7 +10,7 @@ function gameEngine(image, audio, user, userData, isFriend){
 
     this.userName = user;
     this.userdata = new UserData(userData);
-	this.calculator = new Calculator();
+    this.calculator = new Calculator();
     this.coconutImage = image['coconut'];
     this.userdata.setCurrency(this.calculator.calculateOfflineCurrency(this.userdata.timestamp,this.userdata.getCurrency(), this.userdata.getCurrFactor()));
     this.score = this.userdata.score + this.calculator.calculateOfflineScore(this.userdata.timestamp,this.userdata.getCurrency(), this.userdata.getCurrFactor());
@@ -25,13 +26,13 @@ function gameEngine(image, audio, user, userData, isFriend){
         ////////////////////////////////////////////////////////
         //              THE UPGRADES DISPLAY 1
         ////////////////////////////////////////////////////////
-        var names = ['backButton', 'item1upgrade1', 'item2upgrade1', 'item3upgrade1', 'item1upgrade2', 'item2upgrade2', 'item3upgrade2', 'item1upgrade3', 'item2upgrade3', 'item3upgrade3' ,'item1upgrade1_bought', 'item2upgrade1_bought', 'item3upgrade1_bought', 'item1upgrade2_bought', 'item2upgrade2_bought', 'item3upgrade2_bought', 'item1upgrade3_bought', 'item2upgrade3_bought', 'item3upgrade3_bought'];
+        var names = ['item1upgrade1', 'item2upgrade1', 'item3upgrade1', 'item1upgrade2', 'item2upgrade2', 'item3upgrade2', 'item1upgrade3', 'item2upgrade3', 'item3upgrade3' ,'item1upgrade1_bought', 'item2upgrade1_bought', 'item3upgrade1_bought', 'item1upgrade2_bought', 'item2upgrade2_bought', 'item3upgrade2_bought', 'item1upgrade3_bought', 'item2upgrade3_bought', 'item3upgrade3_bought'];
         this.makeUpgradeDisplay(names, image, 0);
 
         ////////////////////////////////////////////////////////
         //              THE UPGRADES DISPLAY 2
         ////////////////////////////////////////////////////////
-        names = ['backButton', 'item4upgrade1', 'item5upgrade1', 'item6upgrade1', 'item4upgrade2', 'item5upgrade2', 'item6upgrade2', 'item4upgrade3', 'item5upgrade3', 'item6upgrade3', 'item4upgrade1_bought', 'item5upgrade1_bought', 'item6upgrade1_bought', 'item4upgrade2_bought', 'item5upgrade2_bought', 'item6upgrade2_bought', 'item4upgrade3_bought', 'item5upgrade3_bought', 'item6upgrade3_bought'];
+        names = ['item4upgrade1', 'item5upgrade1', 'item6upgrade1', 'item4upgrade2', 'item5upgrade2', 'item6upgrade2', 'item4upgrade3', 'item5upgrade3', 'item6upgrade3', 'item4upgrade1_bought', 'item5upgrade1_bought', 'item6upgrade1_bought', 'item4upgrade2_bought', 'item5upgrade2_bought', 'item6upgrade2_bought', 'item4upgrade3_bought', 'item5upgrade3_bought', 'item6upgrade3_bought'];
         this.makeUpgradeDisplay(names, image, 1);
 
         ////////////////////////////////////////////////////////
@@ -56,14 +57,14 @@ function gameEngine(image, audio, user, userData, isFriend){
     }    
  
     //takki3 - exit takki
-    /*pos = {     width: image['exit'].width,
+   /* pos = {     width: image['exit'].width,
                         height: image['exit'].height,
 
                         topX: 40,
                         topY: 40
           };
-*/
-    //buttons.push(new Button(pos, image['exit'], this.exit.bind(this)));
+
+    buttons.push(new Button(pos, image['exit'], this.exit.bind(this)));*/
     
     var backgroundImages = [];
 
@@ -93,7 +94,7 @@ function gameEngine(image, audio, user, userData, isFriend){
 
     sprite = [];
 
-    sprite.push(animation = new Sprite(image['vel1'],137,92,topX,topY,0.7, 8, 1, true));    
+    sprite.push(animation = new Sprite(image['vel1'],137,89.75,topX,topY,0.7, 8, 1, true));    
     sprite.push(animation = new Sprite(image['kall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
     sprite.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
 
@@ -244,7 +245,7 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
     if (this.isFriend) {
         buttons = [];
 
-        /*pos = {     width: image[names[0]].width,
+       /* pos = {     width: image[names[0]].width,
                             height: image[names[0]].height,
                             topX: 900,
                             topY: 10
@@ -268,13 +269,16 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
         ///////////////////////////////////////////
         var upgrades = [[0,0,0],[0,0,0],[0,0,0]];
 
-        var nameCounter = 1;
+        var x= 100;
+        var y= 100;
+
+        var nameCounter = 0;
         for(var i = 0; i< 3; i++){
             for(var j = 0; j< 3; j++){
                 pos = {     width: image[names[nameCounter]].width,
                             height: image[names[nameCounter]].height,
-                            topX: (j*70) + 10,
-                            topY: (i*70) + 10
+                            topX: findX(j,x),
+                            topY: findY(i,y)
                 };
 
                 upgrades[i][j] = new Button(pos, image[names[nameCounter]], this.buyUpgrade.bind(this))
@@ -294,12 +298,10 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
                 for(var j = 0; j < 3; j++){ 
                     pos = {     width: image['unavalible'].width,
                             height: image['unavalible'].height,
-                            topX: (j*70) + 10,
-                            topY: (i*70) + 10
+                            topX: findX(j,x),
+                            topY: findY(i,y)
                      };
-
-                    unavailabe[i][j] = new Button(pos, image['unavalible'], undefined);
-                
+                    unavailabe[i][j] = new Button(pos, image['unavalible'], undefined); 
                 }
             }
 
@@ -311,14 +313,14 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
         ///////////////////////////////////////////
 
         var bought = [[0,0,0],[0,0,0],[0,0,0]];
-        nameCounter = 10;
+        nameCounter = 9;
         for(var i = 0; i < 3; i++){
                 for(var j = 0; j < 3; j++){ 
                     console.log(names[nameCounter])
                     pos = {     width: image[names[nameCounter]].width,
                             height: image[names[nameCounter]].height,
-                            topX: (j*70) + 10,
-                            topY: (i*70) + 10
+                            topX: findX(j,x),
+                            topY: findY(i,y)
                      };
 
                     bought[i][j] = new Button(pos, image[names[nameCounter]], undefined);
@@ -329,22 +331,24 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
        
         buyMenu.push(bought);
     }
-<<<<<<< HEAD
-    //TODO: TEMP -> kannski þarf að breyta þessu input-i í einhvað gáfulegra
-    this.displays.push(new Display([/*image['UpgradeMenu']*/], buttons, buyMenu, undefined));
-    console.log(this.displays);
-=======
-    this.displays.push(new Display([image['UpgradeMenu']], buttons, buyMenu));
->>>>>>> 5552dfe4175c9daa7ec477b4126b585777a49f38
+    this.displays.push(new Display([/*image['UpgradeMenu']*/], buttons, buyMenu));
 
+}
+
+function findX(j,x){
+    return x+(j*110) + 10;
+}
+
+function findY(i,y){
+    return y+(i*110) + 10;
 }
 
 
 gameEngine.prototype.update = function(time){
 
-    var currentCurrency = this.userdata.getCurrency();
-    var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor());
-    var gained = currency - currentCurrency;
+        var currentCurrency = this.userdata.getCurrency();
+        var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor());
+        var gained = currency - currentCurrency;
     if (this.isFriend) {    
         this.score += gained;
     }
@@ -406,7 +410,7 @@ gameEngine.prototype.receiveInputs = function(e){
     }else{
         this.displays[this.displayScreen].findButtonForClick(e);
     }
-	//implementa
+    //implementa
 }
 
 gameEngine.prototype.buyUpgrade = function(index){  
@@ -512,7 +516,7 @@ gameEngine.prototype.buyUpgrade = function(index){
             
         }
     }
-	//implementa
+    //implementa
 }
 
 //láta hann taka inn factor frá´user data. þessi callback milli prótótýpa er vonlaus
@@ -520,7 +524,7 @@ gameEngine.prototype.punch = function(){
 
     if (this.isFriend) {
         console.log('inn í punch');
-    	this.userdata.currency += 1 * this.userdata.treeFactor;
+        this.userdata.currency += 1 * this.userdata.treeFactor;
 
         this.score += 1 * this.userdata.treeFactor;
 
@@ -623,7 +627,7 @@ gameEngine.prototype.exit = function(){
         this.audio['exit'].cloneNode().play();
     }
 
-	console.log('inn í exit');
+    console.log('inn í exit');
     var exit  = $('#exit');
     var field = exit[0][0];
     var scoreField = exit[0][1];

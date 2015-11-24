@@ -231,7 +231,7 @@ function init(){
       console.log('game engine done...starting game');
 
       console.log("HTML buttons setup [begin] " );
-      Buttons.init( leikur );
+      Buttons.init( leikur, isFriend );
       console.log("HTML buttons setup [done] " );
 
       g_canvas.onmousedown = function(e){
