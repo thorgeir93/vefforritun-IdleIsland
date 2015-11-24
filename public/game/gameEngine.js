@@ -27,7 +27,7 @@ function gameEngine(image, audio, user, userData, isFriend){
         //              THE UPGRADES DISPLAY 1
         ////////////////////////////////////////////////////////
 
-        var names = ['exit', 'item1upgrade1', 'item2upgrade1', 'item3upgrade1', 'item1upgrade2', 'item2upgrade2', 'item3upgrade2', 'item1upgrade3', 'item2upgrade3', 'item3upgrade3' ,'item1upgrade1_bought', 'item2upgrade1_bought', 'item3upgrade1_bought', 'item1upgrade2_bought', 'item2upgrade2_bought', 'item3upgrade2_bought', 'item1upgrade3_bought', 'item2upgrade3_bought', 'item3upgrade3_bought'];
+        var names = ['item1upgrade1', 'item2upgrade1', 'item3upgrade1', 'item1upgrade2', 'item2upgrade2', 'item3upgrade2', 'item1upgrade3', 'item2upgrade3', 'item3upgrade3' ,'item1upgrade1_bought', 'item2upgrade1_bought', 'item3upgrade1_bought', 'item1upgrade2_bought', 'item2upgrade2_bought', 'item3upgrade2_bought', 'item1upgrade3_bought', 'item2upgrade3_bought', 'item3upgrade3_bought'];
 
         this.makeUpgradeDisplay(names, image, 0);
 
@@ -72,18 +72,6 @@ function gameEngine(image, audio, user, userData, isFriend){
         buttons.push(new Button(pos, image['tree'], undefined));
     }    
  
-    //takki3 - exit takki
-   /* pos = {     width: image['exit'].width,
-                        height: image['exit'].height,
-
-                        topX: 40,
-                        topY: 40
-          };
-
-*/
-
-
-    buttons.push(new Button(pos, image['exit'], this.exit.bind(this)));
 
 
     var Sprites = [];
@@ -162,7 +150,7 @@ function gameEngine(image, audio, user, userData, isFriend){
     topX = 200;
     topY = 200;
 
-    sprite = [];
+    
 
     sprite.push(animation = new Sprite(image['mole1'],46,38,topX,topY,1, 20, 1.5, true));
     sprite.push(animation = new Sprite(image['mole2'],46,38,topX,topY,1, 20, 1.5, true));
@@ -180,6 +168,16 @@ function gameEngine(image, audio, user, userData, isFriend){
     sprite.push(animation = new Sprite(image['kall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));    
 
     Sprites.push(sprite);
+
+    sprite = [];
+
+    sprite.push(animation = new Sprite(image['kall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
+    sprite.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
+    sprite.push(animation = new Sprite(image['kall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));    
+
+    Sprites.push(sprite);
+
+
 
     this.displays.push(new Display(buttons, undefined, Sprites));
 
