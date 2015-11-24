@@ -246,7 +246,9 @@ function init(){
       console.log('game engine done...starting game');
 
       console.log("HTML buttons setup [begin] " );
-      Buttons.init( leikur, isFriend );
+      console.log(userData);
+      //debugger;
+      Buttons.init( leikur, isFriend);
       console.log("HTML buttons setup [done] " );
 
       document.onmousedown = function(e){

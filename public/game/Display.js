@@ -1,6 +1,7 @@
 'use strict'
-function Display(buttons,upgrades, sprite){
 
+function Display(buttons,upgrades, sprite){
+	
 	this.Buttons = buttons;
 	this.upgrades = upgrades;
 	
@@ -9,16 +10,7 @@ function Display(buttons,upgrades, sprite){
 	}
 	this.animationFrame = 0;
 	this.animationCurrentTime = 0;
-	this.showArrow = false;
 
-	/*var pos = {     width: this.image.width,
-                        height: this.image.height,
-                            topX: coconutPos.x,
-                            topY: coconutPos.y
-                   };
-
-  var coconut = new Coconut(pos,this.image,undefined);
-	this.coconuts = [coconut];*/
 }
 
 Display.prototype.Buttons = undefined;
@@ -27,6 +19,8 @@ Display.prototype.coconuts = [];
 Display.prototype.showArrow = false;
 
 Display.prototype.sprites = undefined;
+
+
 
 Display.prototype.render = function(currency, score, isFriend, upgrades){
 	//g_ctx.aglobalAlpha = 0.0;

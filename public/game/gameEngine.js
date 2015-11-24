@@ -338,6 +338,7 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
         buyMenu.push(bought);
     }
 
+
     this.displays.push(new Display(buttons, buyMenu));
 
 
@@ -360,6 +361,7 @@ gameEngine.prototype.update = function(time){
     if (this.isFriend) {    
         this.score += gained;
     }
+
     if(this.displayScreen === this.lvl1){
 
         for(var i = 0; i < gained && i < 1; i++){

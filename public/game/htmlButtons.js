@@ -34,7 +34,7 @@ var Buttons = (function() {
 	var skyElement;
 	var seaElement;
 
-	function init( game, isFriend  ){
+	function init( game, isFriend){
 		console.log( "button init!" );
 
 		theGame = game;
@@ -46,7 +46,7 @@ var Buttons = (function() {
 
 		//GET BASE ELEMENTS TO ADD NEW ELEMENTS TO
 		allBackgroundElements = document.querySelector('.backgrounds');
-		circleBtnElements = document.querySelector('.circle-buttons');
+		circleBtnElements = document.querySelector('.upg');
 		arrowsBtnElements = document.querySelector('.arrows-buttons');
 		formBtnElement = document.querySelector('.sett');//.children[1];
 		allBtnElements = document.querySelector('.buttons');
@@ -112,6 +112,19 @@ var Buttons = (function() {
 				theGame.exit();
 			}
 		};
+
+ 		
+ 		/*console.log( userData.upgrades1 );
+ 		debugger;
+*/
+		console.log( "displays[2] ");
+		console.dir( displays[2] );
+		if( displays[2].showArrow ) {
+			removeHidden( buttons.levelDown );
+			//var action = (displays[2].showArrow) ? removeHidden : addHidden; 
+			//action( buttons.levelDown );
+		}
+		//removeHidden( buttons.levelDown );
 
 
 	}
@@ -337,7 +350,6 @@ var Buttons = (function() {
 			if( element === visibleElements[i] ){
 				visibleElements.splice(i,1);
 			}
-			
 		}
 	}
 
