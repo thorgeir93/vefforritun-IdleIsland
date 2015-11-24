@@ -142,9 +142,11 @@ function gameEngine(image, audio, user, userData, isFriend){
     var animationTime = 0.7;
     var scale = 0.5;
 
-    sprite.push(animation = new Sprite(image['kall'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
-    sprite.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
-    sprite.push(animation = new Sprite(image['kall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
+    console.log('before image');
+    console.log(image['mole3']);
+    sprite.push(animation = new Sprite(image['mole1'],46,38,topX,topY,1, 20, 1.5, true));
+    sprite.push(animation = new Sprite(image['mole2'],46,38,topX,topY,1, 20, 1.5, true));
+    sprite.push(animation = new Sprite(image['mole3'],44,38,topX,topY,1, 20, 1.5, true));
     sprite.push(animation = new Sprite(image['kall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
 
     Sprites.push(sprite);

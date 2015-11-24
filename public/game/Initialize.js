@@ -129,7 +129,11 @@ function imagePreload(callback){
 
       tube1         : "game/images/tube_animation-upgrade-1.png",
       tube2         : "game/images/tube_animation-upgrade-2.png",
-      tube3         : "game/images/tube_animation-upgrade-3.png"
+      tube3         : "game/images/tube_animation-upgrade-3.png",
+
+      mole1         : "game/images/mole_animation-upgrade-1.png",
+      mole2         : "game/images/mole_animation-upgrade-2.png",
+      mole3         : "game/images/mole_animation-upgrade-3.png"
 
 
       };
