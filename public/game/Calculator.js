@@ -27,6 +27,21 @@ Calculator.prototype.calculateCurrency = function(time, currency, currFactor){
 
 };
 
+Calculator.prototype.calculateCurrencyOffline = function(time, currency, currFactor){
+	var tala = (time/1000)*currFactor;
+	var intTala = parseInt(tala, 10)
+	var difference = tala - intTala;
+	this.difference += difference;
+	if(this.difference >= 1){
+		this.difference -= 1;
+		intTala += 1;
+	}	
+
+	return intTala;
+
+
+};
+
 Calculator.prototype.calculateTreeFactor = function(upgrades,upgrades2){
 
 	var factor = 0;
@@ -51,6 +66,15 @@ Calculator.prototype.calculateTreeFactor = function(upgrades,upgrades2){
 Calculator.prototype.calculateOfflineCurrency = function(date, currency, factor){
 	var timeElapsedInSecs = (Date.now() - date);
 	var curr = this.calculateCurrency(timeElapsedInSecs,currency, factor);
+	console.log(timeElapsedInSecs,curr)
+	return curr;
+
+
+};
+
+Calculator.prototype.calculateOfflineScore = function(date, currency, factor){
+	var timeElapsedInSecs = (Date.now() - date);
+	var curr = this.calculateCurrencyOffline(timeElapsedInSecs,currency, factor);
 	console.log(timeElapsedInSecs,curr)
 	return curr;
 

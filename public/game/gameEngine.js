@@ -12,26 +12,26 @@ function gameEngine(image, audio, user, userData, isFriend){
 	this.calculator = new Calculator();
     this.coconutImage = image['coconut'];
     this.userdata.setCurrency(this.calculator.calculateOfflineCurrency(this.userdata.timestamp,this.userdata.getCurrency(), this.userdata.getCurrFactor()));
-    this.score = this.userdata.score + this.calculator.calculateOfflineCurrency(this.userdata.timestamp,this.userdata.getCurrency(), this.userdata.getCurrFactor());
+    this.score = this.userdata.score + this.calculator.calculateOfflineScore(this.userdata.timestamp,this.userdata.getCurrency(), this.userdata.getCurrFactor());
+    
     this.displayScreen = this.lvl1;
     this.audio = audio;
     this.isFriend = isFriend;
 
-
-    //this.userdata.currency = 1000000000;
+    this.userdata.currency = 1000000000000000;
 
     if (isFriend) {
 
         ////////////////////////////////////////////////////////
         //              THE UPGRADES DISPLAY 1
         ////////////////////////////////////////////////////////
-        var names = ['backButton', 'item1upgrade1', 'item2upgrade1', 'item3upgrade1', 'item1upgrade2', 'item2upgrade2', 'item3upgrade2', 'item1upgrade3', 'item2upgrade3', 'item3upgrade3'];
+        var names = ['backButton', 'item1upgrade1', 'item2upgrade1', 'item3upgrade1', 'item1upgrade2', 'item2upgrade2', 'item3upgrade2', 'item1upgrade3', 'item2upgrade3', 'item3upgrade3' ,'item1upgrade1_bought', 'item2upgrade1_bought', 'item3upgrade1_bought', 'item1upgrade2_bought', 'item2upgrade2_bought', 'item3upgrade2_bought', 'item1upgrade3_bought', 'item2upgrade3_bought', 'item3upgrade3_bought'];
         this.makeUpgradeDisplay(names, image, 0);
 
         ////////////////////////////////////////////////////////
         //              THE UPGRADES DISPLAY 2
         ////////////////////////////////////////////////////////
-        names = ['backButton', 'item4upgrade1', 'item5upgrade1', 'item6upgrade1', 'item4upgrade2', 'item5upgrade2', 'item6upgrade2', 'item4upgrade3', 'item5upgrade3', 'item6upgrade3'];
+        names = ['backButton', 'item4upgrade1', 'item5upgrade1', 'item6upgrade1', 'item4upgrade2', 'item5upgrade2', 'item6upgrade2', 'item4upgrade3', 'item5upgrade3', 'item6upgrade3', 'item4upgrade1_bought', 'item5upgrade1_bought', 'item6upgrade1_bought', 'item4upgrade2_bought', 'item5upgrade2_bought', 'item6upgrade2_bought', 'item4upgrade3_bought', 'item5upgrade3_bought', 'item6upgrade3_bought'];
         this.makeUpgradeDisplay(names, image, 1);
 
         ////////////////////////////////////////////////////////
@@ -69,12 +69,9 @@ function gameEngine(image, audio, user, userData, isFriend){
 
     backgroundImages.push(image['gamesandthree']);
 
-    var upgradesForScreens = [];
 
-
-    upgradesForScreens.push(this.makeItemImages(['item1upgrade1','item1upgrade2','item1upgrade3'], 500, 500, image));
-    upgradesForScreens.push(this.makeItemImages(['item2upgrade1','item2upgrade2','item2upgrade3'], 300, 542, image));
-    upgradesForScreens.push(this.makeItemImages(['item3upgrade1','item3upgrade2','item3upgrade3'], 178, 498, image));
+    var Sprites = [];
+    var sprite = [];
 
     var numberOfFrames = 5;
     var frameheight = image['kall'].height;
@@ -84,12 +81,39 @@ function gameEngine(image, audio, user, userData, isFriend){
     var animationTime = 0.7;
     var scale = 0.5;
 
-    var animation = new Sprite(image['kall'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale);
+    sprite.push(animation = new Sprite(image['kall'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
+    sprite.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
+    sprite.push(animation = new Sprite(image['kall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
+    sprite.push(animation = new Sprite(image['kall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
 
-    this.displays.push(new Display(backgroundImages, buttons,undefined,upgradesForScreens,animation));
+    Sprites.push(sprite);
+
+    topX = 665;
+    topY = 380;
+
+    sprite = [];
+
+    sprite.push(animation = new Sprite(image['vel1'],137,92,topX,topY,0.7, 8, 1, true));    
+    sprite.push(animation = new Sprite(image['kall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
+    sprite.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
+
+    Sprites.push(sprite);
+
+    topX = 345;
+    topY = 200;
+
+    sprite = [];
+
+    sprite.push(animation = new Sprite(image['tube1'],243,147,topX,topY,animationTime, 3, 1.3, true));
+    sprite.push(animation = new Sprite(image['tube2'],243,147,topX,topY,animationTime, 3, 1.3, true));
+    sprite.push(animation = new Sprite(image['tube3'],243,147,topX,topY,animationTime, 3, 1.3, true));    
+
+    Sprites.push(sprite);
+
+    this.displays.push(new Display(backgroundImages, buttons,undefined, Sprites));
 
     /////////////////////////////////////////////////
-    //                  LEVEL TWO
+    //                  Sp TWO
     ////////////////////////////////////////////////
 
     //takki1 - tré
@@ -106,17 +130,48 @@ function gameEngine(image, audio, user, userData, isFriend){
     }    
    
     backgroundImages = [];
-    //backgroundImages.push(image['gamesky'])
-    //backgroundImages.push(image['gameseaseven']);
-    //backgroundImages.push(image['gameseasix']);
 
-    upgradesForScreens = [];
+    var Sprites = [];
+    var sprite = [];
 
-    upgradesForScreens.push(this.makeItemImages(['item4upgrade1','item4upgrade2','item4upgrade3'], 100, 100, image));
-    upgradesForScreens.push(this.makeItemImages(['item5upgrade1','item5upgrade2','item5upgrade3'], 200, 200, image));
-    upgradesForScreens.push(this.makeItemImages(['item6upgrade1','item6upgrade2','item6upgrade3'], 300, 300, image));
+    var numberOfFrames = 5;
+    var frameheight = image['kall'].height;
+    var framewidth = image['kall'].width / numberOfFrames;
+    var topX = 360;
+    var topY = 380;
+    var animationTime = 0.7;
+    var scale = 0.5;
 
-    this.displays.push(new Display(backgroundImages, buttons, undefined, upgradesForScreens));
+    sprite.push(animation = new Sprite(image['kall'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
+    sprite.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
+    sprite.push(animation = new Sprite(image['kall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
+    sprite.push(animation = new Sprite(image['kall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
+
+    Sprites.push(sprite);
+
+    topX = 460;
+    topY = 380;
+
+    sprite = [];
+
+    sprite.push(animation = new Sprite(image['kall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));    
+    sprite.push(animation = new Sprite(image['kall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
+    sprite.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
+
+    Sprites.push(sprite);
+
+    topX = 660;
+    topY = 380;
+
+    sprite = [];
+
+    sprite.push(animation = new Sprite(image['kall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
+    sprite.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
+    sprite.push(animation = new Sprite(image['kall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));    
+
+    Sprites.push(sprite);
+
+    this.displays.push(new Display(backgroundImages, buttons, undefined, Sprites));
 
 
     console.log(this.displays);
@@ -160,26 +215,6 @@ function getWidthHeight(img){
     return {w:img.width, h:img.height};
 };
 
-
-
-
-gameEngine.prototype.makeItemImages = function(names, x, y, images){
-    var buttons = [];
-
-    for(var i = 0; i < 3; i++){
-
-        pos = {     width: images[names[i]].width,
-                        height: images[names[i]].height,
-                        topX: x,
-                        topY: y
-          };
-
-        buttons.push(new Button(pos, images[names[i]], undefined));
-
-    }
-
-    return buttons;
-}
 
 gameEngine.prototype.lvl1 = 2;
 gameEngine.prototype.lvl2 = 3;
@@ -276,24 +311,26 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
         ///////////////////////////////////////////
 
         var bought = [[0,0,0],[0,0,0],[0,0,0]];
-
+        nameCounter = 10;
         for(var i = 0; i < 3; i++){
                 for(var j = 0; j < 3; j++){ 
-                    pos = {     width: image['bought'].width,
-                            height: image['bought'].height,
+                    console.log(names[nameCounter])
+                    pos = {     width: image[names[nameCounter]].width,
+                            height: image[names[nameCounter]].height,
                             topX: (j*70) + 10,
                             topY: (i*70) + 10
                      };
 
-                    bought[i][j] = new Button(pos, image['bought'], undefined);
-                
+                    bought[i][j] = new Button(pos, image[names[nameCounter]], undefined);
+                    nameCounter++;
                 }
             }
 
        
         buyMenu.push(bought);
     }
-    this.displays.push(new Display([image['UpgradeMenu']], buttons, buyMenu, undefined));
+
+    this.displays.push(new Display([image['UpgradeMenu']], buttons, buyMenu));
 
 }
 
@@ -309,7 +346,10 @@ gameEngine.prototype.update = function(time){
     if(this.displayScreen === this.lvl1){
         for(var i = 0; i < gained; i++){
 
-            this.displays[this.displayScreen].sprite.shouldAnimate = true;
+            for(var i = 0; i<4; i++){
+
+                this.displays[this.displayScreen].sprites[0][i].shouldAnimate = true;
+            }   
 
             var pos = {     width: this.coconutImage.width,
                         height: this.coconutImage.height,
@@ -326,7 +366,7 @@ gameEngine.prototype.update = function(time){
     
     if (this.isFriend) {
         this.userdata.setCurrency(currency);
-    }
+    } 
     this.displays[this.displayScreen].update(time);
 
 };
@@ -336,9 +376,9 @@ gameEngine.prototype.render = function(){
     this.displays[this.displayScreen].render(this.userdata.currency, this.score, this.isFriend);
     console.log(this.score);
     if(this.displayScreen === this.lvl1){
-        this.displays[this.displayScreen].renderItemsOnScreen(this.userdata.upgrades1);
+        this.displays[this.displayScreen].renderSprites(this.userdata.upgrades1);
     }else if(this.displayScreen === this.lvl2){
-        this.displays[this.displayScreen].renderItemsOnScreen(this.userdata.upgrades2);
+        this.displays[this.displayScreen].renderSprites(this.userdata.upgrades2);
     }
 
     if(this.displayScreen === this.UpgrLvl1){
@@ -401,6 +441,7 @@ gameEngine.prototype.buyUpgrade = function(index){
                 if(index[1]< 1 && index[0] === 0 ){
                     this.userdata.upgrades1[index[0]][index[1]+2] = 0;
                 }
+
 
                 this.userdata.currency -= this.calculator.prices1[index[0]][index[1]];
             
@@ -490,7 +531,10 @@ gameEngine.prototype.punch = function(){
             this.displays[this.displayScreen].createCoconut(coconut);
         }
 
-        this.displays[this.displayScreen].sprite.shouldAnimate = true;
+        for(var i = 0; i<4; i++){
+
+            this.displays[this.displayScreen].sprites[0][i].shouldAnimate = true;
+        }
 
         if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
 
