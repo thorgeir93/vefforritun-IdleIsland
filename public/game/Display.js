@@ -9,7 +9,16 @@ function Display(buttons,upgrades, sprite){
 	}
 	this.animationFrame = 0;
 	this.animationCurrentTime = 0;
+	this.showArrow = false;
 
+	/*var pos = {     width: this.image.width,
+                        height: this.image.height,
+                            topX: coconutPos.x,
+                            topY: coconutPos.y
+                   };
+
+  var coconut = new Coconut(pos,this.image,undefined);
+	this.coconuts = [coconut];*/
 }
 
 Display.prototype.Buttons = undefined;
@@ -81,6 +90,7 @@ Display.prototype.renderSprites = function(upgrades){
 				if(i === 0){
 					this.sprites[i][j+1].draw(this.sprites[i][j+1].CurrentFrame)
 				}else{
+
 					this.sprites[i][j].draw(this.sprites[i][j].CurrentFrame)
 				}
 				
@@ -89,7 +99,6 @@ Display.prototype.renderSprites = function(upgrades){
 				j = 3;
 				
 			}
-
 		}
 		console.log('');
 	}
@@ -101,11 +110,10 @@ Display.prototype.renderSprites = function(upgrades){
 
 Display.prototype.destroyCoconuts = function(){
 	this.coconuts = [];
-
 }
 
 Display.prototype.createCoconut = function(coconut){
-	this.coconuts.push(coconut)
+		this.coconuts.push(coconut);
 }
 
 Display.prototype.update = function(dt){
@@ -145,24 +153,37 @@ Display.prototype.update = function(dt){
 };*/
 
 
+//var num = 0;
 
 var counter = 0;
 Display.prototype.renderUpgrades = function(upgrades){
 
 	for(var i = 0; i < 3; i++){
 		for(var j = 0; j < 3; j++){	
-
-
+			//num++;
 			if(upgrades[i][j] === 0){
-				g_ctx.drawImage(this.upgrades[1][i][j].image, this.upgrades[1][i][j].getPosition().x, this.upgrades[1][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[1][i][j].image, this.upgrades[1][i][j].getPosition().x, this.upgrades[1][i][j].getPosition().y);
 			}else if(upgrades[i][j] === 1){
-				g_ctx.drawImage(this.upgrades[0][i][j].image, this.upgrades[0][i][j].getPosition().x, this.upgrades[0][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[0][i][j].image, this.upgrades[0][i][j].getPosition().x, this.upgrades[0][i][j].getPosition().y);
 			}else if(upgrades[i][j] === 2){
-				g_ctx.drawImage(this.upgrades[2][i][j].image, this.upgrades[2][i][j].getPosition().x, this.upgrades[2][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[2][i][j].image, this.upgrades[2][i][j].getPosition().x, this.upgrades[2][i][j].getPosition().y);
 			}
-		
 		}
 	}
+	//debugger;
+	//console.log(num);
+};
+
+
+Display.prototype.drawUpgrade = function(ctx, image, x, y, w, h){
+	
+	ctx.drawImage(image, x, y);
+
+	//draw rectangle around the image
+	ctx.rect(x, y, image.width, image.height);
+	ctx.stroke();
+	ctx.strokeStyle = 'white';
+	ctx.lineWidth = 4;
 };
 
 

@@ -7,6 +7,7 @@ var g_ctx = g_canvas.getContext("2d");
 var g_canvasW = g_canvas.parentElement.clientWidth;
 var g_canvasH = g_canvas.parentElement.clientHeight;
 
+g_ctx.globalCompositeOperation='destination-over';
 
 var islandPos = { 
   x:(g_canvasW/10), 
@@ -21,6 +22,11 @@ var treePos = {
 var coconutPos = {
   x:(treePos.x+170),
   y:(treePos.y+60)
+};
+
+var manPos = {
+  x:(treePos.x+240),
+  y:(treePos.y+280)
 };
 
 
@@ -117,7 +123,7 @@ function imagePreload(callback){
 
 
 
-      unavalible    : "game/images/unavalible.png",
+      unavalible    : "game/images/game-upgrade-lock-02.png",//"game/images/unavalible.png",
       kall          : "game/images/kall_animation.png",
       kall1         : "game/images/kall_animation-upgrade-1.png",
       kall2         : "game/images/kall_animation-upgrade-2.png",
@@ -129,7 +135,15 @@ function imagePreload(callback){
 
       veidistong1   : "game/images/veidistong_animation-upgrade-1.png",
       veidistong2   : "game/images/veidistong_animation-upgrade-2.png",
-      veidistong3   : "game/images/veidistong_animation-upgrade-3.png"
+      veidistong3   : "game/images/veidistong_animation-upgrade-3.png",
+
+
+      mole2         : "game/images/mole_animation-upgrade-1.png",
+      mole1         : "game/images/mole_animation-upgrade-2.png",
+      mole3         : "game/images/mole_animation-upgrade-3.png",
+
+      molekall      : "game/images/molekall_animation.png"
+
 
 
       };
@@ -230,7 +244,7 @@ function init(){
       console.log('game engine done...starting game');
 
       console.log("HTML buttons setup [begin] " );
-      Buttons.init( leikur );
+      Buttons.init( leikur, isFriend );
       console.log("HTML buttons setup [done] " );
 
       g_canvas.onmousedown = function(e){
