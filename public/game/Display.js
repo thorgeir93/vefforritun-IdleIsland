@@ -100,7 +100,6 @@ Display.prototype.renderSprites = function(upgrades){
 				
 			}
 		}
-		console.log('');
 	}
 
 	if(flag){
@@ -142,18 +141,6 @@ Display.prototype.update = function(dt){
 	}
 }
 
-/*Display.prototype.drawAt = function (ctx, x, y) {
-	ctx.fillRect(0,0,1000,600);
-
-	for(var i = 0; i<this.image.length; i++){
-
-		ctx.drawImage(this.image[i], x, y);
-		
-	}
-};*/
-
-
-//var num = 0;
 
 var counter = 0;
 Display.prototype.renderUpgrades = function(upgrades){
@@ -170,8 +157,6 @@ Display.prototype.renderUpgrades = function(upgrades){
 			}
 		}
 	}
-	//debugger;
-	//console.log(num);
 };
 
 
@@ -180,10 +165,11 @@ Display.prototype.drawUpgrade = function(ctx, image, x, y, w, h){
 	ctx.drawImage(image, x, y);
 
 	//draw rectangle around the image
+	ctx.beginPath();
 	ctx.rect(x, y, image.width, image.height);
-	ctx.stroke();
 	ctx.strokeStyle = 'white';
 	ctx.lineWidth = 4;
+	ctx.stroke();
 };
 
 
@@ -194,18 +180,12 @@ Display.prototype.findButtonForClick = function(e,upgrades){
 
 	for (var i = 0; i < this.Buttons.length; i++) {
 		
-		if(!(this.Buttons[i].image.name === "downLvl")){
-			var cords = this.Buttons[i].getPosition();
-			if(cords.x <= mouseX && mouseX <= cords.x+cords.width && cords.y <= mouseY && mouseY <= cords.y+cords.height){
-				this.Buttons[i].action();
-			}
-		}else if(this.showArrow){
-			var cords = this.Buttons[i].getPosition();
-			if(cords.x <= mouseX && mouseX <= cords.x+cords.width && cords.y <= mouseY && mouseY <= cords.y+cords.height){
-				this.Buttons[i].action();
-			}
+		var cords = this.Buttons[i].getPosition();
+		if(cords.x <= mouseX && mouseX <= cords.x+cords.width && cords.y <= mouseY && mouseY <= cords.y+cords.height){
+			this.Buttons[i].action();
 		}
 	}
+
 
 	if(this.upgrades){
 		for(var i = 0; i < 3; i++){

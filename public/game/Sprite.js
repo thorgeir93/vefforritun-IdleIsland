@@ -56,7 +56,7 @@ Sprite.prototype.update = function(dt){
 
     if(this.CurrentTime > this.animationTime ){
         this.CurrentTime = 0;
-        if(this.spriteSheet.name === 'kall' || this.spriteSheet.name === 'kall1' || this.spriteSheet.name === 'kall2' ||this.spriteSheet.name === 'kall3'){
+        if(this.spriteSheet.name === 'kall' || this.spriteSheet.name === 'kall1' || this.spriteSheet.name === 'kall2' ||this.spriteSheet.name === 'kall3'||this.spriteSheet.name === 'molekall'){
 
             this.shouldAnimate = false;
         }

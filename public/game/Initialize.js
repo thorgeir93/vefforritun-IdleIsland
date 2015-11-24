@@ -37,14 +37,14 @@ var upgradePos = {
 };
 
 var veidistong = {
-  x:(g_canvasW-670),
-  y:450
+  x:islandPos.x+580,
+  y:islandPos.y
 }
 
 
-var machine = {
-  x:(g_canvasW-850),
-  y:450
+var birdPos = {
+  x:treePos.x+300,
+  y:treePos.y-140
 }
 
 
@@ -124,13 +124,15 @@ function imagePreload(callback){
 
 
       unavalible    : "game/images/game-upgrade-lock-02.png",//"game/images/unavalible.png",
+
       kall          : "game/images/kall_animation.png",
       kall1         : "game/images/kall_animation-upgrade-1.png",
       kall2         : "game/images/kall_animation-upgrade-2.png",
       kall3         : "game/images/kall_animation-upgrade-3.png",
 
-      vel1          : "game/images/vel_animation-upgrade-1.png",
-      vel2          : "game/images/vel_animation-upgrade-2.png",
+      bird1         : "game/images/bird_animation-upgrade-1.png",
+      bird2         : "game/images/bird_animation-upgrade-2.png",
+      bird3         : "game/images/bird_animation-upgrade-3.png",
 
 
       veidistong1   : "game/images/veidistong_animation-upgrade-1.png",
@@ -247,7 +249,8 @@ function init(){
       Buttons.init( leikur, isFriend );
       console.log("HTML buttons setup [done] " );
 
-      g_canvas.onmousedown = function(e){
+      document.onmousedown = function(e){
+
         leikur.receiveInputs(e);
       }
       
