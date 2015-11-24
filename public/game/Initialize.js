@@ -36,6 +36,17 @@ var upgradePos = {
   y:(30)
 };
 
+var veidistong = {
+  x:(g_canvasW-670),
+  y:450
+}
+
+
+var machine = {
+  x:(g_canvasW-850),
+  y:450
+}
+
 
 
 var leikur = undefined;
@@ -62,22 +73,9 @@ function imagePreload(callback){
 
     var requiredImages = {
       tree        : "game/images/game-coconut-tree.png",
-      upgradeMenu : "game/images/game-button-upgrade.png",
-
-      gamesky    : "game/images/game-sky-8.png",
-      gameseaseven: "game/images/game-sea-7.png",
-      gameseasix: "game/images/game-sea-6.png",
-      gameseafive: "game/images/game-sea-5.png",
-      gameseafour: "game/images/game-sea-4.png",
-      gameseatwo: "game/images/game-sea-2.png",
-      gameseaone: "game/images/game-sea-1.png",
-      gamesandthree: "game/images/game-sand-3-01.png",
-      UpgradeMenu   : "game/images/UggradeMenu.png",
-      backButton    : "game/images/backButton.png",
       coconut       : "game/images/game-coconut-money.png",
       exit          : "game/images/game-button-exit.png",
-      downLvl       : "game/images/uplvl.png",
-      upLvl         : "game/images/downlvl.png",
+      island        : "game/images/game-sand-3-01.png",
 
 
       item1upgrade1         : "game/images/item1upgrade1.png",
@@ -131,11 +129,21 @@ function imagePreload(callback){
       kall2         : "game/images/kall_animation-upgrade-2.png",
       kall3         : "game/images/kall_animation-upgrade-3.png",
 
-      vel1          : "game/images/vel_animation2.png",
+      vel1          : "game/images/vel_animation-upgrade-1.png",
+      vel2          : "game/images/vel_animation-upgrade-2.png",
 
-      tube1         : "game/images/tube_animation-upgrade-1.png",
-      tube2         : "game/images/tube_animation-upgrade-2.png",
-      tube3         : "game/images/tube_animation-upgrade-3.png"
+
+      veidistong1   : "game/images/veidistong_animation-upgrade-1.png",
+      veidistong2   : "game/images/veidistong_animation-upgrade-2.png",
+      veidistong3   : "game/images/veidistong_animation-upgrade-3.png",
+
+
+      mole2         : "game/images/mole_animation-upgrade-1.png",
+      mole1         : "game/images/mole_animation-upgrade-2.png",
+      mole3         : "game/images/mole_animation-upgrade-3.png",
+
+      molekall      : "game/images/molekall_animation.png"
+
 
 
       };
