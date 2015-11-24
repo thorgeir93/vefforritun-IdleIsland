@@ -1,7 +1,6 @@
 'use strict'
-function Display(image,buttons,upgrades, sprite){
-	
-	this.image = image;
+function Display(buttons,upgrades, sprite){
+
 	this.Buttons = buttons;
 	this.upgrades = upgrades;
 	
@@ -23,7 +22,6 @@ function Display(image,buttons,upgrades, sprite){
 }
 
 Display.prototype.Buttons = undefined;
-Display.prototype.image = undefined;
 Display.prototype.upgrades = undefined;
 Display.prototype.coconuts = [];
 Display.prototype.showArrow = false;
@@ -36,7 +34,7 @@ Display.prototype.render = function(currency, score, isFriend, upgrades){
 	//console.log(g_canvasW);
 	g_ctx.clearRect(0,0,g_canvasW,g_canvasH);
 	g_ctx.fillStyle = 'rgba(0, 0, 0, 0.0)';
-	this.drawAt(g_ctx, islandPos.x, islandPos.y);
+	//this.drawAt(g_ctx, islandPos.x, islandPos.y);
 
 
 	for(var i = 0; i<this.Buttons.length; i++){
@@ -85,20 +83,24 @@ Display.prototype.renderSprites = function(upgrades){
 	var flag = true;
 
 	for(var i = 0; i < 3; i++){
-		for(var j = 0; j < 3; j++ ){
+		for(var j = 2; j > -1; j-- ){
+			
 			if(upgrades[j][i] === 2){
 
 				if(i === 0){
-
 					this.sprites[i][j+1].draw(this.sprites[i][j+1].CurrentFrame)
 				}else{
-					//console.log(this.sprites[i][j].CurrentFrame, this.sprites[i][j].CurrentTime, this.sprites[i][j].shouldAnimate)
+
 					this.sprites[i][j].draw(this.sprites[i][j].CurrentFrame)
 				}
 				
 				flag = false;
+				i++;
+				j = 3;
+				
 			}
 		}
+		console.log('');
 	}
 
 	if(flag){
@@ -140,7 +142,7 @@ Display.prototype.update = function(dt){
 	}
 }
 
-Display.prototype.drawAt = function (ctx, x, y) {
+/*Display.prototype.drawAt = function (ctx, x, y) {
 	ctx.fillRect(0,0,1000,600);
 
 	for(var i = 0; i<this.image.length; i++){
@@ -148,7 +150,7 @@ Display.prototype.drawAt = function (ctx, x, y) {
 		ctx.drawImage(this.image[i], x, y);
 		
 	}
-};
+};*/
 
 
 //var num = 0;
