@@ -141,9 +141,15 @@ function gameEngine(image, audio, user, userData, isFriend){
     var topX = 360;
     var topY = 380;
     var animationTime = 1;
-    var scale = 0.5;;
+    var scale = 1;
+
+    console.log('before image');
+    console.log(image['mole3']);
     
     sprite.push(animation = new Sprite(image['molekall'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
+    sprite.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
+    sprite.push(animation = new Sprite(image['kall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
+    sprite.push(animation = new Sprite(image['kall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
 
     Sprites.push(sprite);
 
