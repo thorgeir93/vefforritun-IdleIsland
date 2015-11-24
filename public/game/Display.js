@@ -1,5 +1,5 @@
 'use strict'
-function Display(image,buttons,upgrades, sprite){
+function Display(image,buttons,upgrades, sprite, showArrow){
 	
 	this.image = image;
 	this.Buttons = buttons;
@@ -10,7 +10,12 @@ function Display(image,buttons,upgrades, sprite){
 	}
 	this.animationFrame = 0;
 	this.animationCurrentTime = 0;
-	this.showArrow = false;
+	if(showArrow !== 'undefined'){
+		this.showArrow = showArrow;// this.checkUpgradeStatus( this.upgrades );
+	}
+	//if(image===[]){
+		//debugger;
+	//}
 
 	/*var pos = {     width: this.image.width,
                         height: this.image.height,
@@ -29,6 +34,13 @@ Display.prototype.coconuts = [];
 Display.prototype.showArrow = false;
 
 Display.prototype.sprites = undefined;
+
+/*Display.prototype.checkUpgradeStatus = function( upgrades ){
+	console.log("upgrades")
+	console.dir(upgrades);
+	//debugger;
+	//return (upgrades[0][2] === 2) ? true : false;
+}*/
 
 Display.prototype.render = function(currency, score, isFriend, upgrades){
 	//g_ctx.aglobalAlpha = 0.0;

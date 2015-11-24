@@ -43,6 +43,7 @@ function gameEngine(image, audio, user, userData, isFriend){
         this.displays.push([]);
         this.displays.push([]);
     } 
+    //debugger;
     //takki1 - tré
     var buttons = [];
     var pos = {     width: image['tree'].width,
@@ -332,7 +333,12 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
         buyMenu.push(bought);
     }
 
-    this.displays.push(new Display([/*image['UpgradeMenu']*/], buttons, buyMenu));
+    var showArrow = false;
+    if(this.userdata.upgrades1[0][2] === 2){
+        showArrow = true;
+    }
+    //debugger;
+    this.displays.push(new Display([/*image['UpgradeMenu']*/], buttons, buyMenu, false, showArrow));
 
 }
 
@@ -353,6 +359,7 @@ gameEngine.prototype.update = function(time){
     if (this.isFriend) {    
         this.score += gained;
     }
+
     if(this.displayScreen === this.lvl1){
         
         //TODO: taka þrjá og setja í eitthvað bitastæðara
