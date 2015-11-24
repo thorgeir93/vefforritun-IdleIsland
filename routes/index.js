@@ -153,6 +153,7 @@ function exit(req, res, next){
   if (friend === 'true') {
     var gameState = xss(req.body.submitString);
     var score = xss(req.body.score);
+    console.log(score);
     sql.setGameState(req.session.user, gameState, score, function(){
       console.log('allt gekk upp');
       res.redirect('/menu');
@@ -284,6 +285,8 @@ function play(req, res, next) {
       console.log('success');
     }
     gamestate = dataa;
+    console.log('inníplay');
+    console.log(gamestate);
 
     var data = {userName: req.session.user,
                 userData: gamestate,

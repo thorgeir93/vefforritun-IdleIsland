@@ -331,6 +331,7 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
        
         buyMenu.push(bought);
     }
+
     this.displays.push(new Display([/*image['UpgradeMenu']*/], buttons, buyMenu));
 
 }
@@ -383,7 +384,7 @@ gameEngine.prototype.update = function(time){
 gameEngine.prototype.render = function(){
         
     this.displays[this.displayScreen].render(this.userdata.currency, this.score, this.isFriend);
-
+    console.log(this.score);
     if(this.displayScreen === this.lvl1){
         this.displays[this.displayScreen].renderSprites(this.userdata.upgrades1);
     }else if(this.displayScreen === this.lvl2){
@@ -636,7 +637,6 @@ gameEngine.prototype.exit = function(){
     this.userdata.score = this.score;
     field.value = this.userdata.createJSONstring();
     scoreField.value = this.score;
-    console.log(!this.isFriend);
     checkFriend.value = (this.isFriend).toString();
     exit.submit();
     console.log(exit);
