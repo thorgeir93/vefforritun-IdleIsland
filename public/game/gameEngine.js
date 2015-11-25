@@ -283,8 +283,8 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
             for(var j = 0; j< 3; j++){
                 pos = {     width: image[names[nameCounter]].width,
                             height: image[names[nameCounter]].height,
-                            topX: findX(j,x),
-                            topY: findY(i,y)
+                            topX: findX(j,x, image[names[nameCounter]].width),
+                            topY: findY(i,y, image[names[nameCounter]].height)
                 };
 
                 upgrades[i][j] = new Button(pos, image[names[nameCounter]], this.buyUpgrade.bind(this));
@@ -304,8 +304,8 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
                 for(var k = 0; k < 3; k++){ 
                     pos = {     width: image.unavalible.width,
                                 height: image.unavalible.height,
-                                topX: findX(k,x),
-                                topY: findY(i,y)
+                                topX: findX(k,x, image[names[nameCounter]].width),
+                                topY: findY(i,y, image[names[nameCounter]].height)
                      };
                     unavailabe[i][k] = new Button(pos, image.unavalible, undefined); 
                 }
@@ -325,8 +325,8 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
                     
                     pos = {     width: image[names[nameCounter]].width,
                             height: image[names[nameCounter]].height,
-                            topX: findX(l,x),
-                            topY: findY(i,y)
+                            topX: findX(l,x, image[names[nameCounter]].width),
+                            topY: findY(i,y, image[names[nameCounter]].height)
                      };
 
                     bought[i][l] = new Button(pos, image[names[nameCounter]], undefined);
@@ -344,12 +344,12 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
 
 };
 
-function findX(j,x){
-    return x+(j*110) + 10;
+function findX(j,x, width){
+    return (j*110) + g_canvasW/2 - (2*(110)+width)/2 - 15;
 }
 
-function findY(i,y){
-    return y+(i*110) + 10;
+function findY(i,y, height){
+    return (i*110) + g_canvasH/2 - (2*(110)+height)/2;
 }
 
 //var coc = new Coconut({width:35, height:43, topX:300, topY:300,this.coconutImage,undefined);

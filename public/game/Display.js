@@ -136,7 +136,7 @@ Display.prototype.update = function(dt){
 };
 
 
-var counter = 0;
+//var counter = 0;
 Display.prototype.renderUpgrades = function(upgrades){
 
 	for(var i = 0; i < 3; i++){
