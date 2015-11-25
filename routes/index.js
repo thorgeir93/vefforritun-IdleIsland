@@ -170,7 +170,16 @@ function logout(req, res, next) {
 }
 
 function menu(req, res, next) {
-  res.render('menu', { title: 'Idle Island'});
+  var gamestate;
+      sql.getGameState(req.session.user, function(error, dataa){
+        if(error){
+          console.log(error);
+        }else {
+          console.log('success');
+        }
+        gamestate = dataa;
+        res.render('menu', { title: 'Idle Island', gamestate: gamestate});
+      });
 }
 function developmentViewFriends(req, res, next){
   var friended = ["a", "b", "c"];
@@ -190,16 +199,36 @@ function viewFriends(req, res, next) {
     for (var i = 1; i < friends.length; i++) {
       friended.push(friends[i]);
     }
-    if (friended.length > 0) {
-      res.render('viewFriends', { status: 'Your friends', entries: friended});
-    } else {
-      res.render('viewFriends', { status: 'Get some friends, loser', entries: false});
-    }
+    var gamestate;
+      sql.getGameState(req.session.user, function(error, dataa){
+        if(error){
+          console.log(error);
+        }else {
+          console.log('success');
+        }
+        gamestate = dataa;
+
+        if (friended.length > 0) {
+          res.render('viewFriends', { status: 'Your friends', entries: friended,gamestate: gamestate});
+        } else {
+          res.render('viewFriends', { status: 'Get some friends, loser', entries: false,gamestate: gamestate});
+        }
+      });
   });
 }
 
 function addFriends(req, res, next) {
-  res.render('addFriends', { title: 'Add Friends'});
+  var gamestate;
+      sql.getGameState(req.session.user, function(error, dataa){
+        if(error){
+          console.log(error);
+        }else {
+          console.log('success');
+        }
+        gamestate = dataa;
+
+        res.render('addFriends', { title: 'Add Friends', gamestate: gamestate});
+      });
 }
 
 function addFriendsHandler(req, res, next) {
@@ -255,7 +284,19 @@ function highScores(req, res, next) {
     for(var i = 0; i < result.rows.length; i++) {
       entries.push(result.rows[i]);
     }
-    res.render('highScores', { entries: entries});
+      var gamestate;
+      sql.getGameState(req.session.user, function(error, dataa){
+        if(error){
+          console.log(error);
+        }else {
+          console.log('success');
+        }
+        gamestate = dataa;
+
+        var data = { entries: entries, gamestate: gamestate}
+        
+        res.render('highScores', {data});
+      });
   });
 }
 

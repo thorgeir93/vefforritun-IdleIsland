@@ -1,6 +1,7 @@
 extends layout
 
 block content
+	p(hidden, id = 'gamestate') #{gamestate}
 	//link(rel='stylesheet', href='/stylesheets/addFriends.css')
 	script(src='/game/playTheme.js')
 	div.addFriends
