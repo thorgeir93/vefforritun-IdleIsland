@@ -20,7 +20,7 @@ function gameEngine(image, audio, user, userData, isFriend){
     this.isFriend = isFriend;
     this.time = 0;
 
-    this.userdata.currency = 10000000;
+    //this.userdata.currency = 10000000;
 
     if (isFriend) {
 
