@@ -156,7 +156,7 @@ function gameEngine(image, audio, user, userData, isFriend){
     topX = 200;
     topY = 200;
 
-    
+    sprite = [];
 
     sprite.push(animation = new Sprite(image['mole1'],46,38,topX,topY,1, 20, 1.5, true));
     sprite.push(animation = new Sprite(image['mole2'],46,38,topX,topY,1, 20, 1.5, true));
@@ -166,14 +166,6 @@ function gameEngine(image, audio, user, userData, isFriend){
 
     topX = 660;
     topY = 380;
-
-    sprite = [];
-
-    sprite.push(animation = new Sprite(image['kall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
-    sprite.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
-    sprite.push(animation = new Sprite(image['kall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));    
-
-    Sprites.push(sprite);
 
     sprite = [];
 
