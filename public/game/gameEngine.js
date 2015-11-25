@@ -144,12 +144,12 @@ function gameEngine(image, audio, user, userData, isFriend){
     
     sprite.push(animation = new Sprite(image['molekall1'],frameheight,framewidth,topX,topY,animationTime, 1, 0.5, false));
     sprite.push(animation = new Sprite(image['molekall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, 0.5, false));
-    sprite.push(animation = new Sprite(image['molekall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
+    sprite.push(animation = new Sprite(image['molekall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, 0.75, false));
     sprite.push(animation = new Sprite(image['molekall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
 
     Sprites.push(sprite);
 
-    topX = 400;
+    topX = 800;
     topY = 400;
 
     sprite = [];
@@ -162,12 +162,16 @@ function gameEngine(image, audio, user, userData, isFriend){
 
     topX = 660;
     topY = 380;
+    numberOfFrames = 10;
+    framewidth = image['miner1'].height;
+    framewidth = image['miner1'].width / numberOfFrames;
+    scale = 2;
 
     sprite = [];
 
-    sprite.push(animation = new Sprite(image['kall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
-    sprite.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
-    sprite.push(animation = new Sprite(image['kall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));    
+    sprite.push(animation = new Sprite(image['miner1'],frameheight,framewidth,topX,topY,animationTime,numberOfFrames, scale, true));
+    sprite.push(animation = new Sprite(image['miner2'],frameheight,framewidth,topX,topY,animationTime,numberOfFrames, scale, true));
+    sprite.push(animation = new Sprite(image['miner3'],frameheight,framewidth,topX,topY, animationTime ,numberOfFrames, scale, true));    
 
     Sprites.push(sprite);
 
