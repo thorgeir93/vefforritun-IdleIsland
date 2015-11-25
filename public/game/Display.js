@@ -1,6 +1,6 @@
 'use strict'
 
-function Display(buttons,upgrades, sprite, showArrow){
+function Display(buttons,upgrades, sprite){
 	
 	this.Buttons = buttons;
 	this.upgrades = upgrades;
@@ -10,21 +10,6 @@ function Display(buttons,upgrades, sprite, showArrow){
 	}
 	this.animationFrame = 0;
 	this.animationCurrentTime = 0;
-	if(showArrow !== 'undefined'){
-		this.showArrow = showArrow;// this.checkUpgradeStatus( this.upgrades );
-	}
-	//if(image===[]){
-	//debugger;
-	//}
-
-	/*var pos = {     width: this.image.width,
-                        height: this.image.height,
-                            topX: coconutPos.x,
-                            topY: coconutPos.y
-                   };
-
-  var coconut = new Coconut(pos,this.image,undefined);
-	this.coconuts = [coconut];*/
 }
 
 Display.prototype.Buttons = undefined;
@@ -34,12 +19,7 @@ Display.prototype.showArrow = false;
 
 Display.prototype.sprites = undefined;
 
-/*Display.prototype.checkUpgradeStatus = function( upgrades ){
-	console.log("upgrades")
-	console.dir(upgrades);
-	//debugger;
-	//return (upgrades[0][2] === 2) ? true : false;
-}*/
+
 
 Display.prototype.render = function(currency, score, isFriend, upgrades){
 	//g_ctx.aglobalAlpha = 0.0;
@@ -113,7 +93,10 @@ Display.prototype.renderSprites = function(upgrades){
 				
 			}
 		}
+<<<<<<< HEAD
 		//console.log('');
+=======
+>>>>>>> 62d1c3aa47a89abd57a950ee1ba3b378918aa68d
 	}
 
 	if(flag){
@@ -156,18 +139,6 @@ Display.prototype.update = function(dt){
 	}
 }
 
-/*Display.prototype.drawAt = function (ctx, x, y) {
-	ctx.fillRect(0,0,1000,600);
-
-	for(var i = 0; i<this.image.length; i++){
-
-		ctx.drawImage(this.image[i], x, y);
-		
-	}
-};*/
-
-
-//var num = 0;
 
 var counter = 0;
 Display.prototype.renderUpgrades = function(upgrades){
@@ -194,13 +165,17 @@ Display.prototype.drawUpgrade = function(ctx, image, x, y, transparent){
 	ctx.drawImage(image, x, y);
 
 	//draw rectangle around the image
+	ctx.beginPath();
 	ctx.rect(x, y, image.width, image.height);
 	ctx.strokeStyle = 'white';
 	ctx.lineWidth = 4;
 	ctx.stroke();
+<<<<<<< HEAD
 
 	//reset alpha value
 	ctx.globalAlpha = 1.0;
+=======
+>>>>>>> 62d1c3aa47a89abd57a950ee1ba3b378918aa68d
 };
 
 
@@ -211,18 +186,12 @@ Display.prototype.findButtonForClick = function(e,upgrades){
 
 	for (var i = 0; i < this.Buttons.length; i++) {
 		
-		if(!(this.Buttons[i].image.name === "downLvl")){
-			var cords = this.Buttons[i].getPosition();
-			if(cords.x <= mouseX && mouseX <= cords.x+cords.width && cords.y <= mouseY && mouseY <= cords.y+cords.height){
-				this.Buttons[i].action();
-			}
-		}else if(this.showArrow){
-			var cords = this.Buttons[i].getPosition();
-			if(cords.x <= mouseX && mouseX <= cords.x+cords.width && cords.y <= mouseY && mouseY <= cords.y+cords.height){
-				this.Buttons[i].action();
-			}
+		var cords = this.Buttons[i].getPosition();
+		if(cords.x <= mouseX && mouseX <= cords.x+cords.width && cords.y <= mouseY && mouseY <= cords.y+cords.height){
+			this.Buttons[i].action();
 		}
 	}
+
 
 	if(this.upgrades){
 		for(var i = 0; i < 3; i++){
