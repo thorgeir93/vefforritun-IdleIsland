@@ -47,7 +47,7 @@ router.post('/saveGoBackToGame', ensureUser, startGame, play );
 
 router.get('/highScores', ensureUser, highScores);
 
-router.get('/idleisland', /*ensureUser,*/ play);
+router.get('/idleisland', ensureUser, play);
 router.get('/logout', ensureUser, logout);
 
 
@@ -74,6 +74,8 @@ function startGame(req, res, next){
 function gameSettings(req, res, next){
   var gameState = xss(req.body.submitString);
   var score = xss(req.body.score);
+
+  console.log(gameState)
 
   sql.setGameState(req.session.user, gameState, score, function(){
     console.log('allt gekk upp');

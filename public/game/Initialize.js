@@ -230,7 +230,7 @@ Loop = function () {
 
 
 function init(){
-  console.log('starting');
+  
 
   canvasInit();
 
@@ -238,11 +238,11 @@ function init(){
 
     AudioPreload(function(){
 
-      console.log('all preloads done');
+      
 
             user = $('#user')['0'].innerHTML;
             userData = $('#userData')['0'].innerHTML;
-            console.log(userData.toString());
+            
 
             var isFriend = $('#isFriend')['0'].innerHTML;
             if (isFriend === 'false') {
@@ -252,15 +252,15 @@ function init(){
             }
 
       leikur = new gameEngine(g_images, g_audio, user, userData, isFriend);
-      console.log('game engine done...starting game');
+      
 
-      console.log("HTML buttons setup [begin] " );
-      console.log(userData);
+      
+      
       //debugger;
-      console.log(leikur.displays[2].showArrow);
+      
       //debugger;
       Buttons.init( leikur, isFriend);
-      console.log("HTML buttons setup [done] " );
+      
 
       document.onmousedown = function(e){
 

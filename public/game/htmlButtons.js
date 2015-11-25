@@ -1,6 +1,6 @@
 /*settings.js*/
 //document.addEventListener('DOMContentLoaded',function() {
-//	console.log('DOM loaded');
+//	
 //	Buttons.init();
 //});
 
@@ -38,7 +38,7 @@ var Buttons = (function() {
 	var upgrades1;
 
 	function init( game, isFriend){
-		console.log( "button init!" );
+		
 
 		theGame = game;
 
@@ -220,7 +220,7 @@ var Buttons = (function() {
 			exceptList = ['level-down'];
 		}
 		//debugger;
-		console.log(classList[0]);
+		
 		backgroundElement.classList.toggle( classList[0] );
 		backgroundElement.classList.toggle( classList[1] );
 
@@ -300,8 +300,8 @@ var Buttons = (function() {
 
 /*	function toggleHidden( element ){
 		for( var i in visibleElements){
-			console.log( "visibleElements[i]" );
-			console.log( visibleElements[i] );
+			
+			
 			if(element === visibleElements[i]){
 				addHidden( element );
 				visibleElements.splice(i,1);
@@ -370,7 +370,7 @@ var Buttons = (function() {
 
 	//TODO: stop error -> do not let level to zero or far higher
 	function displayLevelDown(){
-		console.log("GO DOWN: level " + (level+1));
+		
 		level += 1;
 		if( lvlFunc[level] ){
 			lvlFunc[level].action();
@@ -389,7 +389,7 @@ var Buttons = (function() {
 
 
 	function displayLevelUp(){
-		console.log("GO UP: level " + (level-1));
+		
 		level -= 1;
 		if(level===2){
 			removeHidden( buttons.levelDown );
@@ -434,24 +434,24 @@ var Buttons = (function() {
 	}
 
 	function addHidden( element ){
-		console.log("Going to add hidden to element!");
+		
 		if( element.classList.contains('hidden') ){
-			console.log("This element has aldready hidden class!");
+			
 		} else {
-			console.log("Hidden class added to element");
+			
 			element.classList.add('hidden');
 		}
 	}
 
 	function removeHidden( element ){
-		console.log("Going to remove hidden to element!");
+		
 		if( element.classList.contains('hidden') ){
-			console.log("Hidden class added to element");
-			console.log(element);
+			
+			
 			element.classList.remove('hidden');
 			//addToVisible(element);
 		} else {
-			console.log("This element has aldready none hidden class!");
+			
 		}
 	}
 
