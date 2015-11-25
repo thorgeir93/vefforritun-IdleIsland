@@ -1,6 +1,6 @@
 /*settings.js*/
 document.addEventListener('DOMContentLoaded',function() {
-	console.log('DOM loaded');
+	
 	menu.init();
 });
 
@@ -10,7 +10,7 @@ var menu = (function() {
 	var container = {};
 
 	function init(){
-		console.log( "init!" );
+		
 		container.body = document.querySelector('html');
 		container.body.addEventListener('mousemove', changeSand);
 	}

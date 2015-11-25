@@ -75,6 +75,8 @@ function gameSettings(req, res, next){
   var gameState = xss(req.body.submitString);
   var score = xss(req.body.score);
 
+  console.log(gameState)
+
   sql.setGameState(req.session.user, gameState, score, function(){
     console.log('allt gekk upp');
 

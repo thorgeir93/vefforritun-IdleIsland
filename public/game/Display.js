@@ -24,7 +24,7 @@ Display.prototype.sprites = undefined;
 Display.prototype.render = function(currency, score, isFriend, upgrades){
 	//g_ctx.aglobalAlpha = 0.0;
 	//g_ctx.fillStyle = 'tranparent';
-	//console.log(g_canvasW);
+	//
 	g_ctx.clearRect(0,0,g_canvasW,g_canvasH);
 	g_ctx.fillStyle = 'rgba(0, 0, 0, 0.0)';
 	//this.drawAt(g_ctx, islandPos.x, islandPos.y);

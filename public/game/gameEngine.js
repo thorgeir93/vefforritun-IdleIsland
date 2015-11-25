@@ -1,11 +1,11 @@
 /******************************/
 function gameEngine(image, audio, user, userData, isFriend){
     isFriend = !isFriend;
-    console.log('inn í gameEngine constructor');
+    
     if (isFriend) {
-        console.log('venju sesh');
+        
     } else {
-        console.log('friend sesh');
+        
     }
 
     this.userName = user;
@@ -19,7 +19,7 @@ function gameEngine(image, audio, user, userData, isFriend){
     this.audio = audio;
     this.isFriend = isFriend;
 
-    this.userdata.currency = 1000000000000000;
+    //this.userdata.currency = 10000000000;
 
     if (isFriend) {
 
@@ -180,7 +180,7 @@ function gameEngine(image, audio, user, userData, isFriend){
     this.displays.push(new Display(buttons, undefined, Sprites));
 
 
-    console.log(this.displays);
+    
 }
 
 gameEngine.prototype.playTheme = function(){
@@ -321,7 +321,7 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
         nameCounter = 9;
         for(i = 0; i < 3; i++){
                 for(var l = 0; l < 3; l++){ 
-                    console.log(names[nameCounter]);
+                    
                     pos = {     width: image[names[nameCounter]].width,
                             height: image[names[nameCounter]].height,
                             topX: findX(l,x),
@@ -394,7 +394,7 @@ gameEngine.prototype.update = function(time){
 gameEngine.prototype.render = function(){
         
     this.displays[this.displayScreen].render(this.userdata.currency, this.score, this.isFriend);
-    //console.log(this.score);
+    //
     if(this.displayScreen === this.lvl1){
         this.displays[this.displayScreen].renderSprites(this.userdata.upgrades1);
     }else if(this.displayScreen === this.lvl2){
@@ -429,7 +429,7 @@ gameEngine.prototype.buyUpgrade = function(index){
 
 
             if(this.userdata.currency >= this.calculator.prices1[index[0]][index[1]]){
-                console.log(this.userdata.upgrades1);
+                
 
                 if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
 
@@ -468,7 +468,7 @@ gameEngine.prototype.buyUpgrade = function(index){
                 this.userdata.setCurrFactor(this.calculator.createFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
                 this.userdata.setTreeFactor(this.calculator.calculateTreeFactor(this.userdata.getUpgrades1(),this.userdata.getUpgrades2()));
 
-                console.log(this.userdata.upgrades1);
+                
             }
             else if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
 
@@ -536,7 +536,7 @@ gameEngine.prototype.buyUpgrade = function(index){
 gameEngine.prototype.punch = function(){
 
     if (this.isFriend) {
-        console.log('inn í punch');
+        
         this.userdata.currency += 1 * this.userdata.treeFactor;
 
         this.score += 1 * this.userdata.treeFactor;
@@ -578,10 +578,6 @@ gameEngine.prototype.chanceDisplayToLvl2 = function(){
 };
 
 gameEngine.prototype.chanceDisplayToLvl1 = function(){
-
-
-
-
 
     this.displayScreen = this.lvl1;
 
@@ -666,7 +662,7 @@ gameEngine.prototype.exit = function(){
         this.audio.exit.cloneNode().play();
     }
 
-    console.log('inn í exit');
+    
     
     this.userdata.score = this.score;
     
@@ -690,5 +686,5 @@ gameEngine.prototype.exit = function(){
     scoreField.value = this.score;
     checkFriend.value = (this.isFriend).toString();
     exit.submit();
-    console.log(exit);
+    
 };
