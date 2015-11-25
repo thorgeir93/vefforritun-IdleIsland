@@ -23,7 +23,11 @@ Button.prototype.render = function(){
 
 Button.prototype.action = function(i){
 	
-	this.actionFunc(i);
+	if(this.actionFunc){
+
+		this.actionFunc(i);
+	}
+
 };
 
 Button.prototype.getPosition = function(){

@@ -333,8 +333,10 @@ button[type='submit']{
 	div.sand{
 		@extend %islands;
 		@include centerer;
+		//opacity: 1.0;
+		//background-color: #6DB3F2;
 		width: $image-island-sand-width;
 		height: $image-island-sand-height;
-		background-image: url('../images/menu-island-sand.png');
+		background: url('../images/menu-island-sand.png');
 		z-index: -1;
 	}

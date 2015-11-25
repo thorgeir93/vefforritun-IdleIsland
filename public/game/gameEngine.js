@@ -92,18 +92,6 @@ function gameEngine(image, audio, user, userData, isFriend){
 
     Sprites.push(sprite);
 
-
-    sprite = [];
-
-    sprite.push(animation = new Sprite(image['vel1'],212,233,machine.x,machine.y,0.7, 5, scale, true));
-    sprite.push(animation = new Sprite(image['vel2'],137,88,machine.x,machine.y,0.7, 8, 1, true));    
-    sprite.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
-
-    Sprites.push(sprite);
-
-    topX = 345;
-    topY = 200;
-
     sprite = [];
 
 
@@ -112,6 +100,17 @@ function gameEngine(image, audio, user, userData, isFriend){
     sprite.push(animation = new Sprite(image['veidistong3'],200,128,veidistong.x,veidistong.y-96, 1, 18, 1, true)); 
 
     Sprites.push(sprite);
+
+    sprite = [];
+
+    sprite.push(animation = new Sprite(image['bird1'],400,200,birdPos.x,birdPos.y, 3, 22, 1.5, true));
+    sprite.push(animation = new Sprite(image['bird2'],400,200,birdPos.x,birdPos.y, 3, 22, 1.5, true));  
+    sprite.push(animation = new Sprite(image['bird3'],400,200,birdPos.x,birdPos.y, 3, 22, 1.5, true)); 
+
+    Sprites.push(sprite);
+
+
+
 
     this.displays.push(new Display(buttons,undefined, Sprites));
 
@@ -337,7 +336,8 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
         buyMenu.push(bought);
     }
 
-    this.displays.push(new Display( buttons, buyMenu));
+
+    this.displays.push(new Display(buttons, buyMenu));
 
 
 }
@@ -359,6 +359,7 @@ gameEngine.prototype.update = function(time){
     if (this.isFriend) {    
         this.score += gained;
     }
+
     if(this.displayScreen === this.lvl1){
 
         for(var i = 0; i < gained && i < 1; i++){
@@ -408,8 +409,6 @@ gameEngine.prototype.render = function(){
 }
 
 gameEngine.prototype.receiveInputs = function(e){
-
-    
 
     if(this.displayScreen === this.UpgrLvl1){
         this.displays[this.displayScreen].findButtonForClick(e,this.userdata.upgrades1);
@@ -578,6 +577,11 @@ gameEngine.prototype.chanceDisplayToLvl2 = function(){
 }
 
 gameEngine.prototype.chanceDisplayToLvl1 = function(){
+
+
+
+
+
     this.displayScreen = this.lvl1;
 
     if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
@@ -589,6 +593,7 @@ gameEngine.prototype.chanceDisplayToLvl1 = function(){
 
 gameEngine.prototype.chanceDisplayToUpgradeslvl1 = function(){
     if (this.isFriend) {
+
         this.displayScreen = this.UpgrLvl1;
         this.displays[this.lvl1].coconuts = [];
 
@@ -632,6 +637,26 @@ gameEngine.prototype.chanceDisplayToSettings = function(){
 }
 
 
+gameEngine.prototype.exitToSettings = function(){
+    if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+        this.audio['exit'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
+        this.audio['exit'].cloneNode().play();
+    }
+    
+    this.userdata.score = this.score;
+    
+    var form  = $('.form-settings');
+    var submitString = form[0][0];
+    var score = form[0][1];
+    var checkFr = form[0][2];
+
+    submitString.value = this.userdata.createJSONstring();
+    score.value = this.score;
+    checkFr.value = (this.isFriend).toString();
+    form.submit();
+};
+
 gameEngine.prototype.exit = function(){
 
     if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
@@ -641,12 +666,25 @@ gameEngine.prototype.exit = function(){
     }
 
     console.log('inn í exit');
+    
+    this.userdata.score = this.score;
+    
+    var form  = $('.form-settings');
+    var submitString = form[0][0];
+    var score = form[0][1];
+    var checkFr = form[0][2];
+
+    submitString.value = this.userdata.createJSONstring();
+    score.value = this.score;
+    checkFr.value = (this.isFriend).toString();
+    form.submit();
+
     var exit  = $('#exit');
     var field = exit[0][0];
     var scoreField = exit[0][1];
     var checkFriend = exit[0][2];
 
-    this.userdata.score = this.score;
+    //this.userdata.score = this.score;
     field.value = this.userdata.createJSONstring();
     scoreField.value = this.score;
     checkFriend.value = (this.isFriend).toString();

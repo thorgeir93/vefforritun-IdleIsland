@@ -1,6 +1,7 @@
 'use strict'
-function Display(buttons,upgrades, sprite){
 
+function Display(buttons,upgrades, sprite){
+	
 	this.Buttons = buttons;
 	this.upgrades = upgrades;
 	
@@ -9,16 +10,6 @@ function Display(buttons,upgrades, sprite){
 	}
 	this.animationFrame = 0;
 	this.animationCurrentTime = 0;
-	this.showArrow = false;
-
-	/*var pos = {     width: this.image.width,
-                        height: this.image.height,
-                            topX: coconutPos.x,
-                            topY: coconutPos.y
-                   };
-
-  var coconut = new Coconut(pos,this.image,undefined);
-	this.coconuts = [coconut];*/
 }
 
 Display.prototype.Buttons = undefined;
@@ -27,6 +18,8 @@ Display.prototype.coconuts = [];
 Display.prototype.showArrow = false;
 
 Display.prototype.sprites = undefined;
+
+
 
 Display.prototype.render = function(currency, score, isFriend, upgrades){
 	//g_ctx.aglobalAlpha = 0.0;
@@ -100,7 +93,6 @@ Display.prototype.renderSprites = function(upgrades){
 				
 			}
 		}
-		console.log('');
 	}
 
 	if(flag){
@@ -114,6 +106,7 @@ Display.prototype.destroyCoconuts = function(){
 
 Display.prototype.createCoconut = function(coconut){
 		this.coconuts.push(coconut);
+
 }
 
 Display.prototype.update = function(dt){
@@ -142,18 +135,6 @@ Display.prototype.update = function(dt){
 	}
 }
 
-/*Display.prototype.drawAt = function (ctx, x, y) {
-	ctx.fillRect(0,0,1000,600);
-
-	for(var i = 0; i<this.image.length; i++){
-
-		ctx.drawImage(this.image[i], x, y);
-		
-	}
-};*/
-
-
-//var num = 0;
 
 var counter = 0;
 Display.prototype.renderUpgrades = function(upgrades){
@@ -162,28 +143,32 @@ Display.prototype.renderUpgrades = function(upgrades){
 		for(var j = 0; j < 3; j++){	
 			//num++;
 			if(upgrades[i][j] === 0){
-				this.drawUpgrade(g_ctx,this.upgrades[1][i][j].image, this.upgrades[1][i][j].getPosition().x, this.upgrades[1][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[1][i][j].image, this.upgrades[1][i][j].getPosition().x, this.upgrades[1][i][j].getPosition().y, 0.2);
 			}else if(upgrades[i][j] === 1){
-				this.drawUpgrade(g_ctx,this.upgrades[0][i][j].image, this.upgrades[0][i][j].getPosition().x, this.upgrades[0][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[0][i][j].image, this.upgrades[0][i][j].getPosition().x, this.upgrades[0][i][j].getPosition().y, 1.0);
 			}else if(upgrades[i][j] === 2){
-				this.drawUpgrade(g_ctx,this.upgrades[2][i][j].image, this.upgrades[2][i][j].getPosition().x, this.upgrades[2][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[2][i][j].image, this.upgrades[2][i][j].getPosition().x, this.upgrades[2][i][j].getPosition().y, 0.3);
 			}
 		}
 	}
-	//debugger;
-	//console.log(num);
 };
 
-
-Display.prototype.drawUpgrade = function(ctx, image, x, y, w, h){
+Display.prototype.drawUpgrade = function(ctx, image, x, y, transparent){
 	
+	//ctx.globalCompositeOperation = "lighter";
+	ctx.beginPath();
+	ctx.globalAlpha = transparent;
 	ctx.drawImage(image, x, y);
 
 	//draw rectangle around the image
+	ctx.beginPath();
 	ctx.rect(x, y, image.width, image.height);
-	ctx.stroke();
 	ctx.strokeStyle = 'white';
 	ctx.lineWidth = 4;
+	ctx.stroke();
+
+	//reset alpha value
+	ctx.globalAlpha = 1.0;
 };
 
 
@@ -194,18 +179,12 @@ Display.prototype.findButtonForClick = function(e,upgrades){
 
 	for (var i = 0; i < this.Buttons.length; i++) {
 		
-		if(!(this.Buttons[i].image.name === "downLvl")){
-			var cords = this.Buttons[i].getPosition();
-			if(cords.x <= mouseX && mouseX <= cords.x+cords.width && cords.y <= mouseY && mouseY <= cords.y+cords.height){
-				this.Buttons[i].action();
-			}
-		}else if(this.showArrow){
-			var cords = this.Buttons[i].getPosition();
-			if(cords.x <= mouseX && mouseX <= cords.x+cords.width && cords.y <= mouseY && mouseY <= cords.y+cords.height){
-				this.Buttons[i].action();
-			}
+		var cords = this.Buttons[i].getPosition();
+		if(cords.x <= mouseX && mouseX <= cords.x+cords.width && cords.y <= mouseY && mouseY <= cords.y+cords.height){
+			this.Buttons[i].action();
 		}
 	}
+
 
 	if(this.upgrades){
 		for(var i = 0; i < 3; i++){
