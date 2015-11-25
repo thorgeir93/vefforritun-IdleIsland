@@ -20,7 +20,7 @@ function gameEngine(image, audio, user, userData, isFriend){
     this.isFriend = isFriend;
     this.time = 0;
 
-    //this.userdata.currency = 10000000000;
+    this.userdata.currency = 10000000000;
 
     if (isFriend) {
 
@@ -119,17 +119,17 @@ function gameEngine(image, audio, user, userData, isFriend){
     //                  Sp TWO
     ////////////////////////////////////////////////
 
-    //takki1 - tré
+    //takki1 - pile
     buttons = [];
-    pos = {     width: image.tree.width,
-                height: image.tree.height,
-                topX: 400,
-                topY: 50
+    pos = {     width: image.pile.width,
+                height: image.pile.height,
+                topX: treePos.x-100,
+                topY: treePos.y+80
                };
     if (isFriend) {      
-        buttons.push(new Button(pos, image.tree, this.punch.bind(this)));
+        buttons.push(new Button(pos, image.pile, this.punch.bind(this)));
     } else {
-        buttons.push(new Button(pos, image.tree, undefined));
+        buttons.push(new Button(pos, image.pile, undefined));
     }    
 
     Sprites = [];
@@ -381,6 +381,21 @@ gameEngine.prototype.update = function(time){
             var coconut = new Coconut(pos,this.coconutImage,undefined);
             this.displays[this.displayScreen].createCoconut(coconut);
         }
+
+    }else if(this.displayScreen === this.lvl2){
+
+        for(var i = 0; i < gained/5 && i < 1; i++){
+
+            var pos = { width: this.coconutImage.width,
+                        height: this.coconutImage.height,
+                        topX: coconutPos.x-100,
+                        topY: coconutPos.y+80
+                   };
+
+            var coconut = new Coconut(pos,this.coconutImage,undefined);
+            this.displays[this.displayScreen].createCoconut(coconut);
+        }
+
     }else{
         this.displays[this.displayScreen].destroyCoconuts();
     }
@@ -548,6 +563,18 @@ gameEngine.prototype.punch = function(){
                             height: this.coconutImage.height,
                                 topX: coconutPos.x,
                                 topY: coconutPos.y
+                       };
+
+            var coconut = new Coconut(pos,this.coconutImage,undefined);
+            this.displays[this.displayScreen].createCoconut(coconut);
+        }
+
+        if(this.displayScreen === this.lvl2){
+
+            var pos = {     width: this.coconutImage.width,
+                            height: this.coconutImage.height,
+                                topX: coconutPos.x-100,
+                                topY: coconutPos.y+80
                        };
 
             var coconut = new Coconut(pos,this.coconutImage,undefined);
