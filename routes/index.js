@@ -100,7 +100,7 @@ function getSettings( body ){
   console.dir(body);
   if(action==='save'){
     settings = body;
-    delete settings['action'];
+    delete settings.action;
   } else if(action==='default'){
     settings = defaultSettings();
   }
@@ -141,7 +141,7 @@ function chooseFriend(req, res, next) {
     var data = {userName: friend,
                 userData: gamestate,
                 isFriend: true
-                 }
+                 };
     res.render('idleisland', {data:data});
   });
 }
@@ -185,7 +185,7 @@ function viewFriends(req, res, next) {
     if (err) {
       console.error(err);
     }
-    friends = result[0]['friendid'].split(',');
+    friends = result[0].friendid.split(',');
     var friended = [];
     for (var i = 1; i < friends.length; i++) {
       friended.push(friends[i]);
@@ -221,7 +221,7 @@ function addFriendsHandler(req, res, next) {
           if (err) {
             console.error(err);
           } 
-          friends = result[0]['friendid'].split(',');
+          friends = result[0].friended.split(',');
           friended = friends[1];
           if (friend === friended) {
             res.render('addFriends', { status: "User is already a friend!"});
@@ -289,9 +289,9 @@ function play(req, res, next) {
 
     var data = {userName: req.session.user,
                 userData: gamestate,
-                isFriend: false }
+                isFriend: false };
 
-    res.render('idleisland', {data});
+    res.render('idleisland', {data: data});
   });
 }
 

@@ -48,7 +48,7 @@ function soundsPreload(requiredSounds,
             console.log("loadedSounds=", loadedSounds);
             console.log("");
             console.log("performing completion callback");
-            console.log(finalCallback)
+            console.log(finalCallback);
 			finalCallback();
 
             console.log("completion callback done");

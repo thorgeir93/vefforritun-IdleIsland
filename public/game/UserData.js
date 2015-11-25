@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 UserData.prototype.userName = undefined;
 UserData.prototype.upgrades1 = undefined;
@@ -14,7 +14,7 @@ UserData.prototype.score = undefined;
 //constructor
 function UserData(userDataFromDB){
 
-	console.log(userDataFromDB)
+	console.log(userDataFromDB);
 	var data = JSON.parse(userDataFromDB);
 
 	this.userName = data.userName;
@@ -29,7 +29,7 @@ function UserData(userDataFromDB){
 
 	console.log('inn í userData constr', data);
 	//implements
-};
+}
 
 
 //getters
@@ -65,11 +65,11 @@ UserData.prototype.getTimestamp = function(){
 
 UserData.prototype.setupgrades1 = function(upgrades1){
 	this.upgrades1 = upgrades1;
-}
+};
 
 UserData.prototype.setupgrades2 = function(upgrades2){
 	this.upgrades2 = upgrades2;
-}
+};
 
 UserData.prototype.setCurrency = function(currency){
 	this.currency = currency;
@@ -85,7 +85,7 @@ UserData.prototype.setCurrFactor = function(currFactor){
 
 UserData.prototype.setTreeFactor = function(treeFactor){
 	this.treeFactor = treeFactor;
-}
+};
 
 UserData.prototype.setTimestamp = function(timestamp){
 	this.timestamp = timestamp;
@@ -98,7 +98,7 @@ UserData.prototype.createJSONstring = function(){
 	console.log(string);
 	return string;
 
-}
+};
 
 
 

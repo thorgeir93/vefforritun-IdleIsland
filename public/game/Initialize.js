@@ -39,17 +39,17 @@ var upgradePos = {
 var veidistong = {
   x:islandPos.x+580,
   y:islandPos.y
-}
+};
 
 
 var birdPos = {
   x:treePos.x+300,
   y:treePos.y-140
-}
+};
 
 
 
-var leikur = undefined;
+var leikur;
 
 var user;
 
@@ -242,7 +242,7 @@ function init(){
 
             user = $('#user')['0'].innerHTML;
             userData = $('#userData')['0'].innerHTML;
-            console.log(userData.toString())
+            console.log(userData.toString());
 
             var isFriend = $('#isFriend')['0'].innerHTML;
             if (isFriend === 'false') {
@@ -265,7 +265,7 @@ function init(){
       document.onmousedown = function(e){
 
         leikur.receiveInputs(e);
-      }
+      };
       
       Loop();
 

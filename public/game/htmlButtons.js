@@ -415,7 +415,7 @@ var Buttons = (function() {
 			removeHidden( lvlFunc[newLevel].backgrounds[i] );
 			//addToVisible( lvlFunc[newLevel].backgrounds[i] );
 		}
-		for(var i in lvlFunc[levelBefore].backgrounds){
+		for(i in lvlFunc[levelBefore].backgrounds){
 			addHidden( lvlFunc[levelBefore].backgrounds[i] );
 			//removeFromVisible( lvlFunc[levelBefore].backgrounds[i] );
 		}

@@ -1,7 +1,6 @@
 var g_audio   = {};
 
 function AudioPreload(callback){
-	console.log('herna')
 	var requiredSounds = {
 		Theme	: "game/sounds/MenuTheme.ogg"
 	};
@@ -19,12 +18,12 @@ function init(){
 
 
 function playTheme(){
-  if(g_audio['Theme'].currentTime === 0){
-    g_audio['Theme'].play();
+  if(g_audio.Theme.currentTime === 0){
+    g_audio.Theme.play();
   }
 
-  if(g_audio['Theme'].currentTime === g_audio['Theme'].duration){
-    g_audio['Theme'].currentTime = 0;
+  if(g_audio.Theme.currentTime === g_audio.Theme.duration){
+    g_audio.Theme.currentTime = 0;
   }
 
 }

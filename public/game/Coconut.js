@@ -43,7 +43,7 @@ Coconut.prototype.update = function(dt){
 	//have to travel
 	if(this.topY > g_canvasH*0.78){
 		this.Yvel = -this.Yvel*0.5;
-		this.topY -= 5
+		this.topY -= 5;
 	}
 
 	this.time -= (dt/100);
@@ -61,11 +61,11 @@ Coconut.prototype.getPosition = function(){
 
 Coconut.prototype.getImage = function(){
 	return this.image;
-}
+};
 
 Coconut.prototype.getAudioPath = function(){
 	//implement plz
-}
+};
 
 Coconut.prototype.drawAt = function (ctx, x, y, w, h) {
 
