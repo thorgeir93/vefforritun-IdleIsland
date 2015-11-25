@@ -44,7 +44,7 @@ Sprite.prototype.draw = function(frame){
     }else{
         g_ctx.drawImage(this.spriteSheet, this.frameWidth*0, 0, this.frameWidth, this.frameHeight, this.cx, this.cy, this.frameWidth*this.scale, this.frameHeight*this.scale);
     }
-}
+};
 
 Sprite.prototype.update = function(dt){
     this.CurrentFrame = Math.floor(this.CurrentTime/ (this.animationTime / this.animationFrames));
@@ -61,4 +61,4 @@ Sprite.prototype.update = function(dt){
             this.shouldAnimate = false;
         }
     }
-}
+};

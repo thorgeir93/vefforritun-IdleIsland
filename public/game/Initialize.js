@@ -39,17 +39,17 @@ var upgradePos = {
 var veidistong = {
   x:islandPos.x+580,
   y:islandPos.y
-}
+};
 
 
 var birdPos = {
   x:treePos.x+300,
   y:treePos.y-140
-}
+};
 
 
 
-var leikur = undefined;
+var leikur;
 
 var user;
 
@@ -140,11 +140,18 @@ function imagePreload(callback){
       veidistong3   : "game/images/veidistong_animation-upgrade-3.png",
 
 
-      mole2         : "game/images/mole_animation-upgrade-1.png",
-      mole1         : "game/images/mole_animation-upgrade-2.png",
+      mole1         : "game/images/mole_animation-upgrade-1.png",
+      mole2         : "game/images/mole_animation-upgrade-2.png",
       mole3         : "game/images/mole_animation-upgrade-3.png",
 
-      molekall      : "game/images/molekall_animation.png",
+      molekall1     : "game/images/molekall_animation-upgrade-1.png",
+      molekall2     : "game/images/molekall_animation-upgrade-2.png",
+      molekall3     : "game/images/molekall_animation-upgrade-3.png",
+
+      miner1        : "game/images/miner_animation-upgrade-1.png",
+      miner2        : "game/images/miner_animation-upgrade-2.png",
+      miner3        : "game/images/miner_animation-upgrade-3.png",
+
       
       moleheap      : "game/images/game-coconut-heap.png"
 
@@ -184,6 +191,7 @@ _updateClocks = function (frameTime) {
 _iterCore = function (dt) {
 
     leikur.update(dt);
+    leikur.saveAndRefresh(dt)
     leikur.render();
     leikur.playTheme();
     Loop();
@@ -223,7 +231,7 @@ Loop = function () {
 
 
 function init(){
-  console.log('starting');
+  
 
   canvasInit();
 
@@ -231,11 +239,11 @@ function init(){
 
     AudioPreload(function(){
 
-      console.log('all preloads done');
+      
 
             user = $('#user')['0'].innerHTML;
             userData = $('#userData')['0'].innerHTML;
-            console.log(userData.toString())
+            
 
             var isFriend = $('#isFriend')['0'].innerHTML;
             if (isFriend === 'false') {
@@ -245,20 +253,20 @@ function init(){
             }
 
       leikur = new gameEngine(g_images, g_audio, user, userData, isFriend);
-      console.log('game engine done...starting game');
+      
 
-      console.log("HTML buttons setup [begin] " );
-      console.log(userData);
+      
+      
       //debugger;
-      console.log(leikur.displays[2].showArrow);
+      
       //debugger;
       Buttons.init( leikur, isFriend);
-      console.log("HTML buttons setup [done] " );
+      
 
       document.onmousedown = function(e){
 
         leikur.receiveInputs(e);
-      }
+      };
       
       Loop();
 

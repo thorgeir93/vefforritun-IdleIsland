@@ -1,6 +1,6 @@
 /*settings.js*/
 document.addEventListener('DOMContentLoaded',function() {
-	console.log('DOM loaded');
+	
 	settings.init();
 });
 
@@ -12,7 +12,7 @@ var settings = (function() {
 	
 
 	function init(){
-		console.log( "init!" );
+		
 		cBoxFullS.on = false;
 		cBoxFullS.element1 = document.getElementById('checkbox-off');
 		cBoxFullS.element2 = document.getElementById('check-off');
@@ -50,7 +50,7 @@ var settings = (function() {
 	}
 
 	function toggleCheckBoxBackground( event ){
-		console.log(cBoxFullS.on);
+		
 		if(cBoxFullS.on){
 			cBoxFullS.on = false;
 

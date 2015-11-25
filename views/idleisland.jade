@@ -27,6 +27,12 @@ html.level-2-background-mine
 			input(type='text', id='score', name='score')
 			input(type='hidden', id='checkFriend', name='checkFriend')
 			div: button.game-exit
+
+		form(method='post', action='/refresh', id = 'save', hidden)
+			input(type='text', id='submitString', name='submitString')
+			input(type='text', id='score', name='score')
+			input(type='hidden', id='checkFriend', name='checkFriend')
+			button send
 		script(src='/game/jquery.js')
 		script(src='/game/imagesPreload.js')
 		script(src='/game/soundsPreload.js')

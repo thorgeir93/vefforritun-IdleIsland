@@ -9,7 +9,7 @@ Audio.prototype.asyncLoad = function(src, asyncCallback) {
 	this.onerror 		 	= asyncCallback;
 	this.onloadstart 	 	= asyncCallback;
 
-	console.log("requesting sound src of ", src);
+	
     this.src = src;
 };
 
@@ -32,7 +32,7 @@ function soundsPreload(requiredSounds,
 
     preloadHandler = function () {
 
-       // console.log("preloadHandler called with this=", this);
+       // 
         loadedSounds[this.name] = this;
 
 		this.oncanplaythrough = null;
@@ -44,18 +44,18 @@ function soundsPreload(requiredSounds,
 
 
         if (numSoundsHandled === numSoundsRequired) {
-            console.log("all preload sounds handled");
-            console.log("loadedSounds=", loadedSounds);
-            console.log("");
-            console.log("performing completion callback");
-            console.log(finalCallback)
+            
+            
+            
+            
+            
 			finalCallback();
 
-            console.log("completion callback done");
-            console.log("");
+            
+            
 
 		} else {
-			console.log("loadedSounds=", loadedSounds);
+			
 		}
 
     };
@@ -66,7 +66,7 @@ function soundsPreload(requiredSounds,
 
         if (requiredSounds.hasOwnProperty(currentName)) {
 
-            console.log("preloading sound", currentName);
+            
             currentSound = new Audio();
             currentSound.name = currentName;
             currentSound.asyncLoad(requiredSounds[currentName], preloadHandler);

@@ -38,17 +38,19 @@ router.post('/viewFriends', chooseFriend);
 router.get('/addFriends', ensureUser,addFriends);
 router.post('/addFriends', addFriendsHandler);
 
-router.get('/highScores', ensureUser, highScores);
+router.get('/highscores', ensureUser, highScores);
 router.get('/settings', ensureUser, settings);
 router.post('/settings',  saveOrRestoreSettings);
 
 router.post('/gameSettings', ensureUser, gameSettings);
 router.post('/saveGoBackToGame', ensureUser, startGame, play );
 
-router.get('/highScores', ensureUser, highScores);
+router.get('/highscores', ensureUser, highScores);
 
-router.get('/idleisland', /*ensureUser,*/ play);
+router.get('/idleisland', ensureUser, play);
 router.get('/logout', ensureUser, logout);
+
+router.post('/refresh', ensureUser, refresh);
 
 
 router.post('/exit', ensureUser ,exit);
@@ -75,6 +77,8 @@ function gameSettings(req, res, next){
   var gameState = xss(req.body.submitString);
   var score = xss(req.body.score);
 
+  console.log(gameState)
+
   sql.setGameState(req.session.user, gameState, score, function(){
     console.log('allt gekk upp');
 
@@ -100,7 +104,7 @@ function getSettings( body ){
   console.dir(body);
   if(action==='save'){
     settings = body;
-    delete settings['action'];
+    delete settings.action;
   } else if(action==='default'){
     settings = defaultSettings();
   }
@@ -141,9 +145,19 @@ function chooseFriend(req, res, next) {
     var data = {userName: friend,
                 userData: gamestate,
                 isFriend: true
-                 }
+                 };
     res.render('idleisland', {data:data});
   });
+}
+
+function refresh(req, res, next){
+    var gameState = xss(req.body.submitString);
+    var score = xss(req.body.score);
+    console.log(score);
+    sql.setGameState(req.session.user, gameState, score, function(){
+      console.log('allt gekk upp');
+      res.redirect('/idleisland');
+    });
 }
 
 function exit(req, res, next){
@@ -170,7 +184,16 @@ function logout(req, res, next) {
 }
 
 function menu(req, res, next) {
-  res.render('menu', { title: 'Idle Island'});
+  var gamestate;
+      sql.getGameState(req.session.user, function(error, dataa){
+        if(error){
+          console.log(error);
+        }else {
+          console.log('success');
+        }
+        gamestate = dataa;
+        res.render('menu', { title: 'Idle Island', gamestate: gamestate});
+      });
 }
 function developmentViewFriends(req, res, next){
   var friended = ["a", "b", "c"];
@@ -185,21 +208,41 @@ function viewFriends(req, res, next) {
     if (err) {
       console.error(err);
     }
-    friends = result[0]['friendid'].split(',');
+    friends = result[0].friendid.split(',');
     var friended = [];
     for (var i = 1; i < friends.length; i++) {
       friended.push(friends[i]);
     }
-    if (friended.length > 0) {
-      res.render('viewFriends', { status: 'Your friends', entries: friended});
-    } else {
-      res.render('viewFriends', { status: 'Get some friends, loser', entries: false});
-    }
+    var gamestate;
+      sql.getGameState(req.session.user, function(error, dataa){
+        if(error){
+          console.log(error);
+        }else {
+          console.log('success');
+        }
+        gamestate = dataa;
+
+        if (friended.length > 0) {
+          res.render('viewFriends', { status: 'Your friends', entries: friended,gamestate: gamestate});
+        } else {
+          res.render('viewFriends', { status: 'Get some friends, loser', entries: false,gamestate: gamestate});
+        }
+      });
   });
 }
 
 function addFriends(req, res, next) {
-  res.render('addFriends', { title: 'Add Friends'});
+  var gamestate;
+      sql.getGameState(req.session.user, function(error, dataa){
+        if(error){
+          console.log(error);
+        }else {
+          console.log('success');
+        }
+        gamestate = dataa;
+
+        res.render('addFriends', { title: 'Add Friends', gamestate: gamestate});
+      });
 }
 
 function addFriendsHandler(req, res, next) {
@@ -221,7 +264,8 @@ function addFriendsHandler(req, res, next) {
           if (err) {
             console.error(err);
           } 
-          friends = result[0]['friendid'].split(',');
+          console.log(result[0]);
+          friends = result[0].friendid.split(',');
           friended = friends[1];
           if (friend === friended) {
             res.render('addFriends', { status: "User is already a friend!"});
@@ -255,7 +299,19 @@ function highScores(req, res, next) {
     for(var i = 0; i < result.rows.length; i++) {
       entries.push(result.rows[i]);
     }
-    res.render('highScores', { entries: entries});
+      var gamestate;
+      sql.getGameState(req.session.user, function(error, dataa){
+        if(error){
+          console.log(error);
+        }else {
+          console.log('success');
+        }
+        gamestate = dataa;
+
+        var data = { entries: entries, gamestate: gamestate}
+        
+        res.render('highscores', {data});
+      });
   });
 }
 
@@ -289,9 +345,9 @@ function play(req, res, next) {
 
     var data = {userName: req.session.user,
                 userData: gamestate,
-                isFriend: false }
+                isFriend: false };
 
-    res.render('idleisland', {data});
+    res.render('idleisland', {data: data});
   });
 }
 

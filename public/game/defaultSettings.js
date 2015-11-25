@@ -6,4 +6,4 @@ module.exports = function(){
 		'audio-slider': '20', 
 		'annad':'0'
 	};
-}
+};

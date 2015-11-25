@@ -1,6 +1,7 @@
 extends layout
 
 block content
+	p(hidden, id = 'gamestate') #{gamestate}
 	script(src='/game/playTheme.js')
 	div(class='container' id='view-friends')
 		h1= 'view Friends'

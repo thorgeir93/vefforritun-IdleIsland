@@ -62,10 +62,14 @@ function reloadBrowser(delay) {
 }
 
 gulp.task('inspect', function() {
-  return gulp.src([ './lib/**/*.js','./bin/**/*.js',
-                    './public/**/*.js','./routes/**/*.js',
-                    './*.js'])
-    .pipe(jshint());
+  return gulp.src([ './lib/*.js',
+                    './public/game/*.js',
+                    './routes/*.js',
+                    './middleware/*.js',
+                    '!./public/game/jquery.js'
+                    ])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });
 
 //

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';	
 
 function Display(buttons,upgrades, sprite){
 	
@@ -24,7 +24,7 @@ Display.prototype.sprites = undefined;
 Display.prototype.render = function(currency, score, isFriend, upgrades){
 	//g_ctx.aglobalAlpha = 0.0;
 	//g_ctx.fillStyle = 'tranparent';
-	//console.log(g_canvasW);
+	//
 	g_ctx.clearRect(0,0,g_canvasW,g_canvasH);
 	g_ctx.fillStyle = 'rgba(0, 0, 0, 0.0)';
 	//this.drawAt(g_ctx, islandPos.x, islandPos.y);
@@ -32,7 +32,7 @@ Display.prototype.render = function(currency, score, isFriend, upgrades){
 
 	for(var i = 0; i<this.Buttons.length; i++){
 
-		if(!(this.Buttons[i].image.name === "downLvl")){
+		if(this.Buttons[i].image.name !== "downLvl"){
 			this.Buttons[i].render();
 		}else if(this.showArrow){
 			this.Buttons[i].render();
@@ -40,7 +40,7 @@ Display.prototype.render = function(currency, score, isFriend, upgrades){
 	}
 
 
-	for(var i = 0; i<this.coconuts.length; i++){
+	for(i = 0; i<this.coconuts.length; i++){
 		this.coconuts[i].render();
 	}
 
@@ -81,10 +81,10 @@ Display.prototype.renderSprites = function(upgrades){
 			if(upgrades[j][i] === 2){
 
 				if(i === 0){
-					this.sprites[i][j+1].draw(this.sprites[i][j+1].CurrentFrame)
+					this.sprites[i][j+1].draw(this.sprites[i][j+1].CurrentFrame);
 				}else{
 
-					this.sprites[i][j].draw(this.sprites[i][j].CurrentFrame)
+					this.sprites[i][j].draw(this.sprites[i][j].CurrentFrame);
 				}
 				
 				flag = false;
@@ -96,18 +96,18 @@ Display.prototype.renderSprites = function(upgrades){
 	}
 
 	if(flag){
-		this.sprites[0][0].draw(this.sprites[0][0].CurrentFrame)
+		this.sprites[0][0].draw(this.sprites[0][0].CurrentFrame);
 	}
-}
+};
 
 Display.prototype.destroyCoconuts = function(){
 	this.coconuts = [];
-}
+};
 
 Display.prototype.createCoconut = function(coconut){
 		this.coconuts.push(coconut);
 
-}
+};
 
 Display.prototype.update = function(dt){
 	if(this.coconuts){
@@ -126,14 +126,14 @@ Display.prototype.update = function(dt){
 			for(var j = 0; j < 3; j++){
 				if(i === 0){
 
-					this.sprites[i][j+1].update(dt)
+					this.sprites[i][j+1].update(dt);
 				}else{
-					this.sprites[i][j].update(dt)
+					this.sprites[i][j].update(dt);
 				}
 			}	
 		}
 	}
-}
+};
 
 
 var counter = 0;
@@ -203,4 +203,4 @@ Display.prototype.findButtonForClick = function(e,upgrades){
 		
 	}
 	//til að taka bara takkana sem er hægt að kaupa (fyrir upgrade menu)
-}
+};

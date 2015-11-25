@@ -1,7 +1,6 @@
 var g_audio   = {};
 
 function AudioPreload(callback){
-	console.log('herna')
 	var requiredSounds = {
 		Theme	: "game/sounds/MenuTheme.ogg"
 	};
@@ -9,9 +8,16 @@ function AudioPreload(callback){
 	soundsPreload(requiredSounds, g_audio, callback);
 }
 
+var userData
+var volume;
 function init(){
 
+    userData = $('#gamestate')['0'].innerHTML;
 
+    var data = JSON.parse(userData);
+
+    volume = data.settings['audio-slider']
+    console.log(volume)
 		AudioPreload(function(){
         Loop();
 		});
@@ -20,11 +26,12 @@ function init(){
 
 function playTheme(){
   if(g_audio['Theme'].currentTime === 0){
+    g_audio['Theme'].volume = (volume/100);
     g_audio['Theme'].play();
   }
 
-  if(g_audio['Theme'].currentTime === g_audio['Theme'].duration){
-    g_audio['Theme'].currentTime = 0;
+  if(g_audio.Theme.currentTime === g_audio.Theme.duration){
+    g_audio.Theme.currentTime = 0;
   }
 
 }
