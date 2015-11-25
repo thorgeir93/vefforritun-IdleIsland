@@ -1,8 +1,8 @@
 /*settings.js*/
-document.addEventListener('DOMContentLoaded',function() {
-	console.log('DOM loaded');
-	Buttons.init();
-});
+//document.addEventListener('DOMContentLoaded',function() {
+//	console.log('DOM loaded');
+//	Buttons.init();
+//});
 
 var Buttons = (function() {
 	

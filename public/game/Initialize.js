@@ -76,6 +76,7 @@ function imagePreload(callback){
       coconut       : "game/images/game-coconut-money.png",
       exit          : "game/images/game-button-exit.png",
       island        : "game/images/game-sand-3-01.png",
+      pile          : "game/images/game-coconut-heap.png",
 
 
       item1upgrade1         : "game/images/item1upgrade1.png",
