@@ -1,6 +1,7 @@
 extends layout
 
 block content
+	p(hidden, id = 'gamestate') #{data.gamestate}
 	script(src='/game/playTheme.js')
 	div.container
 		h1= 'High scores'
@@ -10,7 +11,7 @@ block content
 				tr
 					th Users
 					th Scores
-				each item in entries
+				each item in data.entries
 					tr
 						td #{item.username}
 						td #{item.score}
