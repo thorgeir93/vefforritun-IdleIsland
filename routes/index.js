@@ -47,7 +47,7 @@ router.post('/saveGoBackToGame', ensureUser, startGame, play );
 
 router.get('/highScores', ensureUser, highScores);
 
-router.get('/idleisland', /*ensureUser,*/ play);
+router.get('/idleisland', ensureUser, play);
 router.get('/logout', ensureUser, logout);
 
 

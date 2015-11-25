@@ -163,7 +163,7 @@ function gameEngine(image, audio, user, userData, isFriend){
     topX = 660;
     topY = 380;
     numberOfFrames = 10;
-    framewidth = image.miner1.height;
+    frameheight = image.miner1.height;
     framewidth = image.miner1.width / numberOfFrames;
     scale = 2;
 
@@ -304,7 +304,7 @@ gameEngine.prototype.makeUpgradeDisplay = function(names,image,func){
                     pos = {     width: image.unavalible.width,
                                 height: image.unavalible.height,
                                 topX: findX(k,x),
-                                topY: findY(k,y)
+                                topY: findY(i,y)
                      };
                     unavailabe[i][k] = new Button(pos, image.unavalible, undefined); 
                 }
