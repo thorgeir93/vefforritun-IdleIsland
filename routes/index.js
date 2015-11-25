@@ -252,7 +252,8 @@ function addFriendsHandler(req, res, next) {
           if (err) {
             console.error(err);
           } 
-          friends = result[0].friended.split(',');
+          friends = result[0].friended.
+          friend = friends.split(',');
           friended = friends[1];
           if (friend === friended) {
             res.render('addFriends', { status: "User is already a friend!"});
