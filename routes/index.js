@@ -38,14 +38,14 @@ router.post('/viewFriends', chooseFriend);
 router.get('/addFriends', ensureUser,addFriends);
 router.post('/addFriends', addFriendsHandler);
 
-router.get('/highScores', ensureUser, highScores);
+router.get('/highscores', ensureUser, highScores);
 router.get('/settings', ensureUser, settings);
 router.post('/settings',  saveOrRestoreSettings);
 
 router.post('/gameSettings', ensureUser, gameSettings);
 router.post('/saveGoBackToGame', ensureUser, startGame, play );
 
-router.get('/highScores', ensureUser, highScores);
+router.get('/highscores', ensureUser, highScores);
 
 router.get('/idleisland', ensureUser, play);
 router.get('/logout', ensureUser, logout);
@@ -297,7 +297,7 @@ function highScores(req, res, next) {
 
         var data = { entries: entries, gamestate: gamestate}
         
-        res.render('highScores', {data});
+        res.render('highscores', {data});
       });
   });
 }
