@@ -252,11 +252,30 @@ label{
 }
 
 input[type=range] {
-    //-webkit-appearance: none;
+    -webkit-appearance: none;
     //border-radius: 8px;
     height: 2px;
     border: 1px solid #bdc3c7;
-    //background-color: #fff; 
+    //background:transparent;
+    //background: #fff; 
+}
+
+
+input[type='range']::-moz-range-track {
+  border-radius: 5px;
+  background-color: white;
+  height: 2px;
+  outline: 0;
+  border: 1px dotted transparent !important;
+	border-radius:0;
+}
+
+input[type='range']::-moz-range-thumb {
+	border:0;
+	width: 6px;
+	height: 25px;
+	border-radius:0;
+	cursor: pointer;
 }
 
 input[type='range']::-webkit-slider-thumb {
@@ -267,6 +286,7 @@ input[type='range']::-webkit-slider-thumb {
 	height: 20px;
 	cursor: pointer;
 }
+
 input:focus,
 input:active {
 	outline: 0;

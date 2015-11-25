@@ -1,8 +1,8 @@
 /*settings.js*/
-//document.addEventListener('DOMContentLoaded',function() {
-//	
-//	Buttons.init();
-//});
+document.addEventListener('DOMContentLoaded',function() {
+	console.log('DOM loaded');
+	Buttons.init();
+});
 
 var Buttons = (function() {
 	
@@ -38,7 +38,7 @@ var Buttons = (function() {
 	var upgrades1;
 
 	function init( game, isFriend){
-		
+		console.log( "button init!" );
 
 		theGame = game;
 
@@ -186,6 +186,12 @@ var Buttons = (function() {
 		toggleBackgrounds( backgroundElement, classList );
 		lvlFunc[level].action();
 
+		removeHidden( buttons.upgrade );
+		addToVisible( buttons.upgrade );
+		
+		removeHidden( buttons.settings );
+		addToVisible( buttons.settings );
+		
 		removeHidden( buttons.gameExit );
 		addToVisible( buttons.gameExit );
 
@@ -202,7 +208,7 @@ var Buttons = (function() {
 			//level down button is shown when enough upgrades are bought 
 			var action = (upgrades1[0][2] === 2) ? removeHidden : addHidden; 
 			action( buttons.levelDown );
-		} else if (level===3) {
+		} else if( level===3 ) {
 			addHidden( buttons.levelDown );
 			removeFromVisible( buttons.levelDown );
 			removeHidden( buttons.levelUp );
@@ -220,7 +226,7 @@ var Buttons = (function() {
 			exceptList = ['level-down'];
 		}
 		//debugger;
-		
+		console.log(classList[0]);
 		backgroundElement.classList.toggle( classList[0] );
 		backgroundElement.classList.toggle( classList[1] );
 
@@ -300,8 +306,8 @@ var Buttons = (function() {
 
 /*	function toggleHidden( element ){
 		for( var i in visibleElements){
-			
-			
+			console.log( "visibleElements[i]" );
+			console.log( visibleElements[i] );
 			if(element === visibleElements[i]){
 				addHidden( element );
 				visibleElements.splice(i,1);
@@ -324,27 +330,24 @@ var Buttons = (function() {
 		} else if( level === 3 ){
 			toggleBackgrounds(background, toggleClassList);
 		}
+		
 		//SHOW this elements
 		removeHidden( buttons.quit );
 		addToVisible( buttons.quit );
 		
+		//HIDE this elements
 		addHidden( buttons.gameExit );
 		removeFromVisible( buttons.gameExit );
-		//removeHidden( backgrounds.upgrade );
 
 		addHidden( buttons.levelDown );
 		removeFromVisible( buttons.levelDown );
 		addHidden( buttons.levelUp );
 		removeFromVisible( buttons.levelUp );
 
-		
-		//toggleHidden( buttons.levelUp );
-		/*addHidden( buttons.levelUp );
-		removeFromVisible( buttons.levelUp );*/
-
-		//addHidden( buttons.levelDown );
-		//removeFromVisible( buttons.levelDown );
-		//addToVisible( backgrounds.upgrade );
+		addHidden( buttons.upgrade );
+		removeFromVisible( buttons.upgrade );
+		addHidden( buttons.settings );
+		removeFromVisible( buttons.settings );
 
 		var name = 'upgrade'+level;
 		//debugger;
@@ -370,7 +373,7 @@ var Buttons = (function() {
 
 	//TODO: stop error -> do not let level to zero or far higher
 	function displayLevelDown(){
-		
+		console.log("GO DOWN: level " + (level+1));
 		level += 1;
 		if( lvlFunc[level] ){
 			lvlFunc[level].action();
@@ -389,7 +392,7 @@ var Buttons = (function() {
 
 
 	function displayLevelUp(){
-		
+		console.log("GO UP: level " + (level-1));
 		level -= 1;
 		if(level===2){
 			removeHidden( buttons.levelDown );
@@ -415,7 +418,7 @@ var Buttons = (function() {
 			removeHidden( lvlFunc[newLevel].backgrounds[i] );
 			//addToVisible( lvlFunc[newLevel].backgrounds[i] );
 		}
-		for(i in lvlFunc[levelBefore].backgrounds){
+		for(var i in lvlFunc[levelBefore].backgrounds){
 			addHidden( lvlFunc[levelBefore].backgrounds[i] );
 			//removeFromVisible( lvlFunc[levelBefore].backgrounds[i] );
 		}
@@ -434,24 +437,24 @@ var Buttons = (function() {
 	}
 
 	function addHidden( element ){
-		
+		console.log("Going to add hidden to element!");
 		if( element.classList.contains('hidden') ){
-			
+			console.log("This element has aldready hidden class!");
 		} else {
-			
+			console.log("Hidden class added to element");
 			element.classList.add('hidden');
 		}
 	}
 
 	function removeHidden( element ){
-		
+		console.log("Going to remove hidden to element!");
 		if( element.classList.contains('hidden') ){
-			
-			
+			console.log("Hidden class added to element");
+			console.log(element);
 			element.classList.remove('hidden');
 			//addToVisible(element);
 		} else {
-			
+			console.log("This element has aldready none hidden class!");
 		}
 	}
 
