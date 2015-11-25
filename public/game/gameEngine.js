@@ -18,6 +18,7 @@ function gameEngine(image, audio, user, userData, isFriend){
     this.displayScreen = this.lvl1;
     this.audio = audio;
     this.isFriend = isFriend;
+    this.time = 0;
 
     //this.userdata.currency = 10000000000;
 
@@ -632,6 +633,28 @@ gameEngine.prototype.chanceDisplayToSettings = function(){
         }
     }
 };
+
+gameEngine.prototype.time = undefined;
+gameEngine.prototype.saveAndRefresh = function(dt){
+    this.time += dt;
+    if(this.time > 6000000){
+        var exit  = $('#save');
+        var field = exit[0][0];
+        var scoreField = exit[0][1];
+        var checkFriend = exit[0][2];
+
+        this.userdata.score = this.score;
+        field.value = this.userdata.createJSONstring();
+        scoreField.value = this.score;
+        checkFriend.value = (this.isFriend).toString();
+        if(this.isFriend){
+
+            exit.submit();
+        }
+
+        this.time = 0;
+    }
+}
 
 
 gameEngine.prototype.exitToSettings = function(){
