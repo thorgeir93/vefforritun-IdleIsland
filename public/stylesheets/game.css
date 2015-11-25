@@ -172,7 +172,7 @@ div.settings-show {
 div#myCanvas {
   z-index: 100 !important; }
 
-div.sky, div.mine-wall {
+div.sky {
   left: 0;
   top: 0;
   height: 70%;
@@ -205,19 +205,26 @@ div.sky {
 div.sea {
   background-color: #29ABE2; }
 
-div.mine-floor {
-  background: -webkit-linear-gradient(180deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
-  background: -o-linear-gradient(180deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
-  background: -ms-linear-gradient(180deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
-  background: -moz-linear-gradient(180deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
-  background: linear-gradient(180deg, black 0%, #303030 40%, #616161 81%, #777777 100%); }
-
 div.mine-wall {
-  background: -webkit-linear-gradient(0deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
-  background: -o-linear-gradient(0deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
-  background: -ms-linear-gradient(0deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
-  background: -moz-linear-gradient(0deg, black 0%, #303030 40%, #616161 81%, #777777 100%);
-  background: linear-gradient(0deg, black 0%, #303030 40%, #616161 81%, #777777 100%); }
+  top: 0;
+  height: 100%;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  z-index: -20;
+  background: url("../game/images/game-background-cave.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+
+html.level-2-background-mine {
+  /*	background: url('../game/images/game-background-cave.png');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  z-index: 400;*/ }
 
 button.game-exit {
   position: absolute;

@@ -431,29 +431,53 @@ div.sky{
 div.sea{
 	@extend %background-bottom;
 	background-color:$color-ocean;
+
 }
 
 div.mine-floor{
 	@extend %background-bottom;
-	$rotate:180deg;
-	background: -webkit-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
-	background: -o-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
-	background: -ms-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
-	background: -moz-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
-	background: linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	//$rotate:180deg;
+	//background: -webkit-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	//background: -o-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	//background: -ms-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	//background: -moz-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	//background: linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
 //	z-index:1;
 }
 
 div.mine-wall{
-	@extend %background-top;
+	//@extend %background-top;
 //	z-index:2;
-	$rotate:0deg;
-	background: -webkit-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
-	background: -o-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
-	background: -ms-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
-	background: -moz-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
-	background: linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	//$rotate:0deg;
+	//background: -webkit-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	//background: -o-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	//background: -ms-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	//background: -moz-linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	//background: linear-gradient($rotate, rgb(0, 0, 0) 0%, rgb(48, 48, 48) 40%, rgb(97, 97, 97) 81%, rgb(119, 119, 119) 100%);
+	
+	top:0;
+	height:100%;
+	left:0;
+	width:100%;
+	position: absolute;
+	z-index:-20;
+	background: url('../game/images/game-background-cave.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
 }
+
+html.level-2-background-mine{
+/*	background: url('../game/images/game-background-cave.png');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  z-index: 400;*/
+}
+
 
 
 button.game-exit{

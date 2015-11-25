@@ -1,8 +1,8 @@
 /*settings.js*/
-//document.addEventListener('DOMContentLoaded',function() {
-//	console.log('DOM loaded');
-//	Buttons.init();
-//});
+document.addEventListener('DOMContentLoaded',function() {
+	console.log('DOM loaded');
+	Buttons.init();
+});
 
 var Buttons = (function() {
 	
@@ -186,6 +186,12 @@ var Buttons = (function() {
 		toggleBackgrounds( backgroundElement, classList );
 		lvlFunc[level].action();
 
+		removeHidden( buttons.upgrade );
+		addToVisible( buttons.upgrade );
+		
+		removeHidden( buttons.settings );
+		addToVisible( buttons.settings );
+		
 		removeHidden( buttons.gameExit );
 		addToVisible( buttons.gameExit );
 
@@ -202,7 +208,7 @@ var Buttons = (function() {
 			//level down button is shown when enough upgrades are bought 
 			var action = (upgrades1[0][2] === 2) ? removeHidden : addHidden; 
 			action( buttons.levelDown );
-		} else if (level===3) {
+		} else if( level===3 ) {
 			addHidden( buttons.levelDown );
 			removeFromVisible( buttons.levelDown );
 			removeHidden( buttons.levelUp );
@@ -324,27 +330,24 @@ var Buttons = (function() {
 		} else if( level === 3 ){
 			toggleBackgrounds(background, toggleClassList);
 		}
+		
 		//SHOW this elements
 		removeHidden( buttons.quit );
 		addToVisible( buttons.quit );
 		
+		//HIDE this elements
 		addHidden( buttons.gameExit );
 		removeFromVisible( buttons.gameExit );
-		//removeHidden( backgrounds.upgrade );
 
 		addHidden( buttons.levelDown );
 		removeFromVisible( buttons.levelDown );
 		addHidden( buttons.levelUp );
 		removeFromVisible( buttons.levelUp );
 
-		
-		//toggleHidden( buttons.levelUp );
-		/*addHidden( buttons.levelUp );
-		removeFromVisible( buttons.levelUp );*/
-
-		//addHidden( buttons.levelDown );
-		//removeFromVisible( buttons.levelDown );
-		//addToVisible( backgrounds.upgrade );
+		addHidden( buttons.upgrade );
+		removeFromVisible( buttons.upgrade );
+		addHidden( buttons.settings );
+		removeFromVisible( buttons.settings );
 
 		var name = 'upgrade'+level;
 		//debugger;
