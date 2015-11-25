@@ -252,7 +252,7 @@ function addFriendsHandler(req, res, next) {
     res.render('addFriends', {status: "You can't add yourself, ya dingus"});
   }
   
-  if (friend === '') {
+  else if (friend === '') {
     res.render('addFriends', {status: 'Username is required!'});
   } else {
     sql.isUserNTaken(friend, function (error, result) {
