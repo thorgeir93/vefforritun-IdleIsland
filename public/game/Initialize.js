@@ -142,7 +142,9 @@ function imagePreload(callback){
       mole1         : "game/images/mole_animation-upgrade-2.png",
       mole3         : "game/images/mole_animation-upgrade-3.png",
 
-      molekall      : "game/images/molekall_animation.png"
+      molekall      : "game/images/molekall_animation.png",
+      
+      moleheap      : "game/images/game-coconut-heap.png"
 
 
 
@@ -245,6 +247,8 @@ function init(){
 
       console.log("HTML buttons setup [begin] " );
       console.log(userData);
+      //debugger;
+      console.log(leikur.displays[2].showArrow);
       //debugger;
       Buttons.init( leikur, isFriend);
       console.log("HTML buttons setup [done] " );

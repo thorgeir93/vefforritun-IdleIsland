@@ -159,5 +159,5 @@ div.sand {
   transform: translate(-50%, -50%);
   width: 242px;
   height: 346px;
-  background-image: url("../images/menu-island-sand.png");
+  background: url("../images/menu-island-sand.png");
   z-index: -1; }

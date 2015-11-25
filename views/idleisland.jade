@@ -15,8 +15,11 @@ html
 		div.buttons
 			div.circle-buttons
 				div.upg
-				form( method='post', action='/gameSettings', class='form-settings')
-					div.sett
+				form( method='post', action='/gameSettings', class='form-settings' hidden)
+					input(type='text', id='submitString2', name='submitString')
+					input(type='text', id='score2', name='score')
+					input(type='hidden', id='checkFriend2', name='checkFriend')
+				div.sett
 			div.arrows-buttons
 			//div.quit
 		form(method='post', action='/exit', id = 'exit', hidden)
@@ -37,6 +40,7 @@ html
 		script(src='/game/gameEngine.js')
 		script(src='/game/Initialize.js')
 
+	//button.game-lvl-2-coconutHeap
 	div.backgrounds
 		div.sky
 		div.sea

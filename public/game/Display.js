@@ -14,7 +14,7 @@ function Display(buttons,upgrades, sprite, showArrow){
 		this.showArrow = showArrow;// this.checkUpgradeStatus( this.upgrades );
 	}
 	//if(image===[]){
-		//debugger;
+	//debugger;
 	//}
 
 	/*var pos = {     width: this.image.width,
@@ -113,7 +113,7 @@ Display.prototype.renderSprites = function(upgrades){
 				
 			}
 		}
-		console.log('');
+		//console.log('');
 	}
 
 	if(flag){
@@ -127,6 +127,7 @@ Display.prototype.destroyCoconuts = function(){
 
 Display.prototype.createCoconut = function(coconut){
 		this.coconuts.push(coconut);
+
 }
 
 Display.prototype.update = function(dt){
@@ -175,28 +176,31 @@ Display.prototype.renderUpgrades = function(upgrades){
 		for(var j = 0; j < 3; j++){	
 			//num++;
 			if(upgrades[i][j] === 0){
-				this.drawUpgrade(g_ctx,this.upgrades[1][i][j].image, this.upgrades[1][i][j].getPosition().x, this.upgrades[1][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[1][i][j].image, this.upgrades[1][i][j].getPosition().x, this.upgrades[1][i][j].getPosition().y, 0.2);
 			}else if(upgrades[i][j] === 1){
-				this.drawUpgrade(g_ctx,this.upgrades[0][i][j].image, this.upgrades[0][i][j].getPosition().x, this.upgrades[0][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[0][i][j].image, this.upgrades[0][i][j].getPosition().x, this.upgrades[0][i][j].getPosition().y, 1.0);
 			}else if(upgrades[i][j] === 2){
-				this.drawUpgrade(g_ctx,this.upgrades[2][i][j].image, this.upgrades[2][i][j].getPosition().x, this.upgrades[2][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[2][i][j].image, this.upgrades[2][i][j].getPosition().x, this.upgrades[2][i][j].getPosition().y, 0.8);
 			}
 		}
 	}
-	//debugger;
-	//console.log(num);
 };
 
-
-Display.prototype.drawUpgrade = function(ctx, image, x, y, w, h){
+Display.prototype.drawUpgrade = function(ctx, image, x, y, transparent){
 	
+	//ctx.globalCompositeOperation = "lighter";
+	ctx.beginPath();
+	ctx.globalAlpha = transparent;
 	ctx.drawImage(image, x, y);
 
 	//draw rectangle around the image
 	ctx.rect(x, y, image.width, image.height);
-	ctx.stroke();
 	ctx.strokeStyle = 'white';
 	ctx.lineWidth = 4;
+	ctx.stroke();
+
+	//reset alpha value
+	ctx.globalAlpha = 1.0;
 };
 
 

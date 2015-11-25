@@ -42,12 +42,12 @@ router.get('/highScores', ensureUser, highScores);
 router.get('/settings', ensureUser, settings);
 router.post('/settings',  saveOrRestoreSettings);
 
-router.post('/gameSettings', ensureUser, gameSettings );
-router.post('/saveGoBackToGame', ensureUser, startGame );
+router.post('/gameSettings', ensureUser, gameSettings);
+router.post('/saveGoBackToGame', ensureUser, startGame, play );
 
 router.get('/highScores', ensureUser, highScores);
 
-router.get('/idleisland', ensureUser, play);
+router.get('/idleisland', /*ensureUser,*/ play);
 router.get('/logout', ensureUser, logout);
 
 
@@ -64,35 +64,33 @@ function startGame(req, res, next){
       if(error){
         console.log(error);
       }
-      console.log('settings 3241cecewewrecweweewewwewe');
-      console.dir(settings);
-      res.redirect('/idleisland');
+      next();
     });
-  } else if(action==='default'){
-    res.redirect('/idleisland');
+  } else {
+    next();
   }
 }
 
 function gameSettings(req, res, next){
+  var gameState = xss(req.body.submitString);
+  var score = xss(req.body.score);
 
-  sql.getSettings(req.session.user, function(error, settings){
-    console.log("aaaaaaaaaaaaaaaaaaaaaa");
-    console.dir(settings);
-    res.render('settings', 
-      {
-        title: 'Change Settings',
-        action: '/saveGoBackToGame',
-        btnText1:'Back to game', 
-        btnText2:'Save and go back to game', 
-        settings:settings
-      });
+  sql.setGameState(req.session.user, gameState, score, function(){
+    console.log('allt gekk upp');
+
+    sql.getSettings(req.session.user, function(error, settings){
+      console.dir(settings);
+      res.render('settings', 
+        {
+          title: 'Change Settings',
+          action: '/saveGoBackToGame',
+          btnText1:'Back to game', 
+          btnText2:'Save and go back to game', 
+          settings:settings
+        });
+    });
   });
 }
-/*router.get('/viewFriendsIsland', viewFriendsIsland);
-
-function viewFriendsIsland(req, res, next) {
-  res.render('viewFriendsIsland');
-}*/
 
 function getSettings( body ){
   var action = body.action;
@@ -159,6 +157,7 @@ function exit(req, res, next){
       res.redirect('/menu');
     });
   } else {
+
     res.redirect('/viewFriends');
   }
 }
@@ -260,7 +259,7 @@ function highScores(req, res, next) {
   });
 }
 
-  
+
 
 function settings(req, res, next) {
   sql.getSettings(req.session.user, function(error, settings){

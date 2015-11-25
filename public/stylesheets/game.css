@@ -1,4 +1,4 @@
-button.game-exit {
+button.game-exit, button.game-lvl-2-coconutHeap {
   padding: 4px;
   cursor: pointer;
   outline: 0;
@@ -12,7 +12,7 @@ body {
 #myCanvas {
   border: 0 !important; }
 
-div.circle-buttons .upgrade, div.circle-buttons div button.gamebtn-settings {
+div.circle-buttons .upgrade, div.circle-buttons button.gamebtn-settings {
   margin: 20px 0 0 0; }
 
 div.arrow-up:before {
@@ -43,7 +43,7 @@ div.circle-buttons {
       opacity: 0.5; }
     div.circle-buttons .upgrade:hover {
       transform: rotate(-60deg); }
-  div.circle-buttons div button.gamebtn-settings {
+  div.circle-buttons button.gamebtn-settings {
     /*@extend %button-default;
 		position: absolute;
 		top:40;
@@ -61,9 +61,9 @@ div.circle-buttons {
     height: 72px;
     background: url("../game/images/game-button-settings.png") no-repeat;
     transition: transform 0.5s; }
-    div.circle-buttons div button.gamebtn-settings:active {
+    div.circle-buttons button.gamebtn-settings:active {
       opacity: 2s; }
-    div.circle-buttons div button.gamebtn-settings:hover {
+    div.circle-buttons button.gamebtn-settings:hover {
       transform: rotate(-270deg); }
 
 /*
@@ -226,3 +226,11 @@ button.game-exit {
   width: 42;
   height: 42;
   background: url("../game/images/game-button-exit.png") no-repeat; }
+
+button.game-lvl-2-coconutHeap {
+  position: absolute;
+  top: 20;
+  left: 150;
+  width: 381;
+  height: 356;
+  background: url("../game/images/game-coconut-heap.png") no-repeat; }
