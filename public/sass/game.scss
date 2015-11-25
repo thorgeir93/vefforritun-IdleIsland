@@ -216,7 +216,7 @@ div.circle-buttons{
     	transform: rotate(-60deg);
 		}
 	}
-	div button.gamebtn-settings{
+	button.gamebtn-settings{
 		/*@extend %button-default;
 		position: absolute;
 		top:40;
@@ -245,6 +245,9 @@ div.circle-buttons{
 		}
 	}
 }
+
+
+
 /*
 button.game-exit{
 	@extend %button-default;
@@ -461,4 +464,17 @@ button.game-exit{
 	width:$game-button-exit-width;
 	height:$game-button-exit-width;
 	background:url('../game/images/game-button-exit.png') no-repeat;
+}
+
+
+$game-button-coconutHeap-width: 381;
+$game-button-coconutHeap-height: 356;
+button.game-lvl-2-coconutHeap{
+	@extend %button-default;
+	position: absolute;
+	top:20;
+	left:150;
+	width:$game-button-coconutHeap-width;
+	height:$game-button-coconutHeap-height;
+	background:url('../game/images/game-coconut-heap.png') no-repeat;
 }

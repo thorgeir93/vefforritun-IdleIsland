@@ -135,21 +135,24 @@ function gameEngine(image, audio, user, userData, isFriend){
     var sprite = [];
 
     var numberOfFrames = 5;
-    var frameheight = image['kall'].height;
-    var framewidth = image['kall'].width / numberOfFrames;
+    var frameheight = image['molekall1'].height;
+    var framewidth = image['molekall1'].width / numberOfFrames;
     var topX = 360;
     var topY = 380;
     var animationTime = 1;
-    var scale = 0.5;;
+    var scale = 1;
     
-    sprite.push(animation = new Sprite(image['molekall'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
+    sprite.push(animation = new Sprite(image['molekall1'],frameheight,framewidth,topX,topY,animationTime, 1, 0.5, false));
+    sprite.push(animation = new Sprite(image['molekall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, 0.5, false));
+    sprite.push(animation = new Sprite(image['molekall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, 0.75, false));
+    sprite.push(animation = new Sprite(image['molekall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
 
     Sprites.push(sprite);
 
-    topX = 200;
-    topY = 200;
+    topX = 800;
+    topY = 400;
 
-    
+    sprite = [];
 
     sprite.push(animation = new Sprite(image['mole1'],46,38,topX,topY,1, 20, 1.5, true));
     sprite.push(animation = new Sprite(image['mole2'],46,38,topX,topY,1, 20, 1.5, true));
@@ -159,20 +162,16 @@ function gameEngine(image, audio, user, userData, isFriend){
 
     topX = 660;
     topY = 380;
+    numberOfFrames = 10;
+    framewidth = image['miner1'].height;
+    framewidth = image['miner1'].width / numberOfFrames;
+    scale = 2;
 
     sprite = [];
 
-    sprite.push(animation = new Sprite(image['kall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
-    sprite.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
-    sprite.push(animation = new Sprite(image['kall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));    
-
-    Sprites.push(sprite);
-
-    sprite = [];
-
-    sprite.push(animation = new Sprite(image['kall2'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
-    sprite.push(animation = new Sprite(image['kall1'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
-    sprite.push(animation = new Sprite(image['kall3'],frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));    
+    sprite.push(animation = new Sprite(image['miner1'],frameheight,framewidth,topX,topY,animationTime,numberOfFrames, scale, true));
+    sprite.push(animation = new Sprite(image['miner2'],frameheight,framewidth,topX,topY,animationTime,numberOfFrames, scale, true));
+    sprite.push(animation = new Sprite(image['miner3'],frameheight,framewidth,topX,topY, animationTime ,numberOfFrames, scale, true));    
 
     Sprites.push(sprite);
 
@@ -639,6 +638,26 @@ gameEngine.prototype.chanceDisplayToSettings = function(){
 }
 
 
+gameEngine.prototype.exitToSettings = function(){
+    if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
+
+        this.audio['exit'].volume = Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100;
+        this.audio['exit'].cloneNode().play();
+    }
+    
+    this.userdata.score = this.score;
+    
+    var form  = $('.form-settings');
+    var submitString = form[0][0];
+    var score = form[0][1];
+    var checkFr = form[0][2];
+
+    submitString.value = this.userdata.createJSONstring();
+    score.value = this.score;
+    checkFr.value = (this.isFriend).toString();
+    form.submit();
+};
+
 gameEngine.prototype.exit = function(){
 
     if(Math.round((this.userdata.settings['audio-slider']/100) * 100) / 100 !== 0){
@@ -648,12 +667,25 @@ gameEngine.prototype.exit = function(){
     }
 
     console.log('inn í exit');
+    
+    this.userdata.score = this.score;
+    
+    var form  = $('.form-settings');
+    var submitString = form[0][0];
+    var score = form[0][1];
+    var checkFr = form[0][2];
+
+    submitString.value = this.userdata.createJSONstring();
+    score.value = this.score;
+    checkFr.value = (this.isFriend).toString();
+    form.submit();
+
     var exit  = $('#exit');
     var field = exit[0][0];
     var scoreField = exit[0][1];
     var checkFriend = exit[0][2];
 
-    this.userdata.score = this.score;
+    //this.userdata.score = this.score;
     field.value = this.userdata.createJSONstring();
     scoreField.value = this.score;
     checkFriend.value = (this.isFriend).toString();

@@ -10,7 +10,6 @@ function Display(buttons,upgrades, sprite){
 	}
 	this.animationFrame = 0;
 	this.animationCurrentTime = 0;
-
 }
 
 Display.prototype.Buttons = undefined;
@@ -107,6 +106,7 @@ Display.prototype.destroyCoconuts = function(){
 
 Display.prototype.createCoconut = function(coconut){
 		this.coconuts.push(coconut);
+
 }
 
 Display.prototype.update = function(dt){
@@ -143,19 +143,21 @@ Display.prototype.renderUpgrades = function(upgrades){
 		for(var j = 0; j < 3; j++){	
 			//num++;
 			if(upgrades[i][j] === 0){
-				this.drawUpgrade(g_ctx,this.upgrades[1][i][j].image, this.upgrades[1][i][j].getPosition().x, this.upgrades[1][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[1][i][j].image, this.upgrades[1][i][j].getPosition().x, this.upgrades[1][i][j].getPosition().y, 0.2);
 			}else if(upgrades[i][j] === 1){
-				this.drawUpgrade(g_ctx,this.upgrades[0][i][j].image, this.upgrades[0][i][j].getPosition().x, this.upgrades[0][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[0][i][j].image, this.upgrades[0][i][j].getPosition().x, this.upgrades[0][i][j].getPosition().y, 1.0);
 			}else if(upgrades[i][j] === 2){
-				this.drawUpgrade(g_ctx,this.upgrades[2][i][j].image, this.upgrades[2][i][j].getPosition().x, this.upgrades[2][i][j].getPosition().y);
+				this.drawUpgrade(g_ctx,this.upgrades[2][i][j].image, this.upgrades[2][i][j].getPosition().x, this.upgrades[2][i][j].getPosition().y, 0.3);
 			}
 		}
 	}
 };
 
-
-Display.prototype.drawUpgrade = function(ctx, image, x, y, w, h){
+Display.prototype.drawUpgrade = function(ctx, image, x, y, transparent){
 	
+	//ctx.globalCompositeOperation = "lighter";
+	ctx.beginPath();
+	ctx.globalAlpha = transparent;
 	ctx.drawImage(image, x, y);
 
 	//draw rectangle around the image
@@ -164,6 +166,9 @@ Display.prototype.drawUpgrade = function(ctx, image, x, y, w, h){
 	ctx.strokeStyle = 'white';
 	ctx.lineWidth = 4;
 	ctx.stroke();
+
+	//reset alpha value
+	ctx.globalAlpha = 1.0;
 };
 
 

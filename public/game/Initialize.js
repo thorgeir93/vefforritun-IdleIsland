@@ -140,11 +140,20 @@ function imagePreload(callback){
       veidistong3   : "game/images/veidistong_animation-upgrade-3.png",
 
 
-      mole2         : "game/images/mole_animation-upgrade-1.png",
-      mole1         : "game/images/mole_animation-upgrade-2.png",
+      mole1         : "game/images/mole_animation-upgrade-1.png",
+      mole2         : "game/images/mole_animation-upgrade-2.png",
       mole3         : "game/images/mole_animation-upgrade-3.png",
 
-      molekall      : "game/images/molekall_animation.png"
+      molekall1     : "game/images/molekall_animation-upgrade-1.png",
+      molekall2     : "game/images/molekall_animation-upgrade-2.png",
+      molekall3     : "game/images/molekall_animation-upgrade-3.png",
+
+      miner1        : "game/images/miner_animation-upgrade-1.png",
+      miner2        : "game/images/miner_animation-upgrade-2.png",
+      miner3        : "game/images/miner_animation-upgrade-3.png",
+
+      
+      moleheap      : "game/images/game-coconut-heap.png"
 
 
 
@@ -247,6 +256,8 @@ function init(){
 
       console.log("HTML buttons setup [begin] " );
       console.log(userData);
+      //debugger;
+      console.log(leikur.displays[2].showArrow);
       //debugger;
       Buttons.init( leikur, isFriend);
       console.log("HTML buttons setup [done] " );
