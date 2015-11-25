@@ -144,9 +144,9 @@ function imagePreload(callback){
       mole2         : "game/images/mole_animation-upgrade-2.png",
       mole3         : "game/images/mole_animation-upgrade-3.png",
 
-      molekall      : "game/images/molekall_animation.png",
       molekall1     : "game/images/molekall_animation-upgrade-1.png",
-      molekall2     : "game/images/molekall_anmiation-upgrade-2.png",
+      molekall2     : "game/images/molekall_animation-upgrade-2.png",
+      molekall3     : "game/images/molekall_animation-upgrade-3.png",
       
       moleheap      : "game/images/game-coconut-heap.png"
 
