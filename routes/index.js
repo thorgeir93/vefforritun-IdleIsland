@@ -50,6 +50,8 @@ router.get('/highscores', ensureUser, highScores);
 router.get('/idleisland', ensureUser, play);
 router.get('/logout', ensureUser, logout);
 
+router.post('/refresh', ensureUser, refresh);
+
 
 router.post('/exit', ensureUser ,exit);
 
@@ -146,6 +148,16 @@ function chooseFriend(req, res, next) {
                  };
     res.render('idleisland', {data:data});
   });
+}
+
+function refresh(req, res, next){
+    var gameState = xss(req.body.submitString);
+    var score = xss(req.body.score);
+    console.log(score);
+    sql.setGameState(req.session.user, gameState, score, function(){
+      console.log('allt gekk upp');
+      res.redirect('/idleisland');
+    });
 }
 
 function exit(req, res, next){

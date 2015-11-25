@@ -191,6 +191,7 @@ _updateClocks = function (frameTime) {
 _iterCore = function (dt) {
 
     leikur.update(dt);
+    leikur.saveAndRefresh(dt)
     leikur.render();
     leikur.playTheme();
     Loop();
