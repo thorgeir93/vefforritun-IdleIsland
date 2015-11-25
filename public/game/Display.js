@@ -62,7 +62,19 @@ Display.prototype.render = function(currency, score, isFriend, upgrades){
 
 	g_ctx.fillStyle = "white";
 	g_ctx.font=font;
-	g_ctx.fillText('Coconuts :  '+currency,pos1.x,pos1.y);
+
+	if(currency >= 1000 && currency < 1000000){
+			currency = (currency / 1000).toFixed(2);
+			g_ctx.fillText('Coconuts :  '+currency+'K',pos1.x,pos1.y);
+
+		}else if(currency >= 1000000){
+			currency = (currency / 1000000).toFixed(2);
+			g_ctx.fillText('Coconuts :  '+currency+'M',pos1.x,pos1.y);
+		}else{
+
+			g_ctx.fillText('Coconuts :  '+currency,pos1.x,pos1.y);
+		}
+	
 
 	g_ctx.font=font;
 	g_ctx.fillText('Score : '+score,pos2.x,pos2.y);
@@ -137,7 +149,7 @@ Display.prototype.update = function(dt){
 
 
 //var counter = 0;
-Display.prototype.renderUpgrades = function(upgrades){
+Display.prototype.renderUpgrades = function(upgrades, prices){
 
 	for(var i = 0; i < 3; i++){
 		for(var j = 0; j < 3; j++){	
@@ -145,7 +157,7 @@ Display.prototype.renderUpgrades = function(upgrades){
 			if(upgrades[i][j] === 0){
 				this.drawUpgrade(g_ctx,this.upgrades[1][i][j].image, this.upgrades[1][i][j].getPosition().x, this.upgrades[1][i][j].getPosition().y, 0.2);
 			}else if(upgrades[i][j] === 1){
-				this.drawUpgrade(g_ctx,this.upgrades[0][i][j].image, this.upgrades[0][i][j].getPosition().x, this.upgrades[0][i][j].getPosition().y, 1.0);
+				this.drawUpgrade(g_ctx,this.upgrades[0][i][j].image, this.upgrades[0][i][j].getPosition().x, this.upgrades[0][i][j].getPosition().y, 1.0, prices[i][j]);
 			}else if(upgrades[i][j] === 2){
 				this.drawUpgrade(g_ctx,this.upgrades[2][i][j].image, this.upgrades[2][i][j].getPosition().x, this.upgrades[2][i][j].getPosition().y, 0.3);
 			}
@@ -153,7 +165,7 @@ Display.prototype.renderUpgrades = function(upgrades){
 	}
 };
 
-Display.prototype.drawUpgrade = function(ctx, image, x, y, transparent){
+Display.prototype.drawUpgrade = function(ctx, image, x, y, transparent, price){
 	
 	//ctx.globalCompositeOperation = "lighter";
 	ctx.beginPath();
@@ -165,6 +177,24 @@ Display.prototype.drawUpgrade = function(ctx, image, x, y, transparent){
 	ctx.rect(x, y, image.width, image.height);
 	ctx.strokeStyle = 'white';
 	ctx.lineWidth = 4;
+	if(price){
+		var font = "bold 20px Arial";
+
+		g_ctx.fillStyle = "white";
+		g_ctx.font=font;
+		if(price >= 1000 && price < 1000000){
+			price = price / 1000;
+			g_ctx.fillText(price+'K',x+15,y+80);
+
+		}else if(price >= 1000000){
+			price = price / 1000000;
+			g_ctx.fillText(price+'M',x+15,y+80);
+		}else{
+
+			g_ctx.fillText(price,x+15,y+80);
+		}
+
+	}
 	ctx.stroke();
 
 	//reset alpha value

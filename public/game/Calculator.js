@@ -4,10 +4,10 @@ function Calculator(){
 }
 
 
-Calculator.prototype.prices1 = [[10,1000,1000000],[100,10000,100000000],[1000,100000,1000000000000]];
+Calculator.prototype.prices1 = [[10,2500,150000],[1000,15000,250000],[5000,100000,500000]];
 Calculator.prototype.factors1 = [[1,5,10],[2,7,15],[3,9,20]];
 
-Calculator.prototype.prices2 = [[10*100,1000*100,1000000*100],[100*100,10000*100,100000000*100],[1000*100,100000*100,1000000000000*100]];
+Calculator.prototype.prices2 = [[300000,1000000,8000000],[700000,2000000,25000000],[1500000,10000000,100000000]];
 Calculator.prototype.factors2 = [[1*2,5*2,10*20],[2*2,7*2,15*2],[3*2,9*2,20*2]];
 
 Calculator.prototype.difference = 0;
