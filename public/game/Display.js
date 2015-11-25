@@ -93,10 +93,6 @@ Display.prototype.renderSprites = function(upgrades){
 				
 			}
 		}
-<<<<<<< HEAD
-		//console.log('');
-=======
->>>>>>> 62d1c3aa47a89abd57a950ee1ba3b378918aa68d
 	}
 
 	if(flag){
@@ -151,7 +147,7 @@ Display.prototype.renderUpgrades = function(upgrades){
 			}else if(upgrades[i][j] === 1){
 				this.drawUpgrade(g_ctx,this.upgrades[0][i][j].image, this.upgrades[0][i][j].getPosition().x, this.upgrades[0][i][j].getPosition().y, 1.0);
 			}else if(upgrades[i][j] === 2){
-				this.drawUpgrade(g_ctx,this.upgrades[2][i][j].image, this.upgrades[2][i][j].getPosition().x, this.upgrades[2][i][j].getPosition().y, 0.8);
+				this.drawUpgrade(g_ctx,this.upgrades[2][i][j].image, this.upgrades[2][i][j].getPosition().x, this.upgrades[2][i][j].getPosition().y, 0.3);
 			}
 		}
 	}
@@ -170,12 +166,9 @@ Display.prototype.drawUpgrade = function(ctx, image, x, y, transparent){
 	ctx.strokeStyle = 'white';
 	ctx.lineWidth = 4;
 	ctx.stroke();
-<<<<<<< HEAD
 
 	//reset alpha value
 	ctx.globalAlpha = 1.0;
-=======
->>>>>>> 62d1c3aa47a89abd57a950ee1ba3b378918aa68d
 };
 
 
