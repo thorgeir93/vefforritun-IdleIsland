@@ -143,7 +143,7 @@ function gameEngine(image, audio, user, userData, isFriend){
     animationTime = 1;
     scale = 1;
     
-    sprite.push(animation = new Sprite(image.molekall1,frameheight,framewidth,topX,topY,animationTime, 1, 0.5, false));
+    sprite.push(animation = new Sprite(image.molekall,241,449,topX,topY,1, 1, 1, false));
     sprite.push(animation = new Sprite(image.molekall1,frameheight,framewidth,topX,topY,animationTime, numberOfFrames, 0.5, false));
     sprite.push(animation = new Sprite(image.molekall2,frameheight,framewidth,topX,topY,animationTime, numberOfFrames, 0.75, false));
     sprite.push(animation = new Sprite(image.molekall3,frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
@@ -172,7 +172,7 @@ function gameEngine(image, audio, user, userData, isFriend){
 
     sprite.push(animation = new Sprite(image.miner1,frameheight,framewidth,topX,topY,animationTime,numberOfFrames, scale, true));
     sprite.push(animation = new Sprite(image.miner2,frameheight,framewidth,topX,topY,animationTime,numberOfFrames, scale, true));
-    sprite.push(animation = new Sprite(image.miner3,frameheight,framewidth,topX,topY, animationTime ,numberOfFrames, scale, true));    
+    sprite.push(animation = new Sprite(image.miner3,frameheight,framewidth,topX,topY,animationTime,numberOfFrames, scale, true));    
 
     Sprites.push(sprite);
 
