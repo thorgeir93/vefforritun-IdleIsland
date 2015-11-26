@@ -20,7 +20,7 @@ function gameEngine(image, audio, user, userData, isFriend){
     this.isFriend = isFriend;
     this.time = 0;
 
-    this.userdata.currency = 10000000000;
+    //this.userdata.currency = 10000000;
 
     if (isFriend) {
 
@@ -449,9 +449,9 @@ gameEngine.prototype.render = function(){
 
     if(this.displayScreen === this.UpgrLvl1){
 
-        this.displays[this.displayScreen].renderUpgrades(this.userdata.upgrades1);
+        this.displays[this.displayScreen].renderUpgrades(this.userdata.upgrades1, this.calculator.prices1);
     }else if( this.displayScreen === this.UpgrLvl2){
-        this.displays[this.displayScreen].renderUpgrades(this.userdata.upgrades2);
+        this.displays[this.displayScreen].renderUpgrades(this.userdata.upgrades2, this.calculator.prices2);
     } 
 };
 
