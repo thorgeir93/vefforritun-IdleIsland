@@ -151,7 +151,7 @@ function gameEngine(image, audio, user, userData, isFriend){
     pos = {     width: image.pile.width/3.5,
                 height: image.pile.height/3.5,
                 topX: treePos.x + 150,
-                topY: treePos.y - 80
+                topY: treePos.y - 70
                };
     
     buttons.push(new Button(pos, image.pile, undefined));    
