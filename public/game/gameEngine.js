@@ -706,7 +706,7 @@ gameEngine.prototype.saveAndRefresh = function(dt){
             this.userdata.score = this.score;
             field.value = this.userdata.createJSONstring();
             scoreField.value = this.score;
-            usercheck.value = this.userName;
+            userCheck.value = this.userName;
             refresh.submit();
         }
 
