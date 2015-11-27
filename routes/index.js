@@ -161,6 +161,8 @@ function refresh(req, res, next){
       console.log(req.session.user);
       req.session.regenerate(function (){
         req.session.user = req.session.user;
+        console.log('HÉRNA ER REQ SESSION USER');
+        console.log(req.session.user);
         res.redirect('/idleisland');
       });
     });
