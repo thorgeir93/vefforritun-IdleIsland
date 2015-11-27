@@ -154,7 +154,7 @@ function refresh(req, res, next){
     var gameState = xss(req.body.submitString1);
     var score = xss(req.body.score1);
     var username = xss(req.body.userCheck);
-    sql.setGameState(username, gameState, score, function(){);
+    sql.setGameState(username, gameState, score, function(){
       req.session.regenerate(function (){
         req.session.user = username;
         console.log('CAHPS');
