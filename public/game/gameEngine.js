@@ -130,7 +130,31 @@ function gameEngine(image, audio, user, userData, isFriend){
         buttons.push(new Button(pos, image.pile, this.punch.bind(this)));
     } else {
         buttons.push(new Button(pos, image.pile, undefined));
-    }    
+    }  
+
+    pos = {     width: image.pile.width/2,
+                height: image.pile.height/2,
+                topX: treePos.x+800,
+                topY: treePos.y+200
+               };
+    
+    buttons.push(new Button(pos, image.pile, undefined));
+
+    pos = {     width: image.pile.width/3,
+                height: image.pile.height/3,
+                topX: treePos.x+770,
+                topY: treePos.y+30
+               };
+    
+    buttons.push(new Button(pos, image.pile, undefined));
+
+    pos = {     width: image.pile.width/3.5,
+                height: image.pile.height/3.5,
+                topX: treePos.x + 150,
+                topY: treePos.y - 70
+               };
+    
+    buttons.push(new Button(pos, image.pile, undefined));    
 
     Sprites = [];
     sprite = [];
@@ -143,29 +167,35 @@ function gameEngine(image, audio, user, userData, isFriend){
     animationTime = 1;
     scale = 1;
     
-    sprite.push(animation = new Sprite(image.molekall,241,449,topX,topY,1, 1, 1, false));
-    sprite.push(animation = new Sprite(image.molekall1,frameheight,framewidth,topX,topY,animationTime, numberOfFrames, 0.5, false));
-    sprite.push(animation = new Sprite(image.molekall2,frameheight,framewidth,topX,topY,animationTime, numberOfFrames, 0.75, false));
-    sprite.push(animation = new Sprite(image.molekall3,frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, false));
+    sprite.push(animation = new Sprite(image.molekall,241,449,500,topY,1, 1, 1, false));
+    sprite.push(animation = new Sprite(image.molekall1,frameheight,framewidth,topX,topY,animationTime, numberOfFrames, 0.5, true));
+    sprite.push(animation = new Sprite(image.molekall2,frameheight,framewidth,topX,topY,animationTime, numberOfFrames, 0.75, true));
+    sprite.push(animation = new Sprite(image.molekall3,frameheight,framewidth,310,290,animationTime, numberOfFrames, scale, true));
 
     Sprites.push(sprite);
 
-    topX = 800;
-    topY = 400;
+    numberOfFrames = 20;
+    frameheight = 46;
+    framewidth = 38;
+    topX = (manPos.x + 30);
+    topY = (manPos.y - 320);
+    animationTime = 1;
+    scale = 1.5;
 
     sprite = [];
 
-    sprite.push(animation = new Sprite(image.mole1,46,38,topX,topY,1, 20, 1.5, true));
-    sprite.push(animation = new Sprite(image.mole2,46,38,topX,topY,1, 20, 1.5, true));
-    sprite.push(animation = new Sprite(image.mole3,44,38,topX,topY,1, 20, 1.5, true));
+    sprite.push(animation = new Sprite(image.mole1,frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
+    sprite.push(animation = new Sprite(image.mole2,frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
+    sprite.push(animation = new Sprite(image.mole3,frameheight,framewidth,topX,topY,animationTime, numberOfFrames, scale, true));
 
     Sprites.push(sprite);
 
-    topX = 660;
-    topY = 380;
+    topX = (veidistong.x + 110);
+    topY = (manPos.y - 270);
     numberOfFrames = 10;
     frameheight = image.miner1.height;
     framewidth = image.miner1.width / numberOfFrames;
+    animationTime = 1;
     scale = 2;
 
     sprite = [];
