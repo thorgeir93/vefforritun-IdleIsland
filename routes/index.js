@@ -157,8 +157,6 @@ function refresh(req, res, next){
     sql.setGameState(username, gameState, score, function(){
       req.session.regenerate(function (){
         req.session.user = username;
-        console.log('CAHPS');
-        console.log(req.session.user);
         res.redirect('/idleisland');
       });
     });

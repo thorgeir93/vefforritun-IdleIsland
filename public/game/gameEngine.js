@@ -695,7 +695,7 @@ gameEngine.prototype.time = undefined;
 gameEngine.prototype.saveAndRefresh = function(dt){
     this.time += dt;
 
-    if(this.time > 10000){
+    if(this.time > 300000){
         if(this.isFriend){
 
             var refresh = $('#refresh');
