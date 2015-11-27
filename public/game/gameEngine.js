@@ -701,13 +701,12 @@ gameEngine.prototype.saveAndRefresh = function(dt){
             var refresh = $('#refresh');
             var field = refresh[0][0];
             var scoreField = refresh[0][1];
-            var checkFriend = refresh[0][2];
+            var userCheck = refresh[0][2];
 
             this.userdata.score = this.score;
             field.value = this.userdata.createJSONstring();
             scoreField.value = this.score;
-            checkFriend.value = (this.isFriend).toString();
-
+            usercheck.value = this.userName;
             refresh.submit();
         }
 
