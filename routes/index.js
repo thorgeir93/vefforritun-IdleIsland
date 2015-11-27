@@ -50,7 +50,7 @@ router.get('/highscores', ensureUser, highScores);
 router.get('/idleisland', ensureUser, play);
 router.get('/logout', ensureUser, logout);
 
-router.post('/refresh', ensureUser, refresh);
+router.post('/refresh', /*ensureUser*/, refresh);
 
 
 router.post('/exit', ensureUser ,exit);

@@ -698,7 +698,7 @@ gameEngine.prototype.saveAndRefresh = function(dt){
     if(this.time > 10000){
         if(this.isFriend){
 
-            var refresh = $('#save');
+            var refresh = $('#refresh');
             var field = refresh[0][0];
             var scoreField = refresh[0][1];
             var checkFriend = refresh[0][2];
