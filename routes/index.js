@@ -151,15 +151,20 @@ function chooseFriend(req, res, next) {
 }
 
 function refresh(req, res, next){
-    var gameState = xss(req.body.submitString1);
-    var score = xss(req.body.score1);
-    var username = xss(req.body.userCheck);
+    //console.log('er herna nuna--------------------------------------------------------------------------------------------', req.body.data)
+    var dats = JSON.parse(req.body.data)
+    var gameState = req.body.data
+    var score = dats.score;
+    var username = dats.userName;
+    console.log('gamestate = ',gameState,'score = ',score,'username = ',username)
     sql.setGameState(username, gameState, score, function(){
-      req.session.regenerate(function (){
+      /*req.session.regenerate(function (){
         req.session.user = username;
         res.redirect('/idleisland');
-      });
+      });*/
     });
+  console.log('er að fara aftur í idleisland');
+ res.redirect('/idleisland');
 }
 
 function exit(req, res, next){

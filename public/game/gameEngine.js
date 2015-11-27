@@ -390,6 +390,7 @@ gameEngine.prototype.update = function(time){
     var gained = currency - currentCurrency;
     if (this.isFriend) {    
         this.score += gained;
+        this.userdata.score = this.score;
     }
 
     if(this.displayScreen === this.lvl1){
@@ -586,7 +587,7 @@ gameEngine.prototype.punch = function(){
         this.userdata.currency += 1 * this.userdata.treeFactor;
 
         this.score += 1 * this.userdata.treeFactor;
-
+        this.userdata.score = this.score;
         if(this.displayScreen === this.lvl1){
 
             var pos = {     width: this.coconutImage.width,
@@ -695,10 +696,21 @@ gameEngine.prototype.time = undefined;
 gameEngine.prototype.saveAndRefresh = function(dt){
     this.time += dt;
 
-    if(this.time > 300000){
+    if(this.time > 10000){
         if(this.isFriend){
 
-            var refresh = $('#refresh');
+
+            var parameters = {username: this.userName};
+            $.ajax({
+                url: "/refresh",
+                type: "POST",
+                data: {data:this.userdata.createJSONstring()},                   
+                success: function()
+                            {                                  
+                            }
+            });
+
+            /*var refresh = $('#refresh');
             var field = refresh[0][0];
             var scoreField = refresh[0][1];
             var userCheck = refresh[0][2];
@@ -707,7 +719,7 @@ gameEngine.prototype.saveAndRefresh = function(dt){
             field.value = this.userdata.createJSONstring();
             scoreField.value = this.score;
             userCheck.value = this.userName;
-            refresh.submit();
+            refresh.submit();*/
         }
 
         this.time = 0;
