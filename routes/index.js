@@ -151,11 +151,13 @@ function chooseFriend(req, res, next) {
 }
 
 function refresh(req, res, next){
-    var gameState = xss(req.body.submitString);
-    var score = xss(req.body.score);
+    var gameState = xss(req.body.submitString1);
+    var score = xss(req.body.score1);
     console.log(score);
+    console.log(req.session.user);
     sql.setGameState(req.session.user, gameState, score, function(){
       console.log('allt gekk upp');
+      console.log(req.session.user);
       req.session.regenerate(function (){
         req.session.user = req.session.user;
         res.redirect('/idleisland');
