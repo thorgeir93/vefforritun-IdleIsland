@@ -695,20 +695,19 @@ gameEngine.prototype.time = undefined;
 gameEngine.prototype.saveAndRefresh = function(dt){
     this.time += dt;
 
-    if(this.time > 600000){
+    if(this.time > 300000){
         if(this.isFriend){
 
-            var exit  = $('#save');
-            var field = exit[0][0];
-            var scoreField = exit[0][1];
-            var checkFriend = exit[0][2];
+            var refresh = $('#refresh');
+            var field = refresh[0][0];
+            var scoreField = refresh[0][1];
+            var userCheck = refresh[0][2];
 
             this.userdata.score = this.score;
             field.value = this.userdata.createJSONstring();
             scoreField.value = this.score;
-            checkFriend.value = (this.isFriend).toString();
-
-            exit.submit();
+            userCheck.value = this.userName;
+            refresh.submit();
         }
 
         this.time = 0;

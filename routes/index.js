@@ -50,7 +50,7 @@ router.get('/highscores', ensureUser, highScores);
 router.get('/idleisland', ensureUser, play);
 router.get('/logout', ensureUser, logout);
 
-router.post('/refresh', ensureUser, refresh);
+router.post('/refresh', /*ensureUser, */ refresh);
 
 
 router.post('/exit', ensureUser ,exit);
@@ -151,12 +151,14 @@ function chooseFriend(req, res, next) {
 }
 
 function refresh(req, res, next){
-    var gameState = xss(req.body.submitString);
-    var score = xss(req.body.score);
-    console.log(score);
-    sql.setGameState(req.session.user, gameState, score, function(){
-      console.log('allt gekk upp');
-      res.redirect('/idleisland');
+    var gameState = xss(req.body.submitString1);
+    var score = xss(req.body.score1);
+    var username = xss(req.body.userCheck);
+    sql.setGameState(username, gameState, score, function(){
+      req.session.regenerate(function (){
+        req.session.user = username;
+        res.redirect('/idleisland');
+      });
     });
 }
 
