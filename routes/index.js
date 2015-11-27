@@ -157,7 +157,7 @@ function refresh(req, res, next){
     sql.setGameState(req.session.user, gameState, score, function(){
       console.log('allt gekk upp');
       req.session.regenerate(function (){
-        req.session.user = username;
+        req.session.user = req.session.user;
         res.redirect('/idleisland');
       });
     });
