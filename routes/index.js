@@ -157,6 +157,7 @@ function refresh(req, res, next){
     console.log(req.session.user);
     sql.setGameState(req.session.user, gameState, score, function(){
       console.log('allt gekk upp');
+      console.log('shit mange');
       console.log(req.session.user);
       req.session.regenerate(function (){
         req.session.user = req.session.user;
