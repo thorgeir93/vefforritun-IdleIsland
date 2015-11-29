@@ -1,14 +1,8 @@
-var g_audio   = {};
-var g_images = {};
-
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
 
 var g_canvasW = g_canvas.parentElement.clientWidth;
 var g_canvasH = g_canvas.parentElement.clientHeight;
-
-g_ctx.globalCompositeOperation='destination-over';
-
 var islandPos = { 
   x:(g_canvasW/10), 
   y:(g_canvasH/1.4)
@@ -47,13 +41,19 @@ var birdPos = {
   y:treePos.y-140
 };
 
+var leikurinn = (function(){
 
+var g_audio   = {};
+var g_images = {};
+
+
+g_ctx.globalCompositeOperation='destination-over';
 
 var leikur;
 
 var user;
 
-function AudioPreload(callback){
+AudioPreload = function (callback){
   
   var requiredSounds = {
     punch : "game/sounds/punch.ogg",
@@ -66,103 +66,78 @@ function AudioPreload(callback){
   };
 
   soundsPreload(requiredSounds, g_audio, callback);
-}
+};
 
 
-function imagePreload(callback){
-
+imagePreload = function (callback){
     var requiredImages = {
       tree        : "game/images/game-coconut-tree.png",
       coconut       : "game/images/game-coconut-money.png",
       exit          : "game/images/game-button-exit.png",
       island        : "game/images/game-sand-3-01.png",
       pile          : "game/images/game-coconut-heap.png",
-
-
       item1upgrade1         : "game/images/item1upgrade1.png",
       item1upgrade1_bought  : "game/images/item1upgrade1_bought.png",
       item1upgrade2         : "game/images/item1upgrade2.png",
       item1upgrade2_bought  : "game/images/item1upgrade2_bought.png",
       item1upgrade3         : "game/images/item1upgrade3.png",
       item1upgrade3_bought  : "game/images/item1upgrade3_bought.png",
-
       item2upgrade1         : "game/images/item2upgrade1.png",
       item2upgrade1_bought  : "game/images/item2upgrade1_bought.png",
       item2upgrade2         : "game/images/item2upgrade2.png",
       item2upgrade2_bought  : "game/images/item2upgrade2_bought.png",
       item2upgrade3         : "game/images/item2upgrade3.png",
       item2upgrade3_bought  : "game/images/item2upgrade3_bought.png",
-
       item3upgrade1         : "game/images/item3upgrade1.png",
       item3upgrade1_bought  : "game/images/item3upgrade1_bought.png",
       item3upgrade2         : "game/images/item3upgrade2.png",
       item3upgrade2_bought  : "game/images/item3upgrade2_bought.png",
       item3upgrade3         : "game/images/item3upgrade3.png",
       item3upgrade3_bought  : "game/images/item3upgrade3_bought.png",
-
       item4upgrade1         : "game/images/item4upgrade1.png",
       item4upgrade1_bought  : "game/images/item4upgrade1_bought.png",
       item4upgrade2         : "game/images/item4upgrade2.png",
       item4upgrade2_bought  : "game/images/item4upgrade2_bought.png",
       item4upgrade3         : "game/images/item4upgrade3.png",
       item4upgrade3_bought  : "game/images/item4upgrade3_bought.png",
-
       item5upgrade1         : "game/images/item5upgrade1.png",
       item5upgrade1_bought  : "game/images/item5upgrade1_bought.png",
       item5upgrade2         : "game/images/item5upgrade2.png",
       item5upgrade2_bought  : "game/images/item5upgrade2_bought.png",
       item5upgrade3         : "game/images/item5upgrade3.png",
       item5upgrade3_bought  : "game/images/item5upgrade3_bought.png",
-
       item6upgrade1         : "game/images/item6upgrade1.png",
       item6upgrade1_bought  : "game/images/item6upgrade1_bought.png",
       item6upgrade2         : "game/images/item6upgrade2.png",
       item6upgrade2_bought  : "game/images/item6upgrade2_bought.png",
       item6upgrade3         : "game/images/item6upgrade3.png",
       item6upgrade3_bought  : "game/images/item6upgrade3_bought.png",
-
-
-
-
-      unavalible    : "game/images/game-upgrade-lock-02.png",//"game/images/unavalible.png",
-
+      unavalible    : "game/images/game-upgrade-lock-02.png",
       kall          : "game/images/kall_animation.png",
       kall1         : "game/images/kall_animation-upgrade-1.png",
       kall2         : "game/images/kall_animation-upgrade-2.png",
       kall3         : "game/images/kall_animation-upgrade-3.png",
-
       bird1         : "game/images/bird_animation-upgrade-1.png",
       bird2         : "game/images/bird_animation-upgrade-2.png",
       bird3         : "game/images/bird_animation-upgrade-3.png",
-
-
       veidistong1   : "game/images/veidistong_animation-upgrade-1.png",
       veidistong2   : "game/images/veidistong_animation-upgrade-2.png",
       veidistong3   : "game/images/veidistong_animation-upgrade-3.png",
-
-
       mole1         : "game/images/mole_animation-upgrade-1.png",
       mole2         : "game/images/mole_animation-upgrade-2.png",
       mole3         : "game/images/mole_animation-upgrade-3.png",
-
       molekall      : "game/images/molekall_animation.png",
       molekall1     : "game/images/molekall_animation-upgrade-1.png",
       molekall2     : "game/images/molekall_animation-upgrade-2.png",
       molekall3     : "game/images/molekall_animation-upgrade-3.png",
-
       miner1        : "game/images/miner_animation-upgrade-1.png",
       miner2        : "game/images/miner_animation-upgrade-2.png",
       miner3        : "game/images/miner_animation-upgrade-3.png",
-
-      
       moleheap      : "game/images/game-coconut-heap.png"
+    };
+    imagesPreload(requiredImages, g_images, callback);
+};
 
-
-
-      };
-
-  imagesPreload(requiredImages, g_images, callback);
-}
 
 
 
@@ -186,8 +161,8 @@ _updateClocks = function (frameTime) {
     if (_frameTime_ms === null) _frameTime_ms = frameTime;
 
     // Track frameTime and its delta
-    this._frameTimeDelta_ms = frameTime - this._frameTime_ms;
-    this._frameTime_ms = frameTime;
+    _frameTimeDelta_ms = frameTime - _frameTime_ms;
+    _frameTime_ms = frameTime;
 };
 
 _iterCore = function (dt) {
@@ -207,7 +182,7 @@ window.requestAnimationFrame =
     window.webkitRequestAnimationFrame;    // Safari
 
 // This needs to be a "global" function, for the "window" APIs to callback to
-function mainIterFrame(frameTime) {
+mainIterFrame = function (frameTime) {
     iter(frameTime);
 }
 
@@ -232,7 +207,7 @@ Loop = function () {
 };
 
 
-function init(){
+init = function(){
   
 
   canvasInit();
@@ -277,7 +252,7 @@ function init(){
 }
 
 
-function canvasInit(){
+canvasInit =function (){
   canvas = document.getElementById("myCanvas");
   canvas.width = document.body.clientWidth; //document.width is obsolete
   canvas.height = document.body.clientHeight; //document.height is obsolete
@@ -291,4 +266,10 @@ function canvasInit(){
 
 
 //Starting point of the game
-init();
+
+  return{
+    init: init
+  }
+})();
+
+leikurinn.init();

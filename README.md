@@ -25,7 +25,7 @@ Við ákvöðum þegar við völdum verkefni að nota beinagrind af *idle* leik 
 Þegar notandi fer í **Play** þá byrjar leikurinn, allar myndir og hljóð eru *preloaded* svo það er ekkert hökt á birtingu/spilun þeirra. Síðan getur notandinn klikkað á tré sem sést og byrjað að safna kókoshnetum. Þegar notandinn á nóg af kókoshnetum getur hann keypt upgrades í upgrade valmyndinni. Þegar hann hefur keypt viðkomandi upgrade þá fær hann fleiri kókoshnetur, annað hvort fleiri í hverju höggi eða sjálfvirkt fleiri á tímaeiningu. Þegar sérstakt *upgrade* er keypt þá getur notandi farið neðanjarðar þar sem fleiri *upgrade* eru í boði og útlitið annað.
 
 ##Umhverfið
-Umhverfin sem voru notuð eru Node.js, PostgreSQL, CSS, Express og jQuery. Verkefnið er *hostað* á Heroku.
+Umhverfin sem voru notuð eru Node.js, PostgreSQL, CSS, Express, jQuery og Ajax. Verkefnið er *hostað* á Heroku.
 Öll virkni var útfærð í javaScript, allt CSS var gert með SCSS og HTML skjöl í Jade. 
 
 ##Lausnir

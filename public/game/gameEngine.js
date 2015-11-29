@@ -1,7 +1,8 @@
 /******************************/
 function gameEngine(image, audio, user, userData, isFriend){
     isFriend = !isFriend;
-    
+
+
     if (isFriend) {
         
     } else {
@@ -210,6 +211,8 @@ function gameEngine(image, audio, user, userData, isFriend){
 
     this.displays.push(new Display(buttons, undefined, Sprites));
 
+    console.log(this.displays)
+
 
     
 }
@@ -384,7 +387,7 @@ function findY(i,y, height){
 
 //var coc = new Coconut({width:35, height:43, topX:300, topY:300,this.coconutImage,undefined);
 gameEngine.prototype.update = function(time){
-
+   
     var currentCurrency = this.userdata.getCurrency();
     var currency = this.calculator.calculateCurrency(time,this.userdata.getCurrency(),this.userdata.getCurrFactor());
     var gained = currency - currentCurrency;
