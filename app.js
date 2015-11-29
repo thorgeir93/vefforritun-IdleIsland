@@ -31,7 +31,7 @@ app.use(cookieParser());
 
 var cookie = { domain: '',
                httpOnly: false,
-               secure: false,
+               secure: true,
                maxAge : 36000000 };
 
 app.use(session({
